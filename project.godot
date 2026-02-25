@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="idle game"
+run/main_scene="uid://dx2i0d8fv24ln"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1080
+window/size/viewport_height=1920
 
 [dotnet]
 
