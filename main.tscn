@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://dx2i0d8fv24ln"]
 
-[ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="1_ig7tw"]
+[ext_resource type="Texture2D" uid="uid://11snn51l6dxm" path="res://art/wizard.png" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://label.gd" id="2_0xm2m"]
 
 [node name="Main" type="Node2D" unique_id=868618005]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=742180924]
-position = Vector2(540, 1170)
+position = Vector2(494, 1152)
 scale = Vector2(3, 3)
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("1_0xm2m")
 
 [node name="Label" type="Label" parent="." unique_id=2132427357]
 anchors_preset = 8
@@ -16,18 +16,24 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 16.0
-offset_top = 762.0
-offset_right = 1096.0
-offset_bottom = 967.0
+offset_top = 233.0
+offset_right = 1080.0
+offset_bottom = 438.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 68
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 200
+text = "123"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_0xm2m")
 
 [node name="Timer" type="Timer" parent="Label" unique_id=719079304]
 autostart = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=414141577]
+z_index = -1
+offset_right = 1080.0
+offset_bottom = 3000.0
 
 [connection signal="timeout" from="Label/Timer" to="Label" method="_on_timer_timeout"]
