@@ -16,6 +16,9 @@ export_credentials.cfg
 data_*/
 mono_crash.*.json
 
+# Android builds
+*.apk*
+*.idea
 
 
 ## Ignore Visual Studio temporary files, build results, and
