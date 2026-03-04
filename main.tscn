@@ -5,43 +5,39 @@
 
 [node name="Main" type="Node2D" unique_id=868618005]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1974903383]
+[node name="Main Scene" type="CanvasLayer" parent="." unique_id=1974903383]
 
-[node name="Control" type="Control" parent="CanvasLayer" unique_id=1855495226]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control" unique_id=414141577]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=2016246365]
+[node name="SpriteContainer" type="HBoxContainer" parent="Main Scene" unique_id=352469230]
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.17500001
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.17500001
-offset_left = -171.5
-offset_top = -136.00003
-offset_right = 171.5
-offset_bottom = 136.99997
+anchor_bottom = 0.5
+offset_left = -491.0
+offset_top = -535.0
+offset_right = 445.0
+offset_bottom = 967.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+size_flags_horizontal = 4
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer" unique_id=2132427357]
-layout_mode = 2
+[node name="Wizard sprite" type="Sprite2D" parent="Main Scene/SpriteContainer" unique_id=742180924]
+scale = Vector2(3, 3)
+texture = ExtResource("1_0xm2m")
+centered = false
+
+[node name="SecondsLabel" type="Label" parent="Main Scene" unique_id=2132427357]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -760.0
+offset_right = 57.0
+offset_bottom = -487.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 200
 text = "1"
@@ -49,25 +45,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_0xm2m")
 
-[node name="Timer" type="Timer" parent="CanvasLayer/HBoxContainer/Label" unique_id=719079304]
+[node name="SecondsTimer" type="Timer" parent="Main Scene/SecondsLabel" unique_id=719079304]
 autostart = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer" unique_id=352469230]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -487.0
-offset_top = -509.0
-offset_right = 449.0
-offset_bottom = 931.0
+[node name="Background" type="ColorRect" parent="Main Scene" unique_id=414141577]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/HBoxContainer2" unique_id=742180924]
-scale = Vector2(3, 3)
-texture = ExtResource("1_0xm2m")
-centered = false
-
-[connection signal="timeout" from="CanvasLayer/HBoxContainer/Label/Timer" to="CanvasLayer/HBoxContainer/Label" method="_on_timer_timeout"]
+[connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
