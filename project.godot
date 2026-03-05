@@ -15,10 +15,16 @@ run/main_scene="uid://dx2i0d8fv24ln"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PlayerProgress="*uid://316bob1xainb"
+
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1920
+window/size/window_width_override=480
+window/size/window_height_override=854
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
