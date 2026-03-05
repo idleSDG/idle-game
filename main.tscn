@@ -2,13 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://11snn51l6dxm" path="res://art/wizard.png" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://label.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/hud.gd" id="3_h2yge"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.13433829, 0.82624876, 0, 1)
 
 [node name="Main" type="Node2D" unique_id=868618005]
 
 [node name="Main Scene" type="CanvasLayer" parent="." unique_id=1974903383]
 
 [node name="SpriteContainer" type="HBoxContainer" parent="Main Scene" unique_id=352469230]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -56,4 +62,40 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=921580546]
+script = ExtResource("3_h2yge")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=548802942]
+offset_left = 10.0
+offset_right = 630.0
+offset_bottom = 238.0
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1273892403]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "Level"
+
+[node name="XPBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer" unique_id=1480575437]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+show_percentage = false
+
+[node name="XPLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1563330439]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "XP"
+
+[node name="TestButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1047275507]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+text = "Add +50 XP"
+
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/TestButton" to="CanvasLayer" method="_on_test_button_pressed"]
