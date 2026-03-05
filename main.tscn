@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dx2i0d8fv24ln"]
+[gd_scene format=3 uid="uid://bj8tenpaqqsut"]
 
 [ext_resource type="Texture2D" uid="uid://11snn51l6dxm" path="res://art/wizard.png" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://label.gd" id="2_0xm2m"]
@@ -11,36 +11,56 @@ bg_color = Color(0.13433829, 0.82624876, 0, 1)
 
 [node name="Main" type="Node2D" unique_id=868618005]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=742180924]
-position = Vector2(494, 1152)
+[node name="Main Scene" type="CanvasLayer" parent="." unique_id=1974903383]
+
+[node name="SpriteContainer" type="HBoxContainer" parent="Main Scene" unique_id=352469230]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -491.0
+offset_top = -535.0
+offset_right = 445.0
+offset_bottom = 967.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Wizard sprite" type="Sprite2D" parent="Main Scene/SpriteContainer" unique_id=742180924]
 scale = Vector2(3, 3)
 texture = ExtResource("1_0xm2m")
+centered = false
 
-[node name="Label" type="Label" parent="." unique_id=2132427357]
+[node name="SecondsLabel" type="Label" parent="Main Scene" unique_id=2132427357]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = 233.0
-offset_right = 1080.0
-offset_bottom = 438.0
+offset_left = -57.0
+offset_top = -760.0
+offset_right = 57.0
+offset_bottom = -487.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 200
-text = "123"
+text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_0xm2m")
 
-[node name="Timer" type="Timer" parent="Label" unique_id=719079304]
+[node name="SecondsTimer" type="Timer" parent="Main Scene/SecondsLabel" unique_id=719079304]
 autostart = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=414141577]
+[node name="Background" type="ColorRect" parent="Main Scene" unique_id=414141577]
 z_index = -1
-offset_right = 1080.0
-offset_bottom = 3000.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=921580546]
 script = ExtResource("3_h2yge")
@@ -77,5 +97,5 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "Add +50 XP"
 
-[connection signal="timeout" from="Label/Timer" to="Label" method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/TestButton" to="CanvasLayer" method="_on_test_button_pressed"]
+[connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
