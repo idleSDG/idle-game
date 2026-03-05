@@ -15,8 +15,8 @@ var current_xp: int = 0
 ## Call this from combat, crafting, or any active action
 func add_xp(amount: int) -> void:
 	current_xp += amount
-	xp_changed.emit(current_xp, xp_required_for_next_level())
 	_check_level_up()
+	xp_changed.emit(current_xp, xp_required_for_next_level())
 
 ## XP needed to advance FROM current level TO next
 func xp_required_for_next_level() -> int:

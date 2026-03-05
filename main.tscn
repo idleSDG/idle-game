@@ -39,7 +39,6 @@ autostart = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=414141577]
 z_index = -1
-anchors_preset = -1
 offset_right = 1080.0
 offset_bottom = 3000.0
 
@@ -47,8 +46,8 @@ offset_bottom = 3000.0
 script = ExtResource("3_h2yge")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=548802942]
-anchors_preset = -1
-offset_right = 620.0
+offset_left = 10.0
+offset_right = 630.0
 offset_bottom = 238.0
 
 [node name="LevelLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1273892403]
