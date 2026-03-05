@@ -34,5 +34,5 @@ func _check_level_up() -> void:
 		current_xp -= xp_required_for_next_level()
 		level += 1
 		leveled_up.emit(level)
-		print("[PlayerProgress] Level up! Now level %d (next level 
-			needs %d XP)" % [level, xp_required_for_next_level()])
+		print("[PlayerProgress] Level up! Now level %d (next level needs %d XP)" 
+			% [level, xp_required_for_next_level()])
