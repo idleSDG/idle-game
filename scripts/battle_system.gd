@@ -1,7 +1,7 @@
 extends Node
 
 var character_scene = load("res://scenes/character.tscn")
-var character_class = load("res://scripts/character_temporary.gd")
+var character_class = load("res://scripts/character.gd")
 
 var characterList = []
 var timer = 0
@@ -26,11 +26,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if timer <= 0:
+		update_visuals()
 		if !try_skills():
 			pass_time(delta)
 		else:
 			timer = 1.0
-			print("--- waiting")
+			print("--- waiting for 1.0 second :: skill executed")
 	else:
 		timer -= delta
 	
@@ -46,14 +47,14 @@ func try_skills() -> bool:
 	
 	for c in characterList:
 		var overcharge = c.CheckSkillCharge()
-		print("char overcharge: %f" % overcharge)
 		if overcharge > maxOvercharge:
 			maxOvercharge = overcharge
 			maxPos = i
 		i += 1
 	
 	if maxPos != -1:
-		characterList[maxPos].UseSkill()
+		var target = characterList[1] if maxPos == 0 else characterList[0]
+		characterList[maxPos].UseSkill(target)
 		return true
 	
 	return false
@@ -62,4 +63,9 @@ func try_skills() -> bool:
 func pass_time(delta: float) -> void:
 	for c in characterList:
 		c.PassTime(delta)
+	pass
+
+func update_visuals() :
+	for c in characterList:
+		c.UpdateVisuals()
 	pass

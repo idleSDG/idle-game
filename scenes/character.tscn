@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bgl7yd1c5620h"]
 
 [ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="1_agfs1"]
-[ext_resource type="Script" uid="uid://cnsnptrvopecu" path="res://scripts/character_temporary.gd" id="1_rkhd4"]
+[ext_resource type="Script" uid="uid://cnsnptrvopecu" path="res://scripts/character.gd" id="1_rkhd4"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rkhd4"]
 particle_flag_disable_z = true
@@ -21,6 +21,27 @@ script = ExtResource("1_rkhd4")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=522824923]
 texture = ExtResource("1_agfs1")
+
+[node name="ProgressBar2" type="ProgressBar" parent="Sprite2D" unique_id=2010766615]
+modulate = Color(0, 0.012617188, 0, 1)
+offset_left = -82.0
+offset_top = 84.0
+offset_right = 84.0
+offset_bottom = 98.0
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="ProgressBar" type="ProgressBar" parent="Sprite2D" unique_id=377826066]
+modulate = Color(0, 18.892157, 0, 1)
+self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
+offset_left = -82.0
+offset_top = 84.0
+offset_right = 84.0
+offset_bottom = 98.0
+max_value = 1.0
+value = 1.0
+show_percentage = false
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2074421435]
 emitting = false

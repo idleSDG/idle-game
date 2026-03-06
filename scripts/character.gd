@@ -1,32 +1,36 @@
-extends Node
+class_name Character extends Node
 
 @onready
 var character = $"."
 @onready
 var particles = $GPUParticles2D
+@onready
+var bar = $Sprite2D/ProgressBar
 
 
-var skill_class = load("res://scripts/skill.gd")
+var baseStats = CharacterStats.new()
+var currentStats = baseStats #this should be replaced with cloning/duplicating (two seperate objects)
+
 var skills = []
 var skillToUse = -1
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var instance = skill_class.new(200)
+	var instance = Skill.new(200)
 	skills.append(instance)
 	
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
 	pass
+
+
 
 
 func PassTime(delta: float) -> void:
 	for skill in skills:
 		skill.Charge(delta)
+	pass
+
+func UpdateVisuals():
+	bar.value = currentStats.health * 1.0 / baseStats.maxHealth
 	pass
 
 
@@ -43,8 +47,8 @@ func CheckSkillCharge() -> float:
 	
 	return val
 
-func UseSkill() -> void:
-	if skills[skillToUse].Use():
+func UseSkill(target : Character) -> void:
+	if skills[skillToUse].Use(self, target):
 		particles.emitting = true
 		
 	skillToUse = -1
