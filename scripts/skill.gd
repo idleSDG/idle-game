@@ -1,7 +1,10 @@
 class_name Skill extends Node
 
-var charge = 0
-var maxCharge = 100
+var skillUI = load("res://scenes/skillUI.tscn")
+var skillBar = skillUI.instantiate()
+
+var charge = 0.0
+var maxCharge = 100.0
 
 var potency = 1.0
 var element : CharacterStats.Element
@@ -10,10 +13,14 @@ var element : CharacterStats.Element
 func _init(max : float):
 	maxCharge = max
 	pass
-	
+
+func UpdateBar():
+	skillBar.value = clamp(charge / maxCharge, 0.0, 1.0)
+	pass
 
 func Charge(delta: float) -> bool:
 	charge += delta * 100
+	UpdateBar()
 	
 	return false
 
@@ -28,6 +35,8 @@ func Use(user : Character, target : Character) -> bool:
 	DamageCalculation(user.currentStats, target.currentStats)
 	
 	charge -= maxCharge
+	UpdateBar()
+	
 	return true
 
 func DamageCalculation(user : CharacterStats, target : CharacterStats) :

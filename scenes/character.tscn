@@ -19,10 +19,26 @@ hue_variation_max = 0.99999994
 [node name="Character" type="Node2D" unique_id=582329081]
 script = ExtResource("1_rkhd4")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=522824923]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2074421435]
+emitting = false
+texture = ExtResource("1_agfs1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_rkhd4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=733556611]
+offset_left = -93.0
+offset_top = -66.0
+offset_right = 95.0
+offset_bottom = 145.0
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer" unique_id=522824923]
+position = Vector2(93, 66)
 texture = ExtResource("1_agfs1")
 
-[node name="ProgressBar2" type="ProgressBar" parent="Sprite2D" unique_id=2010766615]
+[node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/Sprite2D" unique_id=2010766615]
 modulate = Color(0, 0.012617188, 0, 1)
 offset_left = -82.0
 offset_top = 84.0
@@ -32,7 +48,7 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="ProgressBar" type="ProgressBar" parent="Sprite2D" unique_id=377826066]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Sprite2D" unique_id=377826066]
 modulate = Color(0, 18.892157, 0, 1)
 self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
 offset_left = -82.0
@@ -43,11 +59,25 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2074421435]
-emitting = false
-texture = ExtResource("1_agfs1")
-lifetime = 0.5
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-process_material = SubResource("ParticleProcessMaterial_rkhd4")
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/Sprite2D" unique_id=1509647717]
+offset_left = -82.0
+offset_top = 84.0
+offset_right = 83.0
+offset_bottom = 100.0
+
+[node name="HBox_Skills" type="HBoxContainer" parent="VBoxContainer/Sprite2D" unique_id=1973657159]
+layout_direction = 2
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.2010001
+anchor_right = 0.5
+anchor_bottom = 1.2010001
+offset_left = -241.0
+offset_top = -47.728012
+offset_right = 942.33325
+offset_bottom = 80.27199
+scale = Vector2(0.3, 0.3)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 60
+alignment = 1

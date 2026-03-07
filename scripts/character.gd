@@ -1,11 +1,15 @@
 class_name Character extends Node
 
+var skillUiScene = load("res://scenes/skillUI.tscn")
+
 @onready
 var character = $"."
 @onready
 var particles = $GPUParticles2D
 @onready
-var bar = $Sprite2D/ProgressBar
+var healthBar = $VBoxContainer/Sprite2D/ProgressBar
+@onready
+var skillBars = $VBoxContainer/Sprite2D/HBox_Skills
 
 
 var baseStats = CharacterStats.new()
@@ -19,6 +23,11 @@ func _ready() -> void:
 	var instance = Skill.new(200)
 	skills.append(instance)
 	
+	for s in skills:
+		#var bar = skillUiScene.instantiate()
+		#s.skillBar = bar
+		skillBars.add_child(s.skillBar)
+	
 	pass
 
 
@@ -26,11 +35,11 @@ func _ready() -> void:
 
 func PassTime(delta: float) -> void:
 	for skill in skills:
-		skill.Charge(delta)
+		skill.Charge(delta * currentStats.chargeRate)
 	pass
 
 func UpdateVisuals():
-	bar.value = currentStats.health * 1.0 / baseStats.maxHealth
+	healthBar.value = currentStats.health * 1.0 / baseStats.maxHealth
 	pass
 
 

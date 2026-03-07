@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bi04igohl7k6q"]
+
+[ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="1_6ojkk"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" unique_id=431378723]
+custom_minimum_size = Vector2(128, 128)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+max_value = 1.0
+step = 0.01
+value = 0.73
+fill_mode = 3
+texture_under = ExtResource("1_6ojkk")
+texture_progress = ExtResource("1_6ojkk")
+tint_under = Color(0.16862746, 0.18039216, 0.27058825, 1)
+tint_progress = Color(0, 1, 0.96862745, 1)
