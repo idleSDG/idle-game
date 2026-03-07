@@ -11,16 +11,20 @@ config_version=5
 [application]
 
 config/name="idle game"
-run/main_scene="uid://c1xf3yvokbqtb"
+run/main_scene="uid://bj8tenpaqqsut"
 config/features=PackedStringArray("4.6", "Mobile")
 config/icon="res://icon.svg"
+
+[autoload]
+
+PlayerProgress="*uid://316bob1xainb"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1920
-window/size/mode=2
-window/stretch/mode="viewport"
+window/size/mode=3
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
 
