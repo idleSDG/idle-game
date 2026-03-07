@@ -1,5 +1,6 @@
 class_name Character extends Node
 
+var damagePopup = load("res://scenes/damagePopup.tscn")
 var skillUiScene = load("res://scenes/skillUI.tscn")
 
 @onready
@@ -61,4 +62,13 @@ func UseSkill(target : Character) -> void:
 		particles.emitting = true
 		
 	skillToUse = -1
+	pass
+
+func TakeDamage(dmg : int, itCrit : bool):
+	currentStats.TakeDamage(dmg)
+	
+	var popup = damagePopup.instantiate()
+	character.get_parent().get_parent().add_child(popup)
+	popup.SetUp(character.get_parent().position, dmg, itCrit)
+	
 	pass

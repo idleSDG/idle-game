@@ -1,5 +1,12 @@
 extends Node
 
+@onready
+var canvas = $"Main Scene"
+@onready
+var characterSpawnPos = [$"Main Scene/Control", $"Main Scene/Control2", $"Main Scene/Control3",
+ $"Main Scene/Control4", $"Main Scene/Control5", $"Main Scene/Control6"]
+
+
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd")
 
@@ -8,15 +15,15 @@ var timer = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	# TEMPORARY CODE
 	var instance = character_scene.instantiate()
 	characterList.append(instance)
-	add_child(instance)
-	instance.transform = Transform2D(0, Vector2(180, 1000))
+	characterSpawnPos[0].add_child(instance)
 	
 	var instance2 = character_scene.instantiate()
 	characterList.append(instance2)
-	add_child(instance2)
-	instance2.transform = Transform2D(0, Vector2(900, 1000))
+	characterSpawnPos[1].add_child(instance2)
 	
 	pass # Replace with function body.
 

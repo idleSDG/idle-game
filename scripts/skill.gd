@@ -32,16 +32,19 @@ func GetOvercharge() -> float:
 
 
 func Use(user : Character, target : Character) -> bool:
-	DamageCalculation(user.currentStats, target.currentStats)
+	var dmg = DamageCalculation(user.currentStats, target.currentStats)
+	target.TakeDamage(dmg.x, dmg.y > 0.0)
+	
 	
 	charge -= maxCharge
 	UpdateBar()
 	
 	return true
 
-func DamageCalculation(user : CharacterStats, target : CharacterStats) :
+func DamageCalculation(user : CharacterStats, target : CharacterStats) -> Vector2:
 	var skillDMG = user.attack * self.potency
-	var critMult = 1.0 + user.critDMG if RandomNumberGenerator.new().randf() <= user.critRate else 1.0
+	var critCondition = RandomNumberGenerator.new().randf() <= user.critRate
+	var critMult = 1.0 + user.critDMG if critCondition else 1.0
 	var elementMult = 1.0 + user.elementalDMG[self.element]
 	var categoryMult = 1.0 + user.categoryDMG[target.characterCategory]
 	
@@ -53,6 +56,4 @@ func DamageCalculation(user : CharacterStats, target : CharacterStats) :
 	var dealtDMG = (skillDMG * critMult * elementMult * categoryMult)
 	dealtDMG = dealtDMG * (defenseRes * elementRes * categoryRes)
 	
-	target.TakeDamage(dealtDMG)
-	
-	pass
+	return Vector2(floor(dealtDMG), 1.0 if critCondition else -1.0)

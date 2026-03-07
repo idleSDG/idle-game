@@ -31,14 +31,14 @@ func SetUpElementCategory() :
 	pass
 
 
-func TakeDamage(dmgTaken : float) :
-	health -= floor(dmgTaken)
+func TakeDamage(dmgTaken : int) :
+	health -= dmgTaken
 	health = clamp(health, 0, maxHealth)
 	
-	print("Damage taken: ", floor(dmgTaken))
-	print("Health remaining: ", health)
+	#print("Damage taken: ", floor(dmgTaken))
+	#print("Health remaining: ", health)
 	
-	pass
+	return
 
 
 enum Element 
