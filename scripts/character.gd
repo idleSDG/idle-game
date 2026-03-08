@@ -31,7 +31,11 @@ func _ready() -> void:
 	
 	pass
 
-
+func SetStats(stats : CharacterStats) :
+	baseStats = stats
+	currentStats = baseStats
+	
+	pass
 
 
 func PassTime(delta: float) -> void:

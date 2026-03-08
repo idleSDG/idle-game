@@ -18,6 +18,7 @@ func _ready() -> void:
 	
 	# TEMPORARY CODE
 	var instance = character_scene.instantiate()
+	instance.SetStats(GlobalVariables.GetPlayer())
 	characterList.append(instance)
 	characterSpawnPos[0].add_child(instance)
 	

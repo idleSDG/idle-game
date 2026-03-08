@@ -51,6 +51,7 @@ func DamageCalculation(user : CharacterStats, target : CharacterStats) -> Vector
 	var defenseRes = 10000.0 / (10000.0 + target.defense)
 	var elementRes = 1.0 - target.elementalRES[self.element]
 	var categoryRes = 1.0 - target.categoryRES[user.characterCategory]
+	
 	#var targetMit = getMitigationSources   - - - -- - -      NOT IMPLEMENTED
 	
 	var dealtDMG = (skillDMG * critMult * elementMult * categoryMult)
