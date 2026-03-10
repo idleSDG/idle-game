@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerProgress="*uid://316bob1xainb"
 SceneManager="*uid://byyql836gwgto"
+IdleProgress="*uid://dov7m1cqcemh7"
 
 [display]
 
