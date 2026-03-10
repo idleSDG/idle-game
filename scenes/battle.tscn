@@ -3,6 +3,7 @@
 [node name="Battle" type="Node2D" unique_id=1983405384]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1110254415]
+layer = 0
 
 [node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1917548595]
 z_index = -1

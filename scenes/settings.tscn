@@ -3,6 +3,7 @@
 [node name="Settings" type="Node2D" unique_id=322031731]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971251208]
+layer = 0
 
 [node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1544346080]
 z_index = -1
