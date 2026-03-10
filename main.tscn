@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bj8tenpaqqsut"]
 
-[ext_resource type="Texture2D" uid="uid://11snn51l6dxm" path="res://assets/wizard.png" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://scripts/ui/label.gd" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://rsqrntdrfr6h" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/ui/hud.gd" id="3_h2yge"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
@@ -10,57 +9,7 @@
 bg_color = Color(0.13433829, 0.82624876, 0, 1)
 
 [node name="Main" type="Node2D" unique_id=868618005]
-
-[node name="MainLayer" type="CanvasLayer" parent="." unique_id=1974903383]
-
-[node name="SpriteContainer" type="HBoxContainer" parent="MainLayer" unique_id=352469230]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -491.0
-offset_top = -535.0
-offset_right = 445.0
-offset_bottom = 967.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-
-[node name="WizardSprite" type="Sprite2D" parent="MainLayer/SpriteContainer" unique_id=742180924]
-scale = Vector2(3, 3)
-texture = ExtResource("1_0xm2m")
-centered = false
-
-[node name="Background" type="ColorRect" parent="MainLayer" unique_id=414141577]
-z_index = -1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SecondsLabel" type="Label" parent="MainLayer" unique_id=2132427357]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -57.0
-offset_top = -760.0
-offset_right = 57.0
-offset_bottom = -487.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 200
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_0xm2m")
-
-[node name="SecondsTimer" type="Timer" parent="MainLayer" unique_id=719079304]
-autostart = true
+script = ExtResource("1_0xm2m")
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=921580546]
 script = ExtResource("3_h2yge")
@@ -97,20 +46,44 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "Add +50 XP"
 
+[node name="ContentArea" type="Control" parent="." unique_id=1174201404]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="NavBarLayer" type="CanvasLayer" parent="." unique_id=435175999]
 
 [node name="NavBar" type="HBoxContainer" parent="NavBarLayer" unique_id=2076489562]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="HomeButton" type="Button" parent="NavBarLayer/NavBar" unique_id=713203215]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "HOME"
 
 [node name="BattleButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1212122017]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "BATTLE"
 
 [node name="SettingsButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1383281877]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "SETTINGS"
 
-[connection signal="timeout" from="MainLayer/SecondsTimer" to="MainLayer/SecondsLabel" method="_on_timer_timeout"]
 [connection signal="pressed" from="HUDLayer/HUD/TestButton" to="HUDLayer" method="_on_test_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]

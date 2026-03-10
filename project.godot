@@ -18,12 +18,12 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerProgress="*uid://316bob1xainb"
+SceneManager="*uid://byyql836gwgto"
 
 [display]
 
 window/size/viewport_width=1080
 window/size/viewport_height=1920
-window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 window/handheld/orientation=1
