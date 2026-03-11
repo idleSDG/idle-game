@@ -9,6 +9,18 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.13433829, 0.82624876, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.8156863, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
+bg_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
+bg_color = Color(0.42306718, 0.0003871758, 0.00021218442, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
+bg_color = Color(1, 0.23488575, 0.17882189, 1)
+
 [node name="Main" type="Node2D" unique_id=868618005]
 
 [node name="Main Scene" type="CanvasLayer" parent="." unique_id=1974903383]
@@ -97,5 +109,62 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "Add +50 XP"
 
+[node name="IngredientHBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=324555488]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -228.0
+offset_right = 236.0
+offset_bottom = -10.0
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/IngredientHBoxContainer" unique_id=1707696475]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="KineticShardsVBoxContainer" type="VBoxContainer" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer" unique_id=1869316392]
+layout_mode = 2
+
+[node name="KineticShardsLabel" type="Label" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1425181548]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Kinetic Shards:"
+
+[node name="KineticShardsCounterLabel" type="Label" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=474962826]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "5/10"
+
+[node name="KineticShardsGainRateLabel" type="Label" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=2086899878]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 / min"
+
+[node name="KineticShardsProgressBar" type="ProgressBar" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1378132024]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="KineticShardsSpendButton" type="Button" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=685049586]
+layout_mode = 2
+text = "Spend 1 Kinetic Shard"
+
+[node name="ClearSaveButton" type="Button" parent="CanvasLayer" unique_id=448881202]
+offset_left = 547.0
+offset_top = 1183.0
+offset_right = 702.0
+offset_bottom = 1256.0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_7mycd")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_272bh")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5vw27")
+text = "Clear Save"
+
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/TestButton" to="CanvasLayer" method="_on_test_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="CanvasLayer" method="_on_kinetic_shards_spend_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ClearSaveButton" to="CanvasLayer" method="_on_clear_save_button_pressed"]
