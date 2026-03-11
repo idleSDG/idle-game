@@ -50,6 +50,8 @@ offset_left = -381.0
 offset_top = -83.0
 offset_right = -261.0
 offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control2" type="Control" parent="Main Scene" unique_id=1530667674]
 layout_mode = 3
@@ -62,6 +64,8 @@ offset_left = 36.0
 offset_top = -65.0
 offset_right = 156.0
 offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control3" type="Control" parent="Main Scene" unique_id=678242868]
 layout_mode = 3
@@ -74,6 +78,8 @@ offset_left = 185.0
 offset_top = -193.0
 offset_right = 305.0
 offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control4" type="Control" parent="Main Scene" unique_id=602843592]
 layout_mode = 3
@@ -86,6 +92,8 @@ offset_left = 177.0
 offset_top = 94.0
 offset_right = 297.0
 offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control5" type="Control" parent="Main Scene" unique_id=840318816]
 layout_mode = 3
@@ -98,6 +106,8 @@ offset_left = 333.0
 offset_top = 19.0
 offset_right = 453.0
 offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Control6" type="Control" parent="Main Scene" unique_id=339259552]
 layout_mode = 3
@@ -110,5 +120,7 @@ offset_left = 358.0
 offset_top = -214.0
 offset_right = 478.0
 offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
