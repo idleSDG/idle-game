@@ -15,9 +15,10 @@ script = ExtResource("1_0xm2m")
 script = ExtResource("3_h2yge")
 
 [node name="HUD" type="VBoxContainer" parent="HUDLayer" unique_id=548802942]
-offset_left = 10.0
-offset_right = 630.0
-offset_bottom = 238.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 545.0
+offset_bottom = 255.0
 
 [node name="LevelLabel" type="Label" parent="HUDLayer/HUD" unique_id=1273892403]
 layout_mode = 2
