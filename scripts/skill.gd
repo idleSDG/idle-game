@@ -3,15 +3,18 @@ class_name Skill extends Node
 var skillUI = load("res://scenes/skillUI.tscn")
 var skillBar = skillUI.instantiate()
 
+var skillName = "DefaultSkill"
+
 var charge = 0.0
 var maxCharge = 100.0
-
 var potency = 1.0
 var element : CharacterStats.Element
 
 
-func _init(max : float):
+func _init(pot = 1.0, max = 100.0, elem = CharacterStats.Element.None):
+	potency = pot
 	maxCharge = max
+	element = elem
 	pass
 
 func UpdateBar():
@@ -30,17 +33,16 @@ func GetOvercharge() -> float:
 	
 	return -3
 
-
 func Use(user : Character, target : Character) -> bool:
 	var dmg = DamageCalculation(user.currentStats, target.currentStats)
 	target.TakeDamage(dmg.x, dmg.y > 0.0)
-	
 	
 	charge -= maxCharge
 	UpdateBar()
 	
 	return true
 
+# Damage formula function
 func DamageCalculation(user : CharacterStats, target : CharacterStats) -> Vector2:
 	var skillDMG = user.attack * self.potency
 	var critCondition = RandomNumberGenerator.new().randf() <= user.critRate

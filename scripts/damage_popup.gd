@@ -1,7 +1,6 @@
 extends Node2D
 
-@onready
-var richText = $DamagePopup
+@onready var richText = $DamagePopup
 
 var timer = 0.7
 var speed = 200.0
@@ -21,6 +20,7 @@ func _process(delta: float) -> void:
 	
 	pass
 
+# Set up created popup with necessary values
 func SetUp(pos : Vector2, dmg : int, crit : bool):
 	self.position = pos
 	

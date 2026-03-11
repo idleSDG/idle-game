@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bj8tenpaqqsut"]
 
 [ext_resource type="Texture2D" uid="uid://11snn51l6dxm" path="res://art/wizard.png" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://c0sfcaq0h26hp" path="res://scripts/game_loader.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://label.gd" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/hud.gd" id="3_h2yge"]
 
@@ -10,6 +11,7 @@
 bg_color = Color(0.13433829, 0.82624876, 0, 1)
 
 [node name="Main" type="Node2D" unique_id=868618005]
+script = ExtResource("1_jyhfs")
 
 [node name="Main Scene" type="CanvasLayer" parent="." unique_id=1974903383]
 
@@ -97,5 +99,16 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "Add +50 XP"
 
+[node name="BattleButton" type="Button" parent="CanvasLayer" unique_id=1407540571]
+offset_left = 34.0
+offset_top = 1769.0
+offset_right = 304.0
+offset_bottom = 1895.0
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+text = "Battle
+"
+
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/TestButton" to="CanvasLayer" method="_on_test_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BattleButton" to="CanvasLayer" method="_on_battle_button_pressed"]

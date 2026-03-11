@@ -21,6 +21,7 @@ var categoryRES = []
 func _init():
 	InitElemCategory()
 
+# Create a new character stats object from all of its variables
 static func Create(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes) -> CharacterStats:
 	var char : CharacterStats = CharacterStats.new()
 	
@@ -29,10 +30,12 @@ static func Create(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, cat
 	
 	return char
 
+# Parse string to create a new character stats object
 static func CreateFromText(line : String):
 	# tikriausiai parse'int .CSV faila, kuris veiks kaip musu duombaze
 	pass
 
+# Sets the values of an already existing characterStats object
 func SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes):
 	#maxHealth = hp
 	health = hp
@@ -43,6 +46,7 @@ func SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes)
 	SetElemCategory(elemDmg, elemRes, catDmg, catRes)
 	pass
 
+# Sets up DMG and RES fields with 0.0 values
 func InitElemCategory() :
 	for e in Element:
 		elementalDMG.append(0.0)
@@ -52,6 +56,7 @@ func InitElemCategory() :
 		categoryRES.append(0.0)
 	pass
 
+# Sets the values of DMG and RES fields
 func SetElemCategory(elemDmg : Array, elemRes : Array, catDmg : Array, catRes : Array) :
 	var i : int = 0
 	for e in Element:
@@ -72,12 +77,10 @@ func SetElemCategory(elemDmg : Array, elemRes : Array, catDmg : Array, catRes : 
 	pass
 
 
+# Subtract damageTaken from health
 func TakeDamage(dmgTaken : int) :
 	health -= dmgTaken
 	health = clamp(health, 0, maxHealth)
-	
-	#print("Damage taken: ", floor(dmgTaken))
-	#print("Health remaining: ", health)
 	
 	return
 
