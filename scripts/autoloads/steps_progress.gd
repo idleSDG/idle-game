@@ -24,10 +24,7 @@ func _on_error(_err):
 
 func _on_permission(result : bool):
 	if result:
-		var end = Time.get_unix_time_from_system()*1000
-		var time = Time.get_datetime_dict_from_system()
-		var start = Time.get_unix_time_from_system()*1000 - time["hour"]*3600000 - time["minute"]*60000 - time["second"]*10000
-		_steps_plugin.read_steps(start,end)
+		_on_timer_timeout()
 		var timer = Timer.new()
 		timer.wait_time = 20
 		timer.autostart = true
