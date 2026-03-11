@@ -1,6 +1,6 @@
 extends Node
 
-# THIS SCRIPT IS ON MAIN's ROOT NODE
+# DEPRECATED
 
 # Loads save data upon turning the game on and, if the player was in battle, resumes it
 func _ready() -> void:
