@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://11snn51l6dxm" path="res://assets/wizard.png" id="1_u4wd2"]
 [ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://scripts/ui/label.gd" id="2_w18ys"]
+[ext_resource type="Script" uid="uid://bsi6q6ecvs1jj" path="res://scripts/ui/step_count_label.gd" id="3_w18ys"]
 
 [node name="Home" type="Node2D" unique_id=660734872]
 
@@ -54,3 +55,30 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("2_w18ys")
+
+[node name="StatContainer" type="VBoxContainer" parent="MainLayer" unique_id=129824591]
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.09900001
+anchor_right = 1.0
+anchor_bottom = 0.09900001
+offset_left = -389.0
+offset_top = -66.08002
+offset_right = 10.0
+offset_bottom = 16.919983
+
+[node name="StepsContainer" type="HBoxContainer" parent="MainLayer/StatContainer" unique_id=1427258725]
+layout_mode = 2
+
+[node name="StepsNameLabel" type="Label" parent="MainLayer/StatContainer/StepsContainer" unique_id=544709919]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "Steps: "
+
+[node name="StepCountLabel" type="Label" parent="MainLayer/StatContainer/StepsContainer" unique_id=1197592755]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+text = "12345"
+script = ExtResource("3_w18ys")

@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PlayerProgress="*uid://316bob1xainb"
 SceneManager="*uid://byyql836gwgto"
 IdleProgress="*uid://dov7m1cqcemh7"
+StepsProgress="*uid://cfgfym31wxges"
 
 [display]
 
@@ -37,6 +38,10 @@ project/assembly_name="idle game"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GodotStepPlugin/plugin.cfg", "res://addons/GodotStepsPlugin/plugin.cfg")
 
 [physics]
 
