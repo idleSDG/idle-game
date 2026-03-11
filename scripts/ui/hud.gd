@@ -1,9 +1,9 @@
 extends CanvasLayer
 
-@onready var level_label: Label = $VBoxContainer/LevelLabel
-@onready var xp_bar: ProgressBar = $VBoxContainer/XPBar
-@onready var xp_label: Label = $VBoxContainer/XPLabel
-@onready var test_button: Button = $VBoxContainer/TestButton
+@onready var level_label: Label = $HUD/LevelLabel
+@onready var xp_bar: ProgressBar = $HUD/XPBar
+@onready var xp_label: Label = $HUD/XPLabel
+@onready var test_button: Button = $HUD/TestButton
 
 @onready var ingredient_hud: Dictionary = {
 	Ingredient.Type.KINETIC_SHARD: {

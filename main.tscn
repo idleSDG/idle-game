@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://bj8tenpaqqsut"]
 
-[ext_resource type="Texture2D" uid="uid://11snn51l6dxm" path="res://art/wizard.png" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://label.gd" id="2_0xm2m"]
-[ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/hud.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://rsqrntdrfr6h" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/ui/hud.gd" id="3_h2yge"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
@@ -22,149 +21,140 @@ bg_color = Color(0.42306718, 0.0003871758, 0.00021218442, 1)
 bg_color = Color(1, 0.23488575, 0.17882189, 1)
 
 [node name="Main" type="Node2D" unique_id=868618005]
+script = ExtResource("1_0xm2m")
 
-[node name="Main Scene" type="CanvasLayer" parent="." unique_id=1974903383]
-
-[node name="SpriteContainer" type="HBoxContainer" parent="Main Scene" unique_id=352469230]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -491.0
-offset_top = -535.0
-offset_right = 445.0
-offset_bottom = 967.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-
-[node name="Wizard sprite" type="Sprite2D" parent="Main Scene/SpriteContainer" unique_id=742180924]
-scale = Vector2(3, 3)
-texture = ExtResource("1_0xm2m")
-centered = false
-
-[node name="SecondsLabel" type="Label" parent="Main Scene" unique_id=2132427357]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -57.0
-offset_top = -760.0
-offset_right = 57.0
-offset_bottom = -487.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 200
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_0xm2m")
-
-[node name="SecondsTimer" type="Timer" parent="Main Scene/SecondsLabel" unique_id=719079304]
-autostart = true
-
-[node name="Background" type="ColorRect" parent="Main Scene" unique_id=414141577]
-z_index = -1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=921580546]
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=921580546]
 script = ExtResource("3_h2yge")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=548802942]
-offset_left = 10.0
-offset_right = 630.0
-offset_bottom = 238.0
+[node name="HUD" type="VBoxContainer" parent="HUDLayer" unique_id=548802942]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 545.0
+offset_bottom = 255.0
 
-[node name="LevelLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1273892403]
+[node name="LevelLabel" type="Label" parent="HUDLayer/HUD" unique_id=1273892403]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "Level"
 
-[node name="XPBar" type="ProgressBar" parent="CanvasLayer/VBoxContainer" unique_id=1480575437]
+[node name="XPBar" type="ProgressBar" parent="HUDLayer/HUD" unique_id=1480575437]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/background = SubResource("StyleBoxFlat_h2yge")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
 show_percentage = false
 
-[node name="XPLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1563330439]
+[node name="XPLabel" type="Label" parent="HUDLayer/HUD" unique_id=1563330439]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 25
 text = "XP"
 
-[node name="TestButton" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1047275507]
+[node name="TestButton" type="Button" parent="HUDLayer/HUD" unique_id=1047275507]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "Add +50 XP"
 
-[node name="IngredientHBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=324555488]
+[node name="IngredientHBoxContainer" type="HBoxContainer" parent="HUDLayer" unique_id=324555488]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -228.0
-offset_right = 236.0
-offset_bottom = -10.0
+offset_top = -450.0
+offset_right = 1083.0
+offset_bottom = -202.0
 grow_vertical = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/IngredientHBoxContainer" unique_id=1707696475]
+[node name="PanelContainer" type="PanelContainer" parent="HUDLayer/IngredientHBoxContainer" unique_id=1707696475]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
 
-[node name="KineticShardsVBoxContainer" type="VBoxContainer" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer" unique_id=1869316392]
+[node name="KineticShardsVBoxContainer" type="VBoxContainer" parent="HUDLayer/IngredientHBoxContainer/PanelContainer" unique_id=1869316392]
 layout_mode = 2
 
-[node name="KineticShardsLabel" type="Label" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1425181548]
+[node name="KineticShardsLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1425181548]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Kinetic Shards:"
 
-[node name="KineticShardsCounterLabel" type="Label" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=474962826]
+[node name="KineticShardsCounterLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=474962826]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 36
 text = "5/10"
 
-[node name="KineticShardsGainRateLabel" type="Label" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=2086899878]
+[node name="KineticShardsGainRateLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=2086899878]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "1 / min"
 
-[node name="KineticShardsProgressBar" type="ProgressBar" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1378132024]
+[node name="KineticShardsProgressBar" type="ProgressBar" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1378132024]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="KineticShardsSpendButton" type="Button" parent="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=685049586]
+[node name="KineticShardsSpendButton" type="Button" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=685049586]
 layout_mode = 2
 text = "Spend 1 Kinetic Shard"
 
-[node name="ClearSaveButton" type="Button" parent="CanvasLayer" unique_id=448881202]
-offset_left = 547.0
-offset_top = 1183.0
-offset_right = 702.0
-offset_bottom = 1256.0
+[node name="ClearSaveButton" type="Button" parent="HUDLayer" unique_id=448881202]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -203.0
+offset_bottom = 116.0
+grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_7mycd")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_272bh")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5vw27")
 text = "Clear Save"
 
-[connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/TestButton" to="CanvasLayer" method="_on_test_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="CanvasLayer" method="_on_kinetic_shards_spend_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/ClearSaveButton" to="CanvasLayer" method="_on_clear_save_button_pressed"]
+[node name="ContentArea" type="Control" parent="." unique_id=1174201404]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NavBarLayer" type="CanvasLayer" parent="." unique_id=435175999]
+
+[node name="NavBar" type="HBoxContainer" parent="NavBarLayer" unique_id=2076489562]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HomeButton" type="Button" parent="NavBarLayer/NavBar" unique_id=713203215]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "HOME"
+
+[node name="BattleButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1212122017]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "BATTLE"
+
+[node name="SettingsButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1383281877]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "SETTINGS"
+
+[connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
+[connection signal="pressed" from="HUDLayer/ClearSaveButton" to="HUDLayer" method="_on_clear_save_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]

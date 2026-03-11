@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://drgtjoo1tbjki"]
+
+[ext_resource type="Texture2D" uid="uid://11snn51l6dxm" path="res://assets/wizard.png" id="1_u4wd2"]
+[ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://scripts/ui/label.gd" id="2_w18ys"]
+
+[node name="Home" type="Node2D" unique_id=660734872]
+
+[node name="MainLayer" type="CanvasLayer" parent="." unique_id=167412646]
+layer = 0
+
+[node name="SpriteContainer" type="HBoxContainer" parent="MainLayer" unique_id=1162506533]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.5
+offset_top = -444.0
+offset_right = 310.5
+offset_bottom = 564.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WizardSprite" type="Sprite2D" parent="MainLayer/SpriteContainer" unique_id=58233690]
+scale = Vector2(2, 2)
+texture = ExtResource("1_u4wd2")
+centered = false
+
+[node name="Background" type="ColorRect" parent="MainLayer" unique_id=1439679217]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SecondsLabel" type="Label" parent="MainLayer" unique_id=1332877599]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -730.0
+offset_right = 57.0
+offset_bottom = -457.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 200
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_w18ys")

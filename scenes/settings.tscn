@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bgqftdi2ey53h"]
+
+[node name="Settings" type="Node2D" unique_id=322031731]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971251208]
+layer = 0
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1544346080]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1762564929]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Settings: Access to volume, account, and step-tracking permissions."
