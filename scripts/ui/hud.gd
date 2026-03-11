@@ -1,10 +1,9 @@
 extends CanvasLayer
 
-@onready var level_label: Label = $VBoxContainer/LevelLabel
-@onready var xp_bar: ProgressBar = $VBoxContainer/XPBar
-@onready var xp_label: Label = $VBoxContainer/XPLabel
-@onready var test_button: Button = $VBoxContainer/TestButton
-@onready var battle_button: Button = $BattleButton
+@onready var level_label: Label = $HUD/LevelLabel
+@onready var xp_bar: ProgressBar = $HUD/XPBar
+@onready var xp_label: Label = $HUD/XPLabel
+@onready var test_button: Button = $HUD/TestButton
 
 func _ready() -> void:
 	# Connect to PlayerProgress signals
@@ -29,6 +28,3 @@ func _on_leveled_up(new_level: int) -> void:
 
 func _on_test_button_pressed() -> void:
 	PlayerProgress.add_xp(50)
-
-func _on_battle_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/battle.tscn")
