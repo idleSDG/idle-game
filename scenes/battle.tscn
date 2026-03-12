@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://c1xf3yvokbqtb"]
 
+[ext_resource type="Script" uid="uid://blfs7l144pod" path="res://scripts/ui/level_select.gd" id="1_dn72j"]
+
 [node name="Battle" type="Node2D" unique_id=1983405384]
+script = ExtResource("1_dn72j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1110254415]
 layer = 0
@@ -28,3 +31,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "Battle: Displays the active combat loop and enemy progress."
+
+[node name="testBattleButton" type="Button" parent="CanvasLayer" unique_id=15478143]
+offset_left = 257.0
+offset_top = 283.0
+offset_right = 831.0
+offset_bottom = 509.0
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 48
+text = "START TEST BATTLE
+"
+
+[connection signal="pressed" from="CanvasLayer/testBattleButton" to="." method="_on_test_battle_button_pressed"]
