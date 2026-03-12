@@ -52,6 +52,3 @@ func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient
 func _on_kinetic_shards_spend_button_pressed() -> void:
 	if PlayerInventory.ingredients[Ingredient.Type.KINETIC_SHARD].count > 0:
 		PlayerInventory.ingredients[Ingredient.Type.KINETIC_SHARD].count -= 1
-
-func _on_clear_save_button_pressed() -> void:
-	PlayerInventory.clear_save()

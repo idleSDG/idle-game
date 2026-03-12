@@ -11,15 +11,6 @@ bg_color = Color(0.13433829, 0.82624876, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
 bg_color = Color(0.8156863, 1, 1, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
-bg_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_272bh"]
-bg_color = Color(0.42306718, 0.0003871758, 0.00021218442, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vw27"]
-bg_color = Color(1, 0.23488575, 0.17882189, 1)
-
 [node name="Main" type="Node2D" unique_id=868618005]
 script = ExtResource("1_0xm2m")
 
@@ -103,19 +94,6 @@ layout_mode = 2
 layout_mode = 2
 text = "Spend 1 Kinetic Shard"
 
-[node name="ClearSaveButton" type="Button" parent="HUDLayer" unique_id=448881202]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -203.0
-offset_bottom = 116.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_7mycd")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_272bh")
-theme_override_styles/hover = SubResource("StyleBoxFlat_5vw27")
-text = "Clear Save"
-
 [node name="ContentArea" type="Control" parent="." unique_id=1174201404]
 layout_mode = 3
 anchors_preset = 15
@@ -154,7 +132,6 @@ theme_override_font_sizes/font_size = 48
 text = "SETTINGS"
 
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
-[connection signal="pressed" from="HUDLayer/ClearSaveButton" to="HUDLayer" method="_on_clear_save_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]
