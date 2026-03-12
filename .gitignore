@@ -473,3 +473,8 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+
+# GodotStepPlugin bin files
+!addons/GodotStepPlugin/bin/
+!addons/GodotStepPlugin/bin/**
