@@ -41,7 +41,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotStepPlugin/plugin.cfg", "res://addons/GodotStepsPlugin/plugin.cfg")
+enabled=PackedStringArray("res://addons/GodotStepPlugin/plugin.cfg")
 
 [physics]
 

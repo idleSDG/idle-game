@@ -34,14 +34,14 @@ class AndroidExportPlugin extends EditorExportPlugin:
 		# TODO: Add remote dependencies here.
 		if debug:
 			return PackedStringArray([
-			"androidx.health.connect:connect-client:1.2.0-alpha02",
-			"androidx.activity:activity-ktx:1.12.4",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"])
+			"androidx.health.connect:connect-client:1.1.0-alpha11",
+			"androidx.activity:activity-ktx:1.9.3",
+			"org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"])
 		else:
 			return PackedStringArray([
-			"androidx.health.connect:connect-client:1.2.0-alpha02",
-			"androidx.activity:activity-ktx:1.12.4",
-			"org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"])
+			"androidx.health.connect:connect-client:1.1.0-alpha11",
+			"androidx.activity:activity-ktx:1.9.3",
+			"org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0"])
 
 	func _get_name():
 		return _plugin_name

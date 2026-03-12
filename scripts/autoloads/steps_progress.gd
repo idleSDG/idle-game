@@ -15,29 +15,22 @@ func _ready():
 		#fallback for testing
 		dailySteps = 6001
 
-
 func _on_steps(steps):
 	dailySteps = steps
 
-func _on_error(_err):
+func _on_error(err):
+	print("Steps error:",err)
 	dailySteps = 6000
 
 func _on_permission(result : bool):
 	if result:
 		_on_timer_timeout()
 		var timer = Timer.new()
-		timer.wait_time = 20
+		timer.wait_time = 10
 		timer.autostart = true
 		timer.one_shot = false
 		timer.timeout.connect(_on_timer_timeout)
 		add_child(timer)
 	
 func _on_timer_timeout():
-	var end = Time.get_unix_time_from_system() * 1000
-	var dt = Time.get_datetime_dict_from_system()
-	dt["hour"] = 0
-	dt["minute"] = 0
-	dt["second"] = 0
-	var start = Time.get_unix_time_from_datetime_dict(dt) * 1000
-	
-	_steps_plugin.read_steps(start,end)
+	_steps_plugin.readTodaySteps()
