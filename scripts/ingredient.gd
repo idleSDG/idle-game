@@ -3,37 +3,37 @@ class_name Ingredient
 enum Type { KINETIC_SHARD, FOCUS_FLUX, IONIC_CURRENT }
 
 var type: Type
-var progress: float
 var count: int
 var capacity: int
+## Defines how much of this ingredient is gained per second, i.e. gain rate of 2 means 2 ingredients made per second.
 var gain_rate_per_second: float
+## Tracks ingredient gain progress (from 0 to 1).
+var progress: float
 
-func _init(type: Type, progress: float, count: int, capacity: int, gain_rate_per_second: float):
-	self.type = type
-	self.count = count
-	self.capacity = capacity
-	self.gain_rate_per_second = gain_rate_per_second
+func _init(p_type: Type, p_progress: float, p_count: int, p_capacity: int, p_gain_rate_per_second: float):
+	self.type = p_type
+	self.progress = p_progress
+	self.count = p_count
+	self.capacity = p_capacity
+	self.gain_rate_per_second = p_gain_rate_per_second
 
 func update_progress(last_timestamp: float, current_timestamp: float):
-	if self.count == self.capacity:
-		self.progress = 0
+	if self.count >= self.capacity:
+		self.progress = 0.0
 		return
 		
 	var seconds_passed: float = current_timestamp - last_timestamp
-	var total_gain = gain_rate_per_second * seconds_passed
-	var progress = progress + total_gain
-	print("Seconds passed: %f", seconds_passed)
-	print("New progress: %f", progress)
+	var units_to_add: float = gain_rate_per_second * seconds_passed
 	
-	if progress >= 100:
-		var units_earned = floor(progress / 100)
-		self.count = clampi(count + units_earned, 0, self.capacity)
-		self.progress = fmod(progress, 100.0)
-	else:
-		self.progress = progress
+	self.progress += units_to_add
 	
-func get_progress_ratio() -> float:
-	return clampf(progress / 100.0, 0.0, 1.0)
+	if self.progress >= 1.0:
+		var whole_units = floor(self.progress)
+		self.count = clampi(self.count + int(whole_units), 0, self.capacity)
+		self.progress = fmod(self.progress, 1.0)
+	
+func get_progress_percentage() -> float:
+	return self.progress * 100.0
 	
 static func to_dictionary(ingredient: Ingredient) -> Dictionary:
 	return {

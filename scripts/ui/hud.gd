@@ -45,7 +45,7 @@ func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient
 		ingredient_hud[type].counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
 		ingredient_hud[type].gain_rate.text = "%.02f / min" % (ingredient.gain_rate_per_second * 60)
 		if ingredient.count < ingredient.capacity:
-			ingredient_hud[type].progress_bar.value = ingredient.get_progress_ratio() * 100
+			ingredient_hud[type].progress_bar.value = ingredient.get_progress_percentage()
 		else:
 			ingredient_hud[type].progress_bar.value = 100.0
 			

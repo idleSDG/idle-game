@@ -93,7 +93,7 @@ func _load_inventory():
 
 func _init_new_save() -> void:
 	last_timestamp = Time.get_unix_time_from_system()
-	ingredients[Ingredient.Type.KINETIC_SHARD] = Ingredient.new(Ingredient.Type.KINETIC_SHARD, 0, 0, 10, 50)
+	ingredients[Ingredient.Type.KINETIC_SHARD] = Ingredient.new(Ingredient.Type.KINETIC_SHARD, 0, 0, 10, 1)
 
 func clear_save() -> void:
 	if FileAccess.file_exists(_save_file_path):
