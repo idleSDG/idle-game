@@ -1,18 +1,21 @@
 [gd_scene format=3 uid="uid://bj8tenpaqqsut"]
 
-[ext_resource type="Script" uid="uid://rsqrntdrfr6h" path="res://main.gd" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/ui/hud.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://rsqrntdrfr6h" path="res://main.gd" id="1_0wfyh"]
+[ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/ui/hud.gd" id="2_sugp2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.13433829, 0.82624876, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.8156863, 1, 1, 1)
+
 [node name="Main" type="Node2D" unique_id=868618005]
-script = ExtResource("1_0xm2m")
+script = ExtResource("1_0wfyh")
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=921580546]
-script = ExtResource("3_h2yge")
+script = ExtResource("2_sugp2")
 
 [node name="HUD" type="VBoxContainer" parent="HUDLayer" unique_id=548802942]
 offset_left = 25.0
@@ -46,6 +49,50 @@ layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25
 text = "Add +50 XP"
+
+[node name="IngredientHBoxContainer" type="HBoxContainer" parent="HUDLayer" unique_id=324555488]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -450.0
+offset_right = 1083.0
+offset_bottom = -202.0
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="HUDLayer/IngredientHBoxContainer" unique_id=1707696475]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="KineticShardsVBoxContainer" type="VBoxContainer" parent="HUDLayer/IngredientHBoxContainer/PanelContainer" unique_id=1869316392]
+layout_mode = 2
+
+[node name="KineticShardsLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1425181548]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Kinetic Shards:"
+
+[node name="KineticShardsCounterLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=474962826]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "5/10"
+
+[node name="KineticShardsGainRateLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=2086899878]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 / min"
+
+[node name="KineticShardsProgressBar" type="ProgressBar" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1378132024]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="KineticShardsSpendButton" type="Button" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=685049586]
+layout_mode = 2
+text = "Spend 1 Kinetic Shard"
 
 [node name="ContentArea" type="Control" parent="." unique_id=1174201404]
 layout_mode = 3
@@ -85,6 +132,7 @@ theme_override_font_sizes/font_size = 48
 text = "SETTINGS"
 
 [connection signal="pressed" from="HUDLayer/HUD/TestButton" to="HUDLayer" method="_on_test_button_pressed"]
+[connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]

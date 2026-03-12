@@ -1,5 +1,16 @@
 [gd_scene format=3 uid="uid://bgqftdi2ey53h"]
 
+[ext_resource type="Script" uid="uid://bnmhb5hkkwgvw" path="res://scenes/clear_save_button.gd" id="1_5p8wc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6d6q"]
+bg_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6wm04"]
+bg_color = Color(0.42306718, 0.0003871758, 0.00021218442, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4mfi"]
+bg_color = Color(1, 0.23488575, 0.17882189, 1)
+
 [node name="Settings" type="Node2D" unique_id=322031731]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971251208]
@@ -29,3 +40,19 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Settings: Access to volume, account, and step-tracking permissions."
+
+[node name="ClearSaveButton" type="Button" parent="CanvasLayer" unique_id=1535614000]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -203.0
+offset_bottom = 116.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_r6d6q")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6wm04")
+theme_override_styles/hover = SubResource("StyleBoxFlat_f4mfi")
+text = "Clear Save"
+script = ExtResource("1_5p8wc")
+
+[connection signal="pressed" from="CanvasLayer/ClearSaveButton" to="CanvasLayer/ClearSaveButton" method="_on_pressed"]
