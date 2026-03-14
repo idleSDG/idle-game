@@ -11,8 +11,9 @@ func _ready():
 
 func save_game():
 	var save_data = {
+		"timestamp": Time.get_unix_time_from_system(),
 		"inventory": PlayerInventory.get_save_data(),
-		"timestamp": Time.get_unix_time_from_system()
+		"xp": PlayerProgress.get_save_data()
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -23,6 +24,7 @@ func save_game():
 		print("Game Saved.")
 
 func init_new_save():
+	PlayerProgress.init_new_save()
 	PlayerInventory.init_new_save()
 
 func save_file_exists() -> bool:
@@ -45,6 +47,13 @@ func load_game():
 	PlayerInventory.last_inventory_update_unix_time = data.get("timestamp", Time.get_unix_time_from_system())
 	if data.has("inventory"):
 		PlayerInventory.load_save_data(data["inventory"])
+	else:
+		printerr("No inventory data found!")
+
+	if data.has("xp"):
+		PlayerProgress.load_save_data(data["xp"])
+	else:
+		printerr("No player xp data found!")
 
 	print("Game Loaded.")
 	
