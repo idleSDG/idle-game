@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+SaveManager="*uid://cn1tcr3s3kc5t"
 PlayerProgress="*uid://316bob1xainb"
 PlayerInventory="*uid://bubpl5hv8kp80"
 SceneManager="*uid://byyql836gwgto"

@@ -36,3 +36,19 @@ func _check_level_up() -> void:
 		leveled_up.emit(level)
 		print("[PlayerProgress] Level up! Now level %d (next level needs %d XP)" 
 			% [level, xp_required_for_next_level()])
+			
+func get_save_data() -> Dictionary:
+	return {
+		"level": level,
+		"current_xp": current_xp
+	}
+	
+func load_save_data(data: Dictionary) -> void:
+	level = data['level']
+	current_xp = data['current_xp']
+
+func init_new_save():
+	level = 1
+	current_xp = 0
+	xp_changed.emit(current_xp, xp_required_for_next_level())
+	leveled_up.emit(level)
