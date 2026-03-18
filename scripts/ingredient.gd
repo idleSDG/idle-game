@@ -23,7 +23,9 @@ func update_progress(last_timestamp: float, current_timestamp: float):
 		return
 		
 	var seconds_passed: float = current_timestamp - last_timestamp
-	var units_to_add: float = gain_rate_per_second * seconds_passed
+	var bonuses = EquipmentManager.get_total_bonuses()
+	var multiplier = 1.0 + bonuses["ingredient_gain_pct"]
+	var units_to_add: float = gain_rate_per_second * seconds_passed * multiplier
 	
 	self.progress += units_to_add
 	
