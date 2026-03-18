@@ -1,4 +1,4 @@
-extends Node
+class_name PrototypeItems extends Node
 
 static func get_test_items() -> Array:
 	var staff = EquipmentItem.new()

@@ -32,3 +32,30 @@ func get_total_bonuses() -> Dictionary:
 			bonuses["ingredient_gain_pct"]  += item.ingredient_gain_pct
 			bonuses["crit_rate_bonus"]      += item.crit_rate_bonus
 	return bonuses
+
+func get_save_data() -> Dictionary:
+	var dict = {}
+	for slot in equipped:
+		var item = equipped[slot]
+		dict[str(slot)] = item.item_name if item else ""
+	return dict
+
+func load_save_data(data: Dictionary):
+	var prototypes = PrototypeItems.new().get_test_items() # reload all prototypes
+	for slot_str in data:
+		var slot = int(slot_str)
+		var item_name = data[slot_str]
+		equipped[slot] = null
+		for item in prototypes:
+			if item.item_name == item_name and item.slot == slot:
+				equipped[slot] = item
+				break
+	emit_signal("equipment_changed")
+
+func init_new_save():
+	equipped = {
+		EquipmentItem.Slot.WEAPON: null,
+		EquipmentItem.Slot.BELT: null,
+		EquipmentItem.Slot.HAT: null,
+	}
+	emit_signal("equipment_changed")
