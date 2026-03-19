@@ -44,8 +44,9 @@ func Use(user : Character, target : Character) -> bool:
 
 # Damage formula function
 func DamageCalculation(user : CharacterStats, target : CharacterStats) -> Vector2:
-	var skillDMG = user.attack * self.potency
-	var critCondition = RandomNumberGenerator.new().randf() <= user.critRate
+	var bonuses = EquipmentManager.get_total_bonuses()
+	var skillDMG = user.attack * self.potency * (1.0 + bonuses["damage_bonus_pct"])
+	var critCondition = RandomNumberGenerator.new().randf() <= (user.critRate + bonuses["crit_rate_bonus"])
 	var critMult = 1.0 + user.critDMG if critCondition else 1.0
 	var elementMult = 1.0 + user.elementalDMG[self.element]
 	var categoryMult = 1.0 + user.categoryDMG[target.characterCategory]

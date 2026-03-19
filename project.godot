@@ -22,6 +22,7 @@ PlayerProgress="*uid://316bob1xainb"
 PlayerInventory="*uid://bubpl5hv8kp80"
 SceneManager="*uid://byyql836gwgto"
 IdleProgress="*uid://dov7m1cqcemh7"
+EquipmentManager="*uid://dgcauqgjrih33"
 
 [display]
 
