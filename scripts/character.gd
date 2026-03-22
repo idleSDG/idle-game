@@ -9,7 +9,11 @@ var charName = "Character"
 @onready var healthBar = $VBoxContainer/Sprite2D/ProgressBar
 @onready var skillBars = $VBoxContainer/Sprite2D/HBox_Skills
 
+@onready var baseSprite = $VBoxContainer/BaseSprite
+@onready var wizardSprites = $VBoxContainer/BaseSprite/WIZARDSPECIFIC
 
+
+var isPlayer : bool = false
 var baseStats = CharacterStats.new()
 var currentStats = baseStats # this should be replaced with cloning/duplicating baseStats
 
@@ -26,16 +30,24 @@ func _ready() -> void:
 	for s in skills:
 		skillBars.add_child(s.skillBar)
 	
+	if isPlayer:
+		baseSprite.texture = load("res://assets/wizard_defaults/wizardBase.png")
+		wizardSprites.visible = true;
+	else:
+		baseSprite.texture = load("res://assets/enemies/skeleton.png") if RandomNumberGenerator.new().randf() > 0.5 else load("res://assets/enemies/wolf.png")
+	
 	pass
 
 func SetStats(stats : CharacterStats) :
 	# TEMPORARY CODE
-	var instance = Skill.new(1.3, 300.0)
+	var instance = Skill.new(1.3, 300.0, CharacterStats.Element.Fire)
 	skills.append(instance)
 	# END OF TEMPORARY CODE
 	
 	baseStats = stats
 	currentStats = baseStats
+	
+	isPlayer = true
 	
 	pass
 
