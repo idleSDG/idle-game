@@ -56,6 +56,11 @@ func load_save_data(data: Dictionary):
 
 func init_new_save():
 	last_inventory_update_unix_time = Time.get_unix_time_from_system()
+	# TODO: Load from a config or some other elegant way instead of hard-coding.
+	for type in ingredients:
+		ingredients[type].count = 0
+		ingredients[type].progress = 0
+		ingredients[type].capacity = 10
 
 func _update_inventory():
 	var current_inventory_update_unix_time = Time.get_unix_time_from_system()
