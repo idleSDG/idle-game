@@ -10,7 +10,7 @@ var _example_dataset = [
 ]
 
 func _ready():
-	get_parent().resized.connect(draw_graph)
+	get_parent().resized.connect(func(): draw_graph(_example_dataset))
 	draw_graph(_example_dataset)
 
 func draw_graph(dataset):
