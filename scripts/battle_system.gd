@@ -148,6 +148,7 @@ func finish_fight(result : bool):
 	
 	if result:
 		combatFinish.text = "YOU WIN"
+		PlayerProgress.add_xp(120)
 	else:
 		combatFinish.text = "YOU LOSE"
 	pass

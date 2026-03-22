@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bou8i67fm3dqd"]
+
+[ext_resource type="Script" uid="uid://c7la6i6q0o4y7" path="res://scripts/ui/equipment_ui.gd" id="1_dusko"]
+
+[node name="Equipment" type="Node2D" unique_id=903095895]
+script = ExtResource("1_dusko")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=930766466]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1289527250]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -670.0
+offset_top = -510.0
+offset_right = 0.00024414063
+offset_bottom = -200.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="EquipmentPrototype" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1524671584]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Equipment Prototype"
+
+[node name="WeaponSlotBtn" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=738474405]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+
+[node name="BeltSlotBtn" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1852605206]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+
+[node name="HatSlotBtn" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=1230319519]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 24
+
+[node name="StatBonusLabel" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1765775727]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32

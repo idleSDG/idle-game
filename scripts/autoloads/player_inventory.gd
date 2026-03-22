@@ -2,110 +2,70 @@ extends Node
 
 signal ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient])
 
-var ingredients: Dictionary[Ingredient.Type, Ingredient] = {}
-@onready var last_timestamp: float
-@onready var inventory_update_timer: Timer
+var ingredients: Dictionary[Ingredient.Type, Ingredient] = {
+	Ingredient.Type.KINETIC_SHARD: Ingredient.new(
+			Ingredient.Type.KINETIC_SHARD,
+			MomentumTracker.new(
+				MomentumConfig.new(), 
+				DummyMomentumDataSource.new()
+			),
+			0, 
+			0, 
+			10, 
+			1
+		)
+}
 
-const _save_file_path = "user://spellcraft-idle-save.json"
+var last_inventory_update_unix_time: float
+var inventory_update_timer: Timer
 
 func _ready():
-	_load_inventory()
 	_create_timer()
+
+func _notification(what):
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		inventory_update_timer.paused = true
+	if what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		inventory_update_timer.paused = false
 
 func _create_timer():
 	if inventory_update_timer != null:
 		return
 	inventory_update_timer = Timer.new()
-	inventory_update_timer.set_wait_time(0.1)
+	inventory_update_timer.set_wait_time(0.05)
 	inventory_update_timer.connect("timeout", _update_inventory)
 	add_child(inventory_update_timer)
 	inventory_update_timer.start()
 
-func _update_inventory():
-	print("Updating inventory...")
-	var current_timestamp: float = Time.get_unix_time_from_system()
-	
+func get_save_data() -> Dictionary:
+	var ingredient_map := {}
 	for type in ingredients:
-		ingredients[type].update_progress(last_timestamp, current_timestamp)
+		ingredient_map[Ingredient.get_type_as_string(type)] = Ingredient.to_dictionary(ingredients[type])
 	
-	ingredients_changed.emit(ingredients)
-	last_timestamp = current_timestamp
-	print("Inventory updated!")
+	return { "ingredients": ingredient_map }
 
-func _save_inventory():
-	print("Saving inventory...")
-	
-	var save_json_string = JSON.stringify({
-		"last_timestamp": Time.get_unix_time_from_system(),
-		"ingredients": _get_ingredients_as_array()
-	})
-	
-	print(save_json_string)
-	
-	var save_file = FileAccess.open(_save_file_path, FileAccess.WRITE)
-	if save_file != null:
-		save_file.store_string(save_json_string)
-		save_file.close()
-	else:
-		print("Saving failed :(")
-	
-	print("Saved inventory!")
-	
-func _get_ingredients_as_array() -> Array:
-	var ingredient_list = []
-	
-	for type_key in ingredients:
-		var ingredient = ingredients[type_key]
-		ingredient_list.append(Ingredient.to_dictionary(ingredient))
-	
-	return ingredient_list
-	
-func _load_inventory():
-	print("Loading inventory...")
-	
-	if not FileAccess.file_exists(_save_file_path):
-		_init_new_save()
-		_save_inventory()
-		return
-	
-	var file = FileAccess.open(_save_file_path, FileAccess.READ)
-	var content = file.get_as_text()
-	file.close()
-	
-	var data = JSON.parse_string(content)
-	if data == null:
-		printerr("Failed to parse save file as JSON.")
-		return
-	
-	ingredients.clear()
-	
-	last_timestamp = data['last_timestamp']
-	
-	for entry in data['ingredients']:
-		var ingredient = Ingredient.from_dictionary(entry)
-		if ingredient:
-			ingredients[ingredient.type] = ingredient
+func load_save_data(data: Dictionary):
+	for entry in data.get("ingredients"):
+		var type := Ingredient.get_type_from_string(entry)
+		if type == Ingredient.Type.UNKNOWN:
+			printerr("Found unknown ingredient type:" + Ingredient.get_type_as_string(type))
 		else:
-			printerr("Loading ingredient entry failed: %s" % entry)
+			Ingredient.from_dictionary(ingredients[type], data.get("ingredients")[entry])
 	
 	_update_inventory()
-	print("Loaded inventory!")
 
-func _init_new_save() -> void:
-	last_timestamp = Time.get_unix_time_from_system()
-	ingredients[Ingredient.Type.KINETIC_SHARD] = Ingredient.new(Ingredient.Type.KINETIC_SHARD, 0, 0, 10, 1)
+func init_new_save():
+	last_inventory_update_unix_time = Time.get_unix_time_from_system()
+	# TODO: Load from a config or some other elegant way instead of hard-coding.
+	for type in ingredients:
+		ingredients[type].count = 0
+		ingredients[type].progress = 0
+		ingredients[type].capacity = 10
 
-func clear_save() -> void:
-	if FileAccess.file_exists(_save_file_path):
-		var dir = DirAccess.open("user://")
-		dir.remove(_save_file_path)
-	_init_new_save()
-	_save_inventory()
-
-func _notification(what):
-	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
-		_save_inventory()
-		inventory_update_timer.paused = true
-	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
-		_load_inventory()
-		inventory_update_timer.paused = false
+func _update_inventory():
+	var current_inventory_update_unix_time = Time.get_unix_time_from_system()
+	for type in ingredients:
+		ingredients[type].update_progress(last_inventory_update_unix_time, current_inventory_update_unix_time)
+	
+	ingredients_changed.emit(ingredients)
+	last_inventory_update_unix_time = current_inventory_update_unix_time
