@@ -9,7 +9,9 @@ extends CanvasLayer
 	Ingredient.Type.KINETIC_SHARD: {
 		"counter": %KineticShardsCounterLabel,
 		"gain_rate": %KineticShardsGainRateLabel,
-		"progress_bar": %KineticShardsProgressBar
+		"progress_bar": %KineticShardsProgressBar,
+		"momentum_label": %KineticShardsMomentumLabel,
+		"momentum_graph_line": %KineticShardsMomentumGraphLine
 	}
 }
 
@@ -40,10 +42,14 @@ func _on_test_button_pressed() -> void:
 	PlayerProgress.add_xp(50)
 	
 func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient]) -> void:
+	var now_unix = Time.get_unix_time_from_system()
+	
 	for type in ingredients:
 		var ingredient = ingredients[type]
 		ingredient_hud[type].counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
-		ingredient_hud[type].gain_rate.text = "%.02f / min" % (ingredient.gain_rate_per_second * 60)
+		ingredient_hud[type].gain_rate.text = "%.02f / min" % (ingredient.get_current_gain_rate() * 60)
+		ingredient_hud[type].momentum_label.text = "%d steps (%.02f %%)" % [ingredient.momentum_tracker.datasource.get_latest_value().val, ingredient.get_current_momentum_percentage()]
+		ingredient_hud[type].momentum_graph_line.draw_graph(ingredient.momentum_tracker.datasource.get_history(now_unix - 86400.0, now_unix))
 		if ingredient.count < ingredient.capacity:
 			ingredient_hud[type].progress_bar.value = ingredient.get_progress_percentage()
 		else:
