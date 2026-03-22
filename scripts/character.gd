@@ -6,16 +6,22 @@ var charName = "Character"
 
 @onready var character = $"."
 @onready var particles = $GPUParticles2D
-@onready var healthBar = $VBoxContainer/Sprite2D/ProgressBar
-@onready var skillBars = $VBoxContainer/Sprite2D/HBox_Skills
+@onready var healthBar = $"VBoxContainer/Container--Sprite2D/ProgressBar"
+@onready var skillBars = $"VBoxContainer/Container--Sprite2D/HBox_Skills"
 
 @onready var baseSprite = $VBoxContainer/BaseSprite
 @onready var wizardSprites = $VBoxContainer/BaseSprite/WIZARDSPECIFIC
 
+@onready var trail = $VBoxContainer/BaseSprite/GPU_TrailParticles
+var isFollowing : bool = false
+var timePass
+var orig
+var end
 
 var isPlayer : bool = false
 var baseStats = CharacterStats.new()
 var currentStats = baseStats # this should be replaced with cloning/duplicating baseStats
+
 
 var skills = []
 var skillToUse = -1
@@ -35,6 +41,7 @@ func _ready() -> void:
 		wizardSprites.visible = true;
 	else:
 		baseSprite.texture = load("res://assets/enemies/skeleton.png") if RandomNumberGenerator.new().randf() > 0.5 else load("res://assets/enemies/wolf.png")
+	trail.texture = baseSprite.texture
 	
 	pass
 
@@ -59,8 +66,18 @@ func PassTime(delta: float) -> void:
 	pass
 
 # Update health bar (should be replaced by tying it to a variable)
-func UpdateVisuals():
+func UpdateVisuals(delta : float):
 	healthBar.value = currentStats.health * 1.0 / baseStats.maxHealth
+	
+	if isFollowing:
+		timePass += delta
+		if timePass >= 0.5:
+			self.global_position = orig
+			isFollowing = false
+			trail.emitting = false
+		else: 
+			self.global_position = lerp(orig, end, timePass / 0.5)
+	
 	pass
 
 
@@ -82,9 +99,12 @@ func CheckSkillCharge() -> float:
 func UseSkill(target : Character) -> void:
 	if skills[skillToUse].Use(self, target):
 		particles.emitting = true
-		
+		trail.emitting = true
+		Follow(target)
+	
 	skillToUse = -1
 	pass
+
 
 # Take damage and create a text popup
 func TakeDamage(dmg : int, itCrit : bool):
@@ -93,5 +113,17 @@ func TakeDamage(dmg : int, itCrit : bool):
 	var popup = damagePopup.instantiate()
 	character.get_parent().get_parent().add_child(popup)
 	popup.SetUp(character.get_parent().position, dmg, itCrit)
+	
+	pass
+
+
+func Follow(target : Character):
+	orig = self.global_position
+	end = target.global_position
+	end.x = (end.x - orig.x) * 0.8 + orig.x
+	
+	timePass = 0.0
+	isFollowing = true
+	trail.modulate = Color.from_hsv(RandomNumberGenerator.new().randf(), 0.8, 1)
 	
 	pass

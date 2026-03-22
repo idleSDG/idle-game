@@ -3,16 +3,17 @@ extends Node
 @onready var canvas = $"Main Scene"
 @onready var combatFinish = $"Main Scene/CombatFinishPopup"
 @onready var characterSpawnPos = [
- $"Main Scene/Control",  $"Main Scene/Control2", $"Main Scene/Control3",
- $"Main Scene/Control4", $"Main Scene/Control5", $"Main Scene/Control6"]
+ $"Main Scene/Control",  $"Main Scene/Control2", $"Main Scene/Control4",
+ $"Main Scene/Control6", $"Main Scene/Control5", $"Main Scene/Control6"]
 @onready var timerLabel = $"Main Scene/SecondsLabel"
 
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd")
 
 var targetIndex = 1
-var characterList = [] # hard-coded to be 6 for now - 1 player and up to 5 enemies
+var characterList = [] 
 var remainingEnemiesList = []
+var enemyAmount : int = 4 # enemy amount = enemies on field + 1 (for the player)
 
 var timer = 0.0
 var gameSpeed = 1.0
@@ -20,7 +21,7 @@ var isPlaying = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	characterList.resize(6)
+	characterList.resize(enemyAmount)
 	
 	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
 	var instance = character_scene.instantiate()
@@ -51,7 +52,7 @@ func _process(delta: float) -> void:
 	delta = delta * gameSpeed  # easily add a speed up button that can increase game speed 2x/4x/etc.
 	
 	if isPlaying:		# if fight isnt finished
-		update_visuals()
+		update_visuals(delta)
 		# timer - can be used for skill animations (if we want any), to stop time while anim is playing
 		if timer <= 0:
 			check_enemies()
@@ -74,13 +75,13 @@ func check_death():
 		characterList[0] = null
 		finish_fight(false)
 	
-	for i in range(1, 6):
+	for i in range(1, enemyAmount):
 		if characterList[i] != null && characterList[i].currentStats.health <= 0:
 			characterList[i].queue_free()
 			characterList[i] = null
 			
 			targetIndex = -1
-			for j in range(1, 6):
+			for j in range(1, enemyAmount):
 				if characterList[j] != null:
 					targetIndex = j
 			if targetIndex == -1:
@@ -89,7 +90,7 @@ func check_death():
 
 # spawns new enemies if there are any left in remainingEnemiesList
 func check_enemies():
-	for i in range(1, 6):
+	for i in range(1, enemyAmount):
 		if remainingEnemiesList.size() > 0:
 			if characterList[i] == null:
 				characterList[i] = remainingEnemiesList[0]
@@ -132,10 +133,10 @@ func pass_time(delta: float) -> void:
 	pass
 
 # used for bar updates and whatnot (though it'd be better to tie the bar to a variable)
-func update_visuals() :
+func update_visuals(delta: float) :
 	for c in characterList:
 		if c != null:
-			c.UpdateVisuals()
+			c.UpdateVisuals(delta)
 	pass
 
 # finishes the fight
