@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://buovyuofavu8d"]
+
+[ext_resource type="PackedScene" uid="uid://b6o81e0vhxb56" path="res://scenes/item_grid.tscn" id="1_qw0r6"]
+
+[node name="Settings" type="Node2D" unique_id=322031731]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971251208]
+layer = 0
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1544346080]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5964, 0.84, 0.80345994, 1)
+
+[node name="ItemGrid" parent="CanvasLayer/Background" unique_id=716936249 instance=ExtResource("1_qw0r6")]
+layout_mode = 1
+offset_top = 144.0
+offset_bottom = 302.0
+
+[node name="NavBar" type="HBoxContainer" parent="CanvasLayer/Background" unique_id=1541292411]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1908.0
+offset_bottom = -1794.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Ingredients" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=1225447675]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "INGREDIENTS
+"
+
+[node name="Hats" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=1047083133]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "HATS"
+
+[node name="Robes" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=1158250260]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "ROBES
+"
+
+[node name="Weapons" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=2097470825]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "WEAPONS
+"
+
+[node name="Potions" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=730387226]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "POTIONS
+"
+
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Ingredients" to="CanvasLayer/Background/ItemGrid" method="_on_ingredients_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Hats" to="CanvasLayer/Background/ItemGrid" method="_on_hats_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Robes" to="CanvasLayer/Background/ItemGrid" method="_on_robes_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Weapons" to="CanvasLayer/Background/ItemGrid" method="_on_weapons_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Potions" to="CanvasLayer/Background/ItemGrid" method="_on_potions_pressed"]

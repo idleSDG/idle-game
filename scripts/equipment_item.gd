@@ -8,3 +8,8 @@ enum Slot { WEAPON, BELT, HAT }
 @export var damage_bonus_pct: float = 0.0
 @export var ingredient_gain_pct: float = 0.0
 @export var crit_rate_bonus: float = 0.0
+
+func _init(name, nSlot : Slot):
+	item_name = name
+	slot = nSlot
+	pass

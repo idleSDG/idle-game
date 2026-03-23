@@ -5,6 +5,7 @@ extends Node
 @onready var battle_scene = preload("res://scenes/battle.tscn")
 @onready var equipment_scene = preload("res://scenes/equipment.tscn")
 @onready var settings_scene = preload("res://scenes/settings.tscn")
+@onready var inventory_scene = preload("res://scenes/inventory.tscn")
 @onready var nav_bar = $"NavBarLayer/NavBar"
 @onready var hud_layer = $HUDLayer
 
@@ -12,6 +13,7 @@ var tab_for_button = {
 	"HomeButton": "home",
 	"BattleButton": "battle",
 	"EquipmentButton": "equipment",
+	"InventoryButton": "inventory",
 	"SettingsButton": "settings",
 }
 
@@ -25,6 +27,7 @@ func _ready():
 		"home": home_scene,
 		"battle": battle_scene,
 		"equipment": equipment_scene,
+		"inventory": inventory_scene,
 		"settings": settings_scene
 	}
 	SceneManager.setup(content_area, tab_scenes)
@@ -52,6 +55,9 @@ func _on_battle_button_pressed():
 
 func _on_equipment_button_pressed():
 	SceneManager.switch_tab("equipment")
+
+func _on_inventory_button_pressed():
+	SceneManager.switch_tab("inventory")
 
 func _on_settings_button_pressed():
 	SceneManager.switch_tab("settings")

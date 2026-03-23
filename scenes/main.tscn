@@ -116,25 +116,31 @@ grow_vertical = 0
 [node name="HomeButton" type="Button" parent="NavBarLayer/NavBar" unique_id=713203215]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "HOME"
 
 [node name="BattleButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1212122017]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "BATTLE"
 
 [node name="EquipmentButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1832751890]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "EQUIPMENT"
+
+[node name="InventoryButton" type="Button" parent="NavBarLayer/NavBar" unique_id=862942468]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "INVENTORY"
 
 [node name="SettingsButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1383281877]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "SETTINGS"
 
 [connection signal="pressed" from="HUDLayer/HUD/TestButton" to="HUDLayer" method="_on_test_button_pressed"]
@@ -142,4 +148,5 @@ text = "SETTINGS"
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/EquipmentButton" to="." method="_on_equipment_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]

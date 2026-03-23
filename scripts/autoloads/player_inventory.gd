@@ -2,6 +2,13 @@ extends Node
 
 signal ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient])
 
+var equipment: Array[EquipmentItem] = [EquipmentItem.new("Equip", EquipmentItem.Slot.WEAPON), 
+EquipmentItem.new("Equip", EquipmentItem.Slot.WEAPON), EquipmentItem.new("Equip", EquipmentItem.Slot.WEAPON), 
+EquipmentItem.new("Equip", EquipmentItem.Slot.HAT), EquipmentItem.new("Equip", EquipmentItem.Slot.HAT), 
+EquipmentItem.new("Equip", EquipmentItem.Slot.HAT), EquipmentItem.new("Equip", EquipmentItem.Slot.HAT), 
+EquipmentItem.new("Equip", EquipmentItem.Slot.BELT), EquipmentItem.new("Equip", EquipmentItem.Slot.WEAPON), 
+EquipmentItem.new("Equip", EquipmentItem.Slot.BELT), EquipmentItem.new("Equip", EquipmentItem.Slot.HAT)]
+
 var ingredients: Dictionary[Ingredient.Type, Ingredient] = {}
 var last_inventory_update_unix_time: float
 var inventory_update_timer: Timer
