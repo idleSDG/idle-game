@@ -3,7 +3,7 @@ extends Node
 @onready var content_area = $ContentArea
 @onready var home_scene = preload("res://scenes/home.tscn")
 @onready var battle_scene = preload("res://scenes/battle.tscn")
-@onready var equipment_scene = preload("res://scenes/equipment.tscn")
+@onready var character_scene = preload("res://scenes/character_menu.tscn")
 @onready var settings_scene = preload("res://scenes/settings.tscn")
 @onready var nav_bar = $"NavBarLayer/NavBar"
 @onready var hud_layer = $HUDLayer
@@ -11,7 +11,7 @@ extends Node
 var tab_for_button = {
 	"HomeButton": "home",
 	"BattleButton": "battle",
-	"EquipmentButton": "equipment",
+	"CharacterButton": "character",
 	"SettingsButton": "settings",
 }
 
@@ -24,7 +24,7 @@ func _ready():
 	var tab_scenes = {
 		"home": home_scene,
 		"battle": battle_scene,
-		"equipment": equipment_scene,
+		"character": character_scene,
 		"settings": settings_scene
 	}
 	SceneManager.setup(content_area, tab_scenes)
@@ -34,7 +34,7 @@ func _ready():
 
 func _on_tab_switched(tab_name):
 	# Only show HUD on home or battle
-	hud_layer.visible = tab_name in ["home", "battle", "equipment"]
+	hud_layer.visible = tab_name in ["home", "battle", "character"]
 	update_navbar_visuals()
 
 func update_navbar_visuals():
@@ -55,3 +55,7 @@ func _on_equipment_button_pressed():
 
 func _on_settings_button_pressed():
 	SceneManager.switch_tab("settings")
+
+
+func _on_character_button_pressed() -> void:
+	SceneManager.switch_tab("character")
