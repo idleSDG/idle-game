@@ -24,7 +24,7 @@ hue_variation_min = -1.0
 hue_variation_max = 0.99999994
 
 [sub_resource type="Gradient" id="Gradient_0dpix"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0.54509807, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_2hyy3"]
 gradient = SubResource("Gradient_0dpix")
@@ -37,7 +37,7 @@ scale_max = 2.0
 color_ramp = SubResource("GradientTexture1D_2hyy3")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0dpix"]
-viewport_path = NodePath("VBoxContainer/SubViewport")
+viewport_path = NodePath("SubViewport")
 
 [node name="Character" type="Node2D" unique_id=582329081]
 script = ExtResource("1_rkhd4")
@@ -118,8 +118,8 @@ texture = ExtResource("3_a5ia6")
 [node name="GPU_TrailParticles" type="GPUParticles2D" parent="VBoxContainer/BaseSprite" unique_id=166595673]
 z_index = -1
 emitting = false
-amount = 16
 texture = ExtResource("3_a5ia6")
+lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_irmqu")
 
 [node name="Shadow" type="Sprite2D" parent="VBoxContainer/BaseSprite" unique_id=1165336262]
@@ -167,10 +167,6 @@ z_as_relative = false
 texture_filter = 1
 texture = ExtResource("8_50cep")
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer" unique_id=1561311271]
-canvas_item_default_texture_filter = 0
-size = Vector2i(1080, 1920)
-
 [node name="SubRender" type="Sprite2D" parent="VBoxContainer" unique_id=1589779356]
 visible = false
 modulate = Color(1, 1, 1, 0.4)
@@ -179,3 +175,7 @@ z_as_relative = false
 position = Vector2(334, -59)
 scale = Vector2(0.29990333, 0.12264747)
 texture = SubResource("ViewportTexture_0dpix")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1561311271]
+canvas_item_default_texture_filter = 0
+size = Vector2i(1080, 1920)

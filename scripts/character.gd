@@ -13,6 +13,7 @@ var charName = "Character"
 @onready var wizardSprites = $VBoxContainer/BaseSprite/WIZARDSPECIFIC
 
 @onready var trail = $VBoxContainer/BaseSprite/GPU_TrailParticles
+var image = Image.new() 
 var isFollowing : bool = false
 var timePass
 var orig
@@ -38,12 +39,16 @@ func _ready() -> void:
 	
 	if isPlayer:
 		baseSprite.texture = load("res://assets/wizard_defaults/wizardBase.png")
+		CreatePlayerCompositeImage()
+
 		wizardSprites.visible = true;
+		trail.texture = ImageTexture.create_from_image(image)
 	else:
 		baseSprite.texture = load("res://assets/enemies/skeleton.png") if RandomNumberGenerator.new().randf() > 0.5 else load("res://assets/enemies/wolf.png")
-	trail.texture = baseSprite.texture
+		trail.texture = baseSprite.texture
 	
 	pass
+
 
 func SetStats(stats : CharacterStats) :
 	# TEMPORARY CODE
@@ -125,5 +130,36 @@ func Follow(target : Character):
 	timePass = 0.0
 	isFollowing = true
 	trail.modulate = Color.from_hsv(RandomNumberGenerator.new().randf(), 0.8, 1)
+	
+	pass
+
+
+func CreatePlayerCompositeImage():
+	image = baseSprite.texture.get_image()
+	
+	var skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Skin
+	var source = skin.texture.get_image()
+	source.convert(Image.FORMAT_RGBA8)
+	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
+	
+	skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Face
+	source = skin.texture.get_image()
+	source.convert(Image.FORMAT_RGBA8)
+	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
+	
+	skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Hat
+	source = skin.texture.get_image()
+	source.convert(Image.FORMAT_RGBA8)
+	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
+	
+	skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Robe
+	source = skin.texture.get_image()
+	source.convert(Image.FORMAT_RGBA8)
+	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
+	
+	skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Weapon
+	source = skin.texture.get_image()
+	source.convert(Image.FORMAT_RGBA8)
+	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
 	
 	pass
