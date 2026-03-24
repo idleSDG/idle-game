@@ -8,7 +8,8 @@ var _has_steps_data: bool = false
 
 # 1 day today + 8 days needed for history
 var lookback_days: int = 9
-var daily_steps_by_date: Dictionary = {} # "YYYY-MM-DD" -> int
+## Dictionary is "YYYY-MM-DD" -> int.
+var daily_steps_by_date: Dictionary = {}
 const GRAPH_MAX_STEPS: int = 12000
 
 func _ready():
