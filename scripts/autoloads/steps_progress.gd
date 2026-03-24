@@ -9,19 +9,25 @@ var _has_steps_data: bool = false
 # 1 day today + 8 days needed for history
 var lookback_days: int = 9
 var daily_steps_by_date: Dictionary = {} # "YYYY-MM-DD" -> int
+var has_history_permissions: bool
 const GRAPH_MAX_STEPS: int = 12000
 
 func _ready():
+	has_history_permissions = false
 	if Engine.has_singleton(_plugin_name):
 		_steps_plugin = Engine.get_singleton(_plugin_name)
 		_steps_plugin.on_steps_read.connect(_on_steps)
 		_steps_plugin.on_steps_error.connect(_on_error)
 		_steps_plugin.on_history_permission_result.connect(_on_history_permission)
-		_steps_plugin.request_history_permissions()
+		request_history_permissions()
 	else:
 		#fallback for testing
 		_set_fallback_data()
 		_mark_steps_ready()
+		
+func request_history_permissions():
+	if Engine.has_singleton(_plugin_name):
+		_steps_plugin.request_history_permissions()
 
 func has_steps_data() -> bool:
 	return _has_steps_data
@@ -47,6 +53,7 @@ func _on_error(err):
 
 func _on_history_permission(result : bool):
 	if result:
+		has_history_permissions = true
 		_fetch_steps()
 		var timer = Timer.new()
 		timer.wait_time = 10

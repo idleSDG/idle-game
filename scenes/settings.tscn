@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgqftdi2ey53h"]
 
 [ext_resource type="Script" uid="uid://bnmhb5hkkwgvw" path="res://scenes/clear_save_button.gd" id="1_5p8wc"]
+[ext_resource type="Script" uid="uid://dr6f1dbabrsuw" path="res://scripts/step_permissions_button.gd" id="2_r6d6q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6d6q"]
 bg_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
@@ -42,17 +43,36 @@ theme_override_font_sizes/font_size = 32
 text = "Settings: Access to volume, account, and step-tracking permissions."
 
 [node name="ClearSaveButton" type="Button" parent="CanvasLayer" unique_id=1535614000]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -203.0
-offset_bottom = 116.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.108
+anchor_right = 0.5
+anchor_bottom = 0.108
+offset_left = -190.0
+offset_top = -50.36
+offset_right = 190.0
+offset_bottom = 49.64
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
 theme_override_styles/normal = SubResource("StyleBoxFlat_r6d6q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6wm04")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f4mfi")
 text = "Clear Save"
 script = ExtResource("1_5p8wc")
 
+[node name="StepPermissionsButton" type="Button" parent="CanvasLayer" unique_id=1864113747]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.39000002
+anchor_right = 0.5
+anchor_bottom = 0.39000002
+offset_left = -350.0
+offset_top = -75.80005
+offset_right = 350.0
+offset_bottom = 74.19995
+theme_override_font_sizes/font_size = 48
+text = "Request Step Permissions"
+script = ExtResource("2_r6d6q")
+
 [connection signal="pressed" from="CanvasLayer/ClearSaveButton" to="CanvasLayer/ClearSaveButton" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/StepPermissionsButton" to="CanvasLayer/StepPermissionsButton" method="_on_pressed"]
