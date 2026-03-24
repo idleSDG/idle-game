@@ -79,7 +79,9 @@ func TakeDamage(dmg : int, itCrit : bool):
 	currentStats.TakeDamage(dmg)
 	
 	var popup = damagePopup.instantiate()
-	character.get_parent().get_parent().add_child(popup)
+	var popup_root = get_tree().get_first_node_in_group("battle_popup_root")
+	if popup_root:
+		popup_root.add_child(popup)
 	popup.SetUp(character.get_parent().position, dmg, itCrit)
 	
 	pass

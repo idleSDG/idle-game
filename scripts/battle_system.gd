@@ -7,6 +7,9 @@ extends Node
  $"Main Scene/Control4", $"Main Scene/Control5", $"Main Scene/Control6"]
 @onready var timerLabel = $"Main Scene/SecondsLabel"
 
+signal request_exit_signal
+@onready var exit_button: Button = $"Main Scene/ExitBattle"
+
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd")
 
@@ -20,6 +23,8 @@ var isPlaying = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if exit_button:
+		exit_button.pressed.connect(_on_exit_battle_pressed)
 	characterList.resize(6)
 	
 	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
@@ -151,6 +156,7 @@ func finish_fight(result : bool):
 		PlayerProgress.add_xp(120)
 	else:
 		combatFinish.text = "YOU LOSE"
+	exit_button.visible = true
 	pass
 
 
@@ -180,3 +186,7 @@ func simulate(length : float):
 		else:
 			length = 0
 	pass
+
+func _on_exit_battle_pressed() -> void:
+	GlobalVariables.save_game()
+	request_exit_signal.emit()
