@@ -45,8 +45,8 @@ func _on_test_button_pressed() -> void:
 func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient]) -> void:
 	for type in ingredients:
 		var ingredient = ingredients[type]
-		var yesterday_steps := StepsProgress.get_steps_for_day_offset(1)
-		var todays_steps := StepsProgress.get_steps_for_day_offset(0)
+		var yesterday_steps : int = StepsProgress.get_steps_for_day_offset(1)
+		var todays_steps : int = StepsProgress.get_steps_for_day_offset(0)
 		var today_momentum_pct = ingredient.momentum_tracker.momentumConfig.get_multiplier(float(yesterday_steps)) * 100.0
 		var tomorrow_momentum_pct = ingredient.momentum_tracker.momentumConfig.get_multiplier(float(todays_steps)) * 100.0
 		ingredient_hud[type].counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
