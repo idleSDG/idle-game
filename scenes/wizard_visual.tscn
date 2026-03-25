@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b2ym5ku4n2rrg" path="res://assets/equipment/staff1.png" id="7_r265v"]
 
 [node name="BaseSprite" type="Sprite2D" unique_id=1448866259]
+texture_filter = 1
 texture = ExtResource("1_nyccv")
 script = ExtResource("2_2guse")
 
@@ -17,24 +18,29 @@ script = ExtResource("2_2guse")
 [node name="Skin" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=575501616]
 z_index = 9
 z_as_relative = false
+texture_filter = 1
 texture = ExtResource("3_urcqd")
 
 [node name="Face" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=1347258255]
 z_index = 13
 z_as_relative = false
+texture_filter = 1
 texture = ExtResource("4_q8lq0")
 
 [node name="Hat" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=1937161608]
 z_index = 14
 z_as_relative = false
+texture_filter = 1
 texture = ExtResource("5_5cwrd")
 
 [node name="Robe" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=913800445]
 z_index = 11
 z_as_relative = false
+texture_filter = 1
 texture = ExtResource("6_j7e23")
 
 [node name="Weapon" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=155841725]
 z_index = 12
 z_as_relative = false
+texture_filter = 1
 texture = ExtResource("7_r265v")
