@@ -56,6 +56,5 @@ func _on_equipment_button_pressed():
 func _on_settings_button_pressed():
 	SceneManager.switch_tab("settings")
 
-
 func _on_character_button_pressed() -> void:
 	SceneManager.switch_tab("character")

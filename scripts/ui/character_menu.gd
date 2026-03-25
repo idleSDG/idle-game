@@ -1,65 +1,54 @@
 extends Node
 
-@onready var weapon_btn = $CanvasLayer/VBoxContainer/WeaponSlotBtn
-@onready var belt_btn   = $CanvasLayer/VBoxContainer/BeltSlotBtn
-@onready var hat_btn    = $CanvasLayer/VBoxContainer/HatSlotBtn
-@onready var stats_lbl  = $CanvasLayer/VBoxContainer/StatBonusLabel
+@onready var weapon_btn       : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/WeaponSlotBtn
+@onready var robe_btn         : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/RobeSlotBtn
+@onready var hat_btn          : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/HatSlotBtn
+@onready var stat_bonus_label : Label          = $CanvasLayer/HSplit/RightVBox/EquipSection/StatBonusLabel
+@onready var skin_panel       : SkinColorPanel = $CanvasLayer/HSplit/RightVBox/CosmeticsSection/SkinColorPanel
 
-var PrototypeItems = load("res://scripts/prototype_items.gd")
-var items = PrototypeItems.get_test_items()
+var _items : Array = PrototypeItems.get_test_items()
 
-func _ready():
-	# Load items from the prototype items file
-	EquipmentManager.equipment_changed.connect(_refresh_ui)
-	_refresh_ui()
-	# Setup button signals
-	weapon_btn.pressed.connect(_on_weapon_slot_btn_pressed)
-	belt_btn.pressed.connect(_on_belt_slot_btn_pressed)
-	hat_btn.pressed.connect(_on_hat_slot_btn_pressed)
+func _ready() -> void:
+	_refresh_equipment_buttons()
 
-func _refresh_ui():
-	var equipped_weapon = EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON)
-	var equipped_belt   = EquipmentManager.get_equipped(EquipmentItem.Slot.BELT)
-	var equipped_hat    = EquipmentManager.get_equipped(EquipmentItem.Slot.HAT)
+	weapon_btn.pressed.connect(_on_weapon_pressed)
+	robe_btn.pressed.connect(_on_robe_pressed)
+	hat_btn.pressed.connect(_on_hat_pressed)
 
-	weapon_btn.text = "Weapon: " + (equipped_weapon.item_name if equipped_weapon else "None")
-	belt_btn.text   = "Belt: "   + (equipped_belt.item_name if equipped_belt else "None")
-	hat_btn.text    = "Hat: "    + (equipped_hat.item_name if equipped_hat else "None")
+	skin_panel.changed.connect(_on_skin_color_changed)
 
-	var bonuses = EquipmentManager.get_total_bonuses()
-	stats_lbl.text = "DMG +%d%% | Ingredient +%d%% | Crit +%d%%" % [
-		bonuses["damage_bonus_pct"] * 100,
+	# Only need to refresh the buttons and stats label here —
+	# WizardAvatar handles its own visual refresh via signals
+	EquipmentManager.equipment_changed.connect(_refresh_equipment_buttons)
+
+func _toggle_slot(slot: EquipmentItem.Slot) -> void:
+	if EquipmentManager.get_equipped(slot) != null:
+		EquipmentManager.unequip(slot)
+	else:
+		for item in _items:
+			if item.slot == slot:
+				EquipmentManager.equip(item)
+				break
+
+func _on_weapon_pressed() -> void: _toggle_slot(EquipmentItem.Slot.WEAPON)
+func _on_robe_pressed()   -> void: _toggle_slot(EquipmentItem.Slot.ROBE)
+func _on_hat_pressed()    -> void: _toggle_slot(EquipmentItem.Slot.HAT)
+
+func _refresh_equipment_buttons() -> void:
+	var w := EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON)
+	var r := EquipmentManager.get_equipped(EquipmentItem.Slot.ROBE)
+	var h := EquipmentManager.get_equipped(EquipmentItem.Slot.HAT)
+
+	weapon_btn.text = "Staff : " + (w.item_name if w else "None  [tap to equip]")
+	robe_btn.text   = "Robe  : " + (r.item_name if r else "None  [tap to equip]")
+	hat_btn.text    = "Hat   : " + (h.item_name if h else "None  [tap to equip]")
+
+	var bonuses := EquipmentManager.get_total_bonuses()
+	stat_bonus_label.text = "DMG +%d%%\nIngredient +%d%%\nCrit +%d%%" % [
+		bonuses["damage_bonus_pct"]    * 100,
 		bonuses["ingredient_gain_pct"] * 100,
-		bonuses["crit_rate_bonus"] * 100,
+		bonuses["crit_rate_bonus"]     * 100,
 	]
 
-func _on_weapon_slot_btn_pressed():
-	# If slot filled, unequip; else equip first weapon from "items"
-	var current = EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON)
-	if current:
-		EquipmentManager.unequip(EquipmentItem.Slot.WEAPON)
-	else:
-		for item in items:
-			if item.slot == EquipmentItem.Slot.WEAPON:
-				EquipmentManager.equip(item)
-				break
-
-func _on_belt_slot_btn_pressed():
-	var current = EquipmentManager.get_equipped(EquipmentItem.Slot.BELT)
-	if current:
-		EquipmentManager.unequip(EquipmentItem.Slot.BELT)
-	else:
-		for item in items:
-			if item.slot == EquipmentItem.Slot.BELT:
-				EquipmentManager.equip(item)
-				break
-
-func _on_hat_slot_btn_pressed():
-	var current = EquipmentManager.get_equipped(EquipmentItem.Slot.HAT)
-	if current:
-		EquipmentManager.unequip(EquipmentItem.Slot.HAT)
-	else:
-		for item in items:
-			if item.slot == EquipmentItem.Slot.HAT:
-				EquipmentManager.equip(item)
-				break
+func _on_skin_color_changed(color: Color) -> void:
+	PlayerAppearance.apply_skin_color(color)
