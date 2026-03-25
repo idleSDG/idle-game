@@ -1,5 +1,8 @@
 class_name ItemGrid extends Node
 
+signal ingredient_pressed(item : Ingredient)
+signal equipment_pressed(item : EquipmentItem)
+
 @onready var buttonBase = $Button
 @onready var grid = $"."
 
@@ -24,6 +27,8 @@ func doIngredients():
 		grid.add_child(newButton)
 		gridItems.append(newButton)
 		
+		newButton.pressed.connect(inv_ingredient_Button_Pressed.bind(list[item]))
+		
 		newButton.get_child(0).text = "x" + str(list[item].count)
 		newButton.icon = load("res://assets/icons/kinetic.png")
 	pass
@@ -38,6 +43,8 @@ func doEquipment(slot : EquipmentItem.Slot):
 			grid.add_child(newButton)
 			gridItems.append(newButton)
 			
+			newButton.pressed.connect(inv_equipment_Button_Pressed.bind(item))
+			
 			if slot == EquipmentItem.Slot.WEAPON:
 				newButton.icon = load("res://assets/icons/staff.png")
 			else: if slot == EquipmentItem.Slot.BELT:
@@ -45,6 +52,13 @@ func doEquipment(slot : EquipmentItem.Slot):
 			else: 
 				newButton.icon = load("res://assets/icons/hat.png")
 	pass
+
+func inv_ingredient_Button_Pressed(item : Ingredient):
+	ingredient_pressed.emit(item)
+
+func inv_equipment_Button_Pressed(item : EquipmentItem):
+	equipment_pressed.emit(item)
+
 
 
 func _on_ingredients_pressed() -> void:
