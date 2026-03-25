@@ -158,6 +158,4 @@ theme_override_font_sizes/font_size = 87
 text = "Exit Battle
 "
 
-[node name="PopupRoot" type="Node2D" parent="Main Scene" unique_id=356167419 groups=["battle_popup_root"]]
-
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]

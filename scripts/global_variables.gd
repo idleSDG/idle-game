@@ -1,9 +1,11 @@
 class_name GlobalVariables extends Object
 
-static var inBattle = false
-static var exitedBattle = true
+enum BattleStates { IN_BATTLE, AWAITING_EXIT, IN_LEVEL_SELECT }
+static var battleState  : BattleStates = BattleStates.IN_LEVEL_SELECT
 static var lastLogin : float = 0
+static var battleStart : float = 0
 static var currentLogin : float = 0
+
 
 
 # Dummy player data
@@ -23,9 +25,9 @@ static func save_game():
 	currentLogin = lastLogin
 	
 	var save_dict = {
-		"inBattle" : inBattle,
-		"exitedBattle" : exitedBattle,
-		"lastLogin" : lastLogin
+		"battleState": battleState,
+		"lastLogin" : lastLogin,
+		"battleStart" : battleStart
 	}
 	var json_string = JSON.stringify(save_dict)
 	save_file.store_line(json_string)
@@ -50,7 +52,7 @@ static func load_game():
 			continue
 		
 		var loadedData = parse_result
-		inBattle = (loadedData["inBattle"] if loadedData.has("inBattle") else false)
-		exitedBattle = (loadedData["exitedBattle"] if loadedData.has("exitedBattle") else true)
+		battleState = (loadedData["battleState"] if loadedData.has("battleState") else BattleStates.IN_LEVEL_SELECT)
 		lastLogin = (loadedData["lastLogin"] if loadedData.has("lastLogin") else Time.get_unix_time_from_system())
+		battleStart = (loadedData["battleStart"] if loadedData.has("battleStart") else Time.get_unix_time_from_system())
 		currentLogin = Time.get_unix_time_from_system()
