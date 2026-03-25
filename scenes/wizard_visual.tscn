@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c1pddi2uee881"]
+
+[ext_resource type="Texture2D" uid="uid://ii8tm3vrcfq5" path="res://assets/wizard_defaults/wizardBase.png" id="1_nyccv"]
+[ext_resource type="Script" uid="uid://cgvrv7apujwgn" path="res://scenes/wizard_visual.gd" id="2_2guse"]
+[ext_resource type="Texture2D" uid="uid://ca2jsvf7t8wj3" path="res://assets/wizard_defaults/wizardSkin.png" id="3_urcqd"]
+[ext_resource type="Texture2D" uid="uid://c1bcio5souhkt" path="res://assets/wizard_defaults/face1.png" id="4_q8lq0"]
+[ext_resource type="Texture2D" uid="uid://csvvjfiqx7wan" path="res://assets/equipment/hat1.png" id="5_5cwrd"]
+[ext_resource type="Texture2D" uid="uid://co0ttyp1p58nj" path="res://assets/equipment/robe1.png" id="6_j7e23"]
+[ext_resource type="Texture2D" uid="uid://b2ym5ku4n2rrg" path="res://assets/equipment/staff1.png" id="7_r265v"]
+
+[node name="BaseSprite" type="Sprite2D" unique_id=1448866259]
+texture = ExtResource("1_nyccv")
+script = ExtResource("2_2guse")
+
+[node name="WIZARDSPECIFIC" type="Sprite2D" parent="." unique_id=1608569812]
+
+[node name="Skin" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=575501616]
+z_index = 9
+z_as_relative = false
+texture = ExtResource("3_urcqd")
+
+[node name="Face" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=1347258255]
+z_index = 13
+z_as_relative = false
+texture = ExtResource("4_q8lq0")
+
+[node name="Hat" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=1937161608]
+z_index = 14
+z_as_relative = false
+texture = ExtResource("5_5cwrd")
+
+[node name="Robe" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=913800445]
+z_index = 11
+z_as_relative = false
+texture = ExtResource("6_j7e23")
+
+[node name="Weapon" type="Sprite2D" parent="WIZARDSPECIFIC" unique_id=155841725]
+z_index = 12
+z_as_relative = false
+texture = ExtResource("7_r265v")
