@@ -2,16 +2,14 @@ extends Node2D
 
 @onready var content = $CanvasLayer
 
-var level_select_scene := preload("res://scenes/level_select.tscn")
 var battle_area_scene := preload("res://scenes/battle_area.tscn")
+var level_select_scene := preload("res://scenes/battle.tscn")
 
 var current_view: Node = null
 
 func _ready() -> void:
-	if GlobalVariables.inBattle:
+	if GlobalVariables.inBattle or not GlobalVariables.exitedBattle:
 		enter_battle()
-	else:
-		show_level_select()
 
 func show_level_select() -> void:
 	_swap_to(level_select_scene)

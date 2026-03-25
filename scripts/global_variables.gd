@@ -1,6 +1,7 @@
 class_name GlobalVariables extends Object
 
 static var inBattle = false
+static var exitedBattle = true
 static var lastLogin : float = 0
 static var currentLogin : float = 0
 
@@ -23,6 +24,7 @@ static func save_game():
 	
 	var save_dict = {
 		"inBattle" : inBattle,
+		"exitedBattle" : exitedBattle,
 		"lastLogin" : lastLogin
 	}
 	var json_string = JSON.stringify(save_dict)
@@ -48,6 +50,7 @@ static func load_game():
 			continue
 		
 		var loadedData = parse_result
-		inBattle = loadedData["inBattle"]
-		lastLogin = loadedData["lastLogin"]
+		inBattle = (loadedData["inBattle"] if loadedData.has("inBattle") else false)
+		exitedBattle = (loadedData["exitedBattle"] if loadedData.has("exitedBattle") else true)
+		lastLogin = (loadedData["lastLogin"] if loadedData.has("lastLogin") else Time.get_unix_time_from_system())
 		currentLogin = Time.get_unix_time_from_system()

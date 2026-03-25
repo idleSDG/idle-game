@@ -25,6 +25,12 @@ var isPlaying = true
 func _ready() -> void:
 	if exit_button:
 		exit_button.pressed.connect(_on_exit_battle_pressed)
+	if not GlobalVariables.inBattle and not GlobalVariables.exitedBattle:
+		isPlaying = false
+		combatFinish.visible = true
+		combatFinish.text = "YOU WIN"
+		exit_button.visible = true
+		return
 	characterList.resize(6)
 	
 	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
@@ -42,10 +48,12 @@ func _ready() -> void:
 	
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
 	if GlobalVariables.inBattle:
-		simulate(GlobalVariables.currentLogin - GlobalVariables.lastLogin)
-		timerLabel.time = int(GlobalVariables.currentLogin - GlobalVariables.lastLogin)
+		var now := Time.get_unix_time_from_system()
+		simulate(now - GlobalVariables.lastLogin)
+		timerLabel.time = int(now - GlobalVariables.lastLogin)
 	else:
 		GlobalVariables.inBattle = true
+		GlobalVariables.exitedBattle = false
 		GlobalVariables.save_game()
 	
 	pass # Replace with function body.
@@ -146,9 +154,10 @@ func update_visuals() :
 # finishes the fight
 func finish_fight(result : bool):
 	GlobalVariables.inBattle = false
+	GlobalVariables.exitedBattle = false
 	isPlaying = false
 	combatFinish.visible = true
-	
+
 	GlobalVariables.save_game()
 	
 	if result:
@@ -188,5 +197,7 @@ func simulate(length : float):
 	pass
 
 func _on_exit_battle_pressed() -> void:
+	GlobalVariables.inBattle = false
+	GlobalVariables.exitedBattle = true
 	GlobalVariables.save_game()
 	request_exit_signal.emit()
