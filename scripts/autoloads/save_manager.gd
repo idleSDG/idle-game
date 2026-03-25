@@ -15,6 +15,7 @@ func save_game():
 		"inventory": PlayerInventory.get_save_data(),
 		"xp": PlayerProgress.get_save_data(),
 		"equipment": EquipmentManager.get_save_data(),
+		"appearance": PlayerAppearance.get_save_data(),
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -28,6 +29,7 @@ func init_new_save():
 	PlayerProgress.init_new_save()
 	PlayerInventory.init_new_save()
 	EquipmentManager.init_new_save()
+	PlayerAppearance.init_new_save()
 
 func save_file_exists() -> bool:
 	print(FileAccess.file_exists(SAVE_PATH))
@@ -61,6 +63,11 @@ func load_game():
 		EquipmentManager.load_save_data(data["equipment"])
 	else:
 		printerr("No equipment data found!")
+		
+	if data.has("appearance"):
+		PlayerAppearance.load_save_data(data["appearance"])
+	else:
+		printerr("No appearance data found!")
 
 	print("Game Loaded.")
 	

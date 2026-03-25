@@ -149,11 +149,11 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 48
 text = "BATTLE"
 
-[node name="EquipmentButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1832751890]
+[node name="CharacterButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1832751890]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 48
-text = "EQUIPMENT"
+text = "CHARACTER"
 
 [node name="SettingsButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1383281877]
 layout_mode = 2
@@ -165,5 +165,5 @@ text = "SETTINGS"
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/EquipmentButton" to="." method="_on_equipment_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]
