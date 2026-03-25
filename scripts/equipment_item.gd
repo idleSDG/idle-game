@@ -1,6 +1,6 @@
 class_name EquipmentItem extends Resource
 
-enum Slot { WEAPON, BELT, HAT }
+enum Slot { WEAPON, ROBE, HAT }
 
 @export var item_name: String = "Unnamed Item"
 @export var slot: Slot = Slot.WEAPON
