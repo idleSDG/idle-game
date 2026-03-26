@@ -18,8 +18,6 @@ var tab_for_button = {
 func _ready():
 	# Loads save data upon turning the game on and, if the player was in battle, resumes it
 	GlobalVariables.load_game()
-	if GlobalVariables.inBattle:
-		get_tree().change_scene_to_file("res://scenes/battle_area.tscn")
 	
 	var tab_scenes = {
 		"home": home_scene,
@@ -29,6 +27,7 @@ func _ready():
 	}
 	SceneManager.setup(content_area, tab_scenes)
 	SceneManager.tab_switched.connect(_on_tab_switched)
+
 	SceneManager.switch_tab("home")
 	update_navbar_visuals()
 
