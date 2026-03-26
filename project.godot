@@ -23,6 +23,7 @@ PlayerInventory="*uid://bubpl5hv8kp80"
 SceneManager="*uid://byyql836gwgto"
 IdleProgress="*uid://dov7m1cqcemh7"
 EquipmentManager="*uid://dgcauqgjrih33"
+StepsProgress="*uid://cfgfym31wxges"
 PlayerAppearance="*uid://b34vpsjibdxjr"
 
 [display]
@@ -41,6 +42,10 @@ project/assembly_name="idle game"
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GodotStepPlugin/plugin.cfg")
 
 [physics]
 

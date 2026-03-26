@@ -8,22 +8,29 @@ var _example_dataset = [
 	{"time": 25, "val": 20},
 	{"time": 100, "val": 90}
 ]
+var _current_dataset: Array = []
 
 func _ready():
-	get_parent().resized.connect(func(): draw_graph(_example_dataset))
-	draw_graph(_example_dataset)
+	_current_dataset = _example_dataset.duplicate(true)
+	get_parent().resized.connect(func(): draw_graph(_current_dataset))
+	draw_graph(_current_dataset)
 
 func draw_graph(dataset):
 	clear_points()
 	if dataset.size() < 2: return
+	_current_dataset = dataset.duplicate(true)
 
 	var parent_size = get_parent().size
 	var draw_width = parent_size.x - (padding * 2)
 	var draw_height = parent_size.y - (padding * 2)
 
+	# Sort the data for representation
+	var sorted_dataset = dataset.duplicate(true)
+	sorted_dataset.sort_custom(func(a, b): return float(a["time"]) < float(b["time"]))
+
 	# 1. Find Ranges
-	var times = dataset.map(func(d): return d.time)
-	var values = dataset.map(func(d): return d.val)
+	var times = sorted_dataset.map(func(d): return d.time)
+	var values = sorted_dataset.map(func(d): return d.val)
 	
 	var min_t = times.min()
 	var max_t = times.max()
@@ -35,7 +42,7 @@ func draw_graph(dataset):
 	var v_range = max(max_v - min_v, 1.0)
 
 	# 2. Map and Draw
-	for data in dataset:
+	for data in sorted_dataset:
 		# Calculate X based on timestamp progress (0.0 to 1.0)
 		var t_ratio = (data.time - min_t) / t_range
 		var x = padding + (t_ratio * draw_width)
