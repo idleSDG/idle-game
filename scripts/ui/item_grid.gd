@@ -47,7 +47,7 @@ func doEquipment(slot : EquipmentItem.Slot):
 			
 			if slot == EquipmentItem.Slot.WEAPON:
 				newButton.icon = load("res://assets/icons/staff.png")
-			else: if slot == EquipmentItem.Slot.BELT:
+			else: if slot == EquipmentItem.Slot.ROBE:
 				newButton.icon = load("res://assets/icons/robe.png")
 			else: 
 				newButton.icon = load("res://assets/icons/hat.png")
@@ -55,9 +55,11 @@ func doEquipment(slot : EquipmentItem.Slot):
 
 func inv_ingredient_Button_Pressed(item : Ingredient):
 	ingredient_pressed.emit(item)
+	doIngredients()
 
 func inv_equipment_Button_Pressed(item : EquipmentItem):
 	equipment_pressed.emit(item)
+	doEquipment(item.slot)
 
 
 
@@ -70,7 +72,7 @@ func _on_hats_pressed() -> void:
 
 
 func _on_robes_pressed() -> void:
-	doEquipment(EquipmentItem.Slot.BELT)
+	doEquipment(EquipmentItem.Slot.ROBE)
 
 
 func _on_weapons_pressed() -> void:

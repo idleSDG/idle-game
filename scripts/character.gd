@@ -39,6 +39,7 @@ func _ready() -> void:
 	
 	if isPlayer:
 		baseSprite.texture = load("res://assets/wizard_defaults/wizardBase.png")
+		SetUpWizard()
 		CreatePlayerCompositeImage()
 
 		wizardSprites.visible = true;
@@ -134,6 +135,23 @@ func Follow(target : Character):
 	pass
 
 
+func SetUpWizard():
+	wizardSprites.get_child(0).modulate = PlayerAppearance.appearance.get_skin_color()
+	
+	var tex = load("res://assets/equipment/hat1.png") if EquipmentManager.get_equipped(EquipmentItem.Slot.HAT) else null
+	wizardSprites.get_child(2).texture = tex
+	wizardSprites.get_child(2).modulate = Color.WHITE
+	
+	tex = load("res://assets/equipment/robe1.png") if EquipmentManager.get_equipped(EquipmentItem.Slot.ROBE) else null
+	wizardSprites.get_child(3).texture = tex
+	wizardSprites.get_child(3).modulate = Color.WHITE
+	
+	tex = load("res://assets/equipment/staff1.png") if EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON) else null
+	wizardSprites.get_child(4).texture = tex
+	wizardSprites.get_child(4).modulate = Color.WHITE
+	
+	pass
+
 func CreatePlayerCompositeImage():
 	image = baseSprite.texture.get_image()
 	
@@ -143,23 +161,27 @@ func CreatePlayerCompositeImage():
 	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
 	
 	skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Face
-	source = skin.texture.get_image()
-	source.convert(Image.FORMAT_RGBA8)
-	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
+	if skin.texture != null:
+		source = skin.texture.get_image()
+		source.convert(Image.FORMAT_RGBA8)
+		image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
 	
 	skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Hat
-	source = skin.texture.get_image()
-	source.convert(Image.FORMAT_RGBA8)
-	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
+	if skin.texture != null:
+		source = skin.texture.get_image()
+		source.convert(Image.FORMAT_RGBA8)
+		image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
 	
 	skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Robe
-	source = skin.texture.get_image()
-	source.convert(Image.FORMAT_RGBA8)
-	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
+	if skin.texture != null:
+		source = skin.texture.get_image()
+		source.convert(Image.FORMAT_RGBA8)
+		image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
 	
 	skin = $VBoxContainer/BaseSprite/WIZARDSPECIFIC/Weapon
-	source = skin.texture.get_image()
-	source.convert(Image.FORMAT_RGBA8)
-	image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
+	if skin.texture != null:
+		source = skin.texture.get_image()
+		source.convert(Image.FORMAT_RGBA8)
+		image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
 	
 	pass

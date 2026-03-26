@@ -6,8 +6,8 @@ var equipment: Array[EquipmentItem] = [EquipmentItem.new("weap1", EquipmentItem.
 EquipmentItem.new("weap2", EquipmentItem.Slot.WEAPON), EquipmentItem.new("weap3", EquipmentItem.Slot.WEAPON), 
 EquipmentItem.new("hat1", EquipmentItem.Slot.HAT), EquipmentItem.new("hat3", EquipmentItem.Slot.HAT), 
 EquipmentItem.new("hat2", EquipmentItem.Slot.HAT), EquipmentItem.new("hat4", EquipmentItem.Slot.HAT), 
-EquipmentItem.new("robe1", EquipmentItem.Slot.BELT), EquipmentItem.new("weap4", EquipmentItem.Slot.WEAPON), 
-EquipmentItem.new("robe2", EquipmentItem.Slot.BELT), EquipmentItem.new("hat1", EquipmentItem.Slot.HAT)]
+EquipmentItem.new("robe1", EquipmentItem.Slot.ROBE), EquipmentItem.new("weap4", EquipmentItem.Slot.WEAPON), 
+EquipmentItem.new("robe2", EquipmentItem.Slot.ROBE), EquipmentItem.new("hat1", EquipmentItem.Slot.HAT)]
 
 const MAX_OFFLINE_SECONDS: float = 7.0 * 86400.0
 

@@ -27,7 +27,7 @@ expand_icon = true
 
 [node name="Label" type="Label" parent="Button" unique_id=1700646693]
 layout_mode = 0
-offset_left = 125.0
+offset_left = 2.0
 offset_top = 144.0
 offset_right = 196.0
 offset_bottom = 199.0

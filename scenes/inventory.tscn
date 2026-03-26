@@ -95,6 +95,7 @@ offset_top = 21.0
 offset_right = 1017.0
 offset_bottom = 168.0
 theme_override_font_sizes/normal_font_size = 116
+text = "select item"
 scroll_active = false
 
 [node name="Count" type="RichTextLabel" parent="CanvasLayer/Background/TextureRect" unique_id=132271947]
@@ -102,7 +103,7 @@ layout_mode = 0
 offset_left = 21.0
 offset_top = 167.0
 offset_right = 496.0
-offset_bottom = 252.0
+offset_bottom = 283.0
 theme_override_font_sizes/normal_font_size = 67
 scroll_active = false
 
