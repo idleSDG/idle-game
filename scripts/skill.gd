@@ -10,11 +10,17 @@ var maxCharge = 100.0
 var potency = 1.0
 var element : CharacterStats.Element
 
+var sprite
+var borderClr
+
 
 func _init(pot = 1.0, max = 100.0, elem = CharacterStats.Element.None):
 	potency = pot
 	maxCharge = max
 	element = elem
+	
+	set_visuals()
+	
 	pass
 
 func UpdateBar():
@@ -61,3 +67,31 @@ func DamageCalculation(user : CharacterStats, target : CharacterStats) -> Vector
 	dealtDMG = dealtDMG * (defenseRes * elementRes * categoryRes)
 	
 	return Vector2(floor(dealtDMG), 1.0 if critCondition else -1.0)
+
+
+func set_visuals():
+	match element:
+		CharacterStats.Element.None:
+			sprite = load("res://assets/skills/None2_borderless.png")
+			borderClr = Color.WHITE
+		CharacterStats.Element.Fire:
+			sprite = load("res://assets/skills/Fire_borderless.png")
+			borderClr = Color.ORANGE_RED
+		CharacterStats.Element.Ice:
+			sprite = load("res://assets/skills/Ice_borderless.png")
+			borderClr = Color.SKY_BLUE
+		CharacterStats.Element.Lightning:
+			sprite = load("res://assets/skills/Lightning_borderless.png")
+			borderClr = Color.YELLOW
+		CharacterStats.Element.Wind:
+			sprite = load("res://assets/skills/Wind_borderless.png")
+			borderClr = Color.SPRING_GREEN
+		CharacterStats.Element.Physical:
+			sprite = load("res://assets/skills/Physical_borderless.png")
+			borderClr = Color.GOLDENROD
+	
+	skillBar.get_node("TextureRect").modulate = borderClr
+	skillBar.texture_progress = sprite
+	skillBar.texture_under = sprite
+	
+	pass

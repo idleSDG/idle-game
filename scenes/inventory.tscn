@@ -1,0 +1,116 @@
+[gd_scene format=3 uid="uid://buovyuofavu8d"]
+
+[ext_resource type="Script" uid="uid://j1f10leyypmi" path="res://scripts/inventory_scene.gd" id="1_hj2ta"]
+[ext_resource type="PackedScene" uid="uid://b6o81e0vhxb56" path="res://scenes/item_grid.tscn" id="1_qw0r6"]
+
+[sub_resource type="Gradient" id="Gradient_qw0r6"]
+interpolation_mode = 1
+colors = PackedColorArray(0.5251013, 0.5251013, 0.5251013, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hj2ta"]
+gradient = SubResource("Gradient_qw0r6")
+
+[node name="Inventory" type="Node2D" unique_id=322031731]
+script = ExtResource("1_hj2ta")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971251208]
+layer = 0
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1544346080]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5964, 0.84, 0.80345994, 1)
+
+[node name="NavBar" type="HBoxContainer" parent="CanvasLayer/Background" unique_id=1541292411]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1908.0
+offset_bottom = -1794.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Ingredients" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=1225447675]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "INGREDIENTS
+"
+
+[node name="Hats" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=1047083133]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "HATS"
+
+[node name="Robes" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=1158250260]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "ROBES
+"
+
+[node name="Weapons" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=2097470825]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "WEAPONS
+"
+
+[node name="Potions" type="Button" parent="CanvasLayer/Background/NavBar" unique_id=730387226]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "POTIONS
+"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Background" unique_id=1591202458]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 155.0
+offset_right = 1069.0
+offset_bottom = 1311.0
+
+[node name="ItemGrid" parent="CanvasLayer/Background/ScrollContainer" unique_id=716936249 instance=ExtResource("1_qw0r6")]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Background" unique_id=1635927537]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 1342.0
+offset_right = 1072.0
+offset_bottom = 1663.0
+texture = SubResource("GradientTexture1D_hj2ta")
+
+[node name="Name" type="RichTextLabel" parent="CanvasLayer/Background/TextureRect" unique_id=1862400203]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 21.0
+offset_right = 1017.0
+offset_bottom = 168.0
+theme_override_font_sizes/normal_font_size = 116
+text = "select item"
+scroll_active = false
+
+[node name="Count" type="RichTextLabel" parent="CanvasLayer/Background/TextureRect" unique_id=132271947]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 167.0
+offset_right = 496.0
+offset_bottom = 283.0
+theme_override_font_sizes/normal_font_size = 67
+scroll_active = false
+
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Ingredients" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_ingredients_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Hats" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_hats_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Robes" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_robes_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Weapons" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_weapons_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Potions" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_potions_pressed"]
+[connection signal="equipment_pressed" from="CanvasLayer/Background/ScrollContainer/ItemGrid" to="." method="_on_item_grid_equipment_pressed"]
+[connection signal="ingredient_pressed" from="CanvasLayer/Background/ScrollContainer/ItemGrid" to="." method="_on_item_grid_ingredient_pressed"]

@@ -1,16 +1,26 @@
 [gd_scene format=3 uid="uid://bi04igohl7k6q"]
 
-[ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="1_6ojkk"]
+[ext_resource type="Texture2D" uid="uid://cjv26pf5hn8a0" path="res://assets/skills/Fire_borderless.png" id="1_weeah"]
+[ext_resource type="Texture2D" uid="uid://b8vmbnqo2idkb" path="res://assets/skills/Grayscale_border.png" id="2_weeah"]
 
 [node name="TextureProgressBar" type="TextureProgressBar" unique_id=431378723]
 custom_minimum_size = Vector2(128, 128)
+offset_right = 1920.0
+offset_bottom = 1920.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 max_value = 1.0
 step = 0.01
 value = 0.73
 fill_mode = 3
-texture_under = ExtResource("1_6ojkk")
-texture_progress = ExtResource("1_6ojkk")
-tint_under = Color(0.16862746, 0.18039216, 0.27058825, 1)
-tint_progress = Color(0, 1, 0.96862745, 1)
+texture_under = ExtResource("1_weeah")
+texture_progress = ExtResource("1_weeah")
+tint_under = Color(0.16862746, 0.18039216, 0.19215687, 1)
+tint_progress = Color(1, 1, 0.96862745, 1)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1418793859]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 128.0
+texture = ExtResource("2_weeah")
+expand_mode = 4

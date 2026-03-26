@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://drhkhd4gfdf3i" path="res://scripts/battle_system.gd" id="1_th188"]
 [ext_resource type="Script" uid="uid://biqv00sj5thfe" path="res://scripts/battleLabel.gd" id="2_1xk2j"]
+[ext_resource type="Texture2D" uid="uid://blkd7n7vu8yfu" path="res://assets/enemies/Battleground1.png" id="3_cnfnp"]
 
 [node name="Battle" type="Node2D" unique_id=868618005]
 script = ExtResource("1_th188")
@@ -50,15 +51,6 @@ text = "YOU WIN"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Background" type="ColorRect" parent="Main Scene" unique_id=453911241]
-z_index = -1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.59717613, 0.59717613, 0.5971761, 1)
-
 [node name="Control" type="Control" parent="Main Scene" unique_id=1175551475]
 layout_mode = 3
 anchors_preset = 8
@@ -88,6 +80,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Control3" type="Control" parent="Main Scene" unique_id=678242868]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -108,28 +101,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 177.0
-offset_top = 94.0
-offset_right = 297.0
-offset_bottom = 227.0
+offset_left = 185.0
+offset_top = 86.0
+offset_right = 305.0
+offset_bottom = 219.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control5" type="Control" parent="Main Scene" unique_id=840318816]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 333.0
-offset_top = 19.0
-offset_right = 453.0
-offset_bottom = 152.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Control6" type="Control" parent="Main Scene" unique_id=339259552]
+[node name="Control5" type="Control" parent="Main Scene" unique_id=339259552]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -142,6 +122,25 @@ offset_right = 478.0
 offset_bottom = -81.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Control6" type="Control" parent="Main Scene" unique_id=840318816]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 322.0
+offset_top = -152.0
+offset_right = 442.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BG" type="Sprite2D" parent="." unique_id=1876381721]
+position = Vector2(658, 654.00006)
+scale = Vector2(1.228805, 1.228805)
+texture = ExtResource("3_cnfnp")
 
 [node name="ExitBattle" type="Button" parent="Main Scene" unique_id=1896487453]
 visible = false

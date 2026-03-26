@@ -150,13 +150,13 @@ grow_vertical = 0
 [node name="HomeButton" type="Button" parent="NavBarLayer/NavBar" unique_id=713203215]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "HOME"
 
 [node name="BattleButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1212122017]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "BATTLE"
 
 [node name="CharacterButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1832751890]
@@ -165,15 +165,22 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 48
 text = "CHARACTER"
 
+[node name="InventoryButton" type="Button" parent="NavBarLayer/NavBar" unique_id=862942468]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "INVENTORY"
+
 [node name="SettingsButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1383281877]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 32
 text = "SETTINGS"
 
 [connection signal="pressed" from="HUDLayer/HUD/TestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]

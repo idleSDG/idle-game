@@ -2,6 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="1_agfs1"]
 [ext_resource type="Script" uid="uid://cnsnptrvopecu" path="res://scripts/character.gd" id="1_rkhd4"]
+[ext_resource type="Texture2D" uid="uid://ii8tm3vrcfq5" path="res://assets/wizard_defaults/wizardBase.png" id="3_a5ia6"]
+[ext_resource type="Texture2D" uid="uid://ca2jsvf7t8wj3" path="res://assets/wizard_defaults/wizardSkin.png" id="4_0dpix"]
+[ext_resource type="Texture2D" uid="uid://daqrowqflcjb1" path="res://assets/wizard_defaults/pngimg.com - circle_PNG36.png" id="4_2hyy3"]
+[ext_resource type="Texture2D" uid="uid://c1bcio5souhkt" path="res://assets/wizard_defaults/face1.png" id="5_2hyy3"]
+[ext_resource type="Texture2D" uid="uid://csvvjfiqx7wan" path="res://assets/equipment/hat1.png" id="6_irmqu"]
+[ext_resource type="Texture2D" uid="uid://co0ttyp1p58nj" path="res://assets/equipment/robe1.png" id="7_7eonc"]
+[ext_resource type="Texture2D" uid="uid://b2ym5ku4n2rrg" path="res://assets/equipment/staff1.png" id="8_50cep"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rkhd4"]
 particle_flag_disable_z = true
@@ -15,6 +22,22 @@ scale_min = 0.19999999
 scale_max = 0.29999998
 hue_variation_min = -1.0
 hue_variation_max = 0.99999994
+
+[sub_resource type="Gradient" id="Gradient_0dpix"]
+colors = PackedColorArray(1, 1, 1, 0.54509807, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2hyy3"]
+gradient = SubResource("Gradient_0dpix")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_irmqu"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+color_ramp = SubResource("GradientTexture1D_2hyy3")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0dpix"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Character" type="Node2D" unique_id=582329081]
 script = ExtResource("1_rkhd4")
@@ -34,12 +57,12 @@ offset_top = -66.0
 offset_right = 95.0
 offset_bottom = 145.0
 
-[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer" unique_id=522824923]
+[node name="Container--Sprite2D" type="Sprite2D" parent="VBoxContainer" unique_id=522824923]
 position = Vector2(93, 66)
-texture = ExtResource("1_agfs1")
 
-[node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/Sprite2D" unique_id=2010766615]
+[node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/Container--Sprite2D" unique_id=2010766615]
 modulate = Color(0, 0.012617188, 0, 1)
+z_index = 20
 offset_left = -82.0
 offset_top = 84.0
 offset_right = 84.0
@@ -48,9 +71,10 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Sprite2D" unique_id=377826066]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Container--Sprite2D" unique_id=377826066]
 modulate = Color(0, 18.892157, 0, 1)
 self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
+z_index = 20
 offset_left = -82.0
 offset_top = 84.0
 offset_right = 84.0
@@ -59,25 +83,99 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/Sprite2D" unique_id=1509647717]
+[node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/Container--Sprite2D" unique_id=1509647717]
+z_index = 20
 offset_left = -82.0
 offset_top = 84.0
 offset_right = 83.0
 offset_bottom = 100.0
 
-[node name="HBox_Skills" type="HBoxContainer" parent="VBoxContainer/Sprite2D" unique_id=1973657159]
+[node name="HBox_Skills" type="HBoxContainer" parent="VBoxContainer/Container--Sprite2D" unique_id=1973657159]
+z_index = 20
 layout_direction = 2
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 1.2010001
 anchor_right = 0.5
 anchor_bottom = 1.2010001
-offset_left = -241.0
-offset_top = -47.728012
-offset_right = 942.33325
-offset_bottom = 80.27199
-scale = Vector2(0.3, 0.3)
+offset_left = -86.5
+offset_top = 107.79901
+offset_right = 5613.5
+offset_bottom = 1744.1622
+scale = Vector2(0.03, 0.03)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_constants/separation = 60
+theme_override_constants/separation = 443
 alignment = 1
+
+[node name="BaseSprite" type="Sprite2D" parent="VBoxContainer" unique_id=1791605079]
+z_index = 10
+texture_filter = 1
+position = Vector2(92, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("3_a5ia6")
+
+[node name="GPU_TrailParticles" type="GPUParticles2D" parent="VBoxContainer/BaseSprite" unique_id=166595673]
+z_index = -1
+emitting = false
+texture = ExtResource("3_a5ia6")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_irmqu")
+
+[node name="Shadow" type="Sprite2D" parent="VBoxContainer/BaseSprite" unique_id=1165336262]
+modulate = Color(1, 1, 1, 0.4)
+z_index = 1
+z_as_relative = false
+position = Vector2(0.7499943, 57.5)
+scale = Vector2(0.067989424, 0.02010582)
+texture = ExtResource("4_2hyy3")
+
+[node name="WIZARDSPECIFIC" type="Sprite2D" parent="VBoxContainer/BaseSprite" unique_id=1564495977]
+visible = false
+
+[node name="Skin" type="Sprite2D" parent="VBoxContainer/BaseSprite/WIZARDSPECIFIC" unique_id=868634181]
+modulate = Color(0.88235295, 0.76862746, 0.6901961, 1)
+z_index = 9
+z_as_relative = false
+texture_filter = 1
+texture = ExtResource("4_0dpix")
+
+[node name="Face" type="Sprite2D" parent="VBoxContainer/BaseSprite/WIZARDSPECIFIC" unique_id=551710572]
+z_index = 13
+z_as_relative = false
+texture_filter = 1
+texture = ExtResource("5_2hyy3")
+
+[node name="Hat" type="Sprite2D" parent="VBoxContainer/BaseSprite/WIZARDSPECIFIC" unique_id=1618611348]
+modulate = Color(0.74509805, 0.67058825, 0.41568628, 1)
+z_index = 14
+z_as_relative = false
+texture_filter = 1
+texture = ExtResource("6_irmqu")
+
+[node name="Robe" type="Sprite2D" parent="VBoxContainer/BaseSprite/WIZARDSPECIFIC" unique_id=260113456]
+modulate = Color(0.43853337, 0.299, 0.46, 1)
+z_index = 11
+z_as_relative = false
+texture_filter = 1
+texture = ExtResource("7_7eonc")
+
+[node name="Weapon" type="Sprite2D" parent="VBoxContainer/BaseSprite/WIZARDSPECIFIC" unique_id=1351906438]
+modulate = Color(0.6392157, 0.34509805, 0.2784314, 1)
+z_index = 12
+z_as_relative = false
+texture_filter = 1
+texture = ExtResource("8_50cep")
+
+[node name="SubRender" type="Sprite2D" parent="VBoxContainer" unique_id=1589779356]
+visible = false
+modulate = Color(1, 1, 1, 0.4)
+z_index = 1
+z_as_relative = false
+position = Vector2(334, -59)
+scale = Vector2(0.29990333, 0.12264747)
+texture = SubResource("ViewportTexture_0dpix")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1561311271]
+canvas_item_default_texture_filter = 0
+size = Vector2i(1080, 1920)
