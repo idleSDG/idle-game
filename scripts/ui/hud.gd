@@ -9,7 +9,10 @@ extends CanvasLayer
 	Ingredient.Type.KINETIC_SHARD: {
 		"counter": %KineticShardsCounterLabel,
 		"gain_rate": %KineticShardsGainRateLabel,
-		"progress_bar": %KineticShardsProgressBar
+		"progress_bar": %KineticShardsProgressBar,
+		"momentum_label_today": %KineticShardsMomentumTodayLabel,
+		"momentum_label_tomorrow": %KineticShardsMomentumTomorrowLabel,
+		"momentum_graph_line": %KineticShardsMomentumGraphLine
 	}
 }
 
@@ -42,8 +45,15 @@ func _on_test_button_pressed() -> void:
 func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient]) -> void:
 	for type in ingredients:
 		var ingredient = ingredients[type]
+		var yesterday_steps : int = StepsProgress.get_steps_for_day_offset(1)
+		var todays_steps : int = StepsProgress.get_steps_for_day_offset(0)
+		var today_momentum_pct = ingredient.momentum_tracker.momentumConfig.get_multiplier(float(yesterday_steps)) * 100.0
+		var tomorrow_momentum_pct = ingredient.momentum_tracker.momentumConfig.get_multiplier(float(todays_steps)) * 100.0
 		ingredient_hud[type].counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
-		ingredient_hud[type].gain_rate.text = "%.02f / min" % (ingredient.gain_rate_per_second * 60)
+		ingredient_hud[type].gain_rate.text = "%.02f / min" % (ingredient.get_current_gain_rate() * 60)
+		ingredient_hud[type].momentum_label_today.text = "today's momentum:\n%d steps (%.02f %%)" % [yesterday_steps, today_momentum_pct]
+		ingredient_hud[type].momentum_label_tomorrow.text = "tomorrow's momentum:\n%d steps (%.02f %%)" % [todays_steps, tomorrow_momentum_pct]
+		ingredient_hud[type].momentum_graph_line.draw_graph(StepsProgress.get_last_days_steps_history(8))
 		if ingredient.count < ingredient.capacity:
 			ingredient_hud[type].progress_bar.value = ingredient.get_progress_percentage()
 		else:

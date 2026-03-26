@@ -5,7 +5,7 @@ signal equipment_changed
 # Store equipped items by slot
 var equipped: Dictionary = {
 	EquipmentItem.Slot.WEAPON: null,
-	EquipmentItem.Slot.BELT:   null,
+	EquipmentItem.Slot.ROBE:   null,
 	EquipmentItem.Slot.HAT:    null,
 }
 
@@ -55,7 +55,7 @@ func load_save_data(data: Dictionary):
 func init_new_save():
 	equipped = {
 		EquipmentItem.Slot.WEAPON: null,
-		EquipmentItem.Slot.BELT: null,
+		EquipmentItem.Slot.ROBE: null,
 		EquipmentItem.Slot.HAT: null,
 	}
 	emit_signal("equipment_changed")

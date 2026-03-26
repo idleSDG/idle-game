@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://rsqrntdrfr6h" path="res://main.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/ui/hud.gd" id="2_sugp2"]
+[ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_sugp2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
@@ -10,6 +11,9 @@ bg_color = Color(0.13433829, 0.82624876, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
 bg_color = Color(0.8156863, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
+bg_color = Color(1, 1, 1, 0.42745098)
 
 [node name="Main" type="Node2D" unique_id=868618005]
 script = ExtResource("1_0wfyh")
@@ -54,7 +58,7 @@ text = "Add +50 XP"
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -450.0
+offset_top = -540.0
 offset_right = 1083.0
 offset_bottom = -202.0
 grow_vertical = 0
@@ -86,6 +90,22 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "1 / min"
 
+[node name="KineticShardsMomentumTodayLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1514311924]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Today's momentum: 
+x steps (100%)"
+
+[node name="KineticShardsMomentumTomorrowLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=928846108]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Tomorrow's momentum: 
+x steps (100%)"
+
 [node name="KineticShardsProgressBar" type="ProgressBar" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1378132024]
 unique_name_in_owner = true
 layout_mode = 2
@@ -93,6 +113,20 @@ layout_mode = 2
 [node name="KineticShardsSpendButton" type="Button" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=685049586]
 layout_mode = 2
 text = "Spend 1 Kinetic Shard"
+
+[node name="KineticShardsMomentumGraphPanel" type="Panel" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer" unique_id=1144980433]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="KineticShardsMomentumGraphLine" type="Line2D" parent="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsMomentumGraphPanel" unique_id=547060329]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+width = 5.0
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+script = ExtResource("3_sugp2")
+padding = 10.0
 
 [node name="ContentArea" type="Control" parent="." unique_id=1174201404]
 layout_mode = 3
@@ -125,11 +159,11 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "BATTLE"
 
-[node name="EquipmentButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1832751890]
+[node name="CharacterButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1832751890]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "EQUIPMENT"
+theme_override_font_sizes/font_size = 48
+text = "CHARACTER"
 
 [node name="InventoryButton" type="Button" parent="NavBarLayer/NavBar" unique_id=862942468]
 layout_mode = 2
@@ -147,6 +181,6 @@ text = "SETTINGS"
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/EquipmentButton" to="." method="_on_equipment_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]

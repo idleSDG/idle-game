@@ -142,4 +142,19 @@ position = Vector2(658, 654.00006)
 scale = Vector2(1.228805, 1.228805)
 texture = ExtResource("3_cnfnp")
 
+[node name="ExitBattle" type="Button" parent="Main Scene" unique_id=1896487453]
+visible = false
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.77300006
+anchor_right = 0.5
+anchor_bottom = 0.77300006
+offset_left = -400.0
+offset_top = -150.16016
+offset_right = 400.0
+offset_bottom = 149.83984
+theme_override_font_sizes/font_size = 87
+text = "Exit Battle
+"
+
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
