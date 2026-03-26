@@ -24,6 +24,7 @@ SceneManager="*uid://byyql836gwgto"
 IdleProgress="*uid://dov7m1cqcemh7"
 EquipmentManager="*uid://dgcauqgjrih33"
 StepsProgress="*uid://cfgfym31wxges"
+PlayerAppearance="*uid://b34vpsjibdxjr"
 
 [display]
 

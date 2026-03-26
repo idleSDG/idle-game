@@ -6,14 +6,14 @@ static func get_test_items() -> Array:
 	staff.slot = EquipmentItem.Slot.WEAPON
 	staff.damage_bonus_pct = 0.8
 
-	var belt = EquipmentItem.new()
-	belt.item_name = "Gatherer's Belt"
-	belt.slot = EquipmentItem.Slot.BELT
-	belt.ingredient_gain_pct = 1.5
+	var ROBE = EquipmentItem.new()
+	ROBE.item_name = "Gatherer's Robe"
+	ROBE.slot = EquipmentItem.Slot.ROBE
+	ROBE.ingredient_gain_pct = 1.5
 
 	var hat = EquipmentItem.new()
 	hat.item_name = "Wizard's Hat"
 	hat.slot = EquipmentItem.Slot.HAT
 	hat.crit_rate_bonus = 0.5
 
-	return [staff, belt, hat]
+	return [staff, ROBE, hat]
