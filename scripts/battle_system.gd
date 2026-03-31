@@ -22,6 +22,21 @@ var timer = 0.0
 var gameSpeed = 1.0
 var isPlaying = true
 
+var _focus_lost_at : float = 0.0
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_OUT:
+		if not isPlaying:
+			return
+		_focus_lost_at = Time.get_unix_time_from_system()
+
+	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
+		if not isPlaying:
+			return
+		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
+		if elapsed > 0.5:
+			simulate(elapsed)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	characterList.resize(enemyAmount)
@@ -51,7 +66,7 @@ func _ready() -> void:
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
 	if GlobalVariables.battleState == GlobalVariables.BattleStates.IN_BATTLE:
 		var now := Time.get_unix_time_from_system()
-		simulate(now - GlobalVariables.lastLogin)
+		simulate(now - GlobalVariables.battleStart)
 		timerLabel.time = int(now - GlobalVariables.battleStart)
 	else:
 		GlobalVariables.battleState = GlobalVariables.BattleStates.IN_BATTLE
