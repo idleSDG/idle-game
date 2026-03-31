@@ -36,6 +36,7 @@ func _notification(what: int) -> void:
 		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
 			simulate(elapsed)
+			timerLabel.time = int(Time.get_unix_time_from_system() - GlobalVariables.battleStart)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
