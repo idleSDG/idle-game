@@ -1,6 +1,7 @@
 extends Node
 
 signal steps_data_ready
+signal steps_permissions
 
 var _plugin_name = "GodotStepPlugin"
 var _steps_plugin
@@ -55,6 +56,7 @@ func _on_error(err):
 func _on_history_permission(result : bool):
 	if result:
 		has_history_permissions = true
+		emit_signal("steps_permissions")
 		_fetch_steps()
 		var timer = Timer.new()
 		timer.wait_time = 10

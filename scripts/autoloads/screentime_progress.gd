@@ -1,6 +1,7 @@
 extends Node
 
 signal screen_time_data_ready
+signal screen_time_permissions
 
 var _plugin_name = "GodotScreenTimePlugin"
 var _screen_time_plugin
@@ -69,6 +70,7 @@ func _notification(what: int) -> void:
 func _on_permissions(permissions : bool):
 	if permissions:
 		has_history_permissions = true
+		emit_signal("screen_time_permissions")
 		_fetch_screen_time()
 		var timer = Timer.new()
 		timer.wait_time = 60
