@@ -6,6 +6,7 @@ signal screen_time_permissions
 var _plugin_name = "GodotScreenTimePlugin"
 var _screen_time_plugin
 var _has_screen_time_data: bool = false
+var lookback_days: int = 7
 
 var screen_time_data_by_hour: Dictionary = {}
 var has_history_permissions: bool
@@ -44,19 +45,6 @@ func _mark_screen_time_ready():
 		return
 	_has_screen_time_data = true
 	screen_time_data_ready.emit()
-	
-func _set_fallback_data():
-	var hour_counter = 0
-	for i in range(1,8):
-		for j in range(0,24):
-			if((0 <= j) and (j <= 1)) or ((22 <= j) and (j <= 23)):
-				screen_time_data_by_hour[hour_counter] = 0
-			elif (j < 12):
-				screen_time_data_by_hour[hour_counter] = (j-1)*(-6)
-			else:
-				screen_time_data_by_hour[hour_counter] = -(60+((j-12)*(-6)))
-			hour_counter += 1
-	screen_time_data_by_hour[0] = -10
 			
 func request_permissions():
 	if Engine.has_singleton(_plugin_name):
@@ -84,7 +72,7 @@ func _on_permissions(permissions : bool):
 		_mark_screen_time_ready()
 		
 func _fetch_screen_time():
-	_screen_time_plugin.readScreenTimeDays(7)
+	_screen_time_plugin.readScreenTimeDays(lookback_days)
 
 
 func get_latest_value_for_profile() -> Dictionary:
@@ -131,7 +119,7 @@ func _hour_offset_for_unix(unix_time: float) -> int:
 	var delta_hours := int(floor(float(delta_seconds) / 3600.0))
 	return maxi(clampi(delta_hours, 0, 167), 0)
 
-func get_last_days_steps_history(days: int = 7) -> Array:
+func get_last_days_steps_history(days: int = lookback_days) -> Array:
 	var hours = days * 24
 	hours = clamp(hours,1,167)
 	var history: Array = []
@@ -145,3 +133,16 @@ func get_last_days_steps_history(days: int = 7) -> Array:
 		counter+=1
 
 	return history
+
+func _set_fallback_data():
+	var hour_counter = 0
+	for i in range(1,8):
+		for j in range(0,24):
+			if((0 <= j) and (j <= 1)) or ((22 <= j) and (j <= 23)):
+				screen_time_data_by_hour[hour_counter] = 0
+			elif (j < 12):
+				screen_time_data_by_hour[hour_counter] = (j-1)*(-6)
+			else:
+				screen_time_data_by_hour[hour_counter] = -(60+((j-12)*(-6)))
+			hour_counter += 1
+	screen_time_data_by_hour[0] = -10
