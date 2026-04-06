@@ -179,6 +179,7 @@ script = ExtResource("3_sugp2")
 padding = 10.0
 
 [node name="MoneyCollectionPanelContainer" type="PanelContainer" parent="HUDLayer" unique_id=329402899]
+unique_name_in_owner = true
 offset_left = 758.0
 offset_top = 766.0
 offset_right = 1033.0

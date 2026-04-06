@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var test_button: Button = %PlayerXPTestButton
 
 @onready var money_amount_label: Label = %MoneyAmountLabel
+@onready var money_collection_panel_container: PanelContainer = %MoneyCollectionPanelContainer
 @onready var collectable_money_amount_label: Label = %MoneyCollectionLabel
 
 @onready var ingredient_hud: Dictionary = {
@@ -27,6 +28,7 @@ func _ready() -> void:
 	PlayerInventory.ingredients_changed.connect(_on_ingredients_changed)
 	PlayerInventory.money_changed.connect(_on_money_changed)
 	PlayerInventory.collectable_money_changed.connect(_on_collectable_money_changed)
+	SceneManager.tab_switched.connect(_on_tab_switched)
 	# Set test button text
 	test_button.text = "Add +50 XP"
 	# Draw initial state
@@ -73,3 +75,11 @@ func _on_money_changed(money: int) -> void:
 	
 func _on_collectable_money_changed(collectable_money: int) -> void:
 	collectable_money_amount_label.text = "%d / %d" % [collectable_money, PlayerInventory.collectable_money_capacity]
+
+func _on_tab_switched(tab_name: String) -> void:
+	print(tab_name)
+	if tab_name == "home":
+		money_collection_panel_container.visible = true
+	else:
+		money_collection_panel_container.visible = false
+		
