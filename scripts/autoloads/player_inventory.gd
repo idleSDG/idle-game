@@ -1,7 +1,11 @@
 extends Node
 
-signal ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient])
+# General
+const MAX_OFFLINE_SECONDS: float = 7.0 * 86400.0
+var last_inventory_update_unix_time: float
+var inventory_update_timer: Timer
 
+# Equipment
 var equipment: Array[EquipmentItem] = [EquipmentItem.new("weap1", EquipmentItem.Slot.WEAPON), 
 EquipmentItem.new("weap2", EquipmentItem.Slot.WEAPON), EquipmentItem.new("weap3", EquipmentItem.Slot.WEAPON), 
 EquipmentItem.new("hat1", EquipmentItem.Slot.HAT), EquipmentItem.new("hat3", EquipmentItem.Slot.HAT), 
@@ -9,7 +13,20 @@ EquipmentItem.new("hat2", EquipmentItem.Slot.HAT), EquipmentItem.new("hat4", Equ
 EquipmentItem.new("robe1", EquipmentItem.Slot.ROBE), EquipmentItem.new("weap4", EquipmentItem.Slot.WEAPON), 
 EquipmentItem.new("robe2", EquipmentItem.Slot.ROBE), EquipmentItem.new("hat1", EquipmentItem.Slot.HAT)]
 
-const MAX_OFFLINE_SECONDS: float = 7.0 * 86400.0
+# Money System
+var money: int
+signal money_changed(money: int)
+
+var collectable_money: int
+var collectable_money_capacity: int = 10
+var collectable_money_progress: float = 0
+var collectable_money_gain_rate_seconds: float = 0.0167 
+signal collectable_money_changed(collectable_money: int)
+
+# Ingredients
+var ingredients: Dictionary[Ingredient.Type, Ingredient] = _create_default_ingredients()
+signal ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient])
+var _steps_initialized: bool = false
 
 class StepsMomentumDataSource:
 	extends RefCounted
@@ -32,13 +49,6 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 			1.0
 		)
 	}
-
-var ingredients: Dictionary[Ingredient.Type, Ingredient] = _create_default_ingredients()
-
-
-var last_inventory_update_unix_time: float
-var inventory_update_timer: Timer
-var _steps_initialized: bool = false
 
 func _ready():
 	_create_timer()
@@ -70,7 +80,7 @@ func get_save_data() -> Dictionary:
 	for type in ingredients:
 		ingredient_map[Ingredient.get_type_as_string(type)] = Ingredient.to_dictionary(ingredients[type])
 	
-	return { "ingredients": ingredient_map }
+	return { "ingredients": ingredient_map, "money": money, "collectable_money": collectable_money }
 
 func load_save_data(data: Dictionary):
 	for entry in data.get("ingredients"):
@@ -80,14 +90,19 @@ func load_save_data(data: Dictionary):
 		else:
 			Ingredient.from_dictionary(ingredients[type], data.get("ingredients")[entry])
 
+	money = data.get("money")
+	collectable_money = data.get("collectable_money")
 	# First update is delayed until StepsProgress signals readiness.
 	ingredients_changed.emit(ingredients)
+	money_changed.emit(money)
 
 func init_new_save():
 	last_inventory_update_unix_time = Time.get_unix_time_from_system()
 	# Reset the ingredients using the ingredient dic
 	# TODO: Could load it from a config file or something similar
 	ingredients = _create_default_ingredients()
+	money = 0
+	collectable_money = 3
 
 func _update_inventory():
 	var current_inventory_update_unix_time = Time.get_unix_time_from_system()
@@ -96,4 +111,17 @@ func _update_inventory():
 		ingredients[type].update_progress(actual_start, current_inventory_update_unix_time)
 	
 	ingredients_changed.emit(ingredients)
+	
+	var seconds_passed: float = current_inventory_update_unix_time - actual_start
+	var collectable_money_to_add: float = collectable_money_gain_rate_seconds * seconds_passed
+	collectable_money_progress += collectable_money_to_add
+	
+	if collectable_money_progress >= 1.0:
+		var whole_units = floor(collectable_money_progress)
+		collectable_money = clampi(collectable_money + int(whole_units), 0, collectable_money_capacity)
+		collectable_money_progress = fmod(collectable_money_progress, 1.0)
+	
+	money_changed.emit(money)
+	collectable_money_changed.emit(collectable_money)
+	
 	last_inventory_update_unix_time = current_inventory_update_unix_time

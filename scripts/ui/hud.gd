@@ -1,9 +1,12 @@
 extends CanvasLayer
 
-@onready var level_label: Label = $HUD/LevelLabel
-@onready var xp_bar: ProgressBar = $HUD/XPBar
-@onready var xp_label: Label = $HUD/XPLabel
-@onready var test_button: Button = $HUD/TestButton
+@onready var level_label: Label = %PlayerXPLevelLabel
+@onready var xp_bar: ProgressBar = %PlayerXPBar
+@onready var xp_label: Label = %PlayerXPLabel
+@onready var test_button: Button = %PlayerXPTestButton
+
+@onready var money_amount_label: Label = %MoneyAmountLabel
+@onready var collectable_money_amount_label: Label = %MoneyCollectionLabel
 
 @onready var ingredient_hud: Dictionary = {
 	Ingredient.Type.KINETIC_SHARD: {
@@ -22,6 +25,8 @@ func _ready() -> void:
 	PlayerProgress.leveled_up.connect(_on_leveled_up)
 	# Connect to Ingredient signals
 	PlayerInventory.ingredients_changed.connect(_on_ingredients_changed)
+	PlayerInventory.money_changed.connect(_on_money_changed)
+	PlayerInventory.collectable_money_changed.connect(_on_collectable_money_changed)
 	# Set test button text
 	test_button.text = "Add +50 XP"
 	# Draw initial state
@@ -62,3 +67,9 @@ func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient
 func _on_kinetic_shards_spend_button_pressed() -> void:
 	if PlayerInventory.ingredients[Ingredient.Type.KINETIC_SHARD].count > 0:
 		PlayerInventory.ingredients[Ingredient.Type.KINETIC_SHARD].count -= 1
+
+func _on_money_changed(money: int) -> void:
+	money_amount_label.text = "%d" % money
+	
+func _on_collectable_money_changed(collectable_money: int) -> void:
+	collectable_money_amount_label.text = "%d / %d" % [collectable_money, PlayerInventory.collectable_money_capacity]
