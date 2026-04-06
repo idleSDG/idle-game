@@ -22,6 +22,7 @@ var end
 var isPlayer : bool = false
 var baseStats = CharacterStats.new()
 var currentStats = baseStats # this should be replaced with cloning/duplicating baseStats
+var statusEffects : Array[StatusEffect] = []
 
 
 var skills = []
@@ -54,6 +55,7 @@ func _ready() -> void:
 func SetStats(stats : CharacterStats) :
 	# TEMPORARY CODE
 	var instance = Skill.new(1.3, 300.0, CharacterStats.Element.Fire)
+	instance.addEffect(StatusEffect.StatusEffectType.Burn, 1.0)
 	skills.append(instance)
 	# END OF TEMPORARY CODE
 	
@@ -69,6 +71,18 @@ func SetStats(stats : CharacterStats) :
 func PassTime(delta: float) -> void:
 	for skill in skills:
 		skill.Charge(delta * currentStats.chargeRate)
+	for effect in statusEffects:
+		if effect.pass_status_time(delta):
+			effect.Apply(self)
+	
+	var toKeep : Array[StatusEffect] = []
+	for effect in statusEffects:
+		if effect.Count <= 0:
+			RemoveStatus(effect)
+		else:
+			toKeep.append(effect)
+	statusEffects = toKeep
+	
 	pass
 
 # Update health bar (should be replaced by tying it to a variable)
@@ -101,6 +115,7 @@ func CheckSkillCharge() -> float:
 	
 	return val
 
+
 # Use skill against target
 func UseSkill(target : Character) -> void:
 	if skills[skillToUse].Use(self, target):
@@ -109,6 +124,25 @@ func UseSkill(target : Character) -> void:
 		Follow(target)
 	
 	skillToUse = -1
+	pass
+
+func ApplyStatus(status : StatusEffect):
+	statusEffects.append(status)
+	var clr : Color = status.GetColor()
+	
+	var popup = damagePopup.instantiate()
+	character.get_parent().get_parent().add_child(popup)
+	popup.SetUpText(character.get_parent().position, 0,
+	 "+" + StatusEffect.StatusEffectType.keys()[status.StatusType], clr)
+	pass
+
+func RemoveStatus(status : StatusEffect):
+	var clr : Color = status.GetColor()
+	
+	var popup = damagePopup.instantiate()
+	character.get_parent().get_parent().add_child(popup)
+	popup.SetUpText(character.get_parent().position, 0,
+	 "-" + StatusEffect.StatusEffectType.keys()[status.StatusType], clr)
 	pass
 
 
@@ -122,6 +156,16 @@ func TakeDamage(dmg : int, itCrit : bool):
 	
 	pass
 
+func TakeTrueDamage(dmg : int, source : int): # source will be used to denote what dealt the damage
+	currentStats.TakeDamage(dmg)
+	
+	var popup = damagePopup.instantiate()
+	character.get_parent().get_parent().add_child(popup)
+	popup.SetUpText(character.get_parent().position, dmg, " burn", Color.ORANGE)
+	
+	pass
+
+
 
 func Follow(target : Character):
 	orig = self.global_position
@@ -133,6 +177,7 @@ func Follow(target : Character):
 	trail.modulate = Color.from_hsv(RandomNumberGenerator.new().randf(), 0.8, 1)
 	
 	pass
+
 
 
 func SetUpWizard():

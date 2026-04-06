@@ -9,19 +9,29 @@ var charge = 0.0
 var maxCharge = 100.0
 var potency = 1.0
 var element : CharacterStats.Element
+var isAoE : bool = false
+
+var additionalEffect : StatusEffect
+
 
 var sprite
 var borderClr
 
 
-func _init(pot = 1.0, max = 100.0, elem = CharacterStats.Element.None):
+func _init(pot = 1.0, max = 100.0, elem = CharacterStats.Element.None, aoe : bool = false):
 	potency = pot
 	maxCharge = max
 	element = elem
-	
+	isAoE = aoe
 	set_visuals()
 	
 	pass
+
+func addEffect(type : StatusEffect.StatusEffectType, chance : float):
+	var status = StatusEffect.new(type, chance)
+	additionalEffect = status
+	pass
+
 
 func UpdateBar():
 	skillBar.value = clamp(charge / maxCharge, 0.0, 1.0)
@@ -42,6 +52,9 @@ func GetOvercharge() -> float:
 func Use(user : Character, target : Character) -> bool:
 	var dmg = DamageCalculation(user.currentStats, target.currentStats)
 	target.TakeDamage(dmg.x, dmg.y > 0.0)
+	
+	if additionalEffect != null && RandomNumberGenerator.new().randf() < additionalEffect.ApplicationRate:
+		target.ApplyStatus(additionalEffect)
 	
 	charge -= maxCharge
 	UpdateBar()

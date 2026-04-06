@@ -5,12 +5,7 @@ extends Node2D
 var timer = 0.7
 var speed = 200.0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	timer -= delta
 	self.position += Vector2(0, -1) * delta * speed
@@ -27,5 +22,13 @@ func SetUp(pos : Vector2, dmg : int, crit : bool):
 	richText.text = str(dmg) + ("!" if crit else "")
 	if crit:
 		richText.add_theme_color_override("default_color", Color.RED)
+	
+	pass
+
+func SetUpText(pos : Vector2, dmg : int, text : String, clr : Color):
+	self.position = pos
+	
+	richText.text = str(dmg) + text if dmg != 0 else text
+	richText.add_theme_color_override("default_color", clr)
 	
 	pass
