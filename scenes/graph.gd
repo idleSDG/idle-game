@@ -44,11 +44,11 @@ func draw_graph(dataset):
 	# 2. Map and Draw
 	for data in sorted_dataset:
 		# Calculate X based on timestamp progress (0.0 to 1.0)
-		var t_ratio = (data.time - min_t) / t_range
+		var t_ratio = (float)(data.time - min_t) / t_range
 		var x = padding + (t_ratio * draw_width)
 		
 		# Calculate Y based on value progress (0.0 to 1.0)
-		var v_ratio = (data.val - min_v) / v_range
+		var v_ratio = (float)(data.val - min_v) / v_range
 		var y = (parent_size.y - padding) - (v_ratio * draw_height)
 		
 		add_point(Vector2(x, y))

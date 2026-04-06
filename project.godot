@@ -25,6 +25,7 @@ IdleProgress="*uid://dov7m1cqcemh7"
 EquipmentManager="*uid://dgcauqgjrih33"
 StepsProgress="*uid://cfgfym31wxges"
 PlayerAppearance="*uid://b34vpsjibdxjr"
+ScreenTimeProgress="*uid://dldxvwrpkyk2h"
 
 [display]
 
@@ -45,7 +46,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotStepPlugin/plugin.cfg")
+enabled=PackedStringArray("res://addons/GodotScreenTimePlugin/plugin.cfg", "res://addons/GodotStepPlugin/plugin.cfg")
 
 [physics]
 

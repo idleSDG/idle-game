@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bnmhb5hkkwgvw" path="res://scenes/clear_save_button.gd" id="1_5p8wc"]
 [ext_resource type="Script" uid="uid://dr6f1dbabrsuw" path="res://scripts/step_permissions_button.gd" id="2_r6d6q"]
+[ext_resource type="Script" uid="uid://u0y0opbm38tq" path="res://scenes/screen_usage_prmissions_button.gd" id="3_6wm04"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6d6q"]
 bg_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
@@ -74,5 +75,19 @@ theme_override_font_sizes/font_size = 48
 text = "Request Step Permissions"
 script = ExtResource("2_r6d6q")
 
+[node name="ScreenUsagePermissionsButton" type="Button" parent="CanvasLayer" unique_id=384963872]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.60200006
+anchor_right = 0.5
+anchor_bottom = 0.60200006
+offset_left = -293.0
+offset_top = -80.84009
+offset_right = 303.0
+offset_bottom = 134.15991
+text = "Request screen usage permissions"
+script = ExtResource("3_6wm04")
+
 [connection signal="pressed" from="CanvasLayer/ClearSaveButton" to="CanvasLayer/ClearSaveButton" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/StepPermissionsButton" to="CanvasLayer/StepPermissionsButton" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScreenUsagePermissionsButton" to="CanvasLayer/ScreenUsagePermissionsButton" method="_on_pressed"]

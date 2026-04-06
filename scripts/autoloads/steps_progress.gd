@@ -60,10 +60,10 @@ func _on_history_permission(result : bool):
 		timer.wait_time = 10
 		timer.autostart = true
 		timer.one_shot = false
-		timer.timeout.connect(_fetch_steps())
+		timer.timeout.connect(_fetch_steps)
 		add_child(timer)
 	else:
-		# For now set the steps to the fallback if permissions are dienied
+		# For now set the steps to the fallback if permissions are denied
 		_set_fallback_data()
 		_mark_steps_ready()
 	

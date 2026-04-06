@@ -2,7 +2,7 @@ extends Button
 
 func _ready() -> void:
 	if StepsProgress.has_history_permissions:
-		text = "Permissions already granted"
+		text = "Step permissions already granted"
 
 func _on_pressed() -> void:
 	if not StepsProgress.has_history_permissions:
