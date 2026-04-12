@@ -27,8 +27,8 @@ func _init(pot = 1.0, max = 100.0, elem = CharacterStats.Element.None, aoe : boo
 	
 	pass
 
-func addEffect(type : StatusEffect.StatusEffectType, chance : float):
-	var status = StatusEffect.new(type, chance)
+func addEffect(type : StatusEffect.StatusEffectType, chance : float, targetSelf : bool):
+	var status = StatusEffect.new(type, chance, targetSelf)
 	additionalEffect = status
 	pass
 
@@ -50,11 +50,17 @@ func GetOvercharge() -> float:
 	return -3
 
 func Use(user : Character, target : Character) -> bool:
-	var dmg = DamageCalculation(user.currentStats, target.currentStats)
+	var dmg = DamageCalculation(user.baseStats, target.baseStats)
+	if user.IsParalyzed():
+		dmg.x *= 0.5
+	
 	target.TakeDamage(dmg.x, dmg.y > 0.0)
 	
 	if additionalEffect != null && RandomNumberGenerator.new().randf() < additionalEffect.ApplicationRate:
-		target.ApplyStatus(additionalEffect)
+		if additionalEffect.TargetSelf:
+			user.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
+		else:
+			target.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 	
 	charge -= maxCharge
 	UpdateBar()

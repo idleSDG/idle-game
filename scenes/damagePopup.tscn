@@ -6,6 +6,8 @@
 script = ExtResource("1_dpo3m")
 
 [node name="DamagePopup" type="RichTextLabel" parent="." unique_id=2117174039]
+z_index = 80
+z_as_relative = false
 clip_contents = false
 custom_minimum_size = Vector2(1, 1)
 offset_left = -220.0

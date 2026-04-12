@@ -17,7 +17,8 @@ func _process(delta: float) -> void:
 
 # Set up created popup with necessary values
 func SetUp(pos : Vector2, dmg : int, crit : bool):
-	self.position = pos
+	var rng = RandomNumberGenerator.new()
+	self.position = pos + Vector2(rng.randf(), -rng.randf()) * 100
 	
 	richText.text = str(dmg) + ("!" if crit else "")
 	if crit:
@@ -26,7 +27,8 @@ func SetUp(pos : Vector2, dmg : int, crit : bool):
 	pass
 
 func SetUpText(pos : Vector2, dmg : int, text : String, clr : Color):
-	self.position = pos
+	var rng = RandomNumberGenerator.new()
+	self.position = pos + Vector2(rng.randf(), -rng.randf()) * 100
 	
 	richText.text = str(dmg) + text if dmg != 0 else text
 	richText.add_theme_color_override("default_color", clr)

@@ -20,8 +20,8 @@ var orig
 var end
 
 var isPlayer : bool = false
-var baseStats = CharacterStats.new()
-var currentStats = baseStats # this should be replaced with cloning/duplicating baseStats
+var baseStats : CharacterStats = CharacterStats.new() # this should be replaced with cloning/duplicating baseStats
+var statChanges : CharacterStats = CharacterStats.new()
 var statusEffects : Array[StatusEffect] = []
 
 
@@ -34,6 +34,8 @@ func _ready() -> void:
 	var instance = Skill.new(1.0, 200.0)
 	skills.append(instance)
 	# END OF TEMPORARY CODE
+	
+	orig = self.global_position
 	
 	for s in skills:
 		skillBars.add_child(s.skillBar)
@@ -55,12 +57,15 @@ func _ready() -> void:
 func SetStats(stats : CharacterStats) :
 	# TEMPORARY CODE
 	var instance = Skill.new(1.3, 300.0, CharacterStats.Element.Fire)
-	instance.addEffect(StatusEffect.StatusEffectType.Burn, 1.0)
+	instance.addEffect(StatusEffect.StatusEffectType.Burn, 1.0, false)
+	skills.append(instance)
+	
+	instance = Skill.new(1.3, 100.0, CharacterStats.Element.Wind)
+	instance.addEffect(StatusEffect.StatusEffectType.Haste, 1.0, true)
 	skills.append(instance)
 	# END OF TEMPORARY CODE
 	
 	baseStats = stats
-	currentStats = baseStats
 	
 	isPlayer = true
 	
@@ -69,14 +74,17 @@ func SetStats(stats : CharacterStats) :
 
 # Charge every skill
 func PassTime(delta: float) -> void:
+	CalculateStatChanges()
+	
 	for skill in skills:
-		skill.Charge(delta * currentStats.chargeRate)
+		skill.Charge(delta * (baseStats.chargeRate * statChanges.chargeRate))
 	for effect in statusEffects:
 		if effect.pass_status_time(delta):
 			effect.Apply(self)
 	
 	var toKeep : Array[StatusEffect] = []
 	for effect in statusEffects:
+		print(effect.Count)
 		if effect.Count <= 0:
 			RemoveStatus(effect)
 		else:
@@ -87,7 +95,7 @@ func PassTime(delta: float) -> void:
 
 # Update health bar (should be replaced by tying it to a variable)
 func UpdateVisuals(delta : float):
-	healthBar.value = currentStats.health * 1.0 / baseStats.maxHealth
+	healthBar.value = baseStats.health * 1.0 / baseStats.maxHealth
 	
 	if isFollowing:
 		timePass += delta
@@ -124,6 +132,8 @@ func UseSkill(target : Character) -> void:
 		Follow(target)
 	
 	skillToUse = -1
+	
+	CalculateStatChanges()
 	pass
 
 func ApplyStatus(status : StatusEffect):
@@ -134,6 +144,8 @@ func ApplyStatus(status : StatusEffect):
 	character.get_parent().get_parent().add_child(popup)
 	popup.SetUpText(character.get_parent().position, 0,
 	 "+" + StatusEffect.StatusEffectType.keys()[status.StatusType], clr)
+	
+	CalculateStatChanges()
 	pass
 
 func RemoveStatus(status : StatusEffect):
@@ -143,32 +155,35 @@ func RemoveStatus(status : StatusEffect):
 	character.get_parent().get_parent().add_child(popup)
 	popup.SetUpText(character.get_parent().position, 0,
 	 "-" + StatusEffect.StatusEffectType.keys()[status.StatusType], clr)
+	
+	CalculateStatChanges()
 	pass
 
 
 # Take damage and create a text popup
 func TakeDamage(dmg : int, itCrit : bool):
-	currentStats.TakeDamage(dmg)
+	baseStats.TakeDamage(dmg)
 	
 	var popup = damagePopup.instantiate()
 	character.get_parent().get_parent().add_child(popup)
 	popup.SetUp(character.get_parent().position, dmg, itCrit)
 	
+	CalculateStatChanges()
 	pass
 
 func TakeTrueDamage(dmg : int, source : int): # source will be used to denote what dealt the damage
-	currentStats.TakeDamage(dmg)
+	baseStats.TakeDamage(dmg)
 	
 	var popup = damagePopup.instantiate()
 	character.get_parent().get_parent().add_child(popup)
 	popup.SetUpText(character.get_parent().position, dmg, " burn", Color.ORANGE)
 	
+	CalculateStatChanges()
 	pass
 
 
 
 func Follow(target : Character):
-	orig = self.global_position
 	end = target.global_position
 	end.x = (end.x - orig.x) * 0.8 + orig.x
 	
@@ -178,6 +193,22 @@ func Follow(target : Character):
 	
 	pass
 
+func CalculateStatChanges():
+	statChanges.ResetStats()
+	statChanges.chargeRate = 1.0
+	
+	for effect in statusEffects:
+		effect.AlterStats(statChanges)
+	
+	pass
+
+func IsParalyzed() -> bool:
+	for effect in statusEffects:
+		if effect.StatusType == StatusEffect.StatusEffectType.Paralyze && effect.Count > 0:
+			effect.Apply(self)
+			return true
+	
+	return false
 
 
 func SetUpWizard():

@@ -46,6 +46,10 @@ func SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes)
 	SetElemCategory(elemDmg, elemRes, catDmg, catRes)
 	pass
 
+func ResetStats():
+	self.SetValues(0, 0, 0, 0, 0, 0, [], [], [], [])
+	pass
+
 # Sets up DMG and RES fields with 0.0 values
 func InitElemCategory() :
 	for e in Element:
@@ -62,16 +66,28 @@ func SetElemCategory(elemDmg : Array, elemRes : Array, catDmg : Array, catRes : 
 	for e in Element:
 		if elemDmg.size() > i:
 			elementalDMG[i] = elemDmg[i]
+		else:
+			elementalDMG[i] = 0.0
+		
 		if elemRes.size() > i:
 			elementalRES[i] = elemRes[i]
+		else:
+			elementalRES[i] = 0.0
+			
 		i += 1
 	
 	i = 0
 	for c in Category:
 		if catDmg.size() > i:
 			categoryDMG[i] = catDmg[i]
+		else:
+			categoryDMG[i] = 0.0
+		
 		if catRes.size() > i:
 			categoryRES[i] = catRes[i]
+		else:
+			categoryRES[i] = 0.0
+			
 		i += 1
 	
 	pass

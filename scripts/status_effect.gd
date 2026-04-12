@@ -5,11 +5,13 @@ var ApplicationRate : float = 0.5
 var Count : int
 var Charge : float = 100.0
 var DecrementRate : float = 100.0
+var TargetSelf : bool = false
 
 
-func _init(newType : StatusEffectType, chance : float):
+func _init(newType : StatusEffectType, chance : float = 0.0, targetMe : bool = false):
 	StatusType = newType
 	ApplicationRate = chance
+	TargetSelf = targetMe
 	
 	match StatusType:
 		StatusEffectType.Burn:
@@ -17,13 +19,13 @@ func _init(newType : StatusEffectType, chance : float):
 			DecrementRate = 400.0
 		StatusEffectType.Freeze:
 			Count = 1
-			DecrementRate = 100.0
+			DecrementRate = 25.0
 		StatusEffectType.Paralyze:
 			Count = 1
 			DecrementRate = 0.0
 		StatusEffectType.Haste:
 			Count = 1
-			DecrementRate = 100.0
+			DecrementRate = 25.0
 	
 	pass
 
@@ -38,15 +40,31 @@ func pass_status_time(delta : float) -> bool:
 	
 	return false
 
+# Apply is used for effects that activate only at certain points
 func Apply(chara : Character):
 	match StatusType:
 		StatusEffectType.Burn:
-			chara.TakeTrueDamage(chara.currentStats.health * 0.15, 0)
+			chara.TakeTrueDamage(max(chara.baseStats.health * 0.15, 3), 0)
 		StatusEffectType.Freeze:
+			pass
+		StatusEffectType.Paralyze:
+			Count = Count - 1
+		StatusEffectType.Haste:
+			pass
+	pass
+
+# AlterStats is used for status effects that change stat values
+func AlterStats(stats : CharacterStats):
+	match StatusType:
+		StatusEffectType.Burn:
+			pass
+		StatusEffectType.Freeze:
+			stats.chargeRate *= 0.8
 			pass
 		StatusEffectType.Paralyze:
 			pass
 		StatusEffectType.Haste:
+			stats.chargeRate *= 1.1
 			pass
 	pass
 
@@ -68,6 +86,6 @@ enum StatusEffectType
 {
 	Burn,     # currentHP% damage every 25 charge for 100 charge
 	Freeze,   # reduces chargeRate by 20% for 100 charge
-	Paralyze, # the next spell deals less damage
+	Paralyze, # the next spell deals half damage
 	Haste     # increases chargeRate by 10% for 100 charge
 }

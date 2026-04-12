@@ -14,7 +14,7 @@ var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd")
 
 var targetIndex = 1
-var characterList = [] 
+var characterList : Array[Character] = [] 
 var remainingEnemiesList = []
 var enemyAmount : int = 4 # enemy amount = enemies on field + 1 (for the player)
 
@@ -100,13 +100,13 @@ func _process(delta: float) -> void:
 
 # checks if the player and enemies are alive, handles them and finishes the Fight if conditions are met
 func check_death():
-	if characterList[0].currentStats.health <= 0:
+	if characterList[0].baseStats.health <= 0:
 		characterList[0].queue_free()
 		characterList[0] = null
 		finish_fight(false)
 	
 	for i in range(1, enemyAmount):
-		if characterList[i] != null && characterList[i].currentStats.health <= 0:
+		if characterList[i] != null && characterList[i].baseStats.health <= 0:
 			characterList[i].queue_free()
 			characterList[i] = null
 			
