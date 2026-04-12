@@ -46,6 +46,14 @@ func SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes)
 	SetElemCategory(elemDmg, elemRes, catDmg, catRes)
 	pass
 
+func CalculateFinalStats(baseStats : CharacterStats):
+	self.SetValues(baseStats.health, baseStats.attack + self.attack, baseStats.defense + self.defense,
+		baseStats.critRate + self.critRate, baseStats.critDMG + self.critDMG,
+		baseStats.chargeRate * self.chargeRate,
+		baseStats.elementalDMG, baseStats.elementalRES, baseStats.categoryDMG, baseStats.categoryRES)
+	pass
+
+
 func ResetStats():
 	self.SetValues(0, 0, 0, 0, 0, 0, [], [], [], [])
 	pass

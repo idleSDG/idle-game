@@ -10,9 +10,10 @@ var maxCharge = 100.0
 var potency = 1.0
 var element : CharacterStats.Element
 var isAoE : bool = false
+var isParalyzed : bool = false
 
 var additionalEffect : StatusEffect
-
+var isCurrentAttack : bool = false
 
 var sprite
 var borderClr
@@ -39,6 +40,7 @@ func UpdateBar():
 
 func Charge(delta: float) -> bool:
 	charge += delta * 100
+	isCurrentAttack = true
 	UpdateBar()
 	
 	return false
@@ -50,21 +52,25 @@ func GetOvercharge() -> float:
 	return -3
 
 func Use(user : Character, target : Character) -> bool:
-	var dmg = DamageCalculation(user.baseStats, target.baseStats)
-	if user.IsParalyzed():
-		dmg.x *= 0.5
+	if user == null || target == null:
+		return false
 	
+	var dmg = DamageCalculation(user.baseStats, target.baseStats)
+	if isParalyzed:
+		dmg.x *= 0.5
 	target.TakeDamage(dmg.x, dmg.y > 0.0)
 	
 	if additionalEffect != null && RandomNumberGenerator.new().randf() < additionalEffect.ApplicationRate:
-		if additionalEffect.TargetSelf:
+		if additionalEffect.TargetSelf && isCurrentAttack:
 			user.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 		else:
 			target.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 	
-	charge -= maxCharge
-	UpdateBar()
+	if isCurrentAttack:
+		charge -= maxCharge
 	
+	UpdateBar()
+	isCurrentAttack = false
 	return true
 
 # Damage formula function

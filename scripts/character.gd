@@ -20,8 +20,8 @@ var orig
 var end
 
 var isPlayer : bool = false
-var baseStats : CharacterStats = CharacterStats.new() # this should be replaced with cloning/duplicating baseStats
-var statChanges : CharacterStats = CharacterStats.new()
+var baseStats : CharacterStats = CharacterStats.new() 
+var statChanges : CharacterStats = CharacterStats.new() # final stats, including all buffs and debuffs
 var statusEffects : Array[StatusEffect] = []
 
 
@@ -60,8 +60,8 @@ func SetStats(stats : CharacterStats) :
 	instance.addEffect(StatusEffect.StatusEffectType.Burn, 1.0, false)
 	skills.append(instance)
 	
-	instance = Skill.new(1.3, 100.0, CharacterStats.Element.Wind)
-	instance.addEffect(StatusEffect.StatusEffectType.Haste, 1.0, true)
+	instance = Skill.new(1.3, 1000.0, CharacterStats.Element.Lightning, true)
+	instance.addEffect(StatusEffect.StatusEffectType.Paralyze, 1.0, false)
 	skills.append(instance)
 	# END OF TEMPORARY CODE
 	
@@ -77,7 +77,7 @@ func PassTime(delta: float) -> void:
 	CalculateStatChanges()
 	
 	for skill in skills:
-		skill.Charge(delta * (baseStats.chargeRate * statChanges.chargeRate))
+		skill.Charge(delta * (statChanges.chargeRate))
 	for effect in statusEffects:
 		if effect.pass_status_time(delta):
 			effect.Apply(self)
@@ -125,11 +125,21 @@ func CheckSkillCharge() -> float:
 
 
 # Use skill against target
-func UseSkill(target : Character) -> void:
-	if skills[skillToUse].Use(self, target):
-		particles.emitting = true
-		trail.emitting = true
-		Follow(target)
+func UseSkill(target : Array[Character]) -> void:
+	if self.IsParalyzed():
+		skills[skillToUse].isParalyzed = true
+	
+	if skills[skillToUse].isAoE:
+		skills[skillToUse].Use(self, target[1])
+		skills[skillToUse].Use(self, target[2])
+		skills[skillToUse].Use(self, target[3])
+	else: skills[skillToUse].Use(self, target[0])
+		
+	particles.emitting = true
+	trail.emitting = true
+	Follow(target[0])
+	
+	skills[skillToUse].isParalyzed = false
 	
 	skillToUse = -1
 	
@@ -199,6 +209,8 @@ func CalculateStatChanges():
 	
 	for effect in statusEffects:
 		effect.AlterStats(statChanges)
+	
+	statChanges.CalculateFinalStats(baseStats)
 	
 	pass
 
