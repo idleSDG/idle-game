@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ohafseoqfphk"]
+
+[ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="1_esmg3"]
+[ext_resource type="Script" uid="uid://0o7ot068fg0l" path="res://scripts/ui/skill_grid_button.gd" id="2_hsuyu"]
+[ext_resource type="Texture2D" uid="uid://b8vmbnqo2idkb" path="res://assets/skills/Grayscale_border.png" id="2_qarl8"]
+
+[node name="Button" type="Button" unique_id=1346103917]
+custom_minimum_size = Vector2(150, 150)
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 39
+icon = ExtResource("1_esmg3")
+alignment = 2
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_hsuyu")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=110061315]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_qarl8")
+expand_mode = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

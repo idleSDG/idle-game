@@ -30,18 +30,11 @@ var skillToUse = -1
 
 
 func _ready() -> void:
-	# TEMPORARY CODE
-	var instance = Skill.new(1.0, 200.0)
-	skills.append(instance)
-	# END OF TEMPORARY CODE
-	
 	orig = self.global_position
-	
-	for s in skills:
-		skillBars.add_child(s.skillBar)
 	
 	if isPlayer:
 		baseSprite.texture = load("res://assets/wizard_defaults/wizardBase.png")
+		SetSpells()
 		SetUpWizard()
 		CreatePlayerCompositeImage()
 
@@ -50,19 +43,27 @@ func _ready() -> void:
 	else:
 		baseSprite.texture = load("res://assets/enemies/skeleton.png") if RandomNumberGenerator.new().randf() > 0.5 else load("res://assets/enemies/wolf.png")
 		trail.texture = baseSprite.texture
+		# TEMPORARY CODE
+		var instance = Skill.new(1.0, 200.0)
+		instance.set_visuals()
+		skills.append(instance)
+		# END OF TEMPORARY CODE
+	
+	for s in skills:
+		skillBars.add_child(s.skillBar)
 	
 	pass
 
 
 func SetStats(stats : CharacterStats) :
 	# TEMPORARY CODE
-	var instance = Skill.new(1.3, 300.0, CharacterStats.Element.Fire)
-	instance.addEffect(StatusEffect.StatusEffectType.Burn, 1.0, false)
-	skills.append(instance)
-	
-	instance = Skill.new(1.3, 1000.0, CharacterStats.Element.Lightning, true)
-	instance.addEffect(StatusEffect.StatusEffectType.Paralyze, 1.0, false)
-	skills.append(instance)
+	#var instance = Skill.new(1.3, 300.0, CharacterStats.Element.Fire)
+	#instance.addEffect(StatusEffect.StatusEffectType.Burn, 1.0, false)
+	#skills.append(instance)
+	#
+	#instance = Skill.new(1.3, 1000.0, CharacterStats.Element.Lightning, true)
+	#instance.addEffect(StatusEffect.StatusEffectType.Paralyze, 1.0, false)
+	#skills.append(instance)
 	# END OF TEMPORARY CODE
 	
 	baseStats = stats
@@ -84,7 +85,6 @@ func PassTime(delta: float) -> void:
 	
 	var toKeep : Array[StatusEffect] = []
 	for effect in statusEffects:
-		print(effect.Count)
 		if effect.Count <= 0:
 			RemoveStatus(effect)
 		else:
@@ -222,6 +222,16 @@ func IsParalyzed() -> bool:
 	
 	return false
 
+
+
+func SetSpells():
+	for i in 3:
+		print(i)
+		for spell in SkillManager.skills:
+			if spell.equipState == i + 1:
+				var instance = Skill.DuplicateSkill(spell)
+				skills.append(instance)
+	pass
 
 func SetUpWizard():
 	wizardSprites.get_child(0).modulate = PlayerAppearance.appearance.get_skin_color()

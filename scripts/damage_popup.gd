@@ -28,7 +28,7 @@ func SetUp(pos : Vector2, dmg : int, crit : bool):
 
 func SetUpText(pos : Vector2, dmg : int, text : String, clr : Color):
 	var rng = RandomNumberGenerator.new()
-	self.position = pos + Vector2(rng.randf(), -rng.randf()) * 100
+	self.position = pos + Vector2(rng.randf() - 0.5, -rng.randf()) * 100
 	
 	richText.text = str(dmg) + text if dmg != 0 else text
 	richText.add_theme_color_override("default_color", clr)
