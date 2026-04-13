@@ -7,6 +7,16 @@ func _ready() -> void:
 	#skills[2].equipState = 2
 	#skills[4].equipState = 3
 	pass
+	
+
+func Equip(skill : Skill, equipNum : int):
+	for sk in skills:
+		if sk.equipState == equipNum:
+			var oldState = sk.equipState
+			sk.equipState = skill.equipState
+			skill.equipState = oldState
+
+	pass
 
 func get_save_data() -> Dictionary:
 	var dict := {}

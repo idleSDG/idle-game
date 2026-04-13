@@ -24,7 +24,7 @@ func set_preview(skill : Skill):
 	button.icon = proper.sprite
 	border.modulate = proper.borderClr
 	potency.text = "Scaling: " + str(int(proper.potency * 100))
-	charge.text = "Charge: " + str(int(proper.charge))
+	charge.text = "Charge: " + str(int(proper.maxCharge))
 	effects.text = "AoE | " if proper.isAoE else ""
 	if proper.additionalEffect != null:
 		effects.text = effects.text + "Has a " + str(int(proper.additionalEffect.ApplicationRate * 100.0)) + "% chance to apply " + StatusEffect.StatusEffectType.keys()[proper.additionalEffect.StatusType]

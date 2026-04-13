@@ -20,6 +20,8 @@ var orig
 var end
 
 var isPlayer : bool = false
+var expCounter : Array[int] = []
+
 var baseStats : CharacterStats = CharacterStats.new() 
 var statChanges : CharacterStats = CharacterStats.new() # final stats, including all buffs and debuffs
 var statusEffects : Array[StatusEffect] = []
@@ -51,6 +53,8 @@ func _ready() -> void:
 	
 	for s in skills:
 		skillBars.add_child(s.skillBar)
+	
+	expCounter.resize(skills.size())
 	
 	pass
 
@@ -134,7 +138,9 @@ func UseSkill(target : Array[Character]) -> void:
 		skills[skillToUse].Use(self, target[2])
 		skills[skillToUse].Use(self, target[3])
 	else: skills[skillToUse].Use(self, target[0])
-		
+	
+	expCounter[skillToUse] += 67
+	
 	particles.emitting = true
 	trail.emitting = true
 	Follow(target[0])
@@ -232,6 +238,12 @@ func SetSpells():
 				var instance = Skill.DuplicateSkill(spell)
 				skills.append(instance)
 	pass
+
+func ApplyExp():
+	for skill in SkillManager.skills:
+		if skill.equipState != -1:
+			skill.LevelUp(expCounter[skill.equipState - 1])
+
 
 func SetUpWizard():
 	wizardSprites.get_child(0).modulate = PlayerAppearance.appearance.get_skin_color()

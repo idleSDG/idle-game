@@ -17,3 +17,5 @@ script = ExtResource("1_0248v")
 [node name="Skill_Grid_Button" parent="." unique_id=1346103917 instance=ExtResource("1_7vxik")]
 visible = false
 layout_mode = 2
+
+[connection signal="equipSkillPressed" from="." to="." method="_on_equip_skill_pressed"]

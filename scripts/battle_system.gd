@@ -11,7 +11,7 @@ signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
 
 var character_scene = load("res://scenes/character.tscn")
-var character_class = load("res://scripts/character.gd")
+var character_class = load("res://scripts/character.gd") 
 
 var targetIndex = 1
 var characterList : Array[Character] = [] 
@@ -181,6 +181,8 @@ func finish_fight(result : bool):
 	if result:
 		combatFinish.text = "YOU WIN"
 		PlayerProgress.add_xp(120)
+		characterList[0].ApplyExp()
+		SaveManager.save_game()
 	else:
 		combatFinish.text = "YOU LOSE"
 	exit_button.visible = true

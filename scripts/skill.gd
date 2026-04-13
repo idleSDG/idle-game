@@ -178,6 +178,7 @@ func LevelUp(expAcquired : int):
 	var xpNeeded = maxExp - exp
 	if (expAcquired > xpNeeded && !(level >= 10)):
 		expAcquired -= xpNeeded
+		exp = 0
 		level = level + 1
 		LevelUp(expAcquired)
 	else:

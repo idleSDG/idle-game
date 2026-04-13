@@ -140,14 +140,18 @@ theme_override_constants/separation = 15
 
 [node name="Button" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1346103917 instance=ExtResource("4_pvdot")]
 layout_mode = 2
+equip = 1
 
 [node name="Button2" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1949027151 instance=ExtResource("4_pvdot")]
 layout_mode = 2
+equip = 2
 
 [node name="Button3" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1550091624 instance=ExtResource("4_pvdot")]
 layout_mode = 2
+equip = 3
 
 [node name="SkillSelection" type="VBoxContainer" parent="CanvasLayer" unique_id=776300045]
+visible = false
 z_index = 100
 anchors_preset = -1
 anchor_left = 0.503
@@ -164,10 +168,23 @@ custom_minimum_size = Vector2(0, 670)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_l2xjd")
 
-[node name="SkillGrid" parent="CanvasLayer/SkillSelection/ScrollContainer" unique_id=1758141714 instance=ExtResource("5_cj3cf")]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SkillSelection/ScrollContainer" unique_id=915604959]
 layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SkillGrid" parent="CanvasLayer/SkillSelection/ScrollContainer/MarginContainer" unique_id=1758141714 node_paths=PackedStringArray("skillScreen", "button1", "button2", "button3") instance=ExtResource("5_cj3cf")]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 6
+skillScreen = NodePath("../../..")
+button1 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button")
+button2 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button2")
+button3 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button3")
 
 [node name="SkillPreview" parent="CanvasLayer/SkillSelection" unique_id=1238233801 instance=ExtResource("6_oqv88")]
 layout_mode = 2
 
-[connection signal="skill_pressed" from="CanvasLayer/SkillSelection/ScrollContainer/SkillGrid" to="CanvasLayer/SkillSelection/SkillPreview" method="_on_skill_grid_skill_pressed"]
+[connection signal="skill_pressed" from="CanvasLayer/SkillSelection/ScrollContainer/MarginContainer/SkillGrid" to="CanvasLayer/SkillSelection/SkillPreview" method="_on_skill_grid_skill_pressed"]
