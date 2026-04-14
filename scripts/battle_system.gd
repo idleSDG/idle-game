@@ -11,10 +11,10 @@ signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
 
 var character_scene = load("res://scenes/character.tscn")
-var character_class = load("res://scripts/character.gd")
+var character_class = load("res://scripts/character.gd") 
 
 var targetIndex = 1
-var characterList = [] 
+var characterList : Array[Character] = [] 
 var remainingEnemiesList = []
 var enemyAmount : int = 4 # enemy amount = enemies on field + 1 (for the player)
 
@@ -85,13 +85,14 @@ func _process(delta: float) -> void:
 		update_visuals(delta)
 		# timer - can be used for skill animations (if we want any), to stop time while anim is playing
 		if timer <= 0:
+			check_death()
 			check_enemies()
 			if !try_skills():
 				pass_time(delta)
 			else:
 				timer = 1.0
 				print(":: skill executed")
-				check_death()
+			check_death()
 		else:
 			timer -= delta
 	
@@ -100,22 +101,15 @@ func _process(delta: float) -> void:
 
 # checks if the player and enemies are alive, handles them and finishes the Fight if conditions are met
 func check_death():
-	if characterList[0].currentStats.health <= 0:
+	if characterList[0].baseStats.health <= 0:
 		characterList[0].queue_free()
 		characterList[0] = null
 		finish_fight(false)
 	
 	for i in range(1, enemyAmount):
-		if characterList[i] != null && characterList[i].currentStats.health <= 0:
+		if characterList[i] != null && characterList[i].baseStats.health <= 0:
 			characterList[i].queue_free()
 			characterList[i] = null
-			
-			targetIndex = -1
-			for j in range(1, enemyAmount):
-				if characterList[j] != null:
-					targetIndex = j
-			if targetIndex == -1:
-				finish_fight(true)
 
 
 # spawns new enemies if there are any left in remainingEnemiesList
@@ -127,6 +121,13 @@ func check_enemies():
 				characterSpawnPos[i].add_child(characterList[i])
 				remainingEnemiesList.pop_front()
 		else: break
+	
+	targetIndex = -1
+	for j in range(1, enemyAmount):
+		if characterList[j] != null:
+			targetIndex = j
+	if targetIndex == -1:
+		finish_fight(true)
 	
 	pass
 
@@ -146,10 +147,10 @@ func try_skills() -> bool:
 			i += 1
 	
 	if maxPos != -1:
-		# targeting logic should be tweaked
+		# targeting logic should maybe be tweaked
 		var target = characterList[targetIndex] if maxPos == 0 else characterList[0]
 		if target != null:
-			characterList[maxPos].UseSkill(target)
+			characterList[maxPos].UseSkill([target, characterList[1], characterList[2], characterList[3]])
 		return true
 	
 	return false
@@ -180,6 +181,8 @@ func finish_fight(result : bool):
 	if result:
 		combatFinish.text = "YOU WIN"
 		PlayerProgress.add_xp(120)
+		characterList[0].ApplyExp()
+		SaveManager.save_game()
 	else:
 		combatFinish.text = "YOU LOSE"
 	exit_button.visible = true

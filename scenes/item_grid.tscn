@@ -1,7 +1,7 @@
-[gd_scene format=3 uid="uid://b6o81e0vhxb56"]
+[gd_scene format=3 uid="uid://dbwsw84mds467"]
 
-[ext_resource type="Script" uid="uid://d4bcb28lawejv" path="res://scripts/ui/item_grid.gd" id="1_id65l"]
-[ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="1_kusxq"]
+[ext_resource type="Script" uid="uid://d4bcb28lawejv" path="res://scripts/ui/item_grid.gd" id="1_0248v"]
+[ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="2_ofkgl"]
 
 [node name="ItemGrid" type="GridContainer" unique_id=1758141714]
 offset_left = 12.0
@@ -12,7 +12,7 @@ size_flags_vertical = 4
 theme_override_constants/h_separation = 14
 theme_override_constants/v_separation = 14
 columns = 5
-script = ExtResource("1_id65l")
+script = ExtResource("1_0248v")
 
 [node name="Button" type="Button" parent="." unique_id=1402094489]
 visible = false
@@ -20,7 +20,7 @@ custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_horizontal = 6
 theme_override_font_sizes/font_size = 39
-icon = ExtResource("1_kusxq")
+icon = ExtResource("2_ofkgl")
 alignment = 2
 icon_alignment = 1
 expand_icon = true
