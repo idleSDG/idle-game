@@ -102,7 +102,15 @@ scroll_active = false
 layout_mode = 0
 offset_left = 21.0
 offset_top = 167.0
-offset_right = 496.0
+offset_right = 1001.0
 offset_bottom = 283.0
 theme_override_font_sizes/normal_font_size = 67
 scroll_active = false
+
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Ingredients" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_ingredients_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Hats" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_hats_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Robes" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_robes_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Weapons" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_weapons_pressed"]
+[connection signal="pressed" from="CanvasLayer/Background/NavBar/Potions" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_potions_pressed"]
+[connection signal="equipment_pressed" from="CanvasLayer/Background/ScrollContainer/ItemGrid" to="." method="_on_item_grid_equipment_pressed"]
+[connection signal="ingredient_pressed" from="CanvasLayer/Background/ScrollContainer/ItemGrid" to="." method="_on_item_grid_ingredient_pressed"]
