@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://ohafseoqfphk"]
+
+[ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="1_esmg3"]
+[ext_resource type="Script" uid="uid://0o7ot068fg0l" path="res://scripts/ui/skill_grid_button.gd" id="2_hsuyu"]
+[ext_resource type="Texture2D" uid="uid://b8vmbnqo2idkb" path="res://assets/skills/Grayscale_border.png" id="2_qarl8"]
+[ext_resource type="Texture2D" uid="uid://2vmxb82tpcf3" path="res://assets/icons/triangleTex.png" id="4_s57g0"]
+
+[node name="Button" type="Button" unique_id=1346103917]
+z_index = 3
+custom_minimum_size = Vector2(150, 150)
+size_flags_horizontal = 6
+theme_override_font_sizes/font_size = 39
+icon = ExtResource("1_esmg3")
+alignment = 2
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_hsuyu")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=110061315]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("2_qarl8")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=487481573]
+visible = false
+z_index = -1
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 0
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 155.0
+offset_bottom = 155.0
+color = Color(0, 1, 1, 1)
+
+[node name="Label" type="Label" parent="." unique_id=1188661141]
+visible = false
+z_index = 1
+layout_mode = 0
+offset_left = 81.0
+offset_top = 10.0
+offset_right = 149.0
+offset_bottom = 182.0
+theme_override_font_sizes/font_size = 70
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Label" unique_id=964404747]
+modulate = Color(1, 1, 1, 0.7647059)
+z_index = -1
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 0
+offset_left = -81.0
+offset_top = -10.0
+offset_right = 69.0
+offset_bottom = 140.0
+texture = ExtResource("4_s57g0")
+expand_mode = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -27,6 +27,8 @@ signal collectable_money_changed(collectable_money: int)
 var ingredients: Dictionary[Ingredient.Type, Ingredient] = _create_default_ingredients()
 signal ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient])
 var _steps_initialized: bool = false
+var _screen_time_initialized: bool = false
+var _data_ready = [false, false]
 
 class StepsMomentumDataSource:
 	extends RefCounted
@@ -36,6 +38,15 @@ class StepsMomentumDataSource:
 
 	func get_history(start_t: float, end_t: float) -> Array:
 		return StepsProgress.get_profile_momentum_history_between(start_t, end_t)
+		
+class ScreenTimeMomentumDataSource:
+	extends RefCounted
+
+	func get_latest_value() -> Dictionary:
+		return ScreenTimeProgress.get_latest_value_for_profile()
+
+	func get_history(start_t: float, end_t: float) -> Array:
+		return ScreenTimeProgress.get_profile_momentum_history_between(start_t, end_t)
 
 # Used to overwrite values from the save
 func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
@@ -43,6 +54,14 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 		Ingredient.Type.KINETIC_SHARD: Ingredient.new(
 			Ingredient.Type.KINETIC_SHARD,
 			MomentumTracker.new(MomentumConfig.new(6000.0, 12000.0), StepsMomentumDataSource.new()),
+			0.0,
+			0,
+			10000,
+			1.0
+		),
+		Ingredient.Type.FOCUS_FLUX: Ingredient.new(
+			Ingredient.Type.FOCUS_FLUX,
+			MomentumTracker.new(MomentumConfig.new(-20, -5), ScreenTimeMomentumDataSource.new()),
 			0.0,
 			0,
 			10000,
@@ -57,15 +76,26 @@ func _ready():
 	StepsProgress.steps_data_ready.connect(_on_steps_data_ready)
 	if StepsProgress.has_steps_data():
 		_on_steps_data_ready()
+	ScreenTimeProgress.screen_time_data_ready.connect(_on_screen_time_data_ready)
 
 func _on_steps_data_ready():
 	if _steps_initialized:
 		return
 	_steps_initialized = true
+	_set_data_ready(0)
 
-	_update_inventory()
-	inventory_update_timer.paused = false
+func _on_screen_time_data_ready():
+	if _screen_time_initialized:
+		return
+	_screen_time_initialized = true
+	_set_data_ready(1)
 
+func _set_data_ready(material : int):
+	_data_ready[material] = true
+	if(_data_ready.all(func(boolean): return boolean)):
+		_update_inventory()
+		inventory_update_timer.paused = false
+	
 func _create_timer():
 	if inventory_update_timer != null:
 		return

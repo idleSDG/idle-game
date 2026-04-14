@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dx8hs5u3c2ruw"]
+
+[ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="1_7vxik"]
+[ext_resource type="Script" uid="uid://pgy4d2ut0g4s" path="res://scripts/ui/skill_grid.gd" id="1_0248v"]
+
+[node name="SkillGrid" type="GridContainer" unique_id=1758141714]
+offset_left = 12.0
+offset_right = 1068.0
+offset_bottom = 220.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 14
+theme_override_constants/v_separation = 14
+columns = 5
+script = ExtResource("1_0248v")
+
+[node name="Skill_Grid_Button" parent="." unique_id=1346103917 instance=ExtResource("1_7vxik")]
+visible = false
+layout_mode = 2
+
+[connection signal="equipSkillPressed" from="." to="." method="_on_equip_skill_pressed"]
