@@ -26,6 +26,7 @@ EquipmentManager="*uid://dgcauqgjrih33"
 StepsProgress="*uid://cfgfym31wxges"
 PlayerAppearance="*uid://b34vpsjibdxjr"
 ScreenTimeProgress="*uid://dldxvwrpkyk2h"
+SkillManager="*uid://wih1s47upqla"
 
 [display]
 
