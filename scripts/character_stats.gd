@@ -7,7 +7,7 @@ var health : int = maxHealth
 var attack : int = 10
 var defense : int = 10
 
-var critRate = 0.5
+var critRate = 0.05
 var critDMG = 0.5
 var chargeRate = 1.0
 

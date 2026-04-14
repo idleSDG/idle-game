@@ -9,6 +9,7 @@ var charName = "Character"
 @onready var healthBar = $"VBoxContainer/Container--Sprite2D/ProgressBar"
 @onready var skillBars = $"VBoxContainer/Container--Sprite2D/HBox_Skills"
 
+var sprite
 @onready var baseSprite = $VBoxContainer/BaseSprite
 @onready var wizardSprites = $VBoxContainer/BaseSprite/WIZARDSPECIFIC
 
@@ -43,15 +44,11 @@ func _ready() -> void:
 		wizardSprites.visible = true;
 		trail.texture = ImageTexture.create_from_image(image)
 	else:
-		baseSprite.texture = load("res://assets/enemies/skeleton.png") if RandomNumberGenerator.new().randf() > 0.5 else load("res://assets/enemies/wolf.png")
 		trail.texture = baseSprite.texture
-		# TEMPORARY CODE
-		var instance = Skill.new(1.0, 200.0)
-		instance.set_visuals()
-		skills.append(instance)
-		# END OF TEMPORARY CODE
+		baseSprite.texture = sprite
 	
 	for s in skills:
+		s.set_visuals()
 		skillBars.add_child(s.skillBar)
 	
 	expCounter.resize(skills.size())
@@ -60,20 +57,7 @@ func _ready() -> void:
 
 
 func SetStats(stats : CharacterStats) :
-	# TEMPORARY CODE
-	#var instance = Skill.new(1.3, 300.0, CharacterStats.Element.Fire)
-	#instance.addEffect(StatusEffect.StatusEffectType.Burn, 1.0, false)
-	#skills.append(instance)
-	#
-	#instance = Skill.new(1.3, 1000.0, CharacterStats.Element.Lightning, true)
-	#instance.addEffect(StatusEffect.StatusEffectType.Paralyze, 1.0, false)
-	#skills.append(instance)
-	# END OF TEMPORARY CODE
-	
 	baseStats = stats
-	
-	isPlayer = true
-	
 	pass
 
 

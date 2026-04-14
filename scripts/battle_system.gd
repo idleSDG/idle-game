@@ -55,13 +55,13 @@ func _ready() -> void:
 	var instance = character_scene.instantiate()
 	instance.SetStats(GlobalVariables.GetPlayer())
 	instance.charName = "Wizard"
+	instance.isPlayer = true
 	characterList[0] = instance
 	characterSpawnPos[0].add_child(instance)
 	
 	for i in 10:
-		var instance2 = character_scene.instantiate()
+		var instance2 := EnemyTypes.CreateEnemy(100)
 		remainingEnemiesList.append(instance2)
-		instance2.charName = "Enemy" + str(i)
 	# END OF TEMPORARY
 	
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
@@ -119,6 +119,8 @@ func check_enemies():
 			if characterList[i] == null:
 				characterList[i] = remainingEnemiesList[0]
 				characterSpawnPos[i].add_child(characterList[i])
+				
+				#remainingEnemiesList[0]._ready()
 				remainingEnemiesList.pop_front()
 		else: break
 	
