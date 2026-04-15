@@ -3,6 +3,7 @@ class_name Character extends Node
 var damagePopup = load("res://scenes/damagePopup.tscn")
 var skillUiScene = load("res://scenes/skillUI.tscn")
 var charName = "Character"
+var level : int = 1
 
 @onready var character = $"."
 @onready var particles = $GPUParticles2D

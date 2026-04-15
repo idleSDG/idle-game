@@ -60,7 +60,7 @@ func _ready() -> void:
 	characterSpawnPos[0].add_child(instance)
 	
 	for i in 10:
-		var instance2 := EnemyTypes.CreateEnemy(100 + i % 3)
+		var instance2 := EnemyTypes.CreateEnemy(100 + i % 3, 5)
 		remainingEnemiesList.append(instance2)
 	# END OF TEMPORARY
 	
