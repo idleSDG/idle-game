@@ -60,7 +60,7 @@ func _ready() -> void:
 	characterSpawnPos[0].add_child(instance)
 	
 	for i in 10:
-		var instance2 := EnemyTypes.CreateEnemy(100)
+		var instance2 := EnemyTypes.CreateEnemy(100 + i % 3)
 		remainingEnemiesList.append(instance2)
 	# END OF TEMPORARY
 	
@@ -151,7 +151,7 @@ func try_skills() -> bool:
 	if maxPos != -1:
 		# targeting logic should maybe be tweaked
 		var target = characterList[targetIndex] if maxPos == 0 else characterList[0]
-		if target != null:
+		if target != null && characterList[maxPos] != null:
 			characterList[maxPos].UseSkill([target, characterList[1], characterList[2], characterList[3]])
 		return true
 	
