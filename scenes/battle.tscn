@@ -18,12 +18,18 @@ grow_vertical = 2
 color = Color(0.6226508, 0.45791954, 0.59386855, 1)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=69417278]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
 [node name="Control" type="Control" parent="CanvasLayer/ScrollContainer" unique_id=1528445326]
-custom_minimum_size = Vector2(0, 3000)
 layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1374128357]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.104
+offset_bottom = 0.31999207
+alignment = 1

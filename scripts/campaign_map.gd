@@ -9,10 +9,12 @@ class path:
 
 var levels : Array[level]
 var paths : Array[path]
+var name : String
 
-func _init(p_levels : Array[level]) -> void:
+func _init(p_levels : Array[level], p_name : String) -> void:
 	p_levels.sort_custom(func(level1 : level, level2 : level): return level1.depth < level2.depth)
 	levels = Array(p_levels)
+	name = p_name
 	generate_paths()
 	
 func generate_paths() -> void:
@@ -39,3 +41,14 @@ func get_depth_count() -> Array[int]:
 	for lvl in levels:
 		depths[lvl.depth] += 1
 	return depths
+	
+static func generate_maps(count : int, depth : int) -> Array[campaign_map]:
+	var campaigns : Array[campaign_map]
+	for i in range(count):
+		var campaign_levels : Array[level]
+		for j in range(depth):
+				for k in range(max(1,randi() % 5)):
+					campaign_levels.append(level.new(j))
+		campaigns.append(campaign_map.new(campaign_levels,str(i)))
+	return campaigns
+		

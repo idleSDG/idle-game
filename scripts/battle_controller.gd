@@ -6,27 +6,36 @@ var battle_area_scene := preload("res://scenes/battle_area.tscn")
 var level_select_scene := preload("res://scenes/battle.tscn")
 
 var current_view: Node = null
+var maps : Array[campaign_map]
+var current_map : String
 
 func _ready() -> void:
 	if (GlobalVariables.battleState == GlobalVariables.BattleStates.IN_BATTLE 
 	or GlobalVariables.battleState == GlobalVariables.BattleStates.AWAITING_EXIT):
 		enter_battle()
 	else:
-		var levels : Array[level]
-		levels.append(level.new(0))
-		levels.append(level.new(1))
-		levels.append(level.new(1))
-		levels.append(level.new(2))
-		levels.append(level.new(2))
-		levels.append(level.new(3))
-		levels.append(level.new(3))
-		levels.append(level.new(3))
-		levels.append(level.new(4))
-		levels.append(level.new(5))
-		levels.append(level.new(6))
+		maps = campaign_map.generate_maps(3,25)
+		for map in maps:
+			var button = Button.new()
+			button.text = map.name
+			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			$CanvasLayer/HBoxContainer.add_child(button)
+			button.pressed.connect(_on_map_changed.bind(map))
+		draw_map(maps[0])
+		current_map = maps[0].name
+		_update_campaign_selection_visuals()
 		
-		var map = campaign_map.new(levels)
-		draw_map(map)
+func _update_campaign_selection_visuals():
+	var buttons = $CanvasLayer/HBoxContainer.get_children()
+	for button in buttons:
+		var is_active : bool = button.text == current_map
+		button.add_theme_font_size_override("font_size", 60 if is_active else 32)
+		button.add_theme_color_override("font_color", Color(0.3, 0.8, 1) if is_active else Color(1, 1, 1))
+
+func _on_map_changed(map : campaign_map):
+	current_map = map.name
+	draw_map(map)
+	_update_campaign_selection_visuals()
 
 func show_level_select() -> void:
 	_swap_to(level_select_scene)
@@ -48,6 +57,10 @@ func _swap_to(scene_res: PackedScene) -> void:
 		current_view.request_exit_signal.connect(_on_exit_battle_request)
 
 func draw_map(map : campaign_map):
+	var control = $CanvasLayer/ScrollContainer/Control
+	for n in control.get_children():
+		control.remove_child(n)
+		n.queue_free() 
 	var height = get_viewport_rect().size.y
 	var width = get_viewport_rect().size.x
 	var depths = map.get_depth_count()
@@ -56,7 +69,6 @@ func draw_map(map : campaign_map):
 	var display_width = width*0.8
 	var last_depth = -1
 	var depth_count = 0
-	var control = $CanvasLayer/ScrollContainer/Control
 	var levels = map.levels
 	var max_height = height
 	levels.reverse()
@@ -92,7 +104,12 @@ func draw_map(map : campaign_map):
 		control.add_child(line)
 	
 	control.custom_minimum_size = Vector2(0,max_height+300)
-	$CanvasLayer/ScrollContainer.set_deferred("scroll_vertical", $CanvasLayer/ScrollContainer.get_v_scroll_bar().max_value)
+	call_deferred("_scroll_to_bottom")
+
+func _scroll_to_bottom() -> void:
+	var scroll = $CanvasLayer/ScrollContainer
+	scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
+
 func _on_start_battle_request() -> void:
 	enter_battle()
 
