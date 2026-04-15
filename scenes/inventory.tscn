@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://buovyuofavu8d"]
 
 [ext_resource type="Script" uid="uid://j1f10leyypmi" path="res://scripts/inventory_scene.gd" id="1_hj2ta"]
-[ext_resource type="PackedScene" uid="uid://b6o81e0vhxb56" path="res://scenes/item_grid.tscn" id="1_qw0r6"]
+[ext_resource type="PackedScene" uid="uid://dbwsw84mds467" path="res://scenes/item_grid.tscn" id="1_qw0r6"]
 
 [sub_resource type="Gradient" id="Gradient_qw0r6"]
 interpolation_mode = 1
@@ -82,7 +82,7 @@ offset_top = -0.5200043
 offset_right = -0.20007324
 offset_bottom = -0.36010742
 
-[node name="ItemGrid" parent="CanvasLayer/Background/ScrollContainer" unique_id=716936249 instance=ExtResource("1_qw0r6")]
+[node name="ItemGrid" parent="CanvasLayer/Background/ScrollContainer" unique_id=1758141714 instance=ExtResource("1_qw0r6")]
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/Background" unique_id=1635927537]
@@ -107,7 +107,7 @@ scroll_active = false
 layout_mode = 0
 offset_left = 21.0
 offset_top = 167.0
-offset_right = 496.0
+offset_right = 1001.0
 offset_bottom = 283.0
 theme_override_font_sizes/normal_font_size = 67
 scroll_active = false
