@@ -25,6 +25,9 @@ border_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2xjd"]
 bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqv88"]
+bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
 [node name="CharacterMenu" type="Node2D" unique_id=1633184879]
 script = ExtResource("1_menu")
 
@@ -67,16 +70,19 @@ theme_override_font_sizes/font_size = 32
 text = "⚔  Equipment"
 
 [node name="WeaponSlotBtn" type="Button" parent="CanvasLayer/HSplit/RightVBox/EquipSection" unique_id=751680909]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Staff : None  [tap to equip]"
 
 [node name="RobeSlotBtn" type="Button" parent="CanvasLayer/HSplit/RightVBox/EquipSection" unique_id=286484683]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Robe  : None  [tap to equip]"
 
 [node name="HatSlotBtn" type="Button" parent="CanvasLayer/HSplit/RightVBox/EquipSection" unique_id=137611829]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Hat   : None  [tap to equip]"
@@ -198,29 +204,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/ItemPicker" unique_id=1875629436]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ItemPicker" unique_id=640481598]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -42.0
-offset_right = 350.0
-offset_bottom = 42.0
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 146.0
 grow_horizontal = 2
-grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_oqv88")
 
-[node name="PickerTitle" type="Label" parent="CanvasLayer/ItemPicker/VBox" unique_id=2053736038]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-
-[node name="ItemGrid" parent="CanvasLayer/ItemPicker/VBox" unique_id=1779284087 instance=ExtResource("7_oqv88")]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/ItemPicker/PanelContainer" unique_id=1875629436]
 layout_mode = 2
 
-[node name="CloseBtn" type="Button" parent="CanvasLayer/ItemPicker/VBox" unique_id=961858564]
+[node name="PickerTitle" type="Label" parent="CanvasLayer/ItemPicker/PanelContainer/VBox" unique_id=2053736038]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemGrid" parent="CanvasLayer/ItemPicker/PanelContainer/VBox" unique_id=1779284087 instance=ExtResource("7_oqv88")]
+layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="CanvasLayer/ItemPicker/PanelContainer/VBox" unique_id=682111993]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/ItemPicker/PanelContainer/VBox" unique_id=638167887]
+custom_minimum_size = Vector2(0, 125)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EquipBtn" type="Button" parent="CanvasLayer/ItemPicker/PanelContainer/VBox/HBox" unique_id=612806409]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 1, 0.2, 1)
+theme_override_font_sizes/font_size = 64
+text = "Equip"
+
+[node name="CloseBtn" type="Button" parent="CanvasLayer/ItemPicker/PanelContainer/VBox/HBox" unique_id=961858564]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 64
 text = "Close"
 
 [connection signal="skill_pressed" from="CanvasLayer/SkillSelection/ScrollContainer/MarginContainer/SkillGrid" to="CanvasLayer/SkillSelection/SkillPreview" method="_on_skill_grid_skill_pressed"]

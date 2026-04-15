@@ -3,11 +3,13 @@ class_name ItemGrid extends Node
 signal ingredient_pressed(item : Ingredient)
 signal equipment_pressed(item : EquipmentItem)
 signal unequip_pressed(slot : EquipmentItem.Slot)
+signal item_selected(item : EquipmentItem)  # fired on tap, no equip yet
 
 @onready var buttonBase = $Button
 @onready var grid = $"."
 
 var gridItems = []
+var _current_slot : EquipmentItem.Slot
 
 func _ready():
 	doIngredients()
@@ -29,13 +31,18 @@ func doIngredients():
 		newButton.get_child(0).text = "x" + str(list[item].count)
 		newButton.icon = load("res://assets/icons/kinetic.png")
 
-func doEquipment(slot : EquipmentItem.Slot, show_unequip : bool = false):
+func doEquipment(slot : EquipmentItem.Slot, 
+	show_unequip : bool = false, show_highlight : bool = false):
 	empty_grid()
+	_current_slot = slot
 
 	if show_unequip:
 		var unequipButton = buttonBase.duplicate()
 		unequipButton.visible = true
+		unequipButton.icon = null
 		unequipButton.text = "X"
+		unequipButton.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		unequipButton.add_theme_font_size_override("font_size", 128)
 		grid.add_child(unequipButton)
 		gridItems.append(unequipButton)
 		unequipButton.pressed.connect(func(): unequip_pressed.emit(slot))
@@ -46,9 +53,9 @@ func doEquipment(slot : EquipmentItem.Slot, show_unequip : bool = false):
 		if item.slot == slot:
 			var newButton = buttonBase.duplicate()
 			newButton.visible = true
+			newButton.icon = null
 			grid.add_child(newButton)
 			gridItems.append(newButton)
-			newButton.pressed.connect(inv_equipment_Button_Pressed.bind(item))
 
 			if slot == EquipmentItem.Slot.WEAPON:
 				newButton.icon = load("res://assets/icons/staff.png")
@@ -57,9 +64,21 @@ func doEquipment(slot : EquipmentItem.Slot, show_unequip : bool = false):
 			else:
 				newButton.icon = load("res://assets/icons/hat.png")
 
-			# Green tint on currently equipped item
-			if equipped != null and item == equipped:
-				newButton.modulate = Color(0.4, 0.9, 0.4)
+			# Green border on currently equipped item
+			if equipped != null and item == equipped and show_highlight:
+				var style = StyleBoxFlat.new()
+				style.border_width_left = 8
+				style.border_width_top = 8
+				style.border_width_right = 8
+				style.border_width_bottom = 8
+				style.border_color = Color(0.2, 1.0, 0.2)
+				style.bg_color = Color(0, 0, 0, 0)  # transparent background
+				newButton.add_theme_stylebox_override("normal", style)
+				
+			newButton.pressed.connect(func():
+				equipment_pressed.emit(item)
+				item_selected.emit(item)
+			)
 
 func inv_ingredient_Button_Pressed(item : Ingredient):
 	ingredient_pressed.emit(item)
