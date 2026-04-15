@@ -1,38 +1,61 @@
 extends Node
 
-@onready var weapon_btn       : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/WeaponSlotBtn
-@onready var robe_btn         : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/RobeSlotBtn
-@onready var hat_btn          : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/HatSlotBtn
-@onready var stat_bonus_label : Label          = $CanvasLayer/HSplit/RightVBox/EquipSection/StatBonusLabel
-@onready var skin_panel       : SkinColorPanel = $CanvasLayer/HSplit/RightVBox/CosmeticsSection/SkinColorPanel
+@onready var weapon_btn : Button = $CanvasLayer/HSplit/RightVBox/EquipSection/WeaponSlotBtn
+@onready var robe_btn : Button = $CanvasLayer/HSplit/RightVBox/EquipSection/RobeSlotBtn
+@onready var hat_btn : Button = $CanvasLayer/HSplit/RightVBox/EquipSection/HatSlotBtn
+@onready var stat_bonus_label : Label = $CanvasLayer/HSplit/RightVBox/EquipSection/StatBonusLabel
+@onready var skin_panel : SkinColorPanel = $CanvasLayer/HSplit/RightVBox/CosmeticsSection/SkinColorPanel
 
-var _items : Array = PrototypeItems.get_test_items()
+# Item picker overlay
+@onready var item_picker : Control = $CanvasLayer/ItemPicker
+@onready var item_grid : ItemGrid  = $CanvasLayer/ItemPicker/VBox/ItemGrid
+@onready var picker_title : Label = $CanvasLayer/ItemPicker/VBox/PickerTitle
+@onready var picker_close_btn : Button = $CanvasLayer/ItemPicker/VBox/CloseBtn
+
+var _current_picker_slot : EquipmentItem.Slot
 
 func _ready() -> void:
 	_refresh_equipment_buttons()
+	item_picker.visible = false
 
 	weapon_btn.pressed.connect(_on_weapon_pressed)
 	robe_btn.pressed.connect(_on_robe_pressed)
 	hat_btn.pressed.connect(_on_hat_pressed)
 
 	skin_panel.changed.connect(_on_skin_color_changed)
+	picker_close_btn.pressed.connect(_close_picker)
 
-	# Only need to refresh the buttons and stats label here —
-	# WizardAvatar handles its own visual refresh via signals
+	item_grid.equipment_pressed.connect(_on_item_selected)
+	item_grid.unequip_pressed.connect(_on_unequip_pressed)
+
 	EquipmentManager.equipment_changed.connect(_refresh_equipment_buttons)
 
-func _toggle_slot(slot: EquipmentItem.Slot) -> void:
-	if EquipmentManager.get_equipped(slot) != null:
-		EquipmentManager.unequip(slot)
-	else:
-		for item in _items:
-			if item.slot == slot:
-				EquipmentManager.equip(item)
-				break
+# ── Slot buttons ──────────────────────────────────────────────────────────────
 
-func _on_weapon_pressed() -> void: _toggle_slot(EquipmentItem.Slot.WEAPON)
-func _on_robe_pressed()   -> void: _toggle_slot(EquipmentItem.Slot.ROBE)
-func _on_hat_pressed()    -> void: _toggle_slot(EquipmentItem.Slot.HAT)
+func _on_weapon_pressed() -> void: _open_picker(EquipmentItem.Slot.WEAPON, "Weapons")
+func _on_robe_pressed()   -> void: _open_picker(EquipmentItem.Slot.ROBE,   "Robes")
+func _on_hat_pressed()    -> void: _open_picker(EquipmentItem.Slot.HAT,    "Hats")
+
+# ── Picker ────────────────────────────────────────────────────────────────────
+
+func _open_picker(slot: EquipmentItem.Slot, title: String) -> void:
+	_current_picker_slot = slot
+	picker_title.text = title
+	item_grid.doEquipment(slot, true)
+	item_picker.visible = true
+
+func _close_picker() -> void:
+	item_picker.visible = false
+
+func _on_item_selected(item: EquipmentItem) -> void:
+	EquipmentManager.equip(item)
+	_close_picker()
+
+func _on_unequip_pressed(_slot: EquipmentItem.Slot) -> void:
+	EquipmentManager.unequip(_current_picker_slot)
+	_close_picker()
+
+# ── Refresh ───────────────────────────────────────────────────────────────────
 
 func _refresh_equipment_buttons() -> void:
 	var w := EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON)

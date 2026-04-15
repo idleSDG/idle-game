@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="4_pvdot"]
 [ext_resource type="PackedScene" uid="uid://b6o81e0vhxb56" path="res://scenes/skill_grid.tscn" id="5_cj3cf"]
 [ext_resource type="PackedScene" uid="uid://ioxsx0fl2xta" path="res://scenes/skill_grid_preview.tscn" id="6_oqv88"]
+[ext_resource type="PackedScene" uid="uid://dbwsw84mds467" path="res://scenes/item_grid.tscn" id="7_oqv88"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7bf8i"]
 
@@ -186,5 +187,40 @@ button3 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HB
 
 [node name="SkillPreview" parent="CanvasLayer/SkillSelection" unique_id=1238233801 instance=ExtResource("6_oqv88")]
 layout_mode = 2
+
+[node name="ItemPicker" type="Control" parent="CanvasLayer" unique_id=1096475004]
+visible = false
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/ItemPicker" unique_id=1875629436]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -42.0
+offset_right = 350.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PickerTitle" type="Label" parent="CanvasLayer/ItemPicker/VBox" unique_id=2053736038]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="ItemGrid" parent="CanvasLayer/ItemPicker/VBox" unique_id=1779284087 instance=ExtResource("7_oqv88")]
+layout_mode = 2
+
+[node name="CloseBtn" type="Button" parent="CanvasLayer/ItemPicker/VBox" unique_id=961858564]
+layout_mode = 2
+text = "Close"
 
 [connection signal="skill_pressed" from="CanvasLayer/SkillSelection/ScrollContainer/MarginContainer/SkillGrid" to="CanvasLayer/SkillSelection/SkillPreview" method="_on_skill_grid_skill_pressed"]
