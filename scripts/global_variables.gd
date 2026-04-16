@@ -6,7 +6,9 @@ static var lastLogin : float = 0
 static var battleStart : float = 0
 static var currentLogin : float = 0
 
-
+static var current_battle_level : battle_level
+static var current_campaign : String
+static var campaigns : Array[campaign_map]
 
 # Dummy player data
 static func GetPlayer() -> CharacterStats:
@@ -56,3 +58,14 @@ static func load_game():
 		lastLogin = (loadedData["lastLogin"] if loadedData.has("lastLogin") else Time.get_unix_time_from_system())
 		battleStart = (loadedData["battleStart"] if loadedData.has("battleStart") else Time.get_unix_time_from_system())
 		currentLogin = Time.get_unix_time_from_system()
+
+static func init_new_battle_save():
+	campaigns = campaign_map.generate_maps(3,20,4)
+	current_campaign = campaigns[0].name
+	current_battle_level = campaigns[0].levels[0]
+
+static func get_campaign_save_data():
+	var campaign_data = []
+	for campaign in campaigns:
+		campaign_data.append(campaign.get_save_data())
+	return campaign_data

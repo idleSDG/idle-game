@@ -10,6 +10,8 @@ extends Node
 signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
 
+@onready var level : battle_level = GlobalVariables.current_battle_level
+
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd")
 
@@ -171,6 +173,7 @@ func update_visuals(delta: float) :
 
 # finishes the fight
 func finish_fight(result : bool):
+	level.beaten = true
 	GlobalVariables.battleState = GlobalVariables.BattleStates.AWAITING_EXIT
 	isPlaying = false
 	combatFinish.visible = true

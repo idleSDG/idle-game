@@ -37,6 +37,7 @@ script = ExtResource("2_w18ys")
 
 [node name="WizardControl" type="Control" parent="MainLayer" unique_id=694562218]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

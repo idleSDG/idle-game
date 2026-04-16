@@ -16,6 +16,9 @@ func save_game():
 		"xp": PlayerProgress.get_save_data(),
 		"equipment": EquipmentManager.get_save_data(),
 		"appearance": PlayerAppearance.get_save_data(),
+		"campaigns": GlobalVariables.get_campaign_save_data(),
+		"current_campaign": GlobalVariables.current_campaign,
+		"current_battle_level": GlobalVariables.current_battle_level.get_save_data()
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -30,6 +33,7 @@ func init_new_save():
 	PlayerInventory.init_new_save()
 	EquipmentManager.init_new_save()
 	PlayerAppearance.init_new_save()
+	GlobalVariables.init_new_battle_save()
 
 func save_file_exists() -> bool:
 	print(FileAccess.file_exists(SAVE_PATH))
@@ -68,7 +72,29 @@ func load_game():
 		PlayerAppearance.load_save_data(data["appearance"])
 	else:
 		printerr("No appearance data found!")
-
+		
+	if data.has("campaigns"):
+		GlobalVariables.campaigns = []
+		for campaign_data in data["campaigns"]:
+			GlobalVariables.campaigns.append(campaign_map.from_save(campaign_data))
+			
+		if data.has("current_campaign"):
+			GlobalVariables.current_campaign = data["current_campaign"]
+			if data.has("current_battle_level"):
+				var loaded_level = battle_level.from_save(data["current_battle_level"])
+				for campaign in GlobalVariables.campaigns:
+					if(campaign.name == GlobalVariables.current_campaign):
+						for level in campaign.levels:
+							if level.depth == loaded_level.depth && level.position == loaded_level.position:
+								GlobalVariables.current_battle_level = level
+			else:
+				printerr("No current battle level data found")
+		else:
+			printerr("No current campaign data found")
+	else:
+		printerr("No campaign map data found")
+		
+	
 	print("Game Loaded.")
 	
 func clear_save() -> void:

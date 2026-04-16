@@ -181,6 +181,6 @@ text = "SETTINGS"
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/PanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]
