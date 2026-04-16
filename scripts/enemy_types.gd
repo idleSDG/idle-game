@@ -6,6 +6,7 @@ static var character_scene = load("res://scenes/character.tscn")
 
 static func CreateEnemy(id : int, level : int = 1) -> Character:
 	var char : Character = character_scene.instantiate()
+	char.level = level
 	var stats : CharacterStats
 
 	match id:

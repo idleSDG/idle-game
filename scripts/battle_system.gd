@@ -54,6 +54,7 @@ func _ready() -> void:
 	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
 	var instance = character_scene.instantiate()
 	instance.SetStats(GlobalVariables.GetPlayer())
+	instance.level = PlayerProgress.level
 	instance.charName = "Wizard"
 	instance.isPlayer = true
 	characterList[0] = instance

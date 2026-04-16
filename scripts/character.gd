@@ -9,6 +9,7 @@ var level : int = 1
 @onready var particles = $GPUParticles2D
 @onready var healthBar = $"VBoxContainer/Container--Sprite2D/ProgressBar"
 @onready var skillBars = $"VBoxContainer/Container--Sprite2D/HBox_Skills"
+@onready var levelLabel = $"VBoxContainer/Container--Sprite2D/Level"
 
 var sprite
 @onready var baseSprite = $VBoxContainer/BaseSprite
@@ -52,6 +53,7 @@ func _ready() -> void:
 		s.set_visuals()
 		skillBars.add_child(s.skillBar)
 	
+	levelLabel.text = "Lv. " + str(level)
 	expCounter.resize(skills.size())
 	
 	pass
