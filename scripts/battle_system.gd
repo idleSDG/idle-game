@@ -75,6 +75,7 @@ func _ready() -> void:
 		GlobalVariables.battleState = GlobalVariables.BattleStates.IN_BATTLE
 		GlobalVariables.battleStart = Time.get_unix_time_from_system()
 		GlobalVariables.save_game()
+		SaveManager.save_game()
 	
 	pass # Replace with function body.
 
@@ -177,7 +178,8 @@ func finish_fight(result : bool):
 	GlobalVariables.battleState = GlobalVariables.BattleStates.AWAITING_EXIT
 	isPlaying = false
 	combatFinish.visible = true
-
+	
+	SaveManager.save_game()
 	GlobalVariables.save_game()
 	
 	if result:
@@ -219,4 +221,5 @@ func simulate(length : float):
 func _on_exit_battle_pressed() -> void:
 	GlobalVariables.battleState = GlobalVariables.BattleStates.IN_LEVEL_SELECT
 	GlobalVariables.save_game()
+	SaveManager.save_game()
 	request_exit_signal.emit()

@@ -15,10 +15,13 @@ func _init(p_depth : int, p_position : int, p_beaten : bool) -> void:
 	beaten = p_beaten
 	
 func get_save_data() -> Dictionary:
-	return { "depth" : depth, "position" : position, "beaten" : beaten}
+	return { "depth" : depth, 
+	"position" : position, 
+	"beaten" : beaten}
 
 static func from_save(data : Dictionary) -> battle_level:
 	var p_depth = (data["depth"] if data.has("depth") else 0)
 	var p_position = (data["position"] if data.has("position") else 0)
 	var p_beaten = (data["beaten"] if data.has("beaten") else false)
+
 	return battle_level.new(p_depth,p_position,p_beaten)

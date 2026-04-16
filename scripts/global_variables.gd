@@ -60,7 +60,10 @@ static func load_game():
 		currentLogin = Time.get_unix_time_from_system()
 
 static func init_new_battle_save():
-	campaigns = campaign_map.generate_maps(3,20,4)
+	campaigns = []
+	campaigns.append(campaign_map.generate_map(10,4,"Zoo","res://assets/battlemap/zoo_background.png","116802"))
+	campaigns.append(campaign_map.generate_map(10,3,"Forest","res://assets/battlemap/forest_background.png","008600"))
+	campaigns.append(campaign_map.generate_map(8,4,"Sky","res://assets/battlemap/sky_background.png","008600"))
 	current_campaign = campaigns[0].name
 	current_battle_level = campaigns[0].levels[0]
 

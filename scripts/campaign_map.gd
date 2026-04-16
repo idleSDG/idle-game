@@ -3,8 +3,12 @@ class_name campaign_map
 var levels : Array[battle_level]
 var paths : Array[battle_path]
 var name : String
+## Background image of the map
+var background_image
+## Background color outside the image
+var background_color = "FFFFFF"
 
-func _init(p_levels : Array[battle_level], p_name : String, p_generate_paths : bool) -> void:
+func _init(p_levels : Array[battle_level], p_name : String, p_generate_paths : bool, p_background_image : String, p_background_color : String) -> void:
 	levels = []
 	paths = []
 	p_levels.sort_custom(func(level1 : battle_level, level2 : battle_level): if level1.depth == level2.depth: return level1.position < level2.position else: return level1.depth < level2.depth)
@@ -12,6 +16,8 @@ func _init(p_levels : Array[battle_level], p_name : String, p_generate_paths : b
 	name = p_name
 	if p_generate_paths:
 		generate_paths()
+	background_image = p_background_image
+	background_color = p_background_color
 	
 func generate_paths() -> void:
 	var max_depth = (levels[len(levels) - 1]).depth
@@ -48,15 +54,13 @@ func find_highest_beaten() -> battle_level:
 	return highest_level
 	
 		
-static func generate_maps(count : int, depth : int, max_possitions : int) -> Array[campaign_map]:
-	var campaigns : Array[campaign_map]
-	for i in range(count):
-		var campaign_levels : Array[battle_level]
-		for j in range(depth):
-				for k in range(max(1,randi() % max_possitions)):
-					campaign_levels.append(battle_level.new(j,k,false))
-		campaigns.append(campaign_map.new(campaign_levels,str(i),true))
-	return campaigns	
+static func generate_map(depth : int, max_possitions : int, p_name : String, p_background_image : String, p_background_color : String) -> campaign_map:
+	var campaign_levels : Array[battle_level]
+	for j in range(depth):
+		for k in range(max(1,randi() % max_possitions+1)):
+			campaign_levels.append(battle_level.new(j,k,false))
+
+	return campaign_map.new(campaign_levels, p_name,true, p_background_image, p_background_color)
 	
 func get_save_data() -> Dictionary:
 	var levels_data = []
@@ -70,8 +74,10 @@ func get_save_data() -> Dictionary:
 	return {
 		"name" : name,
 		"levels" : levels_data,
-		"paths" : paths_data
-	}
+		"paths" : paths_data,
+		"background_image" : background_image,
+		"background_color" : background_color}
+	
 		
 	
 static func from_save(data: Dictionary) -> campaign_map:
@@ -80,8 +86,10 @@ static func from_save(data: Dictionary) -> campaign_map:
 	if data.has("levels"):
 		for level_data in data["levels"]:
 			loaded_levels.append(battle_level.from_save(level_data))
-			
-	var loaded_campaign = campaign_map.new(loaded_levels,p_name,false)
+	var p_background_image = (data["background_image"] if data.has("background_image") else "res://assets/battlemap/forest_background.png")
+	var p_background_color = (data["background_color"] if data.has("background_color") else "FFFFFF")
+	
+	var loaded_campaign = campaign_map.new(loaded_levels,p_name,false,p_background_image,p_background_color)
 	
 	var loaded_paths : Array[battle_path] = []
 	if data.has("paths"):

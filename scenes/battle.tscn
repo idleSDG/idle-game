@@ -8,8 +8,12 @@ script = ExtResource("1_dn72j")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1110254415]
 layer = 0
 
-[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=692250541]
-z_index = -1
+[node name="CampaignBackgroundImage" type="TextureRect" parent="CanvasLayer" unique_id=615862781]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="CampaignBackgroundColor" type="ColorRect" parent="CanvasLayer" unique_id=692250541]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,7 +31,7 @@ vertical_scroll_mode = 3
 [node name="Control" type="Control" parent="CanvasLayer/ScrollContainer" unique_id=1528445326]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1374128357]
+[node name="CampaignButtonContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1374128357]
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.104

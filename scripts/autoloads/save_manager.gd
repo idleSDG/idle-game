@@ -18,7 +18,7 @@ func save_game():
 		"appearance": PlayerAppearance.get_save_data(),
 		"campaigns": GlobalVariables.get_campaign_save_data(),
 		"current_campaign": GlobalVariables.current_campaign,
-		"current_battle_level": GlobalVariables.current_battle_level.get_save_data()
+		"current_battle_level": GlobalVariables.current_battle_level.get_save_data() if GlobalVariables.current_battle_level != null else {}
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
