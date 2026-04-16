@@ -18,7 +18,7 @@ var money: int
 signal money_changed(money: int)
 
 var collectable_money: int
-var collectable_money_capacity: int = 10
+var collectable_money_capacity: int = 25
 var collectable_money_progress: float = 0
 var collectable_money_gain_rate_seconds: float = 0.0167 
 signal collectable_money_changed(collectable_money: int)
