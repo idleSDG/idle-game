@@ -10,7 +10,7 @@ static var currentLogin : float = 0
 
 # Dummy player data
 static func GetPlayer() -> CharacterStats:
-	return CharacterStats.Create(200, 20, 100, 0.5, 1.1, 2.0, [], [], [], [])
+	return CharacterStats.Create(500, 15, 100, 0.5, 1.1, 2.0, [], [], [], [])
 	#[0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 	#[0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 	#[0.1, 0.1, 0.1, 0.1, 0.1],

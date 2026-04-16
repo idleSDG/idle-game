@@ -54,14 +54,15 @@ func _ready() -> void:
 	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
 	var instance = character_scene.instantiate()
 	instance.SetStats(GlobalVariables.GetPlayer())
+	instance.level = PlayerProgress.level
 	instance.charName = "Wizard"
+	instance.isPlayer = true
 	characterList[0] = instance
 	characterSpawnPos[0].add_child(instance)
 	
 	for i in 10:
-		var instance2 = character_scene.instantiate()
+		var instance2 := EnemyTypes.CreateEnemy(100 + i % 3, 5)
 		remainingEnemiesList.append(instance2)
-		instance2.charName = "Enemy" + str(i)
 	# END OF TEMPORARY
 	
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
@@ -119,6 +120,8 @@ func check_enemies():
 			if characterList[i] == null:
 				characterList[i] = remainingEnemiesList[0]
 				characterSpawnPos[i].add_child(characterList[i])
+				
+				#remainingEnemiesList[0]._ready()
 				remainingEnemiesList.pop_front()
 		else: break
 	
@@ -149,7 +152,7 @@ func try_skills() -> bool:
 	if maxPos != -1:
 		# targeting logic should maybe be tweaked
 		var target = characterList[targetIndex] if maxPos == 0 else characterList[0]
-		if target != null:
+		if target != null && characterList[maxPos] != null:
 			characterList[maxPos].UseSkill([target, characterList[1], characterList[2], characterList[3]])
 		return true
 	
