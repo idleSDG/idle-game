@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bgqftdi2ey53h"]
 
-[ext_resource type="Script" uid="uid://bnmhb5hkkwgvw" path="res://scenes/clear_save_button.gd" id="1_5p8wc"]
-[ext_resource type="Script" uid="uid://dr6f1dbabrsuw" path="res://scripts/step_permissions_button.gd" id="2_r6d6q"]
+[ext_resource type="Script" uid="uid://cj2q6elpwkvgn" path="res://scripts/settings_scene.gd" id="1_f4mfi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6d6q"]
 bg_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
@@ -13,6 +12,7 @@ bg_color = Color(0.42306718, 0.0003871758, 0.00021218442, 1)
 bg_color = Color(1, 0.23488575, 0.17882189, 1)
 
 [node name="Settings" type="Node2D" unique_id=322031731]
+script = ExtResource("1_f4mfi")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971251208]
 layer = 0
@@ -25,22 +25,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 0, 1)
-
-[node name="Label" type="Label" parent="CanvasLayer" unique_id=1762564929]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Settings: Access to volume, account, and step-tracking permissions."
 
 [node name="ClearSaveButton" type="Button" parent="CanvasLayer" unique_id=1535614000]
 anchors_preset = -1
@@ -58,21 +42,35 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_r6d6q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_6wm04")
 theme_override_styles/hover = SubResource("StyleBoxFlat_f4mfi")
 text = "Clear Save"
-script = ExtResource("1_5p8wc")
 
 [node name="StepPermissionsButton" type="Button" parent="CanvasLayer" unique_id=1864113747]
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.39000002
+anchor_top = 0.29900002
 anchor_right = 0.5
-anchor_bottom = 0.39000002
+anchor_bottom = 0.29900002
 offset_left = -350.0
-offset_top = -75.80005
+offset_top = -74.08008
 offset_right = 350.0
-offset_bottom = 74.19995
+offset_bottom = 75.91992
+grow_horizontal = 2
 theme_override_font_sizes/font_size = 48
 text = "Request Step Permissions"
-script = ExtResource("2_r6d6q")
 
-[connection signal="pressed" from="CanvasLayer/ClearSaveButton" to="CanvasLayer/ClearSaveButton" method="_on_pressed"]
-[connection signal="pressed" from="CanvasLayer/StepPermissionsButton" to="CanvasLayer/StepPermissionsButton" method="_on_pressed"]
+[node name="ScreenUsagePermissionsButton" type="Button" parent="CanvasLayer" unique_id=384963872]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.404
+anchor_right = 0.5
+anchor_bottom = 0.404
+offset_left = -350.0
+offset_top = -75.68005
+offset_right = 350.0
+offset_bottom = 74.31995
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "Request screen usage permissions"
+
+[connection signal="pressed" from="CanvasLayer/ClearSaveButton" to="." method="_on_clear_save_pressed"]
+[connection signal="pressed" from="CanvasLayer/StepPermissionsButton" to="." method="_on_request_step_permissions_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScreenUsagePermissionsButton" to="." method="_on_request_screen_time_permissions_pressed"]

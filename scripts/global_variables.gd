@@ -12,7 +12,7 @@ static var campaigns : Array[campaign_map]
 
 # Dummy player data
 static func GetPlayer() -> CharacterStats:
-	return CharacterStats.Create(200, 50, 100, 0.5, 1.1, 2.0, [], [], [], [])
+	return CharacterStats.Create(200, 20, 100, 0.5, 1.1, 2.0, [], [], [], [])
 	#[0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 	#[0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
 	#[0.1, 0.1, 0.1, 0.1, 0.1],

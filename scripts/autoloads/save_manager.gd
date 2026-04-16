@@ -16,6 +16,7 @@ func save_game():
 		"xp": PlayerProgress.get_save_data(),
 		"equipment": EquipmentManager.get_save_data(),
 		"appearance": PlayerAppearance.get_save_data(),
+		"skills": SkillManager.get_save_data(),
 		"campaigns": GlobalVariables.get_campaign_save_data(),
 		"current_campaign": GlobalVariables.current_campaign,
 		"current_battle_level": GlobalVariables.current_battle_level.get_save_data() if GlobalVariables.current_battle_level != null else {}
@@ -33,6 +34,7 @@ func init_new_save():
 	PlayerInventory.init_new_save()
 	EquipmentManager.init_new_save()
 	PlayerAppearance.init_new_save()
+	SkillManager.init_new_save()
 	GlobalVariables.init_new_battle_save()
 
 func save_file_exists() -> bool:
@@ -72,6 +74,11 @@ func load_game():
 		PlayerAppearance.load_save_data(data["appearance"])
 	else:
 		printerr("No appearance data found!")
+		
+	if data.has("skills"):
+		SkillManager.load_save_data(data["skills"])
+	else:
+		printerr("No skills data found!")
 		
 	if data.has("campaigns"):
 		GlobalVariables.campaigns = []

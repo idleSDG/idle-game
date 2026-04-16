@@ -478,3 +478,7 @@ FodyWeavers.xsd
 # GodotStepPlugin bin files
 !addons/GodotStepPlugin/bin/
 !addons/GodotStepPlugin/bin/**
+
+# GodotScreenTimePlugin bin files
+!addons/GodotScreenTimePlugin/bin/
+!addons/GodotScreenTimePlugin/bin/**
