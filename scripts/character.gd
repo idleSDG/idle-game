@@ -3,12 +3,15 @@ class_name Character extends Node
 var damagePopup = load("res://scenes/damagePopup.tscn")
 var skillUiScene = load("res://scenes/skillUI.tscn")
 var charName = "Character"
+var level : int = 1
 
 @onready var character = $"."
 @onready var particles = $GPUParticles2D
 @onready var healthBar = $"VBoxContainer/Container--Sprite2D/ProgressBar"
 @onready var skillBars = $"VBoxContainer/Container--Sprite2D/HBox_Skills"
+@onready var levelLabel = $"VBoxContainer/Container--Sprite2D/Level"
 
+var sprite
 @onready var baseSprite = $VBoxContainer/BaseSprite
 @onready var wizardSprites = $VBoxContainer/BaseSprite/WIZARDSPECIFIC
 
@@ -43,37 +46,21 @@ func _ready() -> void:
 		wizardSprites.visible = true;
 		trail.texture = ImageTexture.create_from_image(image)
 	else:
-		baseSprite.texture = load("res://assets/enemies/skeleton.png") if RandomNumberGenerator.new().randf() > 0.5 else load("res://assets/enemies/wolf.png")
 		trail.texture = baseSprite.texture
-		# TEMPORARY CODE
-		var instance = Skill.new(1.0, 200.0)
-		instance.set_visuals()
-		skills.append(instance)
-		# END OF TEMPORARY CODE
+		baseSprite.texture = sprite
 	
 	for s in skills:
+		s.set_visuals()
 		skillBars.add_child(s.skillBar)
 	
+	levelLabel.text = "Lv. " + str(level)
 	expCounter.resize(skills.size())
 	
 	pass
 
 
 func SetStats(stats : CharacterStats) :
-	# TEMPORARY CODE
-	#var instance = Skill.new(1.3, 300.0, CharacterStats.Element.Fire)
-	#instance.addEffect(StatusEffect.StatusEffectType.Burn, 1.0, false)
-	#skills.append(instance)
-	#
-	#instance = Skill.new(1.3, 1000.0, CharacterStats.Element.Lightning, true)
-	#instance.addEffect(StatusEffect.StatusEffectType.Paralyze, 1.0, false)
-	#skills.append(instance)
-	# END OF TEMPORARY CODE
-	
 	baseStats = stats
-	
-	isPlayer = true
-	
 	pass
 
 
