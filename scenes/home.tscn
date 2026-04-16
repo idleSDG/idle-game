@@ -1,7 +1,18 @@
 [gd_scene format=3 uid="uid://drgtjoo1tbjki"]
 
 [ext_resource type="Script" uid="uid://62ja7hquh71k" path="res://scripts/ui/label.gd" id="2_w18ys"]
+[ext_resource type="Script" path="res://scenes/wizard_tap_button.gd" id="3_reixx"]
 [ext_resource type="Script" uid="uid://bqm2y836currr" path="res://scripts/wizard_avatar.gd" id="3_w18ys"]
+[ext_resource type="PackedScene" uid="uid://b1r7cm1uluuj2" path="res://scenes/money_drop.tscn" id="4_reixx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhids"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reixx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxilm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Home" type="Node2D" unique_id=660734872]
 
@@ -37,6 +48,7 @@ script = ExtResource("2_w18ys")
 
 [node name="WizardControl" type="Control" parent="MainLayer" unique_id=694562218]
 layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -45,8 +57,24 @@ offset_left = -540.0
 offset_top = -960.0
 offset_right = 540.0
 offset_bottom = 960.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="WizardAvatar" type="Node2D" parent="MainLayer/WizardControl" unique_id=977118112]
 position = Vector2(526, 1004)
 script = ExtResource("3_w18ys")
 scale_factor = Vector2(7, 7)
+
+[node name="WizardTapButton" type="Button" parent="MainLayer/WizardControl" unique_id=416951984]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 545.0
+offset_right = 926.0
+offset_bottom = 1491.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_uhids")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_reixx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yxilm")
+script = ExtResource("3_reixx")
+money_drop_scene = ExtResource("4_reixx")
+
+[connection signal="pressed" from="MainLayer/WizardControl/WizardTapButton" to="MainLayer/WizardControl/WizardTapButton" method="_on_pressed"]

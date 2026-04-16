@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://b1r7cm1uluuj2"]
+
+[ext_resource type="Texture2D" uid="uid://34sx5ru8alpl" path="res://assets/hud/coin.png" id="1_k6kpj"]
+[ext_resource type="Script" uid="uid://bd78dciepb2um" path="res://scenes/money_drop.gd" id="2_mqm5r"]
+
+[node name="MoneyDrop" type="Sprite2D" unique_id=1150470496]
+scale = Vector2(0.01525, 0.015250001)
+texture = ExtResource("1_k6kpj")
+script = ExtResource("2_mqm5r")
