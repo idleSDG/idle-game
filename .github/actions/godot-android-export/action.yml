@@ -112,10 +112,12 @@ runs:
         echo ${{ inputs.godot-version }}.stable >> ${{ inputs.working-directory }}/android/.build_version
         unzip ~/.local/share/godot/export_templates/${{ inputs.godot-version }}.stable/android_source.zip  -d ${{ inputs.working-directory }}/android/build
 
-    - name: Open project once to import assets in editor mode
+    - name: Import Assets
       shell: bash
       continue-on-error: true
-      run: timeout 120 godot --headless --path ${{ inputs.working-directory }} -e
+      run: |
+        godot --headless --path ${{ inputs.working-directory }} --import || true
+        godot --headless --path ${{ inputs.working-directory }} --import
 
     - name: Export
       shell: bash
