@@ -20,6 +20,7 @@ mono_crash.*.json
 # Android builds
 *.apk*
 *.idea
+*.keystore
 
 # Gradle
 .gradle/
