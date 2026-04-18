@@ -7,6 +7,7 @@
 export.cfg
 export_credentials.cfg
 *.tmp
+android/
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -19,6 +20,7 @@ mono_crash.*.json
 # Android builds
 *.apk*
 *.idea
+*.keystore
 
 # Gradle
 .gradle/

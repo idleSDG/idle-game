@@ -1,0 +1,26 @@
+name: Export Godot Android Build [DEBUG]
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  export-android-build-debug:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Export Godot Project
+        uses: ./.github/actions/godot-android-export
+        with:
+          godot-version: 4.6.1
+          godot-channel: stable
+          export-type: debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: spellcraft-apk-debug
+          path: ./*.apk
+          retention-days: 7
