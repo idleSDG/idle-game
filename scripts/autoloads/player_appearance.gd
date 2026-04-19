@@ -11,9 +11,10 @@ func apply_skin_color(color: Color) -> void:
 func get_save_data() -> Dictionary:
 	return appearance.get_save_data()
 
-func load_save_data(data: Dictionary) -> void:
+func load_save_data(data: Dictionary) -> Error:
 	appearance.load_save_data(data)
 	appearance_changed.emit()
+	return OK
 
 func init_new_save() -> void:
 	appearance = WizardAppearance.new()

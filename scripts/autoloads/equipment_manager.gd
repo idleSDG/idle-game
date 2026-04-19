@@ -40,7 +40,7 @@ func get_save_data() -> Dictionary:
 		dict[str(slot)] = item.item_name if item else ""
 	return dict
 
-func load_save_data(data: Dictionary):
+func load_save_data(data: Dictionary) -> Error:
 	var prototypes = PrototypeItems.new().get_test_items() # reload all prototypes
 	for slot_str in data:
 		var slot = int(slot_str)
@@ -51,6 +51,7 @@ func load_save_data(data: Dictionary):
 				equipped[slot] = item
 				break
 	emit_signal("equipment_changed")
+	return OK
 
 func init_new_save():
 	equipped = {

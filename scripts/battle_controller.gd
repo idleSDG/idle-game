@@ -15,8 +15,8 @@ var maps : Array[campaign_map]
 var current_map : String
 
 func _ready() -> void:
-	if (GlobalVariables.battleState == GlobalVariables.BattleStates.IN_BATTLE 
-	or GlobalVariables.battleState == GlobalVariables.BattleStates.AWAITING_EXIT):
+	if (BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE 
+	or BattleVariables.battleState == BattleVariables.BattleStates.AWAITING_EXIT):
 		enter_battle()
 	else:
 		if GlobalVariables.campaigns.is_empty():

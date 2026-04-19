@@ -1,0 +1,51 @@
+name: Create GitHub Release
+on:
+  push:
+    tags:
+      - 'v*' # Triggers on v1.0, v2.1.3, etc.
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Prepare Release Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+          sed -i 's|keystore/release=""|keystore/release="res://release.keystore"|g' export_presets.cfg
+          sed -i 's|keystore/release_user=""|keystore/release_user="${{ secrets.ANDROID_KEY_ALIAS }}"|g' export_presets.cfg
+          sed -i 's|keystore/release_password=""|keystore/release_password="${{ secrets.ANDROID_KEY_PASSWORD }}"|g' export_presets.cfg
+
+      - name: Export Godot Project
+        uses: ./.github/actions/godot-android-export
+        with:
+          godot-version: 4.6.1
+          godot-channel: stable
+          export-type: release
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ./*.apk
+          name: Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+
+      - name: Discord notification
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: |
+            @everyone New Release: ${{ github.ref_name }} is now available!
+            🔗 View Release: ${{ steps.create_release.outputs.url }}
+          webhookUrl: ${{ secrets.DISCORD_RELEASE_CHANNEL_WEBHOOK }}
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png

@@ -27,11 +27,12 @@ func get_save_data() -> Dictionary:
 		i += 1
 	return { "skills": dict }
 
-func load_save_data(data: Dictionary):
+func load_save_data(data: Dictionary) -> Error:
 	skills.clear()
 	for slot_str in data.get("skills"):
 		var item := Skill.from_dictionary(data.get("skills")[slot_str])
 		skills.append(item)
+	return OK
 
 func init_new_save():
 	skills = [
