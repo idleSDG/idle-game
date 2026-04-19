@@ -10,7 +10,7 @@ extends Node
 signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
 
-@onready var level : battle_level = GlobalVariables.current_battle_level
+@onready var level : battle_level = BattleVariables.current_battle_level
 
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd") 
@@ -63,8 +63,8 @@ func _ready() -> void:
 	characterSpawnPos[0].add_child(instance)
 	# END OF TEMPORARY
 	
-	for enemy in GlobalVariables.current_battle_level.enemies:
-		var instance2 := EnemyTypes.CreateEnemy(enemy, GlobalVariables.current_battle_level.enemy_level)
+	for enemy in BattleVariables.current_battle_level.enemies:
+		var instance2 := EnemyTypes.CreateEnemy(enemy, BattleVariables.current_battle_level.enemy_level)
 		remainingEnemiesList.append(instance2)
 
 	
@@ -181,11 +181,9 @@ func finish_fight(result : bool):
 	BattleVariables.battleState = BattleVariables.BattleStates.AWAITING_EXIT
 	isPlaying = false
 	combatFinish.visible = true
-
-	BattleVariables.save_game()
 	
 	if result:
-		GlobalVariables.current_battle_level.beaten = true
+		BattleVariables.current_battle_level.beaten = true
 		combatFinish.text = "YOU WIN"
 		PlayerProgress.add_xp(120)
 		characterList[0].ApplyExp()
@@ -226,5 +224,5 @@ func simulate(length : float):
 
 func _on_exit_battle_pressed() -> void:
 	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
-	BattleVariables.save_game()
+	SaveManager.save_game()
 	request_exit_signal.emit()
