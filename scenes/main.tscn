@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/ui/hud.gd" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://34sx5ru8alpl" path="res://assets/hud/coin.png" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://y7xumqqfhjfr" path="res://src/ui/invalid_save_popup/invalid_save_pop_up.tscn" id="5_tbgi4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
@@ -30,6 +31,14 @@ bg_color = Color(0.6, 0.6, 0.6, 0.4862745)
 
 [node name="Main" type="Node2D" unique_id=868618005]
 script = ExtResource("1_0wfyh")
+
+[node name="ContentArea" type="Control" parent="." unique_id=1174201404]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=921580546]
 script = ExtResource("2_sugp2")
@@ -267,14 +276,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "10 / 10"
 
-[node name="ContentArea" type="Control" parent="." unique_id=1174201404]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="NavBarLayer" type="CanvasLayer" parent="." unique_id=435175999]
 
 [node name="NavBar" type="HBoxContainer" parent="NavBarLayer" unique_id=2076489562]
@@ -315,6 +316,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "SETTINGS"
+
+[node name="InvalidSavePopUp" parent="NavBarLayer" unique_id=256500332 instance=ExtResource("5_tbgi4")]
+visible = true
 
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
