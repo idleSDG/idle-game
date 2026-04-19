@@ -25,6 +25,7 @@ func save_game():
 		"equipment": EquipmentManager.get_save_data(),
 		"appearance": PlayerAppearance.get_save_data(),
 		"skills": SkillManager.get_save_data(),
+		"battle": BattleVariables.get_save_data()
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -40,6 +41,7 @@ func init_new_save():
 	EquipmentManager.init_new_save()
 	PlayerAppearance.init_new_save()
 	SkillManager.init_new_save()
+	BattleVariables.init_new_save()
 
 func save_file_exists() -> bool:
 	print(FileAccess.file_exists(SAVE_PATH))
@@ -63,9 +65,10 @@ func load_game():
 	var systems = {
 		"inventory": PlayerInventory,
 		"xp": PlayerProgress,
-		"equipment": EquipmentManager,
+		"equipment": EquipmentManager, 
 		"appearance": PlayerAppearance,
-		"skills": SkillManager
+		"skills": SkillManager,
+		"battle": BattleVariables
 	}
 
 	PlayerInventory.last_inventory_update_unix_time = data.get("timestamp", Time.get_unix_time_from_system())
@@ -75,6 +78,7 @@ func load_game():
 		if not data.has(key): 
 			invalid_save = true
 			break
+			
 		var error: Error = systems[key].load_save_data(data[key])
 		
 		if error != OK:

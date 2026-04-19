@@ -36,24 +36,24 @@ func _notification(what: int) -> void:
 		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
 			simulate(elapsed)
-			timerLabel.time = int(Time.get_unix_time_from_system() - GlobalVariables.battleStart)
+			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	characterList.resize(enemyAmount)
 	if exit_button:
 		exit_button.pressed.connect(_on_exit_battle_pressed)
-	if GlobalVariables.battleState == GlobalVariables.BattleStates.AWAITING_EXIT:
+	if BattleVariables.battleState == BattleVariables.BattleStates.AWAITING_EXIT:
 		isPlaying = false
 		combatFinish.visible = true
 		combatFinish.text = "YOU WIN"
 		exit_button.visible = true
-		timerLabel.time = int(Time.get_unix_time_from_system() - GlobalVariables.battleStart)
+		timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 		return
 	
 	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
 	var instance = character_scene.instantiate()
-	instance.SetStats(GlobalVariables.GetPlayer())
+	instance.SetStats(BattleVariables.GetPlayer())
 	instance.level = PlayerProgress.level
 	instance.charName = "Wizard"
 	instance.isPlayer = true
@@ -66,14 +66,14 @@ func _ready() -> void:
 	# END OF TEMPORARY
 	
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
-	if GlobalVariables.battleState == GlobalVariables.BattleStates.IN_BATTLE:
+	if BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE:
 		var now := Time.get_unix_time_from_system()
-		simulate(now - GlobalVariables.battleStart)
-		timerLabel.time = int(now - GlobalVariables.battleStart)
+		simulate(now - BattleVariables.battleStart)
+		timerLabel.time = int(now - BattleVariables.battleStart)
 	else:
-		GlobalVariables.battleState = GlobalVariables.BattleStates.IN_BATTLE
-		GlobalVariables.battleStart = Time.get_unix_time_from_system()
-		GlobalVariables.save_game()
+		BattleVariables.battleState = BattleVariables.BattleStates.IN_BATTLE
+		BattleVariables.battleStart = Time.get_unix_time_from_system()
+		SaveManager.save_game()
 	
 	pass # Replace with function body.
 
@@ -175,11 +175,11 @@ func update_visuals(delta: float) :
 
 # finishes the fight
 func finish_fight(result : bool):
-	GlobalVariables.battleState = GlobalVariables.BattleStates.AWAITING_EXIT
+	BattleVariables.battleState = BattleVariables.BattleStates.AWAITING_EXIT
 	isPlaying = false
 	combatFinish.visible = true
 
-	GlobalVariables.save_game()
+	BattleVariables.save_game()
 	
 	if result:
 		combatFinish.text = "YOU WIN"
@@ -220,6 +220,6 @@ func simulate(length : float):
 	pass
 
 func _on_exit_battle_pressed() -> void:
-	GlobalVariables.battleState = GlobalVariables.BattleStates.IN_LEVEL_SELECT
-	GlobalVariables.save_game()
+	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
+	BattleVariables.save_game()
 	request_exit_signal.emit()
