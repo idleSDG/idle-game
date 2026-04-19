@@ -19,6 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(0.6226508, 0.45791954, 0.59386855, 1)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=69417278]

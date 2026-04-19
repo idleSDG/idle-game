@@ -61,11 +61,12 @@ func _ready() -> void:
 	instance.isPlayer = true
 	characterList[0] = instance
 	characterSpawnPos[0].add_child(instance)
-	
-	for i in 10:
-		var instance2 := EnemyTypes.CreateEnemy(100 + i % 3, 5)
-		remainingEnemiesList.append(instance2)
 	# END OF TEMPORARY
+	
+	for enemy in GlobalVariables.current_battle_level.enemies:
+		var instance2 := EnemyTypes.CreateEnemy(enemy, GlobalVariables.current_battle_level.enemy_level)
+		remainingEnemiesList.append(instance2)
+
 	
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
 	if GlobalVariables.battleState == GlobalVariables.BattleStates.IN_BATTLE:
@@ -178,23 +179,22 @@ func update_visuals(delta: float) :
 
 # finishes the fight
 func finish_fight(result : bool):
-	level.beaten = true
 	GlobalVariables.battleState = GlobalVariables.BattleStates.AWAITING_EXIT
 	isPlaying = false
 	combatFinish.visible = true
-	
-	SaveManager.save_game()
+
 	GlobalVariables.save_game()
-	
 	if result:
+		GlobalVariables.current_battle_level.beaten = true
 		combatFinish.text = "YOU WIN"
 		PlayerProgress.add_xp(120)
 		characterList[0].ApplyExp()
-		SaveManager.save_game()
 	else:
 		combatFinish.text = "YOU LOSE"
+		
+	SaveManager.save_game()
 	exit_button.visible = true
-	pass
+
 
 
 # [length] is in seconds

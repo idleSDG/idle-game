@@ -24,6 +24,9 @@ func _ready() -> void:
 		maps = GlobalVariables.campaigns
 		current_map = GlobalVariables.current_campaign
 		draw_map(maps.filter(func(x): return x.name == current_map).front())
+		var buttons = $CanvasLayer/CampaignButtonContainer.get_children()
+		for button in buttons:
+			button.queue_free()
 		for map in maps:
 			var button = Button.new()
 			button.text = map.name
@@ -31,6 +34,7 @@ func _ready() -> void:
 			$CanvasLayer/CampaignButtonContainer.add_child(button)
 			button.pressed.connect(_on_map_changed.bind(map))
 		_update_campaign_selection_visuals()
+		
 		
 func _update_campaign_selection_visuals():
 	var buttons = $CanvasLayer/CampaignButtonContainer.get_children()
@@ -93,7 +97,7 @@ func draw_map(map : campaign_map):
 		else:
 			last_depth = lvl.depth
 			depth_count = 0
-		lvl.y = (display_height/4)*(layers-lvl.depth)
+		lvl.y = 300+(display_height/4)*(layers-lvl.depth)
 		max_height = max(max_height,lvl.y)
 		if depths[lvl.depth] == 1:
 			lvl.x = width/2
@@ -114,7 +118,8 @@ func draw_map(map : campaign_map):
 			if lvl.depth != 0:
 				level_button.disabled = true
 		
-		elif lvl.depth != highest_level.depth+1:
+		#elif lvl.depth != highest_level.depth+1:
+		elif map.paths.filter(func(x): return x.end == lvl && x.start == highest_level).is_empty():
 			level_button.disabled = true
 			if lvl.beaten:
 				level_button.texture_normal = beaten_button
@@ -126,14 +131,26 @@ func draw_map(map : campaign_map):
 		line.add_point(Vector2(path.end.x,path.end.y))
 		line.z_index = -1
 		control.add_child(line)
-	
+		
 	control.custom_minimum_size = Vector2(0,max_height+300)
+	var max_scroll = INF
 	if highest_level != null:
-		call_deferred("_scroll_to_bottom",highest_level.y-height/2)
-	else:
-		call_deferred("_scroll_to_bottom")
-
-func _scroll_to_bottom(max_scroll = INF) -> void:
+		if highest_level.depth == layers-1:
+			var restart_button = Button.new()
+			restart_button.size = Vector2(400,200)
+			restart_button.position = Vector2(width/2 - restart_button.size.x/2, 300)
+			restart_button.text = "Restart campaign"
+			restart_button.add_theme_font_size_override("font_size", 50)
+			var styleBox = StyleBoxFlat.new()
+			styleBox.bg_color = Color(0.8,0.0,0.0,1)
+			restart_button.add_theme_stylebox_override("normal",styleBox)
+			restart_button.add_theme_stylebox_override("pressed",styleBox)
+			restart_button.add_theme_stylebox_override("hover",styleBox)
+			restart_button.pressed.connect(_on_restart_pressed.bind(current_map))
+			control.add_child(restart_button)
+		max_scroll = highest_level.y-height/2
+		
+	await get_tree().process_frame
 	var scroll = $CanvasLayer/ScrollContainer
 	var scroll_ammount = min(scroll.get_v_scroll_bar().max_value,max_scroll)
 	scroll.scroll_vertical = scroll_ammount
@@ -147,3 +164,24 @@ func _on_start_battle_request(level : battle_level) -> void:
 
 func _on_exit_battle_request() -> void:
 	exit_battle()
+	
+func _on_restart_pressed(restart_map : String):
+	var map_index = GlobalVariables.campaigns.find_custom(func(x): return x.name == restart_map)
+	if map_index == -1:
+		return
+		
+	var map = GlobalVariables.campaigns[map_index]
+	var enemy_level = map.levels.front().enemy_level + 1
+	var new_map : campaign_map
+	match map.type:
+		campaign_map.Type.ZOO:
+			new_map = campaign_map.generate_zoo(enemy_level)
+		campaign_map.Type.SKY:
+			new_map = campaign_map.generate_sky(enemy_level)
+		campaign_map.Type.FOREST:
+			new_map = campaign_map.generate_forest(enemy_level)
+		campaign_map.Type.UNKNOWN:
+			printerr("Unknown map type")
+			new_map = campaign_map.generate_zoo(enemy_level)
+	GlobalVariables.campaigns[map_index] = new_map
+	_ready()
