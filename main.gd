@@ -19,6 +19,8 @@ var tab_for_button = {
 
 func _ready():
 	# Loads save data upon turning the game on and, if the player was in battle, resumes it
+	GlobalVariables.load_game()
+	
 	var tab_scenes = {
 		"home": home_scene,
 		"battle": battle_scene,

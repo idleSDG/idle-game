@@ -17,17 +17,16 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+SaveManager="*uid://cn1tcr3s3kc5t"
 PlayerProgress="*uid://316bob1xainb"
 PlayerInventory="*uid://bubpl5hv8kp80"
 SceneManager="*uid://byyql836gwgto"
 IdleProgress="*uid://dov7m1cqcemh7"
 EquipmentManager="*uid://dgcauqgjrih33"
-BattleVariables="*uid://bdd3tdbyvsbk0"
 StepsProgress="*uid://cfgfym31wxges"
 PlayerAppearance="*uid://b34vpsjibdxjr"
 ScreenTimeProgress="*uid://dldxvwrpkyk2h"
 SkillManager="*uid://wih1s47upqla"
-SaveManager="*uid://cn1tcr3s3kc5t"
 
 [display]
 

@@ -43,12 +43,9 @@ func get_save_data() -> Dictionary:
 		"current_xp": current_xp
 	}
 	
-func load_save_data(data: Dictionary) -> Error:
-	level = data.get('level')
-	current_xp = data.get('current_xp')
-	if level == null or current_xp == null:
-		return ERR_PARSE_ERROR
-	return OK
+func load_save_data(data: Dictionary) -> void:
+	level = data['level']
+	current_xp = data['current_xp']
 
 func init_new_save():
 	level = 1

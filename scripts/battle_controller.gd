@@ -11,21 +11,23 @@ var hovered_button = preload(("res://assets/battlemap/hovered_button.png"))
 var normal_button = preload(("res://assets/battlemap/normal_button.png"))
 
 var current_view: Node = null
+var maps : Array[campaign_map]
 var current_map : String
 
 func _ready() -> void:
-	if (BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE 
-	or BattleVariables.battleState == BattleVariables.BattleStates.AWAITING_EXIT):
+	if (GlobalVariables.battleState == GlobalVariables.BattleStates.IN_BATTLE 
+	or GlobalVariables.battleState == GlobalVariables.BattleStates.AWAITING_EXIT):
 		enter_battle()
 	else:
-		if BattleVariables.campaigns.is_empty():
-			BattleVariables.init_new_battle_save()
-		current_map = BattleVariables.current_campaign
-		draw_map(BattleVariables.campaigns.filter(func(x): return x.name == current_map).front())
+		if GlobalVariables.campaigns.is_empty():
+			GlobalVariables.init_new_battle_save()
+		maps = GlobalVariables.campaigns
+		current_map = GlobalVariables.current_campaign
+		draw_map(maps.filter(func(x): return x.name == current_map).front())
 		var buttons = $CanvasLayer/CampaignButtonContainer.get_children()
 		for button in buttons:
 			button.queue_free()
-		for map in BattleVariables.campaigns:
+		for map in maps:
 			var button = Button.new()
 			button.text = map.name
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -42,7 +44,7 @@ func _update_campaign_selection_visuals():
 		button.add_theme_color_override("font_color", Color(0.3, 0.8, 1) if is_active else Color(1, 1, 1))
 
 func _on_map_changed(map : campaign_map):
-	BattleVariables.current_campaign = map.name
+	GlobalVariables.current_campaign = map.name
 	current_map = map.name
 	draw_map(map)
 	_update_campaign_selection_visuals()
@@ -157,18 +159,18 @@ func _on_start_battle_request(level : battle_level) -> void:
 	for node in $CanvasLayer/ScrollContainer/Control.get_children():
 		node.visible = false
 	
-	BattleVariables.current_battle_level = level
+	GlobalVariables.current_battle_level = level
 	enter_battle()
 
 func _on_exit_battle_request() -> void:
 	exit_battle()
 	
 func _on_restart_pressed(restart_map : String):
-	var map_index = BattleVariables.campaigns.find_custom(func(x): return x.name == restart_map)
+	var map_index = GlobalVariables.campaigns.find_custom(func(x): return x.name == restart_map)
 	if map_index == -1:
 		return
 		
-	var map = BattleVariables.campaigns[map_index]
+	var map = GlobalVariables.campaigns[map_index]
 	var enemy_level = map.levels.front().enemy_level + 1
 	var new_map : campaign_map
 	match map.type:
@@ -181,5 +183,5 @@ func _on_restart_pressed(restart_map : String):
 		campaign_map.Type.UNKNOWN:
 			printerr("Unknown map type")
 			new_map = campaign_map.generate_zoo(enemy_level)
-	BattleVariables.campaigns[map_index] = new_map
+	GlobalVariables.campaigns[map_index] = new_map
 	_ready()
