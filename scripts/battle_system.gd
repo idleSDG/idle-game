@@ -179,7 +179,7 @@ func finish_fight(result : bool):
 	isPlaying = false
 	combatFinish.visible = true
 
-	BattleVariables.save_game()
+	SaveManager.save_game()
 	
 	if result:
 		combatFinish.text = "YOU WIN"
@@ -221,5 +221,5 @@ func simulate(length : float):
 
 func _on_exit_battle_pressed() -> void:
 	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
-	BattleVariables.save_game()
+	SaveManager.save_game()
 	request_exit_signal.emit()
