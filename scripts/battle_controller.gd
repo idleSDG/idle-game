@@ -6,13 +6,23 @@ var battle_area_scene := preload("res://scenes/battle_area.tscn")
 var level_select_scene := preload("res://scenes/battle.tscn")
 
 var beaten_button = preload("res://assets/battlemap/beaten_button.png")
-var pressed_button = preload(("res://assets/battlemap/pressed_button.png"))
-var hovered_button = preload(("res://assets/battlemap/hovered_button.png"))
+
 var normal_button = preload(("res://assets/battlemap/normal_button.png"))
+var hovered_button = preload(("res://assets/battlemap/hovered_button.png"))
+var pressed_button = preload(("res://assets/battlemap/pressed_button.png"))
+
+var active_normal_button = preload(("res://assets/battlemap/active_normal_button.png"))
+var active_hovered_button = preload(("res://assets/battlemap/active_hovered_button.png"))
+var active_pressed_button = preload(("res://assets/battlemap/active_pressed_button.png"))
 
 var current_view: Node = null
 var maps : Array[campaign_map]
 var current_map : String
+
+var max_button_size : float = 0.55
+var min_button_size : float = 0.45
+var increasing_scale : bool = false
+var active_buttons : Array[TextureButton] = []
 
 func _ready() -> void:
 	if (BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE 
@@ -35,6 +45,22 @@ func _ready() -> void:
 			button.pressed.connect(_on_map_changed.bind(map))
 		_update_campaign_selection_visuals()
 		
+func _process(delta: float) -> void:
+	var increasing = increasing_scale # copy so all the buttons change the same
+	var direction_changed = false
+	var change = 0.1 * delta
+	for button : TextureButton in active_buttons:
+		if(!button.disabled):
+			if increasing:
+				button.scale = Vector2(button.scale.x + change,button.scale.y + change)
+				if button.scale.x > max_button_size and !direction_changed:
+					increasing_scale = !increasing_scale
+					direction_changed = true
+			else:
+				button.scale = Vector2(button.scale.x  - change,button.scale.y - change)
+				if button.scale.x < min_button_size and !direction_changed:
+					increasing_scale = !increasing_scale
+					direction_changed = true
 		
 func _update_campaign_selection_visuals():
 	var buttons = $CanvasLayer/CampaignButtonContainer.get_children()
@@ -44,6 +70,7 @@ func _update_campaign_selection_visuals():
 		button.add_theme_color_override("font_color", Color(0.3, 0.8, 1) if is_active else Color(1, 1, 1))
 
 func _on_map_changed(map : campaign_map):
+	increasing_scale = true
 	BattleVariables.current_campaign = map.name
 	current_map = map.name
 	draw_map(map)
@@ -84,6 +111,7 @@ func draw_map(map : campaign_map):
 	var levels = map.levels
 	var max_height = height
 	var highest_level = map.find_highest_beaten()
+	active_buttons = []
 	$CanvasLayer/CampaignBackgroundColor.color = Color.html(map.background_color)
 	$CanvasLayer/CampaignBackgroundColor.z_index = -4
 	$CanvasLayer/CampaignBackgroundImage.texture = ResourceLoader.load(map.background_image)
@@ -114,16 +142,27 @@ func draw_map(map : campaign_map):
 		level_button.set_position(Vector2(lvl.x-50,lvl.y-50))
 		level_button.scale = Vector2(0.5,0.5)
 		level_button.pressed.connect(_on_start_battle_request.bind(lvl))
+		
 		if highest_level == null:
 			if lvl.depth != 0:
 				level_button.disabled = true
-		
-		#elif lvl.depth != highest_level.depth+1:
-		elif map.paths.filter(func(x): return x.end == lvl && x.start == highest_level).is_empty():
-			level_button.disabled = true
-			if lvl.beaten:
-				level_button.texture_normal = beaten_button
+			else:
+				level_button.texture_normal = active_normal_button
+				level_button.texture_hover = active_hovered_button
+				level_button.texture_pressed = active_pressed_button
+		else:
+			if map.paths.filter(func(x): return x.end == lvl && x.start == highest_level).is_empty():
+				level_button.disabled = true
+				if lvl.beaten:
+					level_button.texture_normal = beaten_button
+			else:
+				level_button.texture_normal = active_normal_button
+				level_button.texture_hover = active_hovered_button
+				level_button.texture_pressed = active_pressed_button
 		level_button.z_index = 0
+		level_button.pivot_offset = level_button.size / 2 # used for the pulsing effect
+		level_button.position -= level_button.size / 4
+		if !level_button.disabled: active_buttons.append(level_button)
 		control.add_child(level_button)
 	for path in map.paths:
 		var line = Line2D.new()
