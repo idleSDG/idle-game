@@ -30,7 +30,7 @@ func _ready() -> void:
 		enter_battle()
 	else:
 		if BattleVariables.campaigns.is_empty():
-			BattleVariables.init_new_battle_save()
+			BattleVariables.init_new_save()
 		maps = BattleVariables.campaigns
 		current_map = BattleVariables.current_campaign
 		draw_map(maps.filter(func(x): return x.name == current_map).front())
