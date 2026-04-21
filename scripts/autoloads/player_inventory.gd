@@ -118,19 +118,43 @@ func get_save_data() -> Dictionary:
 	
 	return { "ingredients": ingredient_map, "money": money, "collectable_money": collectable_money }
 
-func load_save_data(data: Dictionary):
-	for entry in data.get("ingredients"):
-		var type := Ingredient.get_type_from_string(entry)
-		if type == Ingredient.Type.UNKNOWN:
-			printerr("Found unknown ingredient type:" + Ingredient.get_type_as_string(type))
-		else:
-			Ingredient.from_dictionary(ingredients[type], data.get("ingredients")[entry])
+func load_save_data(data: Variant) -> Error:
+	if typeof(data) != TYPE_DICTIONARY:
+		printerr("Load failed: Expected Dictionary, got ", typeof(data))
+		return ERR_INVALID_DATA
 
+	if not data.has("ingredients") or typeof(data["ingredients"]) != TYPE_DICTIONARY:
+		printerr("Load failed: 'ingredients' key missing or invalid format.")
+		return ERR_PARSE_ERROR
+	
+	var ingredient_data = data["ingredients"]
+	for entry_name in ingredient_data:
+		var type := Ingredient.get_type_from_string(entry_name)
+		
+		if type == Ingredient.Type.UNKNOWN:
+			printerr("Skipping unknown ingredient type: ", entry_name)
+			continue
+			
+		var entry_payload = ingredient_data[entry_name]
+		if typeof(entry_payload) == TYPE_DICTIONARY:
+			Ingredient.from_dictionary(ingredients[type], entry_payload)
+		else:
+			printerr("Invalid data format for ingredient: ", entry_name)
+			
+	if not data.has("money"): 
+		printerr("Load failed: Key inventory.money missing or failed to parse.")
+		return ERR_PARSE_ERROR
+	if not data.has("collectable_money"): 
+		printerr("Load failed: Key inventory.money missing or failed to parse.")
+		return ERR_PARSE_ERROR
+	
 	money = data.get("money")
 	collectable_money = data.get("collectable_money")
-	# First update is delayed until StepsProgress signals readiness.
+
 	ingredients_changed.emit(ingredients)
 	money_changed.emit(money)
+	
+	return OK
 
 func init_new_save():
 	last_inventory_update_unix_time = Time.get_unix_time_from_system()

@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://y7xumqqfhjfr"]
+
+[ext_resource type="Script" uid="uid://degbvms17ysdj" path="res://src/ui/invalid_save_popup/invalid_save_pop_up.gd" id="1_4n5em"]
+[ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="2_hkyyj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+shader = ExtResource("2_hkyyj")
+shader_parameter/blur_amount = 2.000000095
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
+bg_color = Color(0.55470616, 0, 0.08071355, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+bg_color = Color(0.3911514, 7.52043e-07, 0.04579982, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+bg_color = Color(0.8592052, 0.00022412084, 0.1515933, 1)
+
+[node name="SaveErrorPopUp" type="Control" unique_id=256500332]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4n5em")
+
+[node name="SaveErrorBackgroundBlur" type="ColorRect" parent="." unique_id=2049744714]
+material = SubResource("ShaderMaterial_tefeu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveErrorPanelContainer" type="PanelContainer" parent="SaveErrorBackgroundBlur" unique_id=2063206713]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -271.0
+offset_top = -167.0
+offset_right = 271.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SaveErrorVBoxContainer" type="VBoxContainer" parent="SaveErrorBackgroundBlur/SaveErrorPanelContainer" unique_id=886632189]
+layout_mode = 2
+
+[node name="SaveErrorMarginContainer" type="MarginContainer" parent="SaveErrorBackgroundBlur/SaveErrorPanelContainer/SaveErrorVBoxContainer" unique_id=2088620655]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+
+[node name="SaveErrorSaveLabel" type="Label" parent="SaveErrorBackgroundBlur/SaveErrorPanelContainer/SaveErrorVBoxContainer/SaveErrorMarginContainer" unique_id=588019595]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Your save file is incompatible with this version of the game!"
+horizontal_alignment = 3
+autowrap_mode = 3
+
+[node name="ClearSaveButtonMarginContainer" type="MarginContainer" parent="SaveErrorBackgroundBlur/SaveErrorPanelContainer/SaveErrorVBoxContainer" unique_id=1096451853]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="ClearSaveButton" type="Button" parent="SaveErrorBackgroundBlur/SaveErrorPanelContainer/SaveErrorVBoxContainer/ClearSaveButtonMarginContainer" unique_id=1450211670]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_tefeu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_o6xl0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tipki")
+text = "Clear Save"
+
+[connection signal="pressed" from="SaveErrorBackgroundBlur/SaveErrorPanelContainer/SaveErrorVBoxContainer/ClearSaveButtonMarginContainer/ClearSaveButton" to="." method="_on_clear_invalid_save_button_pressed"]

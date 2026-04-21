@@ -55,7 +55,7 @@ func doEquipButton(equipButton : SkillGridButton):
 func inv_skill_Button_Pressed(skill : Skill):
 	skill_pressed.emit(skill)
 	if currentSelection == 1 || currentSelection == 2 || currentSelection == 3:
-		if GlobalVariables.battleState == GlobalVariables.BattleStates.IN_LEVEL_SELECT:
+		if BattleVariables.battleState == BattleVariables.BattleStates.IN_LEVEL_SELECT:
 			SkillManager.Equip(skill, currentSelection)
 	doSkills()
 

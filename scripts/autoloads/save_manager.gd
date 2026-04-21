@@ -1,8 +1,16 @@
 extends Node
 
+enum SaveReadError {
+	FILE_NOT_FOUND,
+	INVALID_SAVE
+}
+
+signal save_load_failed(error: SaveReadError)
+
 const SAVE_PATH = "user://spellcraft-idle-save.json"
 
 func _ready():
+	load_game.call_deferred()
 	if save_file_exists():
 		load_game()
 	else:
@@ -17,6 +25,7 @@ func save_game():
 		"equipment": EquipmentManager.get_save_data(),
 		"appearance": PlayerAppearance.get_save_data(),
 		"skills": SkillManager.get_save_data(),
+		"battle": BattleVariables.get_save_data()
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -32,51 +41,52 @@ func init_new_save():
 	EquipmentManager.init_new_save()
 	PlayerAppearance.init_new_save()
 	SkillManager.init_new_save()
+	BattleVariables.init_new_save()
 
 func save_file_exists() -> bool:
 	print(FileAccess.file_exists(SAVE_PATH))
 	return FileAccess.file_exists(SAVE_PATH)
 
 func load_game():
-	print("Loading game.")
-	if not save_file_exists():
-		print("No save file found.")
+	if not save_file_exists(): 
+		save_load_failed.emit(SaveReadError.FILE_NOT_FOUND)
 		return
-		
-	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
-	var content = file.get_as_text()
-	file.close()
 	
-	var data = JSON.parse_string(content)
-	if data == null: return
+	var file = FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if not file:
+		save_load_failed.emit(SaveReadError.FILE_NOT_FOUND)
+		return
+	
+	var data = JSON.parse_string(file.get_as_text())
+	if not data: 
+		save_load_failed.emit(SaveReadError.INVALID_SAVE)
+		return
+
+	var systems = {
+		"inventory": PlayerInventory,
+		"xp": PlayerProgress,
+		"equipment": EquipmentManager, 
+		"appearance": PlayerAppearance,
+		"skills": SkillManager,
+		"battle": BattleVariables
+	}
 
 	PlayerInventory.last_inventory_update_unix_time = data.get("timestamp", Time.get_unix_time_from_system())
-	if data.has("inventory"):
-		PlayerInventory.load_save_data(data["inventory"])
-	else:
-		printerr("No inventory data found!")
 
-	if data.has("xp"):
-		PlayerProgress.load_save_data(data["xp"])
-	else:
-		printerr("No player xp data found!")
+	var invalid_save := false
+	for key in systems:
+		if not data.has(key): 
+			invalid_save = true
+			break
+			
+		var error: Error = systems[key].load_save_data(data[key])
 		
-	if data.has("equipment"):
-		EquipmentManager.load_save_data(data["equipment"])
-	else:
-		printerr("No equipment data found!")
-		
-	if data.has("appearance"):
-		PlayerAppearance.load_save_data(data["appearance"])
-	else:
-		printerr("No appearance data found!")
-		
-	if data.has("skills"):
-		SkillManager.load_save_data(data["skills"])
-	else:
-		printerr("No skills data found!")
-
-	print("Game Loaded.")
+		if error != OK:
+			invalid_save = true
+			printerr("Error when loading %s - %s" % [key, error])
+			
+	if invalid_save:
+		save_load_failed.emit(SaveReadError.INVALID_SAVE)
 	
 func clear_save() -> void:
 	if FileAccess.file_exists(SAVE_PATH):

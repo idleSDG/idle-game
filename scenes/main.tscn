@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://scripts/ui/hud.gd" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://34sx5ru8alpl" path="res://assets/hud/coin.png" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://y7xumqqfhjfr" path="res://src/ui/invalid_save_popup/invalid_save_pop_up.tscn" id="5_tbgi4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
@@ -315,6 +316,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "SETTINGS"
+
+[node name="InvalidSavePopUp" parent="NavBarLayer" unique_id=256500332 instance=ExtResource("5_tbgi4")]
+visible = true
 
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
