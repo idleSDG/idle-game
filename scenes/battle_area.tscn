@@ -137,11 +137,6 @@ offset_bottom = -19.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BG" type="Sprite2D" parent="." unique_id=1876381721]
-position = Vector2(658, 654.00006)
-scale = Vector2(1.228805, 1.228805)
-texture = ExtResource("3_cnfnp")
-
 [node name="ExitBattle" type="Button" parent="Main Scene" unique_id=1896487453]
 visible = false
 anchors_preset = -1
@@ -156,5 +151,10 @@ offset_bottom = 149.83984
 theme_override_font_sizes/font_size = 87
 text = "Exit Battle
 "
+
+[node name="BG" type="Sprite2D" parent="." unique_id=1876381721]
+position = Vector2(658, 654.00006)
+scale = Vector2(1.228805, 1.228805)
+texture = ExtResource("3_cnfnp")
 
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]

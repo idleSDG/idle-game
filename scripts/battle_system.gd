@@ -10,6 +10,8 @@ extends Node
 signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
 
+@onready var level : battle_level = BattleVariables.current_battle_level
+
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd") 
 
@@ -59,11 +61,12 @@ func _ready() -> void:
 	instance.isPlayer = true
 	characterList[0] = instance
 	characterSpawnPos[0].add_child(instance)
-	
-	for i in 10:
-		var instance2 := EnemyTypes.CreateEnemy(100 + i % 3, 5)
-		remainingEnemiesList.append(instance2)
 	# END OF TEMPORARY
+	
+	for enemy in BattleVariables.current_battle_level.enemies:
+		var instance2 := EnemyTypes.CreateEnemy(enemy, BattleVariables.current_battle_level.enemy_level)
+		remainingEnemiesList.append(instance2)
+
 	
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
 	if BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE:
@@ -178,18 +181,18 @@ func finish_fight(result : bool):
 	BattleVariables.battleState = BattleVariables.BattleStates.AWAITING_EXIT
 	isPlaying = false
 	combatFinish.visible = true
-
-	SaveManager.save_game()
 	
 	if result:
+		BattleVariables.current_battle_level.beaten = true
 		combatFinish.text = "YOU WIN"
 		PlayerProgress.add_xp(120)
 		characterList[0].ApplyExp()
-		SaveManager.save_game()
 	else:
 		combatFinish.text = "YOU LOSE"
+		
+	SaveManager.save_game()
 	exit_button.visible = true
-	pass
+
 
 
 # [length] is in seconds

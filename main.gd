@@ -34,7 +34,7 @@ func _ready():
 
 func _on_tab_switched(tab_name):
 	# Only show HUD on home or battle
-	hud_layer.visible = tab_name in ["home", "battle", "character"]
+	hud_layer.visible = tab_name in ["home", "character"]
 	update_navbar_visuals()
 
 func update_navbar_visuals():
