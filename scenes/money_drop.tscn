@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bd78dciepb2um" path="res://scenes/money_drop.gd" id="2_mqm5r"]
 
 [node name="MoneyDrop" type="Sprite2D" unique_id=1150470496]
+z_index = 100
 scale = Vector2(0.01525, 0.015250001)
 texture = ExtResource("1_k6kpj")
 script = ExtResource("2_mqm5r")
