@@ -11,7 +11,11 @@ var current_campaign : String
 var campaigns : Array[campaign_map]
 
 func GetPlayer() -> CharacterStats:
-	return CharacterStats.Create(500, 15, 100, 0.5, 1.1, 2.0, [], [], [], [])
+	var lvl = PlayerProgress.level
+	var hp      = 500 + (lvl - 1) * 50
+	var atk     = 15  + (lvl - 1) * 2
+	var defense = 100 + (lvl - 1) * 10
+	return CharacterStats.Create(hp, atk, defense, 0.5, 1.1, 2.0, [], [], [], [])
 		
 func get_save_data() -> Dictionary:
 	return {
