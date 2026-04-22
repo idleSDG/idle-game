@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bqm2y836currr" path="res://scripts/wizard_avatar.gd" id="2_avatar"]
 [ext_resource type="Script" uid="uid://c1exhlvctr7py" path="res://scripts/skin_color_panel.gd" id="3_nq5o8"]
 [ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="4_pvdot"]
-[ext_resource type="PackedScene" uid="uid://b6o81e0vhxb56" path="res://scenes/skill_grid.tscn" id="5_cj3cf"]
+[ext_resource type="PackedScene" uid="uid://dx8hs5u3c2ruw" path="res://scenes/skill_grid.tscn" id="5_cj3cf"]
 [ext_resource type="PackedScene" uid="uid://ioxsx0fl2xta" path="res://scenes/skill_grid_preview.tscn" id="6_oqv88"]
 [ext_resource type="PackedScene" uid="uid://dbwsw84mds467" path="res://scenes/item_grid.tscn" id="7_oqv88"]
 

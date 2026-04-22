@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var xp_bar: ProgressBar = %PlayerXPBar
 @onready var xp_label: Label = %PlayerXPLabel
 @onready var test_button: Button = %PlayerXPTestButton
+@onready var level_up_popup: LevelUpPopup = %LevelUpPopup
 
 @onready var money_amount_label: Label = %MoneyAmountLabel
 @onready var money_collection_panel_container: PanelContainer = %MoneyCollectionPanelContainer
@@ -50,8 +51,9 @@ func _on_xp_changed(current_xp: int, xp_required: int) -> void:
 	xp_bar.value = PlayerProgress.xp_progress_ratio() * 100.0
 	xp_label.text = "%d / %d XP" % [current_xp, xp_required]
 
-func _on_leveled_up(new_level: int) -> void:
+func _on_leveled_up(old_level: int, new_level: int) -> void:
 	level_label.text = "Level %d" % new_level
+	level_up_popup.show_level_up(old_level, new_level)
 
 func _on_test_button_pressed() -> void:
 	PlayerProgress.add_xp(50)
