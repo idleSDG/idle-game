@@ -8,6 +8,7 @@ extends Node
 @onready var inventory_scene = preload("res://scenes/inventory.tscn")
 @onready var nav_bar = $"NavBarLayer/NavBar"
 @onready var hud_layer = $HUDLayer
+@onready var level_up_popup = $PopupLayer/LevelUpPopup
 
 var tab_for_button = {
 	"HomeButton": "home",
@@ -28,6 +29,7 @@ func _ready():
 	}
 	SceneManager.setup(content_area, tab_scenes)
 	SceneManager.tab_switched.connect(_on_tab_switched)
+	PlayerProgress.leveled_up.connect(_on_leveled_up)
 
 	SceneManager.switch_tab("home")
 	update_navbar_visuals()
@@ -61,3 +63,7 @@ func _on_settings_button_pressed():
 
 func _on_character_button_pressed() -> void:
 	SceneManager.switch_tab("character")
+	
+func _on_leveled_up(old_level: int, new_level: int) -> void:
+	if old_level != new_level:
+		level_up_popup.show_level_up(old_level, new_level)

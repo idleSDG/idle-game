@@ -277,9 +277,6 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "10 / 10"
 
-[node name="LevelUpPopup" parent="HUDLayer" unique_id=1366411805 instance=ExtResource("5_tefeu")]
-unique_name_in_owner = true
-
 [node name="NavBarLayer" type="CanvasLayer" parent="." unique_id=435175999]
 
 [node name="NavBar" type="HBoxContainer" parent="NavBarLayer" unique_id=2076489562]
@@ -323,6 +320,11 @@ text = "SETTINGS"
 
 [node name="InvalidSavePopUp" parent="NavBarLayer" unique_id=256500332 instance=ExtResource("5_tbgi4")]
 visible = true
+
+[node name="PopupLayer" type="CanvasLayer" parent="." unique_id=1531632925]
+
+[node name="LevelUpPopup" parent="PopupLayer" unique_id=1366411805 instance=ExtResource("5_tefeu")]
+unique_name_in_owner = true
 
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
