@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bou8i67fm3dqd"]
 
 [ext_resource type="Script" uid="uid://c7la6i6q0o4y7" path="res://scripts/ui/character_menu.gd" id="1_menu"]
-[ext_resource type="Script" uid="uid://bqm2y836currr" path="res://scripts/wizard_avatar.gd" id="2_avatar"]
+[ext_resource type="PackedScene" uid="uid://c7cxvb8mciwtr" path="res://src/ui/wizard_avatar/wizard_avatar.tscn" id="2_oqv88"]
 [ext_resource type="Script" uid="uid://c1exhlvctr7py" path="res://scripts/skin_color_panel.gd" id="3_nq5o8"]
 [ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="4_pvdot"]
-[ext_resource type="PackedScene" uid="uid://b6o81e0vhxb56" path="res://scenes/skill_grid.tscn" id="5_cj3cf"]
+[ext_resource type="PackedScene" uid="uid://dx8hs5u3c2ruw" path="res://scenes/skill_grid.tscn" id="5_cj3cf"]
 [ext_resource type="PackedScene" uid="uid://ioxsx0fl2xta" path="res://scenes/skill_grid_preview.tscn" id="6_oqv88"]
 [ext_resource type="PackedScene" uid="uid://dbwsw84mds467" path="res://scenes/item_grid.tscn" id="7_oqv88"]
 
@@ -51,9 +51,8 @@ size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7bf8i")
 
-[node name="WizardAvatar" type="Node2D" parent="CanvasLayer/HSplit/AvatarPanel" unique_id=1425452382]
-script = ExtResource("2_avatar")
-scale_factor = Vector2(4, 4)
+[node name="WizardAvatar" parent="CanvasLayer/HSplit/AvatarPanel" unique_id=1894489798 instance=ExtResource("2_oqv88")]
+scale = Vector2(4, 4)
 
 [node name="RightVBox" type="VBoxContainer" parent="CanvasLayer/HSplit" unique_id=661971438]
 layout_mode = 2
