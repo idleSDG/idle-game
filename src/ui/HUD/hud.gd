@@ -53,7 +53,8 @@ func _on_xp_changed(current_xp: int, xp_required: int) -> void:
 
 func _on_leveled_up(old_level: int, new_level: int) -> void:
 	level_label.text = "Level %d" % new_level
-	level_up_popup.show_level_up(old_level, new_level)
+	if old_level != new_level:
+		level_up_popup.show_level_up(old_level, new_level)
 
 func _on_test_button_pressed() -> void:
 	PlayerProgress.add_xp(50)

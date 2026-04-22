@@ -56,4 +56,4 @@ func init_new_save():
 	level = 1
 	current_xp = 0
 	xp_changed.emit(current_xp, xp_required_for_next_level())
-	leveled_up.emit(level)
+	leveled_up.emit(level, level)
