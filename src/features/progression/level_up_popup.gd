@@ -8,8 +8,12 @@ extends Control
 func _ready() -> void:
 	visible = false
 	ok_button.pressed.connect(_on_ok_pressed)
+	PlayerProgress.leveled_up.connect(_on_leveled_up)
+	
+func _on_leveled_up(old_level: int, new_level: int) -> void:
+	if old_level != new_level:
+		show_level_up(old_level, new_level)
  
-# Called from hud.gd when leveled_up signal fires
 func show_level_up(old_level: int, new_level: int) -> void:
 	var old_stats = BattleVariables.GetPlayerStatsAtLevel(old_level)
 	var new_stats = BattleVariables.GetPlayerStatsAtLevel(new_level)
