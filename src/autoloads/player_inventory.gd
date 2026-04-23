@@ -5,19 +5,7 @@ const MAX_OFFLINE_SECONDS: float = 7.0 * 86400.0
 var last_inventory_update_unix_time: float
 var inventory_update_timer: Timer
 
-var equipment: Array[EquipmentItem] = [
-	EquipmentItem.new("weap1", EquipmentItem.Slot.WEAPON, 0.8), 
-	EquipmentItem.new("weap2", EquipmentItem.Slot.WEAPON, 0.6), 
-	EquipmentItem.new("weap3", EquipmentItem.Slot.WEAPON, 1.0), 
-	EquipmentItem.new("hat1", EquipmentItem.Slot.HAT, 0.0, 0.0, 1.5), 
-	EquipmentItem.new("hat3", EquipmentItem.Slot.HAT, 0.0, 0.0, 1.2), 
-	EquipmentItem.new("hat2", EquipmentItem.Slot.HAT, 0.0, 0.0, 2.0), 
-	EquipmentItem.new("hat4", EquipmentItem.Slot.HAT, 0.0, 0.0, 1.0), 
-	EquipmentItem.new("robe1", EquipmentItem.Slot.ROBE, 0.0, 1.5), 
-	EquipmentItem.new("weap4", EquipmentItem.Slot.WEAPON, 1.9), 
-	EquipmentItem.new("robe2", EquipmentItem.Slot.ROBE, 0.0, 1.7), 
-	EquipmentItem.new("hat1", EquipmentItem.Slot.HAT, 0.0, 0.0, 0.5)
-	]
+var equipment: Array[EquipmentItem] = []
 
 # Money System
 var money: int
@@ -26,7 +14,7 @@ signal money_changed(money: int)
 var collectable_money: int
 var collectable_money_capacity: int = 25
 var collectable_money_progress: float = 0
-var collectable_money_gain_rate_seconds: float = 0.0167 
+var collectable_money_gain_rate_seconds: float = 0.0167
 signal collectable_money_changed(collectable_money: int)
 
 # Ingredients
@@ -83,6 +71,38 @@ func _ready():
 	if StepsProgress.has_steps_data():
 		_on_steps_data_ready()
 	ScreenTimeProgress.screen_time_data_ready.connect(_on_screen_time_data_ready)
+	_init_equipment()
+	
+func _init_equipment() -> void:
+	# Weapons — attack bonus
+	var weap1 = EquipmentItem.new("weap1", EquipmentItem.Slot.WEAPON)
+	weap1.attack_bonus_pct = 0.8
+	var weap2 = EquipmentItem.new("weap2", EquipmentItem.Slot.WEAPON)
+	weap2.attack_bonus_pct = 0.6
+	var weap3 = EquipmentItem.new("weap3", EquipmentItem.Slot.WEAPON)
+	weap3.attack_bonus_pct = 1.0
+	var weap4 = EquipmentItem.new("weap4", EquipmentItem.Slot.WEAPON)
+	weap4.attack_bonus_pct = 1.9
+
+	# Hats — crit rate bonus
+	var hat1 = EquipmentItem.new("hat1", EquipmentItem.Slot.HAT)
+	hat1.crit_rate_bonus_pct = 1.5
+	var hat2 = EquipmentItem.new("hat2", EquipmentItem.Slot.HAT)
+	hat2.crit_rate_bonus_pct = 2.0
+	var hat3 = EquipmentItem.new("hat3", EquipmentItem.Slot.HAT)
+	hat3.crit_rate_bonus_pct = 1.2
+	var hat4 = EquipmentItem.new("hat4", EquipmentItem.Slot.HAT)
+	hat4.crit_rate_bonus_pct = 1.0
+	var hat5 = EquipmentItem.new("hat5", EquipmentItem.Slot.HAT)
+	hat5.crit_rate_bonus_pct = 0.5
+
+	# Robes — ingredient gain bonus
+	var robe1 = EquipmentItem.new("robe1", EquipmentItem.Slot.ROBE)
+	robe1.ingredient_gain_bonus_pct = 1.5
+	var robe2 = EquipmentItem.new("robe2", EquipmentItem.Slot.ROBE)
+	robe2.ingredient_gain_bonus_pct = 1.7
+
+	equipment = [weap1, weap2, weap3, weap4, hat1, hat2, hat3, hat4, hat5, robe1, robe2]
 
 func _on_steps_data_ready():
 	if _steps_initialized:
@@ -141,10 +161,10 @@ func load_save_data(data: Variant) -> Error:
 		else:
 			printerr("Invalid data format for ingredient: ", entry_name)
 			
-	if not data.has("money"): 
+	if not data.has("money"):
 		printerr("Load failed: Key inventory.money missing or failed to parse.")
 		return ERR_PARSE_ERROR
-	if not data.has("collectable_money"): 
+	if not data.has("collectable_money"):
 		printerr("Load failed: Key inventory.money missing or failed to parse.")
 		return ERR_PARSE_ERROR
 	

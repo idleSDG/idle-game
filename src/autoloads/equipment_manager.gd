@@ -22,15 +22,21 @@ func get_equipped(slot: EquipmentItem.Slot) -> EquipmentItem:
 
 func get_total_bonuses() -> Dictionary:
 	var bonuses = {
-		"damage_bonus_pct": 0.0,
+		"health_pct":         0.0,
+		"attack_pct":         0.0,
+		"defense_pct":        0.0,
+		"crit_rate_pct":      0.0,
+		"crit_dmg_pct":       0.0,
 		"ingredient_gain_pct": 0.0,
-		"crit_rate_bonus": 0.0,
 	}
 	for item in equipped.values():
 		if item != null:
-			bonuses["damage_bonus_pct"]     += item.damage_bonus_pct
-			bonuses["ingredient_gain_pct"]  += item.ingredient_gain_pct
-			bonuses["crit_rate_bonus"]      += item.crit_rate_bonus
+			bonuses["health_pct"]          += item.health_bonus_pct
+			bonuses["attack_pct"]          += item.attack_bonus_pct
+			bonuses["defense_pct"]         += item.defense_bonus_pct
+			bonuses["crit_rate_pct"]       += item.crit_rate_bonus_pct
+			bonuses["crit_dmg_pct"]        += item.crit_dmg_bonus_pct
+			bonuses["ingredient_gain_pct"] += item.ingredient_gain_bonus_pct
 	return bonuses
 
 func get_save_data() -> Dictionary:

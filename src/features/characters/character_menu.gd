@@ -80,29 +80,35 @@ func _on_unequip_pressed(_slot: EquipmentItem.Slot) -> void:
 
 func _show_item_info(item: EquipmentItem) -> void:
 	var info = item.item_name + "\n"
-	if item.damage_bonus_pct != 0:
-		info += "DMG +%d%%\n" % int(item.damage_bonus_pct * 100)
-	if item.ingredient_gain_pct != 0:
-		info += "Ingredient +%d%%\n" % int(item.ingredient_gain_pct * 100)
-	if item.crit_rate_bonus != 0:
-		info += "Crit +%d%%\n" % int(item.crit_rate_bonus * 100)
+	if item.health_bonus_pct != 0:
+		info += "Health +%d%%\n" % int(item.health_bonus_pct * 100)
+	if item.attack_bonus_pct != 0:
+		info += "Attack +%d%%\n" % int(item.attack_bonus_pct * 100)
+	if item.defense_bonus_pct != 0:
+		info += "Defense +%d%%\n" % int(item.defense_bonus_pct * 100)
+	if item.crit_rate_bonus_pct != 0:
+		info += "Crit rate +%d%%\n" % int(item.crit_rate_bonus_pct * 100)
+	if item.crit_dmg_bonus_pct != 0:
+		info += "Crit DMG +%d%%\n" % int(item.crit_dmg_bonus_pct * 100)
+	if item.ingredient_gain_bonus_pct != 0:
+		info += "Ingredient gain +%d%%\n" % int(item.ingredient_gain_bonus_pct * 100)
 	picker_info_lbl.text = info.strip_edges()
 
 func _refresh_equipment_buttons() -> void:
-	var w := EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON)
-	var r := EquipmentManager.get_equipped(EquipmentItem.Slot.ROBE)
-	var h := EquipmentManager.get_equipped(EquipmentItem.Slot.HAT)
+	var w = EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON)
+	var r = EquipmentManager.get_equipped(EquipmentItem.Slot.ROBE)
+	var h = EquipmentManager.get_equipped(EquipmentItem.Slot.HAT)
 
 	weapon_btn.text = "Staff : " + (w.item_name if w else "None  [tap to equip]")
 	robe_btn.text   = "Robe  : " + (r.item_name if r else "None  [tap to equip]")
 	hat_btn.text    = "Hat   : " + (h.item_name if h else "None  [tap to equip]")
 
-	var bonuses := EquipmentManager.get_total_bonuses()
-	stat_bonus_label.text = "DMG +%d%%\nIngredient +%d%%\nCrit +%d%%" % [
-		bonuses["damage_bonus_pct"]    * 100,
-		bonuses["ingredient_gain_pct"] * 100,
-		bonuses["crit_rate_bonus"]     * 100,
-	]
+	#var bonuses = EquipmentManager.get_total_bonuses()
+	#stat_bonus_label.text = "Attack +%d%%\nIngredient +%d%%\nCrit +%d%%" % [
+		#bonuses["attack_pct"]    * 100,
+		#bonuses["ingredient_gain_pct"] * 100,
+		#bonuses["crit_rate_pct"]     * 100,
+	#]
 
 func _on_skin_color_changed(color: Color) -> void:
 	PlayerAppearance.apply_skin_color(color)

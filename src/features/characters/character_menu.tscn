@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://bou8i67fm3dqd"]
 
-[ext_resource type="Script" uid="uid://c7la6i6q0o4y7" path="res://scripts/ui/character_menu.gd" id="1_menu"]
-[ext_resource type="Script" uid="uid://bqm2y836currr" path="res://scripts/wizard_avatar.gd" id="2_avatar"]
-[ext_resource type="Script" uid="uid://c1exhlvctr7py" path="res://scripts/skin_color_panel.gd" id="3_nq5o8"]
-[ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="4_pvdot"]
-[ext_resource type="PackedScene" uid="uid://dx8hs5u3c2ruw" path="res://scenes/skill_grid.tscn" id="5_cj3cf"]
-[ext_resource type="PackedScene" uid="uid://ioxsx0fl2xta" path="res://scenes/skill_grid_preview.tscn" id="6_oqv88"]
-[ext_resource type="PackedScene" uid="uid://dbwsw84mds467" path="res://scenes/item_grid.tscn" id="7_oqv88"]
+[ext_resource type="Script" uid="uid://c7la6i6q0o4y7" path="res://src/features/characters/character_menu.gd" id="1_viems"]
+[ext_resource type="Script" uid="uid://bqm2y836currr" path="res://scripts/wizard_avatar.gd" id="2_qpts6"]
+[ext_resource type="Script" uid="uid://c1exhlvctr7py" path="res://scripts/skin_color_panel.gd" id="3_ifdmm"]
+[ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="4_g64kq"]
+[ext_resource type="PackedScene" uid="uid://dx8hs5u3c2ruw" path="res://scenes/skill_grid.tscn" id="5_kt2ab"]
+[ext_resource type="PackedScene" uid="uid://ioxsx0fl2xta" path="res://scenes/skill_grid_preview.tscn" id="6_jbg7u"]
+[ext_resource type="PackedScene" uid="uid://dbwsw84mds467" path="res://scenes/item_grid.tscn" id="7_ahy0h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7bf8i"]
 
@@ -29,7 +29,7 @@ bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
 bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
 
 [node name="CharacterMenu" type="Node2D" unique_id=1633184879]
-script = ExtResource("1_menu")
+script = ExtResource("1_viems")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=344208635]
 
@@ -52,7 +52,7 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7bf8i")
 
 [node name="WizardAvatar" type="Node2D" parent="CanvasLayer/HSplit/AvatarPanel" unique_id=1425452382]
-script = ExtResource("2_avatar")
+script = ExtResource("2_qpts6")
 scale_factor = Vector2(4, 4)
 
 [node name="RightVBox" type="VBoxContainer" parent="CanvasLayer/HSplit" unique_id=661971438]
@@ -106,7 +106,7 @@ text = "✦  Appearance"
 [node name="SkinColorPanel" type="PanelContainer" parent="CanvasLayer/HSplit/RightVBox/CosmeticsSection" unique_id=1383197197]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7bf8i")
-script = ExtResource("3_nq5o8")
+script = ExtResource("3_ifdmm")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HSplit/RightVBox/CosmeticsSection/SkinColorPanel" unique_id=513128103]
 layout_mode = 2
@@ -145,15 +145,15 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_7bf8i")
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Button" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1346103917 instance=ExtResource("4_pvdot")]
+[node name="Button" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1346103917 instance=ExtResource("4_g64kq")]
 layout_mode = 2
 equip = 1
 
-[node name="Button2" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1949027151 instance=ExtResource("4_pvdot")]
+[node name="Button2" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1949027151 instance=ExtResource("4_g64kq")]
 layout_mode = 2
 equip = 2
 
-[node name="Button3" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1550091624 instance=ExtResource("4_pvdot")]
+[node name="Button3" parent="CanvasLayer/HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer" unique_id=1550091624 instance=ExtResource("4_g64kq")]
 layout_mode = 2
 equip = 3
 
@@ -182,7 +182,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="SkillGrid" parent="CanvasLayer/SkillSelection/ScrollContainer/MarginContainer" unique_id=1758141714 node_paths=PackedStringArray("skillScreen", "button1", "button2", "button3") instance=ExtResource("5_cj3cf")]
+[node name="SkillGrid" parent="CanvasLayer/SkillSelection/ScrollContainer/MarginContainer" unique_id=1758141714 node_paths=PackedStringArray("skillScreen", "button1", "button2", "button3") instance=ExtResource("5_kt2ab")]
 layout_mode = 2
 size_flags_horizontal = 0
 columns = 6
@@ -191,7 +191,7 @@ button1 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HB
 button2 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button2")
 button3 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button3")
 
-[node name="SkillPreview" parent="CanvasLayer/SkillSelection" unique_id=1238233801 instance=ExtResource("6_oqv88")]
+[node name="SkillPreview" parent="CanvasLayer/SkillSelection" unique_id=1238233801 instance=ExtResource("6_jbg7u")]
 layout_mode = 2
 
 [node name="ItemPicker" type="Control" parent="CanvasLayer" unique_id=1096475004]
@@ -222,7 +222,7 @@ theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ItemGrid" parent="CanvasLayer/ItemPicker/PanelContainer/VBox" unique_id=1779284087 instance=ExtResource("7_oqv88")]
+[node name="ItemGrid" parent="CanvasLayer/ItemPicker/PanelContainer/VBox" unique_id=1779284087 instance=ExtResource("7_ahy0h")]
 layout_mode = 2
 
 [node name="InfoLabel" type="Label" parent="CanvasLayer/ItemPicker/PanelContainer/VBox" unique_id=682111993]
