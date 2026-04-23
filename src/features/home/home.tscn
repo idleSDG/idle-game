@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://drgtjoo1tbjki"]
+
+[ext_resource type="PackedScene" uid="uid://c7cxvb8mciwtr" path="res://src/ui/wizard_avatar/wizard_avatar.tscn" id="1_nxnce"]
+[ext_resource type="Script" uid="uid://clfi2mpmubow6" path="res://src/features/home/wizard_tap_button.gd" id="2_v0gh6"]
+[ext_resource type="PackedScene" uid="uid://b1r7cm1uluuj2" path="res://scenes/money_drop.tscn" id="3_qhgor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhids"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_reixx"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yxilm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="Home" type="Node2D" unique_id=660734872]
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=167412646]
+layer = 0
+
+[node name="Background" type="ColorRect" parent="UILayer" unique_id=1439679217]
+z_index = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UILayer" unique_id=1372644241]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WizardControl" type="Control" parent="UILayer/CenterContainer" unique_id=694562218]
+layout_mode = 2
+
+[node name="WizardAvatar" parent="UILayer/CenterContainer/WizardControl" unique_id=1894489798 instance=ExtResource("1_nxnce")]
+scale = Vector2(6, 6)
+
+[node name="WizardTapButton" type="Button" parent="UILayer/CenterContainer/WizardControl" unique_id=416951984]
+layout_mode = 0
+offset_left = -256.0
+offset_top = -468.0
+offset_right = 374.0
+offset_bottom = 478.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_uhids")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_reixx")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yxilm")
+script = ExtResource("2_v0gh6")
+money_drop_scene = ExtResource("3_qhgor")
+
+[connection signal="pressed" from="UILayer/CenterContainer/WizardControl/WizardTapButton" to="UILayer/CenterContainer/WizardControl/WizardTapButton" method="_on_pressed"]
