@@ -60,6 +60,132 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 24
 
+[node name="StatsSection" type="VBoxContainer" parent="CanvasLayer/HSplit/RightVBox" unique_id=1082116910]
+layout_mode = 2
+
+[node name="StatsTitle" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection" unique_id=1460978271]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "📊  Stats"
+
+[node name="StatsGrid" type="GridContainer" parent="CanvasLayer/HSplit/RightVBox/StatsSection" unique_id=1353690450]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+columns = 3
+
+[node name="Label" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=511492860]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Label2" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=2043659016]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Base"
+
+[node name="Label3" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1397262175]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Final"
+
+[node name="Label4" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1836242561]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "HP"
+
+[node name="HPBaseLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=151043911]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="HPFinalLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=184791996]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Label5" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=617938271]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "ATK"
+
+[node name="ATKBaseLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1506748341]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="ATKFinalLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=315643193]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Label6" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=608634292]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "DEF"
+
+[node name="DEFBaseLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1323147031]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="DEFFinalLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1640019501]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Label7" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=527176026]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Crit Rate"
+
+[node name="CRBaseLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=213786503]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="CRFinalLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=151764387]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Label8" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1174177183]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Crit DMG"
+
+[node name="CDMGBaseLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1005905696]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="CDMGFinalLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1427239518]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="Label9" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=204997484]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+text = "Ingredient Gain"
+
+[node name="IngBaseLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1171897219]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
+[node name="IngFinalLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid" unique_id=1190353638]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 30
+
 [node name="EquipSection" type="VBoxContainer" parent="CanvasLayer/HSplit/RightVBox" unique_id=1684116850]
 layout_mode = 2
 theme_override_constants/separation = 8
@@ -86,13 +212,6 @@ custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
 text = "Hat   : None  [tap to equip]"
-
-[node name="StatBonusLabel" type="Label" parent="CanvasLayer/HSplit/RightVBox/EquipSection" unique_id=4715157]
-layout_mode = 2
-theme_override_font_sizes/font_size = 26
-text = "DMG +0%
-Ingredient +0%
-Crit +0%"
 
 [node name="CosmeticsSection" type="VBoxContainer" parent="CanvasLayer/HSplit/RightVBox" unique_id=1452004159]
 layout_mode = 2

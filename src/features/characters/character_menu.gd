@@ -1,5 +1,20 @@
 extends Node
 
+# Stats section
+@onready var hp_base_label         : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/HPBaseLabel
+@onready var hp_final_label        : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/HPFinalLabel
+@onready var atk_base_label        : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/ATKBaseLabel
+@onready var atk_final_label       : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/ATKFinalLabel
+@onready var def_base_label        : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/DEFBaseLabel
+@onready var def_final_label       : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/DEFFinalLabel
+@onready var crit_base_label       : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/CRBaseLabel
+@onready var crit_final_label      : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/CRFinalLabel
+@onready var critdmg_base_label    : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/CDMGBaseLabel
+@onready var critdmg_final_label   : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/CDMGFinalLabel
+@onready var ing_base_label        : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/IngBaseLabel
+@onready var ing_final_label       : Label = $CanvasLayer/HSplit/RightVBox/StatsSection/StatsGrid/IngFinalLabel
+
+# Equipment section
 @onready var weapon_btn       : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/WeaponSlotBtn
 @onready var robe_btn         : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/RobeSlotBtn
 @onready var hat_btn          : Button         = $CanvasLayer/HSplit/RightVBox/EquipSection/HatSlotBtn
@@ -17,8 +32,12 @@ extends Node
 var _current_picker_slot : EquipmentItem.Slot
 var _selected_item : EquipmentItem = null
 
+const GREEN := Color(0.133, 0.827, 0.0)
+const WHITE := Color(1.0, 1.0, 1.0)
+
 func _ready() -> void:
 	_refresh_equipment_buttons()
+	_refresh_stats()
 	item_picker.visible = false
 	picker_equip_btn.disabled = true  # nothing selected yet
 
@@ -33,16 +52,45 @@ func _ready() -> void:
 	item_grid.item_selected.connect(_on_item_selected)
 	item_grid.unequip_pressed.connect(_on_unequip_pressed)
 
-	EquipmentManager.equipment_changed.connect(_refresh_equipment_buttons)
+	EquipmentManager.equipment_changed.connect(_on_equipment_changed)
+	PlayerProgress.leveled_up.connect(func(_o, _n): _refresh_stats())
+
+# Stats
+func _refresh_stats() -> void:
+	var base : CharacterStats = BattleVariables.GetPlayerStatsAtLevel(PlayerProgress.level)
+	var bonuses : Dictionary = EquipmentManager.get_total_bonuses()
+
+	var final_hp : int = int(base.maxHealth * (1.0 + bonuses["health_pct"]))
+	var final_atk : int = int(base.attack * (1.0 + bonuses["attack_pct"]))
+	var final_def : int = int(base.defense * (1.0 + bonuses["defense_pct"]))
+	var final_crit : float = base.critRate + bonuses["crit_rate_pct"]
+	var final_critdmg : float = base.critDMG + bonuses["crit_dmg_pct"]
+	var final_ing : float = 1.0 + bonuses["ingredient_gain_pct"]
+
+	_set_stat_row(hp_base_label, hp_final_label, 
+		str(base.maxHealth), str(final_hp), final_hp != base.maxHealth)
+	_set_stat_row(atk_base_label, atk_final_label,
+		str(base.attack), str(final_atk), final_atk != base.attack)
+	_set_stat_row(def_base_label, def_final_label, 
+		str(base.defense), str(final_def), final_def != base.defense)
+	_set_stat_row(crit_base_label, crit_final_label, 
+		"%.0f%%" % (base.critRate * 100), "%.0f%%" % (final_crit * 100), final_crit    != base.critRate)
+	_set_stat_row(critdmg_base_label, critdmg_final_label, 
+		"%.0f%%" % ((1.0 + base.critDMG) * 100), "%.0f%%" % ((1.0 + final_critdmg) * 100), final_critdmg != base.critDMG)
+	_set_stat_row(ing_base_label, ing_final_label, 
+		"100%", "%d%%" % int(final_ing * 100), final_ing != 1.0)
+
+func _set_stat_row(base_lbl: Label, final_lbl: Label, base_val: String, final_val: String, boosted: bool) -> void:
+	base_lbl.text      = base_val
+	final_lbl.text     = final_val
+	final_lbl.modulate = GREEN if boosted else WHITE
 
 # Slot buttons
-
 func _on_weapon_pressed() -> void: _open_picker(EquipmentItem.Slot.WEAPON, "Staffs")
 func _on_robe_pressed() -> void: _open_picker(EquipmentItem.Slot.ROBE, "Robes")
 func _on_hat_pressed() -> void: _open_picker(EquipmentItem.Slot.HAT,"Hats")
 
 # Picker
-
 func _open_picker(slot: EquipmentItem.Slot, title: String) -> void:
 	_current_picker_slot = slot
 	_selected_item = null
@@ -103,12 +151,9 @@ func _refresh_equipment_buttons() -> void:
 	robe_btn.text   = "Robe  : " + (r.item_name if r else "None  [tap to equip]")
 	hat_btn.text    = "Hat   : " + (h.item_name if h else "None  [tap to equip]")
 
-	#var bonuses = EquipmentManager.get_total_bonuses()
-	#stat_bonus_label.text = "Attack +%d%%\nIngredient +%d%%\nCrit +%d%%" % [
-		#bonuses["attack_pct"]    * 100,
-		#bonuses["ingredient_gain_pct"] * 100,
-		#bonuses["crit_rate_pct"]     * 100,
-	#]
-
 func _on_skin_color_changed(color: Color) -> void:
 	PlayerAppearance.apply_skin_color(color)
+	
+func _on_equipment_changed() -> void:
+	_refresh_equipment_buttons()
+	_refresh_stats()
