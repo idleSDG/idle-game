@@ -47,12 +47,13 @@ func get_save_data() -> Dictionary:
 	return dict
 
 func load_save_data(data: Dictionary) -> Error:
-	var prototypes = PrototypeItems.new().get_test_items() # reload all prototypes
 	for slot_str in data:
 		var slot = int(slot_str)
 		var item_name = data[slot_str]
 		equipped[slot] = null
-		for item in prototypes:
+		if item_name == "":
+			continue
+		for item in PlayerInventory.equipment:
 			if item.item_name == item_name and item.slot == slot:
 				equipped[slot] = item
 				break

@@ -319,6 +319,7 @@ theme_override_font_sizes/font_size = 32
 text = "SETTINGS"
 
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=1531632925]
+layer = 3
 
 [node name="LevelUpPopup" parent="PopupLayer" unique_id=1366411805 instance=ExtResource("5_tefeu")]
 unique_name_in_owner = true

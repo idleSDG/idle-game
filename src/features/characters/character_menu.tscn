@@ -32,6 +32,7 @@ bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
 script = ExtResource("1_viems")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=344208635]
+layer = 2
 
 [node name="HSplit" type="HBoxContainer" parent="CanvasLayer" unique_id=559952770]
 anchors_preset = 15
