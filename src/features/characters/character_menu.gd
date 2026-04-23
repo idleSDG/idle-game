@@ -57,26 +57,21 @@ func _ready() -> void:
 
 # Stats
 func _refresh_stats() -> void:
-	var base : CharacterStats = BattleVariables.GetPlayerStatsAtLevel(PlayerProgress.level)
+	var base  : CharacterStats = BattleVariables.GetPlayerBaseStatsAtLevel(PlayerProgress.level)
+	var final : CharacterStats = BattleVariables.GetPlayer()
 	var bonuses : Dictionary = EquipmentManager.get_total_bonuses()
-
-	var final_hp : int = int(base.maxHealth * (1.0 + bonuses["health_pct"]))
-	var final_atk : int = int(base.attack * (1.0 + bonuses["attack_pct"]))
-	var final_def : int = int(base.defense * (1.0 + bonuses["defense_pct"]))
-	var final_crit : float = base.critRate + bonuses["crit_rate_pct"]
-	var final_critdmg : float = base.critDMG + bonuses["crit_dmg_pct"]
 	var final_ing : float = 1.0 + bonuses["ingredient_gain_pct"]
 
 	_set_stat_row(hp_base_label, hp_final_label, 
-		str(base.maxHealth), str(final_hp), final_hp != base.maxHealth)
-	_set_stat_row(atk_base_label, atk_final_label,
-		str(base.attack), str(final_atk), final_atk != base.attack)
+		str(base.maxHealth), str(final.maxHealth), final.maxHealth != base.maxHealth)
+	_set_stat_row(atk_base_label,atk_final_label, 
+		str(base.attack), str(final.attack), final.attack != base.attack)
 	_set_stat_row(def_base_label, def_final_label, 
-		str(base.defense), str(final_def), final_def != base.defense)
+		str(base.defense), str(final.defense), final.defense != base.defense)
 	_set_stat_row(crit_base_label, crit_final_label, 
-		"%.0f%%" % (base.critRate * 100), "%.0f%%" % (final_crit * 100), final_crit    != base.critRate)
+		"%.0f%%" % (base.critRate * 100), "%.0f%%" % (final.critRate * 100), final.critRate  != base.critRate)
 	_set_stat_row(critdmg_base_label, critdmg_final_label, 
-		"%.0f%%" % ((1.0 + base.critDMG) * 100), "%.0f%%" % ((1.0 + final_critdmg) * 100), final_critdmg != base.critDMG)
+		"%.0f%%" % ((1.0+base.critDMG) * 100), "%.0f%%" % ((1.0+final.critDMG) * 100), final.critDMG != base.critDMG)
 	_set_stat_row(ing_base_label, ing_final_label, 
 		"100%", "%d%%" % int(final_ing * 100), final_ing != 1.0)
 

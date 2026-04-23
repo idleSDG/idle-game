@@ -11,19 +11,27 @@ var current_campaign : String
 var campaigns : Array[campaign_map]
 
 func GetPlayer() -> CharacterStats:
-	var lvl = PlayerProgress.level
+	return _get_final_stats()
+
+# Returns base stats for a specific level
+func GetPlayerBaseStatsAtLevel(lvl: int) -> CharacterStats:
 	var hp      = 500 + (lvl - 1) * 50
 	var atk     = 15  + (lvl - 1) * 2
 	var defense = 100 + (lvl - 1) * 10
 	return CharacterStats.Create(hp, atk, defense, 0.5, 1.1, 2.0, [], [], [], [])
 
-# Returns stats for a specific level — used by the level up popup
-func GetPlayerStatsAtLevel(lvl: int) -> CharacterStats:
-	var hp      = 500 + (lvl - 1) * 50
-	var atk     = 15  + (lvl - 1) * 2
-	var defense = 100 + (lvl - 1) * 10
-	return CharacterStats.Create(hp, atk, defense, 0.5, 1.1, 2.0, [], [], [], [])
-		
+func _get_final_stats() -> CharacterStats:
+	var base : CharacterStats = GetPlayerBaseStatsAtLevel(PlayerProgress.level)
+	var bonuses : Dictionary = EquipmentManager.get_total_bonuses()
+	
+	base.health = int(base.health * (1.0 + bonuses["health_pct"]))
+	base.maxHealth = base.health
+	base.attack = int(base.attack * (1.0 + bonuses["attack_pct"]))
+	base.defense = int(base.defense * (1.0 + bonuses["defense_pct"]))
+	base.critRate += bonuses["crit_rate_pct"]
+	base.critDMG += bonuses["crit_dmg_pct"]
+	return base
+
 func get_save_data() -> Dictionary:
 	return {
 		"battleState": battleState,

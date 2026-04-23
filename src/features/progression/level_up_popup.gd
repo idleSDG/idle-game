@@ -15,8 +15,8 @@ func _on_leveled_up(old_level: int, new_level: int) -> void:
 		show_level_up(old_level, new_level)
  
 func show_level_up(old_level: int, new_level: int) -> void:
-	var old_stats = BattleVariables.GetPlayerStatsAtLevel(old_level)
-	var new_stats = BattleVariables.GetPlayerStatsAtLevel(new_level)
+	var old_stats = BattleVariables.GetPlayerBaseStatsAtLevel(old_level)
+	var new_stats = BattleVariables.GetPlayerBaseStatsAtLevel(new_level)
  
 	if new_level - old_level == 1:
 		title_label.text = "Level Up!\nYou are now level %d" % new_level
