@@ -40,6 +40,7 @@ func SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes)
 	#maxHealth = hp
 	health = hp
 	attack = atk
+	defense = def
 	critRate = cr
 	critDMG = cdmg
 	chargeRate = charge

@@ -2,7 +2,7 @@ class_name Main extends Node
 
 @export var home_scene: PackedScene = preload("res://src/features/home/home.tscn")
 @export var battle_scene: PackedScene = preload("res://scenes/battle.tscn")
-@export var character_scene: PackedScene = preload("res://scenes/character_menu.tscn")
+@export var character_scene: PackedScene = preload("res://src/features/characters/character_menu.tscn")
 @export var settings_scene: PackedScene = preload("res://scenes/settings.tscn")
 @export var inventory_scene: PackedScene = preload("res://scenes/inventory.tscn")
 
