@@ -94,7 +94,7 @@ func Charge(delta: float) -> bool:
 	return false
 
 func GetOvercharge() -> float:
-	if charge > maxCharge:
+	if charge >= maxCharge:
 		return charge - maxCharge
 	
 	return -3
@@ -115,7 +115,8 @@ func Use(user : Character, target : Character) -> bool:
 			target.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 	
 	if isCurrentAttack:
-		charge -= maxCharge
+		print("ChargeTaken")
+		charge = charge - maxCharge
 	
 	UpdateBar()
 	isCurrentAttack = false

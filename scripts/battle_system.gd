@@ -15,7 +15,8 @@ signal request_exit_signal
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd") 
 
-var targetIndex = 1
+var targetIndex = -1
+var tempIndex = 1
 var characterList : Array[Character] = [] 
 var remainingEnemiesList = []
 var enemyAmount : int = 4 # enemy amount = enemies on field + 1 (for the player)
@@ -23,6 +24,9 @@ var enemyAmount : int = 4 # enemy amount = enemies on field + 1 (for the player)
 var timer = 0.0
 var gameSpeed = 1.0
 var isPlaying = true
+
+var isFast = false
+var isPaused = false
 
 var _focus_lost_at : float = 0.0
 
@@ -83,6 +87,9 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # Drives the primary game logic
 func _process(delta: float) -> void:
+	gameSpeed = 2.0 if isFast else 1.0
+	gameSpeed = 0.0 if isPaused else gameSpeed
+	
 	delta = delta * gameSpeed  # easily add a speed up button that can increase game speed 2x/4x/etc.
 	
 	if isPlaying:		# if fight isnt finished
@@ -124,16 +131,24 @@ func check_enemies():
 				characterList[i] = remainingEnemiesList[0]
 				characterSpawnPos[i].add_child(characterList[i])
 				
+				characterList[i].hitbox.pressed.connect(select_enemy_unit.bind(i))
+				characterList[i].index = i
+				
 				#remainingEnemiesList[0]._ready()
 				remainingEnemiesList.pop_front()
 		else: break
 	
-	targetIndex = -1
+	tempIndex = -1
 	for j in range(1, enemyAmount):
 		if characterList[j] != null:
-			targetIndex = j
-	if targetIndex == -1:
+			tempIndex = j
+			#select_enemy_unit(tempIndex)
+	if tempIndex == -1:
 		finish_fight(true)
+		return
+	
+	if targetIndex == -1 || characterList[targetIndex] == null:
+		select_enemy_unit(tempIndex)
 	
 	pass
 
@@ -150,14 +165,18 @@ func try_skills() -> bool:
 			if overcharge > maxOvercharge:
 				maxOvercharge = overcharge
 				maxPos = i
-			i += 1
+		i += 1
 	
 	if maxPos != -1:
 		# targeting logic should maybe be tweaked
 		var target = characterList[targetIndex] if maxPos == 0 else characterList[0]
 		if target != null && characterList[maxPos] != null:
+			print(characterList[maxPos].charName + " charge: " + str(maxOvercharge))
 			characterList[maxPos].UseSkill([target, characterList[1], characterList[2], characterList[3]])
-		return true
+			return true
+		else:
+			print("Number " + str(maxPos) + " says something's fucked")
+			print(JSON.stringify(characterList))
 	
 	return false
 
@@ -226,3 +245,23 @@ func _on_exit_battle_pressed() -> void:
 	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
 	SaveManager.save_game()
 	request_exit_signal.emit()
+
+func select_enemy_unit(ind : int):
+	var i : int = 0
+	for c in characterList:
+		if c != null:
+			c.select(c.index == ind)
+			i+=1
+	
+	targetIndex = ind
+	pass
+
+
+func _on_pause_toggled(toggled_on: bool) -> void:
+	isPaused = !toggled_on
+	pass # Replace with function body.
+
+
+func _on_fast_toggled(toggled_on: bool) -> void:
+	isFast = !toggled_on
+	pass # Replace with function body.

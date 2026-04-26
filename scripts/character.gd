@@ -4,7 +4,9 @@ var damagePopup = load("res://scenes/damagePopup.tscn")
 var skillUiScene = load("res://scenes/skillUI.tscn")
 var charName = "Character"
 var level : int = 1
+var index : int = -1
 
+@onready var hitbox = $HitBox
 @onready var character = $"."
 @onready var particles = $GPUParticles2D
 @onready var healthBar = $"VBoxContainer/Container--Sprite2D/ProgressBar"
@@ -30,7 +32,7 @@ var statChanges : CharacterStats = CharacterStats.new() # final stats, including
 var statusEffects : Array[StatusEffect] = []
 
 
-var skills = []
+var skills : Array[Skill] = []
 var skillToUse = -1
 
 
@@ -119,6 +121,8 @@ func CheckSkillCharge() -> float:
 func UseSkill(target : Array[Character]) -> void:
 	if self.IsParalyzed():
 		skills[skillToUse].isParalyzed = true
+	
+	skills[skillToUse].isCurrentAttack = true
 	
 	if skills[skillToUse].isAoE:
 		skills[skillToUse].Use(self, target[1])
@@ -282,3 +286,6 @@ func CreatePlayerCompositeImage():
 		image.blend_rect(source, Rect2(Vector2.ZERO, source.get_size()), Vector2.ZERO)
 	
 	pass
+
+func select(on : bool):
+	$"VBoxContainer/Container--Sprite2D/Selection".visible = on

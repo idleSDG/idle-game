@@ -2,12 +2,61 @@
 
 [ext_resource type="Script" uid="uid://drhkhd4gfdf3i" path="res://scripts/battle_system.gd" id="1_th188"]
 [ext_resource type="Script" uid="uid://biqv00sj5thfe" path="res://scripts/battleLabel.gd" id="2_1xk2j"]
+[ext_resource type="Texture2D" uid="uid://cmqf4mvip8xod" path="res://assets/hud/pause.png" id="2_mhs3n"]
 [ext_resource type="Texture2D" uid="uid://blkd7n7vu8yfu" path="res://assets/enemies/Battleground1.png" id="3_cnfnp"]
+[ext_resource type="Texture2D" uid="uid://c3krf2aihmxt6" path="res://assets/hud/fast.png" id="3_osvxu"]
+
+[sub_resource type="DPITexture" id="DPITexture_mhs3n"]
+
+[sub_resource type="DPITexture" id="DPITexture_osvxu"]
 
 [node name="Battle" type="Node2D" unique_id=868618005]
 script = ExtResource("1_th188")
 
 [node name="Main Scene" type="CanvasLayer" parent="." unique_id=68912168]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main Scene" unique_id=533918086]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -501.0
+offset_top = -682.0
+offset_right = -57.0
+offset_bottom = -550.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Pause" type="CheckBox" parent="Main Scene/HBoxContainer" unique_id=1076112190]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+theme_override_colors/icon_hover_color = Color(0.72464263, 0.7246426, 0.7246426, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.74978, 0.74978, 0.74977994, 1)
+theme_override_icons/checked = SubResource("DPITexture_mhs3n")
+theme_override_icons/unchecked = SubResource("DPITexture_osvxu")
+button_pressed = true
+icon = ExtResource("2_mhs3n")
+expand_icon = true
+
+[node name="Fast" type="CheckBox" parent="Main Scene/HBoxContainer" unique_id=1036546450]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
+theme_override_colors/icon_hover_color = Color(0.72464263, 0.7246426, 0.7246426, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.74978, 0.74978, 0.74977994, 1)
+theme_override_icons/checked = SubResource("DPITexture_mhs3n")
+theme_override_icons/unchecked = SubResource("DPITexture_osvxu")
+button_pressed = true
+icon = ExtResource("3_osvxu")
+expand_icon = true
 
 [node name="SecondsLabel" type="Label" parent="Main Scene" unique_id=1318015151]
 anchors_preset = 8
@@ -157,4 +206,6 @@ position = Vector2(658, 654.00006)
 scale = Vector2(1.228805, 1.228805)
 texture = ExtResource("3_cnfnp")
 
+[connection signal="toggled" from="Main Scene/HBoxContainer/Pause" to="." method="_on_pause_toggled"]
+[connection signal="toggled" from="Main Scene/HBoxContainer/Fast" to="." method="_on_fast_toggled"]
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
