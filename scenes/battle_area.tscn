@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cmqf4mvip8xod" path="res://assets/hud/pause.png" id="2_mhs3n"]
 [ext_resource type="Texture2D" uid="uid://blkd7n7vu8yfu" path="res://assets/enemies/Battleground1.png" id="3_cnfnp"]
 [ext_resource type="Texture2D" uid="uid://c3krf2aihmxt6" path="res://assets/hud/fast.png" id="3_osvxu"]
+[ext_resource type="PackedScene" uid="uid://dobjjs6ykdmio" path="res://scenes/battleUI.tscn" id="6_l3vuj"]
 
 [sub_resource type="DPITexture" id="DPITexture_mhs3n"]
 
@@ -13,10 +14,15 @@
 [node name="Battle" type="Node2D" unique_id=868618005]
 script = ExtResource("1_th188")
 
+[node name="BG" type="Sprite2D" parent="." unique_id=1876381721]
+position = Vector2(658, 654.00006)
+scale = Vector2(1.228805, 1.228805)
+texture = ExtResource("3_cnfnp")
+
 [node name="Main Scene" type="CanvasLayer" parent="." unique_id=68912168]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main Scene" unique_id=533918086]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -190,21 +196,29 @@ grow_vertical = 2
 visible = false
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.77300006
+anchor_top = 0.545
 anchor_right = 0.5
-anchor_bottom = 0.77300006
+anchor_bottom = 0.545
 offset_left = -400.0
-offset_top = -150.16016
+offset_top = 54.599976
 offset_right = 400.0
-offset_bottom = 149.83984
+offset_bottom = 181.59998
 theme_override_font_sizes/font_size = 87
 text = "Exit Battle
 "
 
-[node name="BG" type="Sprite2D" parent="." unique_id=1876381721]
-position = Vector2(658, 654.00006)
-scale = Vector2(1.228805, 1.228805)
-texture = ExtResource("3_cnfnp")
+[node name="Container" type="Container" parent="Main Scene" unique_id=150168763]
+anchors_preset = -1
+anchor_top = 0.68
+anchor_right = 1.0150001
+anchor_bottom = 0.94600004
+offset_left = -3.0
+offset_top = -62.599976
+offset_right = -0.20007324
+offset_bottom = 1297.6799
+
+[node name="BattleUI" parent="Main Scene/Container" unique_id=1238233801 instance=ExtResource("6_l3vuj")]
+layout_mode = 2
 
 [connection signal="toggled" from="Main Scene/HBoxContainer/Pause" to="." method="_on_pause_toggled"]
 [connection signal="toggled" from="Main Scene/HBoxContainer/Fast" to="." method="_on_fast_toggled"]

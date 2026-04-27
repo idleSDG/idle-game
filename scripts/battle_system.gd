@@ -1,5 +1,7 @@
 extends Node
 
+@onready var battle_ui: Control = $"Main Scene/Container/BattleUI"
+
 @onready var canvas = $"Main Scene"
 @onready var combatFinish = $"Main Scene/CombatFinishPopup"
 @onready var characterSpawnPos = [
@@ -65,6 +67,8 @@ func _ready() -> void:
 	instance.isPlayer = true
 	characterList[0] = instance
 	characterSpawnPos[0].add_child(instance)
+	characterList[0].hitbox.pressed.connect(select_enemy_unit.bind(0))
+	characterList[0].index = 0
 	# END OF TEMPORARY
 	
 	for enemy in BattleVariables.current_battle_level.enemies:
@@ -142,13 +146,12 @@ func check_enemies():
 	for j in range(1, enemyAmount):
 		if characterList[j] != null:
 			tempIndex = j
-			#select_enemy_unit(tempIndex)
 	if tempIndex == -1:
 		finish_fight(true)
 		return
 	
 	if targetIndex == -1 || characterList[targetIndex] == null:
-		select_enemy_unit(tempIndex)
+		select_enemy_slot(tempIndex)
 	
 	pass
 
@@ -193,6 +196,7 @@ func update_visuals(delta: float) :
 	for c in characterList:
 		if c != null:
 			c.UpdateVisuals(delta)
+	battle_ui.UpdateStatDisplay()
 	pass
 
 # finishes the fight
@@ -241,20 +245,29 @@ func simulate(length : float):
 			length = 0
 	pass
 
+
+
 func _on_exit_battle_pressed() -> void:
 	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
 	SaveManager.save_game()
 	request_exit_signal.emit()
 
+
 func select_enemy_unit(ind : int):
-	var i : int = 0
-	for c in characterList:
-		if c != null:
-			c.select(c.index == ind)
-			i+=1
+	select_enemy_slot(ind)
 	
-	targetIndex = ind
+	battle_ui.StartPreview(characterList[ind])
 	pass
+
+func select_enemy_slot(ind : int):
+	if (ind != 0):
+		var i : int = 0
+		for c in characterList:
+			if c != null:
+				c.select(c.index == ind)
+				i+=1
+		targetIndex = ind
+
 
 
 func _on_pause_toggled(toggled_on: bool) -> void:
