@@ -40,6 +40,7 @@ color_ramp = SubResource("GradientTexture1D_2hyy3")
 viewport_path = NodePath("SubViewport")
 
 [node name="Character" type="Node2D" unique_id=582329081]
+y_sort_enabled = true
 script = ExtResource("1_rkhd4")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2074421435]
@@ -197,6 +198,7 @@ scale = Vector2(0.29990333, 0.12264747)
 texture = SubResource("ViewportTexture_0dpix")
 
 [node name="HitBox" type="Button" parent="." unique_id=905537464]
+modulate = Color(1, 1, 1, 0)
 z_index = 35
 offset_left = -115.0
 offset_top = -154.0

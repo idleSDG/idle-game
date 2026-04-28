@@ -48,8 +48,8 @@ func _ready() -> void:
 		wizardSprites.visible = true;
 		trail.texture = ImageTexture.create_from_image(image)
 	else:
-		trail.texture = baseSprite.texture
 		baseSprite.texture = sprite
+		trail.texture = baseSprite.texture
 	
 	for s in skills:
 		s.set_visuals()
