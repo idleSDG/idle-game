@@ -22,15 +22,21 @@ func get_equipped(slot: EquipmentItem.Slot) -> EquipmentItem:
 
 func get_total_bonuses() -> Dictionary:
 	var bonuses = {
-		"damage_bonus_pct": 0.0,
+		"health_pct":         0.0,
+		"attack_pct":         0.0,
+		"defense_pct":        0.0,
+		"crit_rate_pct":      0.0,
+		"crit_dmg_pct":       0.0,
 		"ingredient_gain_pct": 0.0,
-		"crit_rate_bonus": 0.0,
 	}
 	for item in equipped.values():
 		if item != null:
-			bonuses["damage_bonus_pct"]     += item.damage_bonus_pct
-			bonuses["ingredient_gain_pct"]  += item.ingredient_gain_pct
-			bonuses["crit_rate_bonus"]      += item.crit_rate_bonus
+			bonuses["health_pct"]          += item.health_bonus_pct
+			bonuses["attack_pct"]          += item.attack_bonus_pct
+			bonuses["defense_pct"]         += item.defense_bonus_pct
+			bonuses["crit_rate_pct"]       += item.crit_rate_bonus_pct
+			bonuses["crit_dmg_pct"]        += item.crit_dmg_bonus_pct
+			bonuses["ingredient_gain_pct"] += item.ingredient_gain_bonus_pct
 	return bonuses
 
 func get_save_data() -> Dictionary:
@@ -41,12 +47,13 @@ func get_save_data() -> Dictionary:
 	return dict
 
 func load_save_data(data: Dictionary) -> Error:
-	var prototypes = PrototypeItems.new().get_test_items() # reload all prototypes
 	for slot_str in data:
 		var slot = int(slot_str)
 		var item_name = data[slot_str]
 		equipped[slot] = null
-		for item in prototypes:
+		if item_name == "":
+			continue
+		for item in PlayerInventory.equipment:
 			if item.item_name == item_name and item.slot == slot:
 				equipped[slot] = item
 				break

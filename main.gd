@@ -1,11 +1,12 @@
-extends Node
+class_name Main extends Node
+
+@export var home_scene: PackedScene = preload("res://src/features/home/home.tscn")
+@export var battle_scene: PackedScene = preload("res://scenes/battle.tscn")
+@export var character_scene: PackedScene = preload("res://src/features/characters/character_menu.tscn")
+@export var settings_scene: PackedScene = preload("res://scenes/settings.tscn")
+@export var inventory_scene: PackedScene = preload("res://scenes/inventory.tscn")
 
 @onready var content_area = $ContentArea
-@onready var home_scene = preload("res://scenes/home.tscn")
-@onready var battle_scene = preload("res://scenes/battle.tscn")
-@onready var character_scene = preload("res://scenes/character_menu.tscn")
-@onready var settings_scene = preload("res://scenes/settings.tscn")
-@onready var inventory_scene = preload("res://scenes/inventory.tscn")
 @onready var nav_bar = $"NavBarLayer/NavBar"
 @onready var hud_layer = $HUDLayer
 

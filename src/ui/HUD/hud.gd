@@ -50,7 +50,7 @@ func _on_xp_changed(current_xp: int, xp_required: int) -> void:
 	xp_bar.value = PlayerProgress.xp_progress_ratio() * 100.0
 	xp_label.text = "%d / %d XP" % [current_xp, xp_required]
 
-func _on_leveled_up(new_level: int) -> void:
+func _on_leveled_up(old_level: int, new_level: int) -> void:
 	level_label.text = "Level %d" % new_level
 
 func _on_test_button_pressed() -> void:
