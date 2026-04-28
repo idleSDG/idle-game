@@ -18,7 +18,9 @@ var collectable_money_gain_rate_seconds: float = 0.0167
 signal collectable_money_changed(collectable_money: int)
 
 # Ingredients
-var ingredients: Dictionary[Ingredient.Type, Ingredient] = _create_default_ingredients()
+var steps : steps_progress
+var screentime : screentime_progress
+var ingredients: Dictionary[Ingredient.Type, Ingredient] = {}
 signal ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient])
 var _steps_initialized: bool = false
 var _screen_time_initialized: bool = false
@@ -26,28 +28,36 @@ var _data_ready = [false, false]
 
 class StepsMomentumDataSource:
 	extends RefCounted
+	var steps : steps_progress
+	
+	func _init(step_source : steps_progress) -> void:
+		steps = step_source
 
 	func get_latest_value() -> Dictionary:
-		return StepsProgress.get_latest_value_for_profile()
+		return steps.get_latest_value_for_profile()
 
 	func get_history(start_t: float, end_t: float) -> Array:
-		return StepsProgress.get_profile_momentum_history_between(start_t, end_t)
+		return steps.get_profile_momentum_history_between(start_t, end_t)
 		
 class ScreenTimeMomentumDataSource:
 	extends RefCounted
+	var screentime : screentime_progress
+	
+	func	 _init(screentime_source : screentime_progress) -> void:
+		screentime = screentime_source
 
 	func get_latest_value() -> Dictionary:
-		return ScreenTimeProgress.get_latest_value_for_profile()
+		return screentime.get_latest_value_for_profile()
 
 	func get_history(start_t: float, end_t: float) -> Array:
-		return ScreenTimeProgress.get_profile_momentum_history_between(start_t, end_t)
+		return screentime.get_profile_momentum_history_between(start_t, end_t)
 
 # Used to overwrite values from the save
 func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 	return {
 		Ingredient.Type.KINETIC_SHARD: Ingredient.new(
 			Ingredient.Type.KINETIC_SHARD,
-			MomentumTracker.new(MomentumConfig.new(6000.0, 12000.0), StepsMomentumDataSource.new()),
+			MomentumTracker.new(MomentumConfig.new(6000.0, 12000.0), StepsMomentumDataSource.new(steps)),
 			0.0,
 			0,
 			10000,
@@ -55,7 +65,7 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 		),
 		Ingredient.Type.FOCUS_FLUX: Ingredient.new(
 			Ingredient.Type.FOCUS_FLUX,
-			MomentumTracker.new(MomentumConfig.new(-20, -5), ScreenTimeMomentumDataSource.new()),
+			MomentumTracker.new(MomentumConfig.new(-20, -5), ScreenTimeMomentumDataSource.new(screentime)),
 			0.0,
 			0,
 			10000,
@@ -64,13 +74,21 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 	}
 
 func _ready():
+	steps = steps_progress.new()
+	screentime = screentime_progress.new()
+	
+	ingredients = _create_default_ingredients()
+	
 	_create_timer()
 	inventory_update_timer.paused = true
 
-	StepsProgress.steps_data_ready.connect(_on_steps_data_ready)
-	if StepsProgress.has_steps_data():
+	steps.steps_data_ready.connect(_on_steps_data_ready)
+	if steps.has_steps_data():
 		_on_steps_data_ready()
-	ScreenTimeProgress.screen_time_data_ready.connect(_on_screen_time_data_ready)
+	screentime.screen_time_data_ready.connect(_on_screen_time_data_ready)
+	if screentime.has_screen_time_data():
+		_on_screen_time_data_ready()
+
 	_init_equipment()
 	
 func _init_equipment() -> void:
