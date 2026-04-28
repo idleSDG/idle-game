@@ -36,9 +36,6 @@ scale_min = 2.0
 scale_max = 2.0
 color_ramp = SubResource("GradientTexture1D_2hyy3")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0dpix"]
-viewport_path = NodePath("SubViewport")
-
 [node name="Character" type="Node2D" unique_id=582329081]
 y_sort_enabled = true
 script = ExtResource("1_rkhd4")
@@ -195,7 +192,6 @@ z_index = 1
 z_as_relative = false
 position = Vector2(334, -59)
 scale = Vector2(0.29990333, 0.12264747)
-texture = SubResource("ViewportTexture_0dpix")
 
 [node name="HitBox" type="Button" parent="." unique_id=905537464]
 modulate = Color(1, 1, 1, 0)

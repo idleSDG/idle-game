@@ -11,6 +11,9 @@ extends Node
 
 signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
+@onready var pause: CheckBox = $"Main Scene/HBoxContainer/Pause"
+@onready var fast: CheckBox = $"Main Scene/HBoxContainer/Fast"
+
 
 @onready var level : battle_level = BattleVariables.current_battle_level
 
@@ -27,9 +30,6 @@ var timer = 0.0
 var gameSpeed = 1.0
 var isPlaying = true
 
-var isFast = false
-var isPaused = false
-
 var _focus_lost_at : float = 0.0
 
 func _notification(what: int) -> void:
@@ -41,7 +41,7 @@ func _notification(what: int) -> void:
 	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
 		if not isPlaying:
 			return
-		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
+		var elapsed = BattleVariables.battleElapsed #Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
 			simulate(elapsed)
 			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
@@ -58,6 +58,10 @@ func _ready() -> void:
 		exit_button.visible = true
 		timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 		return
+	
+	pause.set_pressed_no_signal(!BattleVariables.isPaused) 
+	fast.set_pressed_no_signal(!BattleVariables.isFast)
+
 	
 	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
 	var instance = character_scene.instantiate()
@@ -79,11 +83,12 @@ func _ready() -> void:
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
 	if BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE:
 		var now := Time.get_unix_time_from_system()
-		simulate(now - BattleVariables.battleStart)
+		simulate(BattleVariables.battleElapsed) #(now - BattleVariables.battleStart)
 		timerLabel.time = int(now - BattleVariables.battleStart)
 	else:
 		BattleVariables.battleState = BattleVariables.BattleStates.IN_BATTLE
 		BattleVariables.battleStart = Time.get_unix_time_from_system()
+		BattleVariables.battleElapsed = 0.0
 		SaveManager.save_game()
 	
 	pass # Replace with function body.
@@ -91,10 +96,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # Drives the primary game logic
 func _process(delta: float) -> void:
-	gameSpeed = 2.0 if isFast else 1.0
-	gameSpeed = 0.0 if isPaused else gameSpeed
+	gameSpeed = 2.0 if BattleVariables.isFast else 1.0
+	gameSpeed = 0.0 if BattleVariables.isPaused else gameSpeed
 	
-	delta = delta * gameSpeed  # easily add a speed up button that can increase game speed 2x/4x/etc.
+	delta = delta * gameSpeed
+	BattleVariables.battleElapsed += delta
 	
 	if isPlaying:		# if fight isnt finished
 		update_visuals(delta)
@@ -174,7 +180,6 @@ func try_skills() -> bool:
 		# targeting logic should maybe be tweaked
 		var target = characterList[targetIndex] if maxPos == 0 else characterList[0]
 		if target != null && characterList[maxPos] != null:
-			print(characterList[maxPos].charName + " charge: " + str(maxOvercharge))
 			characterList[maxPos].UseSkill([target, characterList[1], characterList[2], characterList[3]])
 			return true
 		else:
@@ -228,7 +233,7 @@ func simulate(length : float):
 		length -= delta
 		
 		if isPlaying:
-			#update_visuals()
+			#update_visuals(delta)
 			check_enemies()
 			if !try_skills():
 				pass_time(delta)
@@ -271,10 +276,10 @@ func select_enemy_slot(ind : int):
 
 
 func _on_pause_toggled(toggled_on: bool) -> void:
-	isPaused = !toggled_on
+	BattleVariables.isPaused = !toggled_on
 	pass # Replace with function body.
 
 
 func _on_fast_toggled(toggled_on: bool) -> void:
-	isFast = !toggled_on
+	BattleVariables.isFast = !toggled_on
 	pass # Replace with function body.

@@ -115,7 +115,6 @@ func Use(user : Character, target : Character) -> bool:
 			target.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 	
 	if isCurrentAttack:
-		print("ChargeTaken")
 		charge = charge - maxCharge
 	
 	UpdateBar()
