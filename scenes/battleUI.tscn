@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://dobjjs6ykdmio"]
+
+[ext_resource type="Script" uid="uid://bot7gyad0rwje" path="res://scripts/ui/battle_ui.gd" id="1_aeslv"]
+[ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="2_aeslv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dm231"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5gm01"]
+bg_color = Color(0.4710033, 0.853177, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6k20a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aeslv"]
+
+[node name="BattleUI" type="Control" unique_id=1238233801]
+custom_minimum_size = Vector2(1000, 285)
+layout_mode = 3
+anchor_right = 0.9990001
+anchor_bottom = 0.155
+offset_right = 0.079956055
+offset_bottom = 476.4
+script = ExtResource("1_aeslv")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2043750506]
+custom_minimum_size = Vector2(1000, 285)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_right = 9.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.18717623, 0.18717608, 0.18717614, 1)
+
+[node name="UnitPreview" type="Control" parent="." unique_id=2068457909]
+visible = false
+layout_mode = 1
+anchor_right = 1.0
+anchor_bottom = 0.76000005
+offset_right = 5.0
+offset_bottom = -42.24005
+
+[node name="Button" type="Button" parent="UnitPreview" unique_id=1346103917]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.019000001
+anchor_top = 0.064
+anchor_right = 0.019000001
+anchor_bottom = 0.064
+offset_left = 40.404
+offset_top = 38.056
+offset_right = 140.40399
+offset_bottom = 138.056
+size_flags_horizontal = 6
+theme_override_colors/font_disabled_color = Color(0.88, 0.88, 0.88, 1)
+theme_override_font_sizes/font_size = 39
+icon = ExtResource("2_aeslv")
+alignment = 2
+icon_alignment = 1
+expand_icon = true
+
+[node name="Main Stats" type="Control" parent="UnitPreview" unique_id=2093512024]
+layout_mode = 1
+anchor_left = 0.18200001
+anchor_top = 0.049000002
+anchor_right = 0.98700005
+anchor_bottom = 0.39900002
+offset_left = 0.16899109
+offset_top = -0.651001
+offset_right = -0.91516113
+offset_bottom = 0.1459961
+
+[node name="HpBar" type="ProgressBar" parent="UnitPreview/Main Stats" unique_id=1191174455]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 70.797
+offset_right = 588.0
+offset_bottom = 93.797
+theme_override_styles/background = SubResource("StyleBoxFlat_dm231")
+theme_override_styles/fill = SubResource("StyleBoxFlat_5gm01")
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="HpCount" type="Label" parent="UnitPreview/Main Stats/HpBar" unique_id=544149430]
+layout_mode = 0
+offset_top = -31.0
+offset_right = 568.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 20
+text = "65/212"
+horizontal_alignment = 1
+vertical_alignment = 3
+
+[node name="Name" type="Label" parent="UnitPreview/Main Stats" unique_id=2048908631]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.022000002
+anchor_top = 0.526
+anchor_right = 0.022000002
+anchor_bottom = 0.526
+offset_left = 0.31199837
+offset_top = -0.04083252
+offset_right = 841.5517
+offset_bottom = 84.959175
+theme_override_font_sizes/font_size = 54
+text = "Wizard"
+
+[node name="LevelCount" type="Label" parent="UnitPreview/Main Stats" unique_id=50169080]
+layout_mode = 0
+offset_left = -16.457
+offset_top = -25.636993
+offset_right = 152.543
+offset_bottom = 86.797
+theme_override_font_sizes/font_size = 29
+text = "Level 3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control2" type="Control" parent="UnitPreview" unique_id=659272086]
+layout_mode = 1
+anchor_left = 0.014
+anchor_top = 0.41400003
+anchor_right = 0.98700005
+anchor_bottom = 0.95300007
+offset_left = -0.1760006
+offset_top = 10.955978
+offset_right = -0.91516113
+offset_bottom = -100.33801
+
+[node name="Stats" type="ScrollContainer" parent="UnitPreview/Control2" unique_id=273177916]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.47100002
+anchor_bottom = 1.218
+offset_left = 8.0
+offset_right = -0.43069458
+offset_bottom = -0.06915283
+theme_override_styles/panel = SubResource("StyleBoxFlat_6k20a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitPreview/Control2/Stats" unique_id=1905570974]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StatsText" type="RichTextLabel" parent="UnitPreview/Control2/Stats/VBoxContainer" unique_id=1607821720]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[b]STATS[/b] [p]rahh"
+fit_content = true
+
+[node name="Buffs_Debuffs" type="ScrollContainer" parent="UnitPreview/Control2" unique_id=2045583119]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.51000005
+anchor_right = 1.0
+anchor_bottom = 1.218
+offset_left = 0.463562
+offset_right = -9.99292
+offset_bottom = -0.06915283
+theme_override_styles/panel = SubResource("StyleBoxFlat_aeslv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UnitPreview/Control2/Buffs_Debuffs" unique_id=58200908]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BuffsText" type="RichTextLabel" parent="UnitPreview/Control2/Buffs_Debuffs/VBoxContainer" unique_id=1823896911]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/bold_font_size = 24
+theme_override_font_sizes/bold_italics_font_size = 24
+theme_override_font_sizes/italics_font_size = 24
+theme_override_font_sizes/mono_font_size = 24
+bbcode_enabled = true
+text = "[b]KILL YOURSELF[/b] amirite"
+fit_content = true
+
+[connection signal="pressed" from="UnitPreview/Button" to="." method="_on_button_pressed"]

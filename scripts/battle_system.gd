@@ -1,5 +1,7 @@
 extends Node
 
+@onready var battle_ui: Control = $"Main Scene/Container/BattleUI"
+
 @onready var canvas = $"Main Scene"
 @onready var combatFinish = $"Main Scene/CombatFinishPopup"
 @onready var characterSpawnPos = [
@@ -9,13 +11,17 @@ extends Node
 
 signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
+@onready var pause: CheckBox = $"Main Scene/HBoxContainer/Pause"
+@onready var fast: CheckBox = $"Main Scene/HBoxContainer/Fast"
+
 
 @onready var level : battle_level = BattleVariables.current_battle_level
 
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd") 
 
-var targetIndex = 1
+var targetIndex = -1
+var tempIndex = 1
 var characterList : Array[Character] = [] 
 var remainingEnemiesList = []
 var enemyAmount : int = 4 # enemy amount = enemies on field + 1 (for the player)
@@ -35,7 +41,7 @@ func _notification(what: int) -> void:
 	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
 		if not isPlaying:
 			return
-		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
+		var elapsed = BattleVariables.battleElapsed #Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
 			simulate(elapsed)
 			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
@@ -53,6 +59,10 @@ func _ready() -> void:
 		timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 		return
 	
+	pause.set_pressed_no_signal(!BattleVariables.isPaused) 
+	fast.set_pressed_no_signal(!BattleVariables.isFast)
+
+	
 	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
 	var instance = character_scene.instantiate()
 	instance.SetStats(BattleVariables.GetPlayer())
@@ -61,6 +71,8 @@ func _ready() -> void:
 	instance.isPlayer = true
 	characterList[0] = instance
 	characterSpawnPos[0].add_child(instance)
+	characterList[0].hitbox.pressed.connect(select_enemy_unit.bind(0))
+	characterList[0].index = 0
 	# END OF TEMPORARY
 	
 	for enemy in BattleVariables.current_battle_level.enemies:
@@ -71,11 +83,12 @@ func _ready() -> void:
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
 	if BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE:
 		var now := Time.get_unix_time_from_system()
-		simulate(now - BattleVariables.battleStart)
+		simulate(BattleVariables.battleElapsed) #(now - BattleVariables.battleStart)
 		timerLabel.time = int(now - BattleVariables.battleStart)
 	else:
 		BattleVariables.battleState = BattleVariables.BattleStates.IN_BATTLE
 		BattleVariables.battleStart = Time.get_unix_time_from_system()
+		BattleVariables.battleElapsed = 0.0
 		SaveManager.save_game()
 	
 	pass # Replace with function body.
@@ -83,7 +96,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # Drives the primary game logic
 func _process(delta: float) -> void:
-	delta = delta * gameSpeed  # easily add a speed up button that can increase game speed 2x/4x/etc.
+	gameSpeed = 2.0 if BattleVariables.isFast else 1.0
+	gameSpeed = 0.0 if BattleVariables.isPaused else gameSpeed
+	
+	delta = delta * gameSpeed
+	BattleVariables.battleElapsed += delta
 	
 	if isPlaying:		# if fight isnt finished
 		update_visuals(delta)
@@ -124,16 +141,23 @@ func check_enemies():
 				characterList[i] = remainingEnemiesList[0]
 				characterSpawnPos[i].add_child(characterList[i])
 				
+				characterList[i].hitbox.pressed.connect(select_enemy_unit.bind(i))
+				characterList[i].index = i
+				
 				#remainingEnemiesList[0]._ready()
 				remainingEnemiesList.pop_front()
 		else: break
 	
-	targetIndex = -1
+	tempIndex = -1
 	for j in range(1, enemyAmount):
 		if characterList[j] != null:
-			targetIndex = j
-	if targetIndex == -1:
+			tempIndex = j
+	if tempIndex == -1:
 		finish_fight(true)
+		return
+	
+	if targetIndex == -1 || characterList[targetIndex] == null:
+		select_enemy_slot(tempIndex)
 	
 	pass
 
@@ -150,14 +174,17 @@ func try_skills() -> bool:
 			if overcharge > maxOvercharge:
 				maxOvercharge = overcharge
 				maxPos = i
-			i += 1
+		i += 1
 	
 	if maxPos != -1:
 		# targeting logic should maybe be tweaked
 		var target = characterList[targetIndex] if maxPos == 0 else characterList[0]
 		if target != null && characterList[maxPos] != null:
 			characterList[maxPos].UseSkill([target, characterList[1], characterList[2], characterList[3]])
-		return true
+			return true
+		else:
+			print("Number " + str(maxPos) + " says something's fucked")
+			print(JSON.stringify(characterList))
 	
 	return false
 
@@ -174,6 +201,7 @@ func update_visuals(delta: float) :
 	for c in characterList:
 		if c != null:
 			c.UpdateVisuals(delta)
+	battle_ui.UpdateStatDisplay()
 	pass
 
 # finishes the fight
@@ -205,7 +233,7 @@ func simulate(length : float):
 		length -= delta
 		
 		if isPlaying:
-			#update_visuals()
+			#update_visuals(delta)
 			check_enemies()
 			if !try_skills():
 				pass_time(delta)
@@ -222,7 +250,36 @@ func simulate(length : float):
 			length = 0
 	pass
 
+
+
 func _on_exit_battle_pressed() -> void:
 	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
 	SaveManager.save_game()
 	request_exit_signal.emit()
+
+
+func select_enemy_unit(ind : int):
+	select_enemy_slot(ind)
+	
+	battle_ui.StartPreview(characterList[ind])
+	pass
+
+func select_enemy_slot(ind : int):
+	if (ind != 0):
+		var i : int = 0
+		for c in characterList:
+			if c != null:
+				c.select(c.index == ind)
+				i+=1
+		targetIndex = ind
+
+
+
+func _on_pause_toggled(toggled_on: bool) -> void:
+	BattleVariables.isPaused = !toggled_on
+	pass # Replace with function body.
+
+
+func _on_fast_toggled(toggled_on: bool) -> void:
+	BattleVariables.isFast = !toggled_on
+	pass # Replace with function body.

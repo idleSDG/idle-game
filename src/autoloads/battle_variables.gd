@@ -4,7 +4,11 @@ enum BattleStates { IN_BATTLE, AWAITING_EXIT, IN_LEVEL_SELECT }
 var battleState  : BattleStates = BattleStates.IN_LEVEL_SELECT
 var lastLogin : float = 0
 var battleStart : float = 0
+var battleElapsed : float = 0
 var currentLogin : float = 0
+
+var isPaused : bool = false
+var isFast : bool = false
 
 var current_battle_level : battle_level
 var current_campaign : String
@@ -39,13 +43,21 @@ func get_save_data() -> Dictionary:
 		"battleStart" : battleStart,
 		"campaigns": get_campaign_save_data(),
 		"current_campaign": current_campaign,
-		"current_battle_level": current_battle_level.get_save_data() if current_battle_level != null else {}
+		"current_battle_level": current_battle_level.get_save_data() if current_battle_level != null else {},
+		"isPaused": isPaused,
+		"isFast": isFast,
+		"battleElapsed": battleElapsed
 	}
 	
 func load_save_data(data: Dictionary) -> Error:
 	battleState = (data["battleState"] if data.has("battleState") else BattleStates.IN_LEVEL_SELECT)
 	lastLogin = (data["lastLogin"] if data.has("lastLogin") else Time.get_unix_time_from_system())
 	battleStart = (data["battleStart"] if data.has("battleStart") else Time.get_unix_time_from_system())
+	isPaused = data["isPaused"] if data.has("isPaused") else false
+	isFast = data["isFast"] if data.has("isFast") else false
+	
+	battleElapsed = (data["battleElapsed"] if data.has("battleElapsed") else 0.0)
+	
 	if data.has("campaigns"):
 		campaigns = []
 		for campaign_data in data["campaigns"]:
@@ -72,6 +84,9 @@ func init_new_save():
 	battleState =  BattleStates.IN_LEVEL_SELECT
 	lastLogin = Time.get_unix_time_from_system()
 	battleStart =  Time.get_unix_time_from_system()
+	isPaused = false
+	isFast = false
+	battleElapsed = 0.0
 	
 	campaigns = []
 	campaigns.append(campaign_map.generate_zoo(1))

@@ -36,10 +36,8 @@ scale_min = 2.0
 scale_max = 2.0
 color_ramp = SubResource("GradientTexture1D_2hyy3")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0dpix"]
-viewport_path = NodePath("SubViewport")
-
 [node name="Character" type="Node2D" unique_id=582329081]
+y_sort_enabled = true
 script = ExtResource("1_rkhd4")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=2074421435]
@@ -59,6 +57,16 @@ offset_bottom = 145.0
 
 [node name="Container--Sprite2D" type="Sprite2D" parent="VBoxContainer" unique_id=522824923]
 position = Vector2(93, 66)
+
+[node name="Selection" type="ColorRect" parent="VBoxContainer/Container--Sprite2D" unique_id=1972655182]
+visible = false
+modulate = Color(1, 0.56, 0.56, 1)
+z_index = 3
+z_as_relative = false
+offset_left = -89.0
+offset_top = 79.0
+offset_right = 90.0
+offset_bottom = 103.0
 
 [node name="ProgressBar2" type="ProgressBar" parent="VBoxContainer/Container--Sprite2D" unique_id=2010766615]
 modulate = Color(0, 0.012617188, 0, 1)
@@ -184,8 +192,13 @@ z_index = 1
 z_as_relative = false
 position = Vector2(334, -59)
 scale = Vector2(0.29990333, 0.12264747)
-texture = SubResource("ViewportTexture_0dpix")
 
-[node name="SubViewport" type="SubViewport" parent="." unique_id=1561311271]
-canvas_item_default_texture_filter = 0
-size = Vector2i(1080, 1920)
+[node name="HitBox" type="Button" parent="." unique_id=905537464]
+modulate = Color(1, 1, 1, 0)
+z_index = 35
+offset_left = -115.0
+offset_top = -154.0
+offset_right = 114.0
+offset_bottom = 105.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
