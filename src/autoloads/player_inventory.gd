@@ -16,7 +16,7 @@ signal money_changed(money: int)
 var collectable_money: int
 var collectable_money_capacity: int = 25
 var collectable_money_progress: float = 0
-var collectable_money_gain_rate_seconds: float = 0.0167
+var collectable_money_gain_rate_seconds: float = 1.0167
 signal collectable_money_changed(collectable_money: int)
 
 # Ingredients
@@ -73,7 +73,6 @@ func _ready():
 	if StepsProgress.has_steps_data():
 		_on_steps_data_ready()
 	ScreenTimeProgress.screen_time_data_ready.connect(_on_screen_time_data_ready)
-	_init_equipment()
 	
 func _init_equipment() -> void:
 	var starter_weapon = EquipmentItem.new("weap1", EquipmentItem.Slot.WEAPON)
@@ -176,6 +175,7 @@ func load_save_data(data: Variant) -> Error:
 	collectable_money = data.get("collectable_money")
 
 	# Restore purchased items from shop catalogue
+	_init_equipment()
 	if data.has("purchased_items"):
 		for item_name in data["purchased_items"]:
 			var item = ShopCatalogue.find_by_name(item_name)
@@ -196,6 +196,7 @@ func init_new_save():
 	ingredients = _create_default_ingredients()
 	money = 0
 	collectable_money = 3
+	_init_equipment()
 
 func _update_inventory():
 	var current_inventory_update_unix_time = Time.get_unix_time_from_system()
