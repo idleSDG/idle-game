@@ -312,6 +312,12 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "INVENTORY"
 
+[node name="ShopButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1125663488]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "SHOP"
+
 [node name="SettingsButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1383281877]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -334,4 +340,5 @@ visible = true
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]

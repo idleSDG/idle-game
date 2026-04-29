@@ -7,8 +7,8 @@ signal buy_pressed(item: EquipmentItem)
 @onready var name_label: Label = $MarginContainer/HBox/InfoVBox/NameLabel
 @onready var stats_label: Label = $MarginContainer/HBox/InfoVBox/StatsLabel
 @onready var cost_label: Label = $MarginContainer/HBox/InfoVBox/CostLabel
-@onready var buy_button: Button = $MarginContainer/HBox/InfoVBox/BuyButton
-@onready var owned_label: Label = $MarginContainer/HBox/InfoVBox/OwnedLabel
+@onready var buy_button: Button = $MarginContainer/HBox/BuyVBox/BuyButton
+@onready var owned_label: Label = $MarginContainer/HBox/BuyVBox/OwnedLabel
  
 var _item : EquipmentItem
  

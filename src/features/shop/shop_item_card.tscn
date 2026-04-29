@@ -25,6 +25,7 @@ stretch_mode = 5
 [node name="InfoVBox" type="VBoxContainer" parent="MarginContainer/HBox" unique_id=1220781524]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 4
 theme_override_constants/separation = 8
 
 [node name="NameLabel" type="Label" parent="MarginContainer/HBox/InfoVBox" unique_id=198558810]
@@ -43,15 +44,20 @@ theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 
-[node name="BuyButton" type="Button" parent="MarginContainer/HBox/InfoVBox" unique_id=1183072894]
+[node name="BuyVBox" type="VBoxContainer" parent="MarginContainer/HBox" unique_id=1182734853]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="BuyButton" type="Button" parent="MarginContainer/HBox/BuyVBox" unique_id=1183072894]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Buy"
 
-[node name="OwnedLabel" type="Label" parent="MarginContainer/HBox/InfoVBox" unique_id=1842356048]
+[node name="OwnedLabel" type="Label" parent="MarginContainer/HBox/BuyVBox" unique_id=1842356048]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.13333334, 0.827451, 0, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 48
 text = "Owned"
 horizontal_alignment = 1
