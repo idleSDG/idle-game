@@ -20,11 +20,13 @@ signal collectable_money_changed(collectable_money: int)
 # Ingredients
 var steps : steps_progress
 var screentime : screentime_progress
+var sleep : sleep_progress
 var ingredients: Dictionary[Ingredient.Type, Ingredient] = {}
 signal ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient])
 var _steps_initialized: bool = false
 var _screen_time_initialized: bool = false
-var _data_ready = [false, false]
+var _sleep_initialized: bool = false
+var _data_ready = [false, false, false]
 
 class StepsMomentumDataSource:
 	extends RefCounted
@@ -51,6 +53,19 @@ class ScreenTimeMomentumDataSource:
 
 	func get_history(start_t: float, end_t: float) -> Array:
 		return screentime.get_profile_momentum_history_between(start_t, end_t)
+		
+class SleepMomentumDataSource:
+	extends RefCounted
+	var sleep : sleep_progress
+	
+	func _init(sleep_source : sleep_progress) -> void:
+		sleep = sleep_source
+
+	func get_latest_value() -> Dictionary:
+		return sleep.get_latest_value_for_profile()
+
+	func get_history(start_t: float, end_t: float) -> Array:
+		return sleep.get_profile_momentum_history_between(start_t, end_t)
 
 # Used to overwrite values from the save
 func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
@@ -70,12 +85,21 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 			0,
 			10000,
 			1.0
+		),
+		Ingredient.Type.DREAM_SHARDS: Ingredient.new(
+			Ingredient.Type.DREAM_SHARDS,
+			MomentumTracker.new(MomentumConfig.new(7 * 60, 8.5 * 60), SleepMomentumDataSource.new(sleep)),
+			0.0,
+			0,
+			10000,
+			1.0
 		)
 	}
 
 func _ready():
 	steps = steps_progress.new()
 	screentime = screentime_progress.new()
+	sleep = sleep_progress.new()
 	
 	ingredients = _create_default_ingredients()
 	
@@ -85,6 +109,9 @@ func _ready():
 	steps.steps_data_ready.connect(_on_steps_data_ready)
 	if steps.has_steps_data():
 		_on_steps_data_ready()
+	sleep.sleep_data_ready.connect(_on_sleep_data_ready)
+	if sleep.has_sleep_data():
+		_on_sleep_data_ready()
 	screentime.screen_time_data_ready.connect(_on_screen_time_data_ready)
 	if screentime.has_screen_time_data():
 		_on_screen_time_data_ready()
@@ -128,11 +155,17 @@ func _on_steps_data_ready():
 	_steps_initialized = true
 	_set_data_ready(0)
 
+func _on_sleep_data_ready():
+	if _sleep_initialized:
+		return
+	_sleep_initialized = true
+	_set_data_ready(1)
+
 func _on_screen_time_data_ready():
 	if _screen_time_initialized:
 		return
 	_screen_time_initialized = true
-	_set_data_ready(1)
+	_set_data_ready(2)
 
 func _set_data_ready(material : int):
 	_data_ready[material] = true

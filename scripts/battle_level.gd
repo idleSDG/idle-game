@@ -24,7 +24,7 @@ func get_save_data() -> Dictionary:
 	"beaten" : beaten,
 	"enemies" : enemies,
 	"enemy_level" : enemy_level}
-
+	
 static func from_save(data : Dictionary) -> battle_level:
 	var p_depth = (data["depth"] if data.has("depth") else 0)
 	var p_position = (data["position"] if data.has("position") else 0)

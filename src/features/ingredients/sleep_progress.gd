@@ -1,37 +1,36 @@
-class_name steps_progress
+class_name sleep_progress
 extends Node
 
-signal steps_data_ready
-signal steps_permissions
+signal sleep_data_ready
+signal sleep_permissions
 
 var _plugin_name = "GodotStepAndSleepPlugin"
-var _steps_plugin
-var _has_steps_data: bool = false
+var _sleep_plugin
+var _has_sleep_data: bool = false
 
-# 1 day today + 8 days needed for history
-var lookback_days: int = 9
+# One deeper than 7 for lookback after midnight
+var lookback_days: int = 8
 ## Dictionary is "YYYY-MM-DD" -> int.
-var daily_steps_by_date: Dictionary = { }
+var daily_sleep_by_date: Dictionary = { }
 var has_history_permissions: bool
-const GRAPH_MAX_STEPS: int = 12000
+const GRAPH_MAX_SLEEP: int = 10 * 60
 
 
 func _init() -> void:
 	has_history_permissions = false
 	if Engine.has_singleton(_plugin_name):
-		_steps_plugin = Engine.get_singleton(_plugin_name)
-		_steps_plugin.on_steps_read.connect(_on_steps)
-		_steps_plugin.on_error.connect(_on_error)
-		_steps_plugin.on_history_permission_result.connect(_on_history_permission)
+		_sleep_plugin = Engine.get_singleton(_plugin_name)
+		_sleep_plugin.on_sleep_read.connect(_on_sleep)
+		_sleep_plugin.on_error.connect(_on_error)
+		_sleep_plugin.on_history_permission_result.connect(_on_history_permission)
 		request_history_permissions()
 	else:
 		#fallback for testing
 		_set_fallback_data()
-		_mark_steps_ready()
+		_mark_sleep_ready()
 
 
 func request_history_permissions():
-	# Wait 10 seconds for permissions, else set fallback
 	#var timer = Timer.new()
 	#timer.wait_time = 10
 	#timer.autostart = true
@@ -39,72 +38,65 @@ func request_history_permissions():
 	#timer.timeout.connect(_on_history_permission.bind(false))
 	#add_child(timer)
 	if Engine.has_singleton(_plugin_name):
-		_steps_plugin.request_history_permissions()
+		_sleep_plugin.request_history_permissions()
 
 
-func has_steps_data() -> bool:
-	return _has_steps_data
+func has_sleep_data() -> bool:
+	return _has_sleep_data
 
 
-func _mark_steps_ready():
-	if _has_steps_data:
+func _mark_sleep_ready():
+	if _has_sleep_data:
 		return
-	_has_steps_data = true
-	steps_data_ready.emit()
+	_has_sleep_data = true
+	sleep_data_ready.emit()
 
 
-func _on_steps(dates: PackedStringArray, steps: PackedInt64Array):
-	daily_steps_by_date.clear()
+func _on_sleep(dates: PackedStringArray, steps: PackedInt64Array):
+	daily_sleep_by_date.clear()
 	var count := mini(dates.size(), steps.size())
 	for i in range(count):
-		daily_steps_by_date[dates[i]] = int(steps[i])
+		daily_sleep_by_date[dates[i]] = int(steps[i])
 
-	_mark_steps_ready()
+	_mark_sleep_ready()
 
 
 func _on_error(err):
-	print("Steps error:", err)
+	print("Sleep error:", err)
 	_set_fallback_data()
-	_mark_steps_ready()
+	_mark_sleep_ready()
 
 
 func _on_history_permission(steps_granted: bool, sleep_granted: bool):
-	if _has_steps_data:
+	if _has_sleep_data:
 		return
-	if steps_granted:
+	if sleep_granted:
 		has_history_permissions = true
-		emit_signal("steps_permissions")
-		_fetch_steps()
-		var timer = Timer.new()
-		timer.wait_time = 10
-		timer.autostart = true
-		timer.one_shot = false
-		timer.timeout.connect(_fetch_steps)
-		add_child(timer)
+		emit_signal("sleep_permissions")
+		_fetch_sleep()
 	else:
 		# For now set the steps to the fallback if permissions are denied
 		_set_fallback_data()
-		_mark_steps_ready()
+		_mark_sleep_ready()
 
 
-func _fetch_steps():
-	_steps_plugin.read_daily_steps(lookback_days)
+func _fetch_sleep():
+	_sleep_plugin.read_daily_sleep(lookback_days)
 
 
-func get_steps_for_day_offset(offset: int) -> int:
+func get_sleep_for_day_offset(offset: int) -> int:
 	var key := _date_key_for_offset(offset)
-	return int(daily_steps_by_date.get(key, 0))
+	return int(daily_sleep_by_date.get(key, 0))
 
 
-func get_momentum_steps_for_day_offset(day_offset: int) -> float:
-	# Momentum for a day is set by the previous day's steps.
-	return float(get_steps_for_day_offset(day_offset + 1))
+func get_momentum_sleep_for_day_offset(day_offset: int) -> float:
+	return float(get_sleep_for_day_offset(day_offset))
 
 
 func get_latest_value_for_profile() -> Dictionary:
 	return {
 		"time": Time.get_unix_time_from_system(),
-		"val": get_momentum_steps_for_day_offset(0),
+		"val": get_momentum_sleep_for_day_offset(0),
 	}
 
 
@@ -115,7 +107,7 @@ func get_profile_momentum_history_between(start_t: float, end_t: float) -> Array
 		history.append(
 			{
 				"time": end_t,
-				"val": get_momentum_steps_for_day_offset(day_offset_now),
+				"val": get_momentum_sleep_for_day_offset(day_offset_now),
 			},
 		)
 		return history
@@ -131,24 +123,24 @@ func get_profile_momentum_history_between(start_t: float, end_t: float) -> Array
 
 		# Momentum used during a day comes from previous day's steps.
 		var day_offset := _day_offset_for_unix(cursor)
-		var day_momentum_steps := get_momentum_steps_for_day_offset(day_offset)
+		var day_momentum_sleep := get_momentum_sleep_for_day_offset(day_offset)
 
-		history.append({ "time": cursor, "val": day_momentum_steps })
+		history.append({ "time": cursor, "val": day_momentum_sleep })
 
 		# Duplicate value at boundary so momentum doesn't get interpolated
-		history.append({ "time": next_boundary, "val": day_momentum_steps })
+		history.append({ "time": next_boundary, "val": day_momentum_sleep })
 		cursor = next_boundary
 
 	return history
 
 
-func get_last_days_steps_history(days: int = lookback_days) -> Array:
+func get_last_days_sleep_history(days: int = lookback_days) -> Array:
 	var history: Array = []
 	var sample_days: int = maxi(days, 1)
 	var start_of_today := _start_of_day_unix(Time.get_unix_time_from_system())
 
 	for offset in range(sample_days - 1, -1, -1):
-		var clamped_steps := clampi(get_steps_for_day_offset(offset), 0, GRAPH_MAX_STEPS)
+		var clamped_steps := clampi(get_sleep_for_day_offset(offset), 0, GRAPH_MAX_SLEEP)
 		var t := float(start_of_today - (offset * 86400))
 		history.append(
 			{
@@ -189,13 +181,12 @@ func _day_offset_for_unix(unix_time: float) -> int:
 
 
 func _set_fallback_data():
-	daily_steps_by_date.clear()
-	daily_steps_by_date[_date_key_for_offset(0)] = 5000
-	daily_steps_by_date[_date_key_for_offset(1)] = 6000
-	daily_steps_by_date[_date_key_for_offset(2)] = 1000
-	daily_steps_by_date[_date_key_for_offset(3)] = 1000
-	daily_steps_by_date[_date_key_for_offset(4)] = 1000
-	daily_steps_by_date[_date_key_for_offset(5)] = 2000
-	daily_steps_by_date[_date_key_for_offset(6)] = 1000
-	daily_steps_by_date[_date_key_for_offset(7)] = 1000
-	daily_steps_by_date[_date_key_for_offset(8)] = 1000
+	daily_sleep_by_date.clear()
+	daily_sleep_by_date[_date_key_for_offset(0)] = 8 * 60
+	daily_sleep_by_date[_date_key_for_offset(1)] = 6 * 60
+	daily_sleep_by_date[_date_key_for_offset(2)] = 7 * 60
+	daily_sleep_by_date[_date_key_for_offset(3)] = 10 * 60
+	daily_sleep_by_date[_date_key_for_offset(4)] = 8 * 60
+	daily_sleep_by_date[_date_key_for_offset(5)] = 8 * 60
+	daily_sleep_by_date[_date_key_for_offset(6)] = 4 * 60
+	daily_sleep_by_date[_date_key_for_offset(7)] = 6 * 60

@@ -1,4 +1,5 @@
 class_name screentime_progress
+extends Node
 
 signal screen_time_data_ready
 signal screen_time_permissions
@@ -51,6 +52,12 @@ func _mark_screen_time_ready():
 
 
 func request_permissions():
+	#var timer = Timer.new()
+	#timer.wait_time = 10
+	#timer.autostart = true
+	#timer.one_shot = false
+	#timer.timeout.connect(_on_permissions.bind(false))
+	#add_child(timer)
 	if Engine.has_singleton(_plugin_name):
 		_screen_time_plugin.requestUsagePermissions()
 
@@ -71,7 +78,7 @@ func _on_permissions(permissions: bool):
 		timer.autostart = true
 		timer.one_shot = false
 		timer.timeout.connect(_fetch_screen_time)
-		#add_child(timer)
+		add_child(timer)
 	else:
 		# For now set the screen time to the fallback if permissions are denied
 		_set_fallback_data()
@@ -133,7 +140,7 @@ func _hour_offset_for_unix(unix_time: float) -> int:
 	return maxi(clampi(delta_hours, 0, 167), 0)
 
 
-func get_last_days_steps_history(days: int = lookback_days) -> Array:
+func get_last_days_screen_time_history(days: int = lookback_days) -> Array:
 	var hours = days * 24
 	hours = clamp(hours, 1, 167)
 	var history: Array = []

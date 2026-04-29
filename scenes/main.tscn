@@ -222,7 +222,7 @@ unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 18
-text = "Current momentum: 
+text = "Current minutes: 
 x steps (100%)
 
 "
@@ -242,6 +242,67 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
 
 [node name="FocusFluxMomentumGraphLine" type="Line2D" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer/FocusFluxMomentumGraphPanel" unique_id=1105415625]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+script = ExtResource("3_sugp2")
+padding = 10.0
+
+[node name="DreamShardsPanelContainer" type="PanelContainer" parent="HUDLayer/IngredientHBoxContainer" unique_id=1505209790]
+custom_minimum_size = Vector2(235, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="DreamShardsVBoxContainer" type="VBoxContainer" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer" unique_id=530625436]
+layout_mode = 2
+
+[node name="DreamShardsFluxLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer" unique_id=1190688941]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Dream Shards:"
+
+[node name="DreamShardsCounterLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer" unique_id=1605440307]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "5/10"
+
+[node name="DreamShardsGainRateLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer" unique_id=2107261682]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 / min"
+
+[node name="DreamShardsMomentum" type="Label" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer" unique_id=787320845]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Current momentum: 
+x hours (100%)
+
+"
+
+[node name="DreamShardsProgressBar" type="ProgressBar" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer" unique_id=1100528436]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DreamShardsSpendButton" type="Button" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer" unique_id=924819205]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Spend 1 Focus Flux"
+
+[node name="DreamShardsMomentumGraphPanel" type="Panel" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer" unique_id=1761356683]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="DreamShardsMomentumGraphLine" type="Line2D" parent="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer/DreamShardsMomentumGraphPanel" unique_id=1187010261]
 unique_name_in_owner = true
 position = Vector2(0, -4)
 width = 2.0
@@ -320,6 +381,7 @@ text = "SETTINGS"
 
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=1531632925]
 layer = 3
+visible = false
 
 [node name="LevelUpPopup" parent="PopupLayer" unique_id=1366411805 instance=ExtResource("5_tefeu")]
 unique_name_in_owner = true
@@ -330,6 +392,7 @@ visible = true
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer/FocusFluxSpendButton" to="HUDLayer" method="_on_focus_flux_spend_button_pressed"]
+[connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/DreamShardsPanelContainer/DreamShardsVBoxContainer/DreamShardsSpendButton" to="HUDLayer" method="_on_dream_shards_spend_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
