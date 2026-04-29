@@ -12,6 +12,15 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.13433829, 0.82624876, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbgi4"]
 content_margin_left = 16.0
 content_margin_top = 8.0
@@ -89,16 +98,29 @@ text = "Add +50 XP"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MoneyPanelContainer" type="PanelContainer" parent="HUDLayer/Upper HUD" unique_id=47610890]
+[node name="VBox" type="VBoxContainer" parent="HUDLayer/Upper HUD" unique_id=1453854805]
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="HUDLayer/Upper HUD/VBox" unique_id=241068043]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_tefeu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tipki")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o6xl0")
+text = "⚙"
+
+[node name="MoneyPanelContainer" type="PanelContainer" parent="HUDLayer/Upper HUD/VBox" unique_id=47610890]
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_tbgi4")
 
-[node name="MoneyHBoxContainer" type="HBoxContainer" parent="HUDLayer/Upper HUD/MoneyPanelContainer" unique_id=523972392]
+[node name="MoneyHBoxContainer" type="HBoxContainer" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer" unique_id=523972392]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="MoneyIcon" type="TextureRect" parent="HUDLayer/Upper HUD/MoneyPanelContainer/MoneyHBoxContainer" unique_id=488510758]
+[node name="MoneyIcon" type="TextureRect" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer/MoneyHBoxContainer" unique_id=488510758]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -107,7 +129,7 @@ texture = ExtResource("3_jyhfs")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="MoneyAmountLabel" type="Label" parent="HUDLayer/Upper HUD/MoneyPanelContainer/MoneyHBoxContainer" unique_id=684867495]
+[node name="MoneyAmountLabel" type="Label" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer/MoneyHBoxContainer" unique_id=684867495]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -318,22 +340,19 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 32
 text = "SHOP"
 
-[node name="SettingsButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1383281877]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "SETTINGS"
-
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=1531632925]
 layer = 3
 
 [node name="LevelUpPopup" parent="PopupLayer" unique_id=1366411805 instance=ExtResource("5_tefeu")]
 unique_name_in_owner = true
+visible = false
 
 [node name="InvalidSavePopUp" parent="PopupLayer" unique_id=256500332 instance=ExtResource("5_tbgi4")]
-visible = true
+
+[node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=978724567]
 
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
+[connection signal="pressed" from="HUDLayer/Upper HUD/VBox/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer/KineticShardsSpendButton" to="HUDLayer" method="_on_kinetic_shards_spend_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer/FocusFluxSpendButton" to="HUDLayer" method="_on_focus_flux_spend_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
@@ -341,4 +360,3 @@ visible = true
 [connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/ShopButton" to="." method="_on_shop_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]

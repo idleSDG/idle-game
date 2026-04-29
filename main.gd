@@ -17,7 +17,6 @@ var tab_for_button = {
 	"InventoryButton": "inventory",
 	"CharacterButton": "character",
 	"ShopButton": "shop",
-	"SettingsButton": "settings",
 }
 
 func _ready():
