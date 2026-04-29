@@ -128,7 +128,19 @@ func get_save_data() -> Dictionary:
 	for type in ingredients:
 		ingredient_map[Ingredient.get_type_as_string(type)] = Ingredient.to_dictionary(ingredients[type])
 	
-	return { "ingredients": ingredient_map, "money": money, "collectable_money": collectable_money }
+	# Save purchased item names (exclude starters — they're always added in _init_equipment)
+	var starter_names = ["weap1", "robe1", "hat1"]
+	var purchased_names: Array = []
+	for item in equipment:
+		if item.item_name not in starter_names:
+			purchased_names.append(item.item_name)
+
+	return {
+		"ingredients": ingredient_map,
+		"money": money,
+		"collectable_money": collectable_money,
+		"purchased_items": purchased_names
+	}
 
 func load_save_data(data: Variant) -> Error:
 	if typeof(data) != TYPE_DICTIONARY:
@@ -162,6 +174,15 @@ func load_save_data(data: Variant) -> Error:
 	
 	money = data.get("money")
 	collectable_money = data.get("collectable_money")
+
+	# Restore purchased items from shop catalogue
+	if data.has("purchased_items"):
+		for item_name in data["purchased_items"]:
+			var item = ShopCatalogue.find_by_name(item_name)
+			if item != null:
+				equipment.append(item)
+			else:
+				printerr("Could not find shop item: ", item_name)
 
 	ingredients_changed.emit(ingredients)
 	money_changed.emit(money)
