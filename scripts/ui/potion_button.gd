@@ -5,16 +5,65 @@ extends Node
 @onready var potname: Label = $Name
 
 @onready var progress_bar: ProgressBar = $ProgressBar
-var potion
-var currValue = 0
+@onready var color_rect: ColorRect = $ColorRect
 
-func SetupPotion(pot : Potion):
-	progress_bar.visible = false
+
+var potion : Potion
+var charList : Array[Character]
+var battleUI
+var queued = false
+
+func SetupPotion(pot : Potion, list : Array[Character], battUI):
+	if pot == null:
+		potion = null
+		quantity.text = ""
+		potname.text = "None"
+		potion_button.disabled = true
+		return
 	
-	quantity.text = "x" + str(pot.quantity)
+	progress_bar.visible = false
+	potion = pot
+	
+	quantity.text = "x" + str(PotionManager.GetPotionSlot(potion.slot).quantity)
+	potname.text = pot.potName
+	
+	
+	charList = list
+	battleUI = battUI
 	
 	VerifyPotion()
 
+func PassTime(delta : float):
+	if potion == null:
+		return
+	
+	if queued:
+		UsePotion()
+	
+	potion.PassTime(delta)
+	UpdateVisuals()
+	VerifyPotion()
+
+func UpdateVisuals():
+	progress_bar.visible = true if potion.currentCooldown > 0 else false
+	
+	progress_bar.value = potion.currentCooldown / potion.cooldown
+	quantity.text = "x" + str(PotionManager.GetPotionSlot(potion.slot).quantity)
+	VerifyPotion()
+	pass
+
 func VerifyPotion():
-	if (currValue > 0 || potion.quant < 1):
+	if (potion.currentCooldown > 0 || PotionManager.GetPotionSlot(potion.slot).quantity < 1):
 		potion_button.disabled = true
+	else:
+		potion_button.disabled = false
+
+func UsePotion():
+	potion.UsePotion(charList)
+	queued = false
+	color_rect.visible = false
+
+func _on_pressed() -> void:
+	queued = true
+	color_rect.visible = true
+	pass # Replace with function body.

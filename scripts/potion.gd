@@ -1,11 +1,86 @@
 class_name Potion extends Node
 
-enum PotionTypes { Healing, Strength, Explosive }
+enum PotionTypes { Status, Damage }
 
-var type : PotionTypes
+var id : int
 var slot : int = -1
 var quantity : int = 10
 
-func _init(typ : PotionTypes, slt : int = -1):
-	type = typ
+var type : PotionTypes
+var potName : String = ""
+
+var damage : int = 50
+var cooldown : float = 1.0
+var currentCooldown : float
+var effect : StatusEffect
+var targetSelf : bool = true
+
+
+func _init(newId : int, slt : int = -1):
+	id = newId
 	slot = slt
+	
+	match id:
+		0: 
+			potName = "Explosive Potion"
+			type = PotionTypes.Damage
+			damage = 50
+			cooldown = 2.0
+			currentCooldown = 0.0
+			targetSelf = false
+		1: 
+			potName = "Healing Potion"
+			type = PotionTypes.Damage
+			damage = -50
+			cooldown = 2.0
+			currentCooldown = 0.0
+			targetSelf = true
+		2: 
+			potName = "Strength Potion"
+			type = PotionTypes.Status
+			effect = StatusEffect.new(StatusEffect.StatusEffectType.Strength, 1.0, true)
+			cooldown = 100.0 / effect.DecrementRate
+			currentCooldown = 0.0
+			targetSelf = true
+
+func UsePotion(charList : Array[Character]):
+	if type == PotionTypes.Damage:
+		if targetSelf:
+			charList[0].TakeTrueDamage(damage, 1)
+		else:
+			if charList[1] != null: charList[1].TakeTrueDamage(damage, 1)
+			if charList[2] != null: charList[2].TakeTrueDamage(damage, 1)
+			if charList[3] != null: charList[3].TakeTrueDamage(damage, 1)
+	
+	if type == PotionTypes.Status:
+		if targetSelf:
+			charList[0].ApplyStatus(effect)
+		else:
+			if charList[1] != null: charList[1].ApplyStatus(effect)
+			if charList[2] != null: charList[2].ApplyStatus(effect)
+			if charList[3] != null: charList[3].ApplyStatus(effect)
+	
+	PotionManager.GetPotionSlot(slot).quantity -= 1
+	currentCooldown = cooldown
+	
+	pass
+
+
+func PassTime(delta : float):
+	if currentCooldown > 0.0:
+		currentCooldown = max(currentCooldown - delta, 0.0)
+	pass
+	
+
+static func to_dictionary(pot: Potion) -> Dictionary:
+	return {
+		"id": pot.id,
+		"quantity": pot.quantity,
+		"slot": pot.slot
+	}
+
+static func from_dictionary(skill_str: Dictionary) -> Potion:
+	var potion := Potion.new(skill_str.id, skill_str.slot)
+	potion.quantity = skill_str.quantity
+	
+	return potion

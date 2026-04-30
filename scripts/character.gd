@@ -183,7 +183,14 @@ func TakeTrueDamage(dmg : int, source : int): # source will be used to denote wh
 	
 	var popup = damagePopup.instantiate()
 	character.get_parent().get_parent().add_child(popup)
-	popup.SetUpText(character.get_parent().position, dmg, " burn", Color.ORANGE)
+	
+	if dmg < 0:
+		source = 2
+	
+	match source:
+		2: popup.SetUpText(character.get_parent().position, abs(dmg), " heal", Color.SPRING_GREEN)
+		1: popup.SetUpText(character.get_parent().position, dmg, " explosion", Color.ORANGE)
+		_: popup.SetUpText(character.get_parent().position, dmg, " burn", Color.ORANGE)
 	
 	CalculateStatChanges()
 	pass
@@ -203,6 +210,8 @@ func Follow(target : Character):
 func CalculateStatChanges():
 	statChanges.ResetStats()
 	statChanges.chargeRate = 1.0
+	statChanges.attack = baseStats.attack
+	statChanges.defense = baseStats.defense
 	
 	for effect in statusEffects:
 		effect.AlterStats(statChanges)

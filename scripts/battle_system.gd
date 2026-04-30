@@ -73,6 +73,7 @@ func _ready() -> void:
 	characterSpawnPos[0].add_child(instance)
 	characterList[0].hitbox.pressed.connect(select_enemy_unit.bind(0))
 	characterList[0].index = 0
+	SetPotions()
 	# END OF TEMPORARY
 	
 	for enemy in BattleVariables.current_battle_level.enemies:
@@ -194,6 +195,7 @@ func pass_time(delta: float) -> void:
 	for c in characterList:
 		if c != null:
 			c.PassTime(delta)
+	battle_ui.PassTime(delta)
 	pass
 
 # used for bar updates and whatnot (though it'd be better to tie the bar to a variable)
@@ -273,6 +275,22 @@ func select_enemy_slot(ind : int):
 				i+=1
 		targetIndex = ind
 
+func SetPotions():
+	var pot1 = null
+	var pot2 = null
+	var pot3 = null
+	for i in 3:
+		print(i)
+		for pot in PotionManager.potions:
+			if pot.slot == i + 1:
+				var instance = Potion.new(pot.id, i + 1)
+				if i + 1 == 1:
+					pot1 = instance
+				if i + 1 == 2:
+					pot2 = instance
+				if i + 1 == 3:
+					pot3 = instance
+	battle_ui.SetPotions(pot1, pot2, pot3, characterList)
 
 
 func _on_pause_toggled(toggled_on: bool) -> void:
