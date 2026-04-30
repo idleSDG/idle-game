@@ -17,9 +17,7 @@ func _on_clear_save_pressed() -> void:
 
 func _on_request_step_permissions_pressed() -> void:
 	if not PlayerInventory.steps.has_history_permissions:
-		PlayerInventory.steps.request_history_permissions()
-	if not PlayerInventory.sleep.has_history_permissions:
-		PlayerInventory.sleep.request_history_permissions()
+		PlayerInventory.step_sleep_manager.request_history_permissions()
 
 func _on_request_screen_time_permissions_pressed() -> void:
 	if not PlayerInventory.screentime.has_history_permissions:

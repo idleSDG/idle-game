@@ -34,13 +34,13 @@ func _on_history_permission(steps_granted: bool, sleep_granted: bool):
 	if !sleep.has_sleep_data():
 		if sleep_granted:
 			sleep.has_history_permissions = true
-			emit_signal("sleep_permissions")
+			sleep.sleep_permissions.emit()
 			sleep.fetch_sleep()
 
 	if !steps.has_steps_data():
 		if steps_granted:
 			steps.has_history_permissions = true
-			emit_signal("steps_permissions")
+			steps.steps_permissions.emit()
 			steps.fetch_steps()
 			var timer = Timer.new()
 			timer.wait_time = 10
@@ -55,3 +55,7 @@ func _set_fallback_data(set_sleep: bool, set_steps: bool):
 		sleep.set_fallback_data()
 	if set_steps:
 		steps.set_fallback_data()
+		
+func request_history_permissions():
+	if Engine.has_singleton(_plugin_name):
+		_plugin.request_history_permissions()

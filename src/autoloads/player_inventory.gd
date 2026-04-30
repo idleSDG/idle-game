@@ -21,6 +21,7 @@ signal collectable_money_changed(collectable_money: int)
 var steps : steps_progress
 var screentime : screentime_progress
 var sleep : sleep_progress
+var step_sleep_manager : steps_sleep_plugin_manager
 var ingredients: Dictionary[Ingredient.Type, Ingredient] = {}
 signal ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient])
 var _steps_initialized: bool = false
@@ -98,7 +99,7 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 
 func _ready():
 	screentime = screentime_progress.new()
-	var step_sleep_manager = steps_sleep_plugin_manager.new()
+	step_sleep_manager = steps_sleep_plugin_manager.new()
 	add_child(step_sleep_manager)
 	var classes = step_sleep_manager.get_classes()
 	steps = classes[0]
