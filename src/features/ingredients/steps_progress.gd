@@ -21,25 +21,6 @@ func _init() -> void:
 	if Engine.has_singleton(_plugin_name):
 		_steps_plugin = Engine.get_singleton(_plugin_name)
 		_steps_plugin.on_steps_read.connect(_on_steps)
-		_steps_plugin.on_error.connect(_on_error)
-		_steps_plugin.on_history_permission_result.connect(_on_history_permission)
-		request_history_permissions()
-	else:
-		#fallback for testing
-		_set_fallback_data()
-		_mark_steps_ready()
-
-
-func request_history_permissions():
-	# Wait 10 seconds for permissions, else set fallback
-	#var timer = Timer.new()
-	#timer.wait_time = 10
-	#timer.autostart = true
-	#timer.one_shot = false
-	#timer.timeout.connect(_on_history_permission.bind(false))
-	#add_child(timer)
-	if Engine.has_singleton(_plugin_name):
-		_steps_plugin.request_history_permissions()
 
 
 func has_steps_data() -> bool:
@@ -62,32 +43,7 @@ func _on_steps(dates: PackedStringArray, steps: PackedInt64Array):
 	_mark_steps_ready()
 
 
-func _on_error(err):
-	print("Steps error:", err)
-	_set_fallback_data()
-	_mark_steps_ready()
-
-
-func _on_history_permission(steps_granted: bool, sleep_granted: bool):
-	if _has_steps_data:
-		return
-	if steps_granted:
-		has_history_permissions = true
-		emit_signal("steps_permissions")
-		_fetch_steps()
-		var timer = Timer.new()
-		timer.wait_time = 10
-		timer.autostart = true
-		timer.one_shot = false
-		timer.timeout.connect(_fetch_steps)
-		add_child(timer)
-	else:
-		# For now set the steps to the fallback if permissions are denied
-		_set_fallback_data()
-		_mark_steps_ready()
-
-
-func _fetch_steps():
+func fetch_steps():
 	_steps_plugin.read_daily_steps(lookback_days)
 
 
@@ -188,14 +144,16 @@ func _day_offset_for_unix(unix_time: float) -> int:
 	return maxi(int(floor(float(delta) / 86400.0)), 0)
 
 
-func _set_fallback_data():
-	daily_steps_by_date.clear()
-	daily_steps_by_date[_date_key_for_offset(0)] = 5000
-	daily_steps_by_date[_date_key_for_offset(1)] = 6000
-	daily_steps_by_date[_date_key_for_offset(2)] = 1000
-	daily_steps_by_date[_date_key_for_offset(3)] = 1000
-	daily_steps_by_date[_date_key_for_offset(4)] = 1000
-	daily_steps_by_date[_date_key_for_offset(5)] = 2000
-	daily_steps_by_date[_date_key_for_offset(6)] = 1000
-	daily_steps_by_date[_date_key_for_offset(7)] = 1000
-	daily_steps_by_date[_date_key_for_offset(8)] = 1000
+func set_fallback_data():
+	if not _has_steps_data:
+		daily_steps_by_date.clear()
+		daily_steps_by_date[_date_key_for_offset(0)] = 12000
+		daily_steps_by_date[_date_key_for_offset(1)] = 6000
+		daily_steps_by_date[_date_key_for_offset(2)] = 1000
+		daily_steps_by_date[_date_key_for_offset(3)] = 1000
+		daily_steps_by_date[_date_key_for_offset(4)] = 1000
+		daily_steps_by_date[_date_key_for_offset(5)] = 2000
+		daily_steps_by_date[_date_key_for_offset(6)] = 1000
+		daily_steps_by_date[_date_key_for_offset(7)] = 1000
+		daily_steps_by_date[_date_key_for_offset(8)] = 1000
+		_mark_steps_ready()

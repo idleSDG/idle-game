@@ -21,24 +21,6 @@ func _init() -> void:
 	if Engine.has_singleton(_plugin_name):
 		_sleep_plugin = Engine.get_singleton(_plugin_name)
 		_sleep_plugin.on_sleep_read.connect(_on_sleep)
-		_sleep_plugin.on_error.connect(_on_error)
-		_sleep_plugin.on_history_permission_result.connect(_on_history_permission)
-		request_history_permissions()
-	else:
-		#fallback for testing
-		_set_fallback_data()
-		_mark_sleep_ready()
-
-
-func request_history_permissions():
-	#var timer = Timer.new()
-	#timer.wait_time = 10
-	#timer.autostart = true
-	#timer.one_shot = false
-	#timer.timeout.connect(_on_history_permission.bind(false))
-	#add_child(timer)
-	if Engine.has_singleton(_plugin_name):
-		_sleep_plugin.request_history_permissions()
 
 
 func has_sleep_data() -> bool:
@@ -61,26 +43,7 @@ func _on_sleep(dates: PackedStringArray, steps: PackedInt64Array):
 	_mark_sleep_ready()
 
 
-func _on_error(err):
-	print("Sleep error:", err)
-	_set_fallback_data()
-	_mark_sleep_ready()
-
-
-func _on_history_permission(steps_granted: bool, sleep_granted: bool):
-	if _has_sleep_data:
-		return
-	if sleep_granted:
-		has_history_permissions = true
-		emit_signal("sleep_permissions")
-		_fetch_sleep()
-	else:
-		# For now set the steps to the fallback if permissions are denied
-		_set_fallback_data()
-		_mark_sleep_ready()
-
-
-func _fetch_sleep():
+func fetch_sleep():
 	_sleep_plugin.read_daily_sleep(lookback_days)
 
 
@@ -180,13 +143,15 @@ func _day_offset_for_unix(unix_time: float) -> int:
 	return maxi(int(floor(float(delta) / 86400.0)), 0)
 
 
-func _set_fallback_data():
-	daily_sleep_by_date.clear()
-	daily_sleep_by_date[_date_key_for_offset(0)] = 8 * 60
-	daily_sleep_by_date[_date_key_for_offset(1)] = 6 * 60
-	daily_sleep_by_date[_date_key_for_offset(2)] = 7 * 60
-	daily_sleep_by_date[_date_key_for_offset(3)] = 10 * 60
-	daily_sleep_by_date[_date_key_for_offset(4)] = 8 * 60
-	daily_sleep_by_date[_date_key_for_offset(5)] = 8 * 60
-	daily_sleep_by_date[_date_key_for_offset(6)] = 4 * 60
-	daily_sleep_by_date[_date_key_for_offset(7)] = 6 * 60
+func set_fallback_data():
+	if not _has_sleep_data:
+		daily_sleep_by_date.clear()
+		daily_sleep_by_date[_date_key_for_offset(0)] = 6.5 * 60
+		daily_sleep_by_date[_date_key_for_offset(1)] = 6 * 60
+		daily_sleep_by_date[_date_key_for_offset(2)] = 7 * 60
+		daily_sleep_by_date[_date_key_for_offset(3)] = 10 * 60
+		daily_sleep_by_date[_date_key_for_offset(4)] = 8 * 60
+		daily_sleep_by_date[_date_key_for_offset(5)] = 8 * 60
+		daily_sleep_by_date[_date_key_for_offset(6)] = 4 * 60
+		daily_sleep_by_date[_date_key_for_offset(7)] = 6 * 60
+		_mark_sleep_ready()

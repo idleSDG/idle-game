@@ -88,7 +88,7 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 		),
 		Ingredient.Type.DREAM_SHARDS: Ingredient.new(
 			Ingredient.Type.DREAM_SHARDS,
-			MomentumTracker.new(MomentumConfig.new(7 * 60, 8.5 * 60), SleepMomentumDataSource.new(sleep)),
+			MomentumTracker.new(MomentumConfig.new(6.5 * 60, 8.5 * 60), SleepMomentumDataSource.new(sleep)),
 			0.0,
 			0,
 			10000,
@@ -97,9 +97,12 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 	}
 
 func _ready():
-	steps = steps_progress.new()
 	screentime = screentime_progress.new()
-	sleep = sleep_progress.new()
+	var step_sleep_manager = steps_sleep_plugin_manager.new()
+	add_child(step_sleep_manager)
+	var classes = step_sleep_manager.get_classes()
+	steps = classes[0]
+	sleep = classes[1]
 	
 	ingredients = _create_default_ingredients()
 	

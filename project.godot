@@ -48,7 +48,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotScreenTimePlugin/plugin.cfg", "res://addons/GodotStepAndSleepPlugin/plugin.cfg", "res://addons/GodotStepPlugin/plugin.cfg")
+enabled=PackedStringArray("res://addons/GodotScreenTimePlugin/plugin.cfg", "res://addons/GodotStepAndSleepPlugin/plugin.cfg")
 
 [physics]
 

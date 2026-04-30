@@ -35,7 +35,7 @@ func _on_screen_usage(hourly_array: Array):
 		var minutes = hourly_array[i] / 1000 / 60
 		#using negative minutes so the calculations are easier (higer == worse)
 		screen_time_data_by_hour[hours_ago] = -minutes
-		_mark_screen_time_ready()
+	_mark_screen_time_ready()
 
 
 func _on_error(err):
@@ -52,12 +52,6 @@ func _mark_screen_time_ready():
 
 
 func request_permissions():
-	#var timer = Timer.new()
-	#timer.wait_time = 10
-	#timer.autostart = true
-	#timer.one_shot = false
-	#timer.timeout.connect(_on_permissions.bind(false))
-	#add_child(timer)
 	if Engine.has_singleton(_plugin_name):
 		_screen_time_plugin.requestUsagePermissions()
 
@@ -173,4 +167,4 @@ func _set_fallback_data():
 			else:
 				screen_time_data_by_hour[hour_counter] = -(60 + ((j - 12) * (-6)))
 			hour_counter += 1
-	screen_time_data_by_hour[0] = -10
+	screen_time_data_by_hour[0] = -20
