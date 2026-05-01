@@ -43,6 +43,7 @@ func PassTime(delta : float):
 	potion.PassTime(delta)
 	UpdateVisuals()
 	VerifyPotion()
+	
 
 func UpdateVisuals():
 	progress_bar.visible = true if potion.currentCooldown > 0 else false
@@ -62,6 +63,11 @@ func UsePotion():
 	potion.UsePotion(charList)
 	queued = false
 	color_rect.visible = false
+	
+	BattleVariables.potionUsage[BattleVariables.potionUsage.size()] = [BattleVariables.battleElapsed, potion.slot]
+
+func SetCooldown():
+	potion.currentCooldown = potion.cooldown
 
 func _on_pressed() -> void:
 	queued = true

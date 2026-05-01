@@ -16,8 +16,14 @@ extends Node
 @onready var button_2: Button = $PotionBar/HBoxContainer/Button2
 @onready var button_3: Button = $PotionBar/HBoxContainer/Button3
 
+var potionMem
 
 var char : Character
+var charList : Array[Character]
+
+
+func _ready() -> void:
+	pass
 
 func StartPreview(chara : Character):
 	unit_preview.visible = true
@@ -50,15 +56,31 @@ func UpdateStatDisplay():
 	
 	pass
 
-func SetPotions(pot1: Potion, pot2: Potion, pot3: Potion, charList : Array[Character]):
+func SetPotions(pot1: Potion, pot2: Potion, pot3: Potion, charsList : Array[Character]):
+	potionMem = BattleVariables.potionUsage.duplicate(true)
+	
+	charList = charsList
 	button.SetupPotion(pot1, charList, self)
 	button_2.SetupPotion(pot2, charList, self)
 	button_3.SetupPotion(pot3, charList, self)
 
-func PassTime(delta : float):
+func PassTime(delta : float, total : float = 0.0):
 	button.PassTime(delta)
 	button_2.PassTime(delta)
 	button_3.PassTime(delta)
+	
+	var newMem : Dictionary
+	
+	if potionMem != null:
+		for entry in potionMem:
+			if potionMem[entry][0] <= total:
+				Potion.new(PotionManager.GetPotionSlot(potionMem[entry][1]).id).UsePotionEffect(charList)
+				if potionMem[entry][1] == 1: button.SetCooldown()
+				if potionMem[entry][1] == 2: button_2.SetCooldown()
+				if potionMem[entry][1] == 3: button_3.SetCooldown()
+			else:
+				newMem[entry] = potionMem[entry]
+		potionMem = newMem
 
 func _on_button_pressed() -> void:
 	unit_preview.visible = false

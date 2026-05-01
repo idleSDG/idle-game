@@ -203,7 +203,7 @@ func Follow(target : Character):
 	
 	timePass = 0.0
 	isFollowing = true
-	trail.modulate = Color.from_hsv(RandomNumberGenerator.new().randf(), 0.8, 1)
+	trail.modulate = Color.from_hsv(BattleVariables.battleRNG.randf(), 0.8, 1)
 	
 	pass
 

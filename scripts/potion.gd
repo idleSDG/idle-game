@@ -10,7 +10,7 @@ var type : PotionTypes
 var potName : String = ""
 
 var damage : int = 50
-var cooldown : float = 1.0
+var cooldown : float = 10.0
 var currentCooldown : float
 var effect : StatusEffect
 var targetSelf : bool = true
@@ -44,6 +44,12 @@ func _init(newId : int, slt : int = -1):
 			targetSelf = true
 
 func UsePotion(charList : Array[Character]):
+	UsePotionEffect(charList)
+	PotionManager.GetPotionSlot(slot).quantity -= 1
+	
+	pass
+
+func UsePotionEffect(charList : Array[Character]):
 	if type == PotionTypes.Damage:
 		if targetSelf:
 			charList[0].TakeTrueDamage(damage, 1)
@@ -60,11 +66,7 @@ func UsePotion(charList : Array[Character]):
 			if charList[2] != null: charList[2].ApplyStatus(effect)
 			if charList[3] != null: charList[3].ApplyStatus(effect)
 	
-	PotionManager.GetPotionSlot(slot).quantity -= 1
 	currentCooldown = cooldown
-	
-	pass
-
 
 func PassTime(delta : float):
 	if currentCooldown > 0.0:

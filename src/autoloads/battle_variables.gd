@@ -5,6 +5,10 @@ var battleState  : BattleStates = BattleStates.IN_LEVEL_SELECT
 var lastLogin : float = 0
 var battleStart : float = 0
 var battleElapsed : float = 0
+var potionUsage : Dictionary
+var battleSeed : int = 0
+var battleRNG : RandomNumberGenerator
+
 var currentLogin : float = 0
 
 var isPaused : bool = false
@@ -46,7 +50,9 @@ func get_save_data() -> Dictionary:
 		"current_battle_level": current_battle_level.get_save_data() if current_battle_level != null else {},
 		"isPaused": isPaused,
 		"isFast": isFast,
-		"battleElapsed": battleElapsed
+		"battleElapsed": battleElapsed,
+		"potionUsage": potionUsage,
+		"battleSeed": battleSeed
 	}
 	
 func load_save_data(data: Dictionary) -> Error:
@@ -55,6 +61,8 @@ func load_save_data(data: Dictionary) -> Error:
 	battleStart = (data["battleStart"] if data.has("battleStart") else Time.get_unix_time_from_system())
 	isPaused = data["isPaused"] if data.has("isPaused") else false
 	isFast = data["isFast"] if data.has("isFast") else false
+	potionUsage = data["potionUsage"] if data.has("potionUsage") else {}
+	battleSeed = data["battleSeed"] if data.has("battleSeed") else 0
 	
 	battleElapsed = (data["battleElapsed"] if data.has("battleElapsed") else 0.0)
 	
@@ -87,6 +95,8 @@ func init_new_save():
 	isPaused = false
 	isFast = false
 	battleElapsed = 0.0
+	potionUsage = {}
+	battleSeed = 0
 	
 	campaigns = []
 	campaigns.append(campaign_map.generate_zoo(1))
