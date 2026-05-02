@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bot7gyad0rwje" path="res://scripts/ui/battle_ui.gd" id="1_aeslv"]
 [ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="2_aeslv"]
+[ext_resource type="PackedScene" uid="uid://ixme676dvwbw" path="res://scenes/potion_button.tscn" id="3_wm05t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dm231"]
 bg_color = Color(0, 0, 0, 1)
@@ -188,5 +189,28 @@ theme_override_font_sizes/mono_font_size = 24
 bbcode_enabled = true
 text = "[b]KILL YOURSELF[/b] amirite"
 fit_content = true
+
+[node name="PotionBar" type="Control" parent="." unique_id=1831040683]
+anchors_preset = 0
+offset_right = 1080.0
+offset_bottom = 393.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PotionBar" unique_id=179915630]
+layout_mode = 0
+offset_right = 1083.0
+offset_bottom = 346.0
+alignment = 1
+
+[node name="Button" parent="PotionBar/HBoxContainer" unique_id=1101878322 instance=ExtResource("3_wm05t")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Button2" parent="PotionBar/HBoxContainer" unique_id=1649095051 instance=ExtResource("3_wm05t")]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Button3" parent="PotionBar/HBoxContainer" unique_id=1034070388 instance=ExtResource("3_wm05t")]
+layout_mode = 2
+size_flags_vertical = 4
 
 [connection signal="pressed" from="UnitPreview/Button" to="." method="_on_button_pressed"]
