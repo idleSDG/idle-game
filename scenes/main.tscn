@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dwh7mcn7npbm0" path="res://assets/hud/progress-bar-frame.png" id="7_85g3d"]
 [ext_resource type="Texture2D" uid="uid://pnlvse15jobc" path="res://assets/icons/kinetic.png" id="8_choun"]
 [ext_resource type="Texture2D" uid="uid://be5l1nv268yem" path="res://assets/hud/info.png" id="8_ya4ey"]
+[ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="12_eb6dy"]
+[ext_resource type="Script" uid="uid://b4ych1hv6wmbm" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
@@ -37,6 +39,15 @@ bg_color = Color(0.8156863, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
 bg_color = Color(1, 1, 1, 0.42745098)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
+bg_color = Color(0.08235294, 0.08235294, 0.08235294, 0.79607844)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
+shader = ExtResource("12_eb6dy")
+shader_parameter/blur_amount = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb6dy"]
 
 [node name="Main" type="Node2D" unique_id=868618005]
 script = ExtResource("1_0wfyh")
@@ -158,7 +169,7 @@ text = "10 / 10"
 
 [node name="SmallIngredientButton" type="Button" parent="HUDLayer" unique_id=430342629]
 unique_name_in_owner = true
-anchors_preset = -1
+anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -370.0
@@ -232,6 +243,7 @@ offset = Vector2(64, 64)
 
 [node name="IngredientVBoxContainer" type="VBoxContainer" parent="HUDLayer" unique_id=557320581]
 unique_name_in_owner = true
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -518,16 +530,13 @@ padding = 10.0
 
 [node name="IngredientInfoPopupPanel" type="PopupPanel" parent="HUDLayer" unique_id=1570118367]
 unique_name_in_owner = true
+oversampling_override = 1.0
+size = Vector2i(908, 408)
+theme_override_styles/panel = SubResource("StyleBoxFlat_ya4ey")
 
 [node name="IngredientInfoContainer" type="MarginContainer" parent="HUDLayer/IngredientInfoPopupPanel" unique_id=219818923]
-offset_left = 4.0
-offset_top = 4.0
-offset_right = 904.0
-offset_bottom = 404.0
-
-[node name="IngredientInfoTextBackground" type="ColorRect" parent="HUDLayer/IngredientInfoPopupPanel/IngredientInfoContainer" unique_id=2029202334]
-layout_mode = 2
-color = Color(0.08235294, 0.08235294, 0.08235294, 0.79607844)
+offset_right = 908.0
+offset_bottom = 408.0
 
 [node name="IngredientInfoLabel" type="Label" parent="HUDLayer/IngredientInfoPopupPanel/IngredientInfoContainer" unique_id=1255759300]
 unique_name_in_owner = true
@@ -581,13 +590,87 @@ text = "SETTINGS"
 
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=1531632925]
 layer = 3
-visible = false
 
 [node name="LevelUpPopup" parent="PopupLayer" unique_id=1366411805 instance=ExtResource("5_tefeu")]
 unique_name_in_owner = true
+visible = false
 
 [node name="InvalidSavePopUp" parent="PopupLayer" unique_id=256500332 instance=ExtResource("5_tbgi4")]
-visible = true
+
+[node name="MissingSleepDataPopUp" type="Control" parent="PopupLayer" unique_id=2021368707]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("12_trceg")
+
+[node name="SleepDataBackgroundBlur" type="ColorRect" parent="PopupLayer/MissingSleepDataPopUp" unique_id=1398356484]
+material = SubResource("ShaderMaterial_trceg")
+custom_minimum_size = Vector2(1080, 1920)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SleepDataPanelContainer" type="PanelContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur" unique_id=917765986]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -506.0
+offset_top = -314.5
+offset_right = 506.0
+offset_bottom = 314.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eb6dy")
+
+[node name="SleepDataVBoxContainer" type="VBoxContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer" unique_id=977809021]
+layout_mode = 2
+
+[node name="SleepDataLabelMarginContainer" type="MarginContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer" unique_id=1942552957]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+
+[node name="SleepDataLabel" type="Label" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataLabelMarginContainer" unique_id=734127456]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 76
+text = "No sleep data has been found on the device, would you like to use the default values?"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SleepDataButtonMarginContainer" type="MarginContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer" unique_id=283125614]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="SleepDataButtonsHBoxContainer" type="HBoxContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer" unique_id=601658771]
+layout_mode = 2
+
+[node name="SleepDataFallbackButton" type="Button" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer" unique_id=309633020]
+custom_minimum_size = Vector2(480, 120)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Use default data"
+
+[node name="SleepDataDeviceDataButton" type="Button" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer" unique_id=1225988326]
+custom_minimum_size = Vector2(480, 120)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Use device's data"
 
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/SmallIngredientButton" to="HUDLayer" method="_on_small_ingredient_button_pressed"]
@@ -603,3 +686,5 @@ visible = true
 [connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataFallbackButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_fallback_button_pressed"]
+[connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataDeviceDataButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_device_data_button_pressed"]

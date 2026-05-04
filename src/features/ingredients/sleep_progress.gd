@@ -2,7 +2,9 @@ class_name sleep_progress
 extends Node
 
 signal sleep_data_ready
+@warning_ignore("unused_signal")
 signal sleep_permissions
+signal sleep_data_popup
 
 var _plugin_name = "GodotStepAndSleepPlugin"
 var _sleep_plugin
@@ -27,7 +29,7 @@ func has_sleep_data() -> bool:
 	return _has_sleep_data
 
 
-func _mark_sleep_ready():
+func mark_sleep_ready():
 	if _has_sleep_data:
 		return
 	_has_sleep_data = true
@@ -37,10 +39,16 @@ func _mark_sleep_ready():
 func _on_sleep(dates: PackedStringArray, steps: PackedInt64Array):
 	daily_sleep_by_date.clear()
 	var count := mini(dates.size(), steps.size())
+	var non_zero: bool = false
 	for i in range(count):
 		daily_sleep_by_date[dates[i]] = int(steps[i])
+		if (steps[i] > 0):
+			non_zero = true
 
-	_mark_sleep_ready()
+	if non_zero:
+		mark_sleep_ready()
+	else:
+		sleep_data_popup.emit()
 
 
 func fetch_sleep():
@@ -154,4 +162,4 @@ func set_fallback_data():
 		daily_sleep_by_date[_date_key_for_offset(5)] = 8 * 60
 		daily_sleep_by_date[_date_key_for_offset(6)] = 4 * 60
 		daily_sleep_by_date[_date_key_for_offset(7)] = 6 * 60
-		_mark_sleep_ready()
+		mark_sleep_ready()
