@@ -1,6 +1,6 @@
 class_name Ingredient 
 
-enum Type { UNKNOWN, KINETIC_SHARD, FOCUS_FLUX, IONIC_CURRENT, BONE, FUR }
+enum Type { UNKNOWN, KINETIC_SHARD, FOCUS_FLUX, DREAM_SHARDS, BONE, FUR }
 
 var type: Type
 var count: int
