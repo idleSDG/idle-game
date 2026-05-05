@@ -55,7 +55,7 @@ offset_right = 350.0
 offset_bottom = 75.91992
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 48
-text = "Request Step and Sleep Permissions"
+text = "Request Step Permissions"
 
 [node name="ScreenUsagePermissionsButton" type="Button" parent="CanvasLayer" unique_id=384963872]
 anchors_preset = -1

@@ -4,15 +4,8 @@
 [ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://src/ui/HUD/hud.gd" id="2_sugp2"]
 [ext_resource type="Texture2D" uid="uid://34sx5ru8alpl" path="res://assets/hud/coin.png" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_sugp2"]
-[ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="4_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://y7xumqqfhjfr" path="res://src/ui/invalid_save_popup/invalid_save_pop_up.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://7n7ppwm46eci" path="res://src/features/progression/level_up_popup.tscn" id="5_tefeu"]
-[ext_resource type="Texture2D" uid="uid://d2aa5rwfqyayy" path="res://assets/hud/progress-bar-circle.png" id="6_tipki"]
-[ext_resource type="Texture2D" uid="uid://dwh7mcn7npbm0" path="res://assets/hud/progress-bar-frame.png" id="7_85g3d"]
-[ext_resource type="Texture2D" uid="uid://pnlvse15jobc" path="res://assets/icons/kinetic.png" id="8_choun"]
-[ext_resource type="Texture2D" uid="uid://be5l1nv268yem" path="res://assets/hud/info.png" id="8_ya4ey"]
-[ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="12_eb6dy"]
-[ext_resource type="Script" uid="uid://b4ych1hv6wmbm" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
@@ -35,28 +28,16 @@ content_margin_right = 16.0
 content_margin_bottom = 8.0
 bg_color = Color(0.6, 0.6, 0.6, 0.5294118)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
-content_margin_left = 16.0
-content_margin_right = 16.0
-bg_color = Color(0.6, 0.6, 0.6, 0.4862745)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
-bg_color = Color(0.48657194, 0.60121614, 0.60121614, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
 bg_color = Color(0.8156863, 1, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
 bg_color = Color(1, 1, 1, 0.42745098)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
-bg_color = Color(0.08235294, 0.08235294, 0.08235294, 0.79607844)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
-shader = ExtResource("12_eb6dy")
-shader_parameter/blur_amount = 2.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb6dy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
+content_margin_left = 16.0
+content_margin_right = 16.0
+bg_color = Color(0.6, 0.6, 0.6, 0.4862745)
 
 [node name="Main" type="Node2D" unique_id=868618005]
 script = ExtResource("1_0wfyh")
@@ -73,12 +54,10 @@ grow_vertical = 2
 script = ExtResource("2_sugp2")
 
 [node name="Upper HUD" type="HBoxContainer" parent="HUDLayer" unique_id=1053733074]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.125
 offset_left = 22.0
 offset_top = 31.0
-offset_right = -36.0
+offset_right = 1044.0
+offset_bottom = 240.0
 
 [node name="XP" type="VBoxContainer" parent="HUDLayer/Upper HUD" unique_id=548802942]
 custom_minimum_size = Vector2(250, 0)
@@ -134,17 +113,20 @@ text = "⚙"
 
 [node name="MoneyPanelContainer" type="PanelContainer" parent="HUDLayer/Upper HUD/VBox" unique_id=47610890]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_tbgi4")
 
-[node name="MoneyHBoxContainer" type="HBoxContainer" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer" unique_id=523972392]
+[node name="SettingsButton" type="Button" parent="HUDLayer/Upper HUD/VBox" unique_id=241068043]
 layout_mode = 2
-theme_override_constants/separation = 12
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxFlat_tefeu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tipki")
+theme_override_styles/hover = SubResource("StyleBoxFlat_o6xl0")
+text = "⚙"
 
 [node name="MoneyIcon" type="TextureRect" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer/MoneyHBoxContainer" unique_id=488510758]
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("3_jyhfs")
 expand_mode = 1
@@ -170,6 +152,170 @@ offset_right = -47.0
 offset_bottom = 46.839966
 theme_override_styles/panel = SubResource("StyleBoxFlat_jyhfs")
 
+[node name="MoneyHBoxContainer" type="HBoxContainer" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer" unique_id=523972392]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="MoneyIcon" type="TextureRect" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer/MoneyHBoxContainer" unique_id=488510758]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_jyhfs")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MoneyAmountLabel" type="Label" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer/MoneyHBoxContainer" unique_id=684867495]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+text = "99"
+
+[node name="IngredientHBoxContainer" type="HBoxContainer" parent="HUDLayer" unique_id=324555488]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -540.0
+offset_right = 1083.0
+offset_bottom = -202.0
+grow_vertical = 0
+
+[node name="KineticShardsPanelContainer" type="PanelContainer" parent="HUDLayer/IngredientHBoxContainer" unique_id=1707696475]
+custom_minimum_size = Vector2(265, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="KineticShardsVBoxContainer" type="VBoxContainer" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer" unique_id=1869316392]
+layout_mode = 2
+
+[node name="KineticShardsLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer" unique_id=1425181548]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Kinetic Shards:"
+
+[node name="KineticShardsCounterLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer" unique_id=474962826]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "5/10"
+
+[node name="KineticShardsGainRateLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer" unique_id=2086899878]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 / min"
+
+[node name="KineticShardsMomentumTodayLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer" unique_id=1514311924]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Today's momentum: 
+x steps (100%)"
+
+[node name="KineticShardsMomentumTomorrowLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer" unique_id=928846108]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Tomorrow's momentum: 
+x steps (100%)"
+
+[node name="KineticShardsProgressBar" type="ProgressBar" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer" unique_id=1378132024]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="KineticShardsSpendButton" type="Button" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer" unique_id=685049586]
+layout_mode = 2
+text = "Spend 1 Kinetic Shard"
+
+[node name="KineticShardsMomentumGraphPanel" type="Panel" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer" unique_id=1144980433]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="KineticShardsMomentumGraphLine" type="Line2D" parent="HUDLayer/IngredientHBoxContainer/KineticShardsPanelContainer/KineticShardsVBoxContainer/KineticShardsMomentumGraphPanel" unique_id=547060329]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+script = ExtResource("3_sugp2")
+padding = 10.0
+
+[node name="FocusFluxPanelContainer" type="PanelContainer" parent="HUDLayer/IngredientHBoxContainer" unique_id=1063816101]
+custom_minimum_size = Vector2(235, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="FocusFluxVBoxContainer" type="VBoxContainer" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer" unique_id=1314552279]
+layout_mode = 2
+
+[node name="FocusFluxLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer" unique_id=768092736]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Focus Flux:"
+
+[node name="FocusFluxCounterLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer" unique_id=1902084551]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 36
+text = "5/10"
+
+[node name="FocusFluxGainRateLabel" type="Label" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer" unique_id=1569050396]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "1 / min"
+
+[node name="FocusFluxMomentum" type="Label" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer" unique_id=1934338959]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "Current momentum: 
+x steps (100%)
+
+"
+
+[node name="FocusFluxProgressBar" type="ProgressBar" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer" unique_id=1111988865]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="FocusFluxSpendButton" type="Button" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer" unique_id=547740898]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Spend 1 Focus Flux"
+
+[node name="FocusFluxMomentumGraphPanel" type="Panel" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer" unique_id=1893895348]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="FocusFluxMomentumGraphLine" type="Line2D" parent="HUDLayer/IngredientHBoxContainer/FocusFluxPanelContainer/FocusFluxVBoxContainer/FocusFluxMomentumGraphPanel" unique_id=1105415625]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+width = 2.0
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+script = ExtResource("3_sugp2")
+padding = 10.0
+
+[node name="MoneyCollectionPanelContainer" type="PanelContainer" parent="HUDLayer" unique_id=329402899]
+unique_name_in_owner = true
+offset_left = 758.0
+offset_top = 766.0
+offset_right = 1033.0
+offset_bottom = 859.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_jyhfs")
+
 [node name="HBoxContainer" type="HBoxContainer" parent="HUDLayer/MoneyCollectionPanelContainer" unique_id=1013152147]
 layout_mode = 2
 
@@ -188,386 +334,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "10 / 10"
-
-[node name="SmallIngredientButton" type="Button" parent="HUDLayer" unique_id=430342629]
-unique_name_in_owner = true
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -370.0
-offset_right = 510.0
-offset_bottom = -200.0
-flat = true
-
-[node name="IngredientSmallHboxContainer" type="HBoxContainer" parent="HUDLayer/SmallIngredientButton" unique_id=681355684]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.001
-anchor_top = 0.896
-anchor_right = 0.001
-anchor_bottom = 0.896
-offset_left = -0.521
-offset_top = -152.32
-offset_right = 391.479
-offset_bottom = -24.320007
-scale = Vector2(1.3, 1.3)
-
-[node name="KineticShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1365023928]
-unique_name_in_owner = true
-layout_mode = 2
-step = 0.01
-value = 33.0
-fill_mode = 4
-texture_under = ExtResource("6_tipki")
-texture_over = ExtResource("7_85g3d")
-texture_progress = ExtResource("6_tipki")
-tint_under = Color(0.49411765, 0.6666667, 0.6666667, 1)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0.4, 0.85882354, 0.9019608, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=818379365]
-texture = ExtResource("8_choun")
-offset = Vector2(64, 64)
-
-[node name="FocusFluxTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1086528486]
-unique_name_in_owner = true
-layout_mode = 2
-step = 0.01
-value = 33.0
-fill_mode = 4
-texture_under = ExtResource("6_tipki")
-texture_over = ExtResource("7_85g3d")
-texture_progress = ExtResource("6_tipki")
-tint_under = Color(0.05862423, 0.16963479, 0.2188414, 1)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0.07857873, 0.40549615, 0.5018992, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1870068454]
-texture = ExtResource("8_choun")
-offset = Vector2(64, 64)
-
-[node name="DreamShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1791962131]
-unique_name_in_owner = true
-layout_mode = 2
-step = 0.01
-value = 33.0
-fill_mode = 4
-texture_under = ExtResource("6_tipki")
-texture_over = ExtResource("7_85g3d")
-texture_progress = ExtResource("6_tipki")
-tint_under = Color(0.41732287, 0.3616535, 0.574478, 1)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0.60784316, 0.5568628, 0.76862746, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=550219596]
-texture = ExtResource("8_choun")
-offset = Vector2(64, 64)
-
-[node name="IngredientVBoxContainer" type="VBoxContainer" parent="HUDLayer" unique_id=557320581]
-unique_name_in_owner = true
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -452.0
-offset_top = -660.0
-offset_right = 452.0
-offset_bottom = 595.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 0
-
-[node name="IngredientTopPanel" type="PanelContainer" parent="HUDLayer/IngredientVBoxContainer" unique_id=2112185648]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
-
-[node name="ButtonControl" type="Control" parent="HUDLayer/IngredientVBoxContainer/IngredientTopPanel" unique_id=1279139826]
-custom_minimum_size = Vector2(0, 105)
-layout_mode = 2
-
-[node name="IngredientCloseButton" type="Button" parent="HUDLayer/IngredientVBoxContainer/IngredientTopPanel/ButtonControl" unique_id=1666127598]
-clip_contents = true
-layout_mode = 0
-offset_left = 800.0
-offset_right = 1320.0
-offset_bottom = 520.0
-scale = Vector2(0.2, 0.2)
-icon = ExtResource("4_o6xl0")
-flat = true
-
-[node name="KineticShardsPanelContainer" type="PanelContainer" parent="HUDLayer/IngredientVBoxContainer" unique_id=1707696475]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
-
-[node name="KineticShardsHBoxContainer" type="HBoxContainer" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer" unique_id=857390864]
-layout_mode = 2
-alignment = 1
-
-[node name="KineticShardsVBoxContainerLeft" type="VBoxContainer" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer" unique_id=1869316392]
-custom_minimum_size = Vector2(450, 450)
-layout_mode = 2
-alignment = 1
-
-[node name="KineticShardsLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=1425181548]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 56
-text = "Kinetic Shards:"
-
-[node name="KineticShardsCounterLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=474962826]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "5/10"
-
-[node name="KineticShardsGainRateLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=2086899878]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "1 / min"
-
-[node name="KineticShardsMomentumTodayLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=1514311924]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Today's momentum: 
-x steps (100%)"
-
-[node name="KineticShardsMomentumTomorrowLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=928846108]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Tomorrow's momentum: 
-x steps (100%)"
-
-[node name="KineticShardsVBoxContainerRight" type="VBoxContainer" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer" unique_id=349713264]
-custom_minimum_size = Vector2(450, 450)
-layout_mode = 2
-alignment = 1
-
-[node name="KineticShardsInfoButton" type="Button" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight" unique_id=1673555274]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-icon = ExtResource("8_ya4ey")
-flat = true
-icon_alignment = 1
-vertical_icon_alignment = 0
-expand_icon = true
-
-[node name="KineticShardsProgressBar" type="ProgressBar" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight" unique_id=1378132024]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="KineticShardsSpendButton" type="Button" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight" unique_id=685049586]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-text = "Spend 1 Kinetic Shard"
-
-[node name="KineticShardsMomentumGraphPanel" type="Panel" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight" unique_id=1144980433]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
-
-[node name="KineticShardsMomentumGraphLine" type="Line2D" parent="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight/KineticShardsMomentumGraphPanel" unique_id=547060329]
-unique_name_in_owner = true
-position = Vector2(0, -4)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-antialiased = true
-script = ExtResource("3_sugp2")
-padding = 10.0
-
-[node name="FocusFluxPanelContainer" type="PanelContainer" parent="HUDLayer/IngredientVBoxContainer" unique_id=1063816101]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
-
-[node name="FocusFluxHBoxContainer" type="HBoxContainer" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer" unique_id=623061050]
-layout_mode = 2
-alignment = 1
-
-[node name="FocusFluxVBoxContainerLeft" type="VBoxContainer" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer" unique_id=1314552279]
-custom_minimum_size = Vector2(450, 400)
-layout_mode = 2
-alignment = 1
-
-[node name="FocusFluxLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerLeft" unique_id=768092736]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 56
-text = "Focus Flux:"
-
-[node name="FocusFluxCounterLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerLeft" unique_id=1902084551]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "5/10"
-
-[node name="FocusFluxGainRateLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerLeft" unique_id=1569050396]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "1 / min"
-
-[node name="FocusFluxMomentum" type="Label" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerLeft" unique_id=1934338959]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Current mommentum: 
-x minutes (100%)"
-
-[node name="FocusFluxVBoxContainerRight" type="VBoxContainer" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer" unique_id=277622762]
-custom_minimum_size = Vector2(450, 400)
-layout_mode = 2
-alignment = 1
-
-[node name="FocusFluxInfoButton" type="Button" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight" unique_id=820921870]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-icon = ExtResource("8_ya4ey")
-flat = true
-icon_alignment = 1
-vertical_icon_alignment = 0
-expand_icon = true
-
-[node name="FocusFluxProgressBar" type="ProgressBar" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight" unique_id=1111988865]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="FocusFluxSpendButton" type="Button" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight" unique_id=547740898]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-text = "Spend 1 Focus Flux"
-
-[node name="FocusFluxMomentumGraphPanel" type="Panel" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight" unique_id=1893895348]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
-
-[node name="FocusFluxMomentumGraphLine" type="Line2D" parent="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight/FocusFluxMomentumGraphPanel" unique_id=1105415625]
-unique_name_in_owner = true
-position = Vector2(0, -4)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-antialiased = true
-script = ExtResource("3_sugp2")
-padding = 10.0
-
-[node name="DreamShardsPanelContainer" type="PanelContainer" parent="HUDLayer/IngredientVBoxContainer" unique_id=1505209790]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
-
-[node name="DreamShardsHBoxContainer" type="HBoxContainer" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer" unique_id=1390842265]
-layout_mode = 2
-alignment = 1
-
-[node name="DreamShardsVBoxContainerRight" type="VBoxContainer" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer" unique_id=530625436]
-custom_minimum_size = Vector2(450, 400)
-layout_mode = 2
-alignment = 1
-
-[node name="DreamShardsFluxLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerRight" unique_id=1190688941]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 56
-text = "Dream Shards:"
-
-[node name="DreamShardsCounterLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerRight" unique_id=1605440307]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "5/10"
-
-[node name="DreamShardsGainRateLabel" type="Label" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerRight" unique_id=2107261682]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 48
-text = "1 / min"
-
-[node name="DreamShardsMomentum" type="Label" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerRight" unique_id=787320845]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Current momentum: 
-x hours (100%)"
-
-[node name="DreamShardsVBoxContainerLeft" type="VBoxContainer" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer" unique_id=1425526110]
-custom_minimum_size = Vector2(450, 400)
-layout_mode = 2
-alignment = 1
-
-[node name="DreamShardsInfoButton" type="Button" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft" unique_id=2051862671]
-custom_minimum_size = Vector2(75, 75)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-icon = ExtResource("8_ya4ey")
-flat = true
-icon_alignment = 1
-vertical_icon_alignment = 0
-expand_icon = true
-
-[node name="DreamShardsProgressBar" type="ProgressBar" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft" unique_id=1100528436]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="DreamShardsSpendButton" type="Button" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft" unique_id=924819205]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-text = "Spend 1 Focus Flux"
-
-[node name="DreamShardsMomentumGraphPanel" type="Panel" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft" unique_id=1761356683]
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
-
-[node name="DreamShardsMomentumGraphLine" type="Line2D" parent="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft/DreamShardsMomentumGraphPanel" unique_id=1187010261]
-unique_name_in_owner = true
-position = Vector2(0, -4)
-width = 2.0
-default_color = Color(0, 0, 0, 1)
-antialiased = true
-script = ExtResource("3_sugp2")
-padding = 10.0
-
-[node name="IngredientInfoPopupPanel" type="PopupPanel" parent="HUDLayer" unique_id=1570118367]
-unique_name_in_owner = true
-oversampling_override = 1.0
-size = Vector2i(908, 408)
-theme_override_styles/panel = SubResource("StyleBoxFlat_ya4ey")
-
-[node name="IngredientInfoContainer" type="MarginContainer" parent="HUDLayer/IngredientInfoPopupPanel" unique_id=219818923]
-offset_right = 908.0
-offset_bottom = 408.0
-
-[node name="IngredientInfoLabel" type="Label" parent="HUDLayer/IngredientInfoPopupPanel/IngredientInfoContainer" unique_id=1255759300]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(900, 400)
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 48
-vertical_alignment = 1
-autowrap_mode = 2
 
 [node name="NavBarLayer" type="CanvasLayer" parent="." unique_id=435175999]
 

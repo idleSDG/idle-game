@@ -13,7 +13,7 @@ func get_time_weighted_multiplier(start_t: float, end_t: float) -> float:
 	var history: Array = datasource.get_history(start_t, end_t)
 	
 	if history.size() < 2:
-		return get_momentum_at_timestamp(end_t) 
+		return momentumConfig.get_multiplier(0.0) # Fallback
 
 	var total_area: float = 0.0
 	var total_duration: float = 0.0

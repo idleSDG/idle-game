@@ -477,9 +477,9 @@ FodyWeavers.xsd
 *.msp
 
 
-# GodotStepAndSleepPlugin bin files
-!addons/GodotStepAndSleepPlugin/bin/
-!addons/GodotStepAndSleepPlugin/bin/**
+# GodotStepPlugin bin files
+!addons/GodotStepPlugin/bin/
+!addons/GodotStepPlugin/bin/**
 
 # GodotScreenTimePlugin bin files
 !addons/GodotScreenTimePlugin/bin/
