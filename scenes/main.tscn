@@ -619,6 +619,8 @@ visible = false
 
 [node name="InvalidSavePopUp" parent="PopupLayer" unique_id=256500332 instance=ExtResource("5_tbgi4")]
 
+[node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=978724567]
+
 [node name="MissingSleepDataPopUp" type="Control" parent="PopupLayer" unique_id=2021368707]
 unique_name_in_owner = true
 visible = false
@@ -695,6 +697,7 @@ theme_override_font_sizes/font_size = 50
 text = "Use device's data"
 
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
+[connection signal="pressed" from="HUDLayer/Upper HUD/VBox/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="HUDLayer/SmallIngredientButton" to="HUDLayer" method="_on_small_ingredient_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/IngredientTopPanel/ButtonControl/IngredientCloseButton" to="HUDLayer" method="_on_ingredient_close_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight/KineticShardsInfoButton" to="HUDLayer" method="_on_kinetic_shards_info_button_pressed"]
@@ -707,7 +710,6 @@ text = "Use device's data"
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataFallbackButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_fallback_button_pressed"]
 [connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataDeviceDataButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_device_data_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/ShopButton" to="." method="_on_shop_button_pressed"]
