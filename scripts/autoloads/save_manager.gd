@@ -25,7 +25,8 @@ func save_game():
 		"equipment": EquipmentManager.get_save_data(),
 		"appearance": PlayerAppearance.get_save_data(),
 		"skills": SkillManager.get_save_data(),
-		"battle": BattleVariables.get_save_data()
+		"battle": BattleVariables.get_save_data(),
+		"potions": PotionManager.get_save_data()
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -42,6 +43,7 @@ func init_new_save():
 	PlayerAppearance.init_new_save()
 	SkillManager.init_new_save()
 	BattleVariables.init_new_save()
+	PotionManager.init_new_save()
 
 func save_file_exists() -> bool:
 	print(FileAccess.file_exists(SAVE_PATH))
@@ -68,7 +70,8 @@ func load_game():
 		"equipment": EquipmentManager, 
 		"appearance": PlayerAppearance,
 		"skills": SkillManager,
-		"battle": BattleVariables
+		"battle": BattleVariables,
+		"potions": PotionManager
 	}
 
 	PlayerInventory.last_inventory_update_unix_time = data.get("timestamp", Time.get_unix_time_from_system())

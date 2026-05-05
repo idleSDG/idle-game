@@ -5,6 +5,7 @@ class_name Main extends Node
 @export var character_scene: PackedScene = preload("res://src/features/characters/character_menu.tscn")
 @export var settings_scene: PackedScene = preload("res://scenes/settings.tscn")
 @export var inventory_scene: PackedScene = preload("res://scenes/inventory.tscn")
+@export var shop_scene: PackedScene = preload("res://src/features/shop/shop.tscn")
 
 @onready var content_area = $ContentArea
 @onready var nav_bar = $"NavBarLayer/NavBar"
@@ -15,7 +16,7 @@ var tab_for_button = {
 	"BattleButton": "battle",
 	"InventoryButton": "inventory",
 	"CharacterButton": "character",
-	"SettingsButton": "settings",
+	"ShopButton": "shop",
 }
 
 func _ready():
@@ -25,7 +26,8 @@ func _ready():
 		"battle": battle_scene,
 		"inventory": inventory_scene,
 		"character": character_scene,
-		"settings": settings_scene
+		"shop": shop_scene,
+		"settings": settings_scene,
 	}
 	SceneManager.setup(content_area, tab_scenes)
 	SceneManager.tab_switched.connect(_on_tab_switched)
@@ -35,7 +37,7 @@ func _ready():
 
 func _on_tab_switched(tab_name):
 	# Only show HUD on home or battle
-	hud_layer.visible = tab_name in ["home", "character"]
+	hud_layer.visible = tab_name in ["home", "character", "shop"]
 	update_navbar_visuals()
 
 func update_navbar_visuals():
@@ -51,14 +53,14 @@ func _on_home_button_pressed():
 func _on_battle_button_pressed():
 	SceneManager.switch_tab("battle")
 
-func _on_equipment_button_pressed():
-	SceneManager.switch_tab("equipment")
+func _on_character_button_pressed():
+	SceneManager.switch_tab("character")
 
 func _on_inventory_button_pressed():
 	SceneManager.switch_tab("inventory")
 
+func _on_shop_button_pressed():
+	SceneManager.switch_tab("shop")
+
 func _on_settings_button_pressed():
 	SceneManager.switch_tab("settings")
-
-func _on_character_button_pressed() -> void:
-	SceneManager.switch_tab("character")

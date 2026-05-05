@@ -108,7 +108,7 @@ func Use(user : Character, target : Character) -> bool:
 		dmg.x *= 0.5
 	target.TakeDamage(dmg.x, dmg.y > 0.0)
 	
-	if additionalEffect != null && RandomNumberGenerator.new().randf() < additionalEffect.ApplicationRate:
+	if additionalEffect != null && BattleVariables.battleRNG.randf() < additionalEffect.ApplicationRate:
 		if additionalEffect.TargetSelf && isCurrentAttack:
 			user.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 		else:
@@ -124,7 +124,7 @@ func Use(user : Character, target : Character) -> bool:
 # Damage formula function
 func DamageCalculation(user : CharacterStats, target : CharacterStats) -> Vector2:
 	var skillDMG = user.attack * self.potency
-	var critCondition = RandomNumberGenerator.new().randf() <= user.critRate
+	var critCondition = BattleVariables.battleRNG.randf() <= user.critRate
 	var critMult = 1.0 + user.critDMG if critCondition else 1.0
 	var elementMult = 1.0 + user.elementalDMG[self.element]
 	var categoryMult = 1.0 + user.categoryDMG[target.characterCategory]
