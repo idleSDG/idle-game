@@ -26,7 +26,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+bg_color = Color(0.48657194, 0.60121614, 0.60121614, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbgi4"]
 content_margin_left = 16.0
@@ -39,9 +39,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0.5294118)
 content_margin_left = 16.0
 content_margin_right = 16.0
 bg_color = Color(0.6, 0.6, 0.6, 0.4862745)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
-bg_color = Color(0.48657194, 0.60121614, 0.60121614, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
 bg_color = Color(0.8156863, 1, 1, 1)
@@ -619,8 +616,6 @@ visible = false
 
 [node name="InvalidSavePopUp" parent="PopupLayer" unique_id=256500332 instance=ExtResource("5_tbgi4")]
 
-[node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=978724567]
-
 [node name="MissingSleepDataPopUp" type="Control" parent="PopupLayer" unique_id=2021368707]
 unique_name_in_owner = true
 visible = false
@@ -696,6 +691,8 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Use device's data"
 
+[node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=978724567]
+
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/Upper HUD/VBox/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="HUDLayer/SmallIngredientButton" to="HUDLayer" method="_on_small_ingredient_button_pressed"]
@@ -710,6 +707,6 @@ text = "Use device's data"
 [connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="NavBarLayer/NavBar/ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataFallbackButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_fallback_button_pressed"]
 [connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataDeviceDataButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_device_data_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/ShopButton" to="." method="_on_shop_button_pressed"]
