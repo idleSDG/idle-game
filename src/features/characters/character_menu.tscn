@@ -22,11 +22,11 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2xjd"]
-bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqv88"]
 bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2xjd"]
+bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
 
 [node name="CharacterMenu" type="Node2D" unique_id=1633184879]
 script = ExtResource("1_viems")
@@ -276,44 +276,8 @@ equip = 2
 layout_mode = 2
 equip = 3
 
-[node name="SkillSelection" type="VBoxContainer" parent="CanvasLayer" unique_id=776300045]
-visible = false
-z_index = 100
-anchors_preset = -1
-anchor_left = 0.503
-anchor_top = 0.569
-anchor_right = 0.503
-anchor_bottom = 0.569
-offset_left = -482.24005
-offset_top = -966.48
-offset_right = 486.75995
-offset_bottom = -0.47998047
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/SkillSelection" unique_id=1544014948]
-custom_minimum_size = Vector2(0, 670)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_l2xjd")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SkillSelection/ScrollContainer" unique_id=915604959]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="SkillGrid" parent="CanvasLayer/SkillSelection/ScrollContainer/MarginContainer" unique_id=1758141714 node_paths=PackedStringArray("skillScreen", "button1", "button2", "button3") instance=ExtResource("5_kt2ab")]
-layout_mode = 2
-size_flags_horizontal = 0
-columns = 6
-skillScreen = NodePath("../../..")
-button1 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button")
-button2 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button2")
-button3 = NodePath("../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button3")
-
-[node name="SkillPreview" parent="CanvasLayer/SkillSelection" unique_id=1238233801 instance=ExtResource("6_jbg7u")]
-layout_mode = 2
-
 [node name="ItemPicker" type="Control" parent="CanvasLayer" unique_id=1096475004]
+visible = false
 z_index = 100
 layout_mode = 3
 anchors_preset = 15
@@ -363,4 +327,53 @@ theme_override_colors/font_color = Color(0.2, 1, 0.2, 1)
 theme_override_font_sizes/font_size = 64
 text = "Equip"
 
-[connection signal="skill_pressed" from="CanvasLayer/SkillSelection/ScrollContainer/MarginContainer/SkillGrid" to="CanvasLayer/SkillSelection/SkillPreview" method="_on_skill_grid_skill_pressed"]
+[node name="SkillSelectionBackground" type="Control" parent="CanvasLayer" unique_id=1691713966]
+visible = false
+z_index = 99
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillSelection" type="VBoxContainer" parent="CanvasLayer/SkillSelectionBackground" unique_id=776300045]
+z_index = 100
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.00006
+offset_top = -483.0
+offset_right = 500.00006
+offset_bottom = 483.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/SkillSelectionBackground/SkillSelection" unique_id=1544014948]
+custom_minimum_size = Vector2(0, 670)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l2xjd")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/SkillSelectionBackground/SkillSelection/ScrollContainer" unique_id=915604959]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="SkillGrid" parent="CanvasLayer/SkillSelectionBackground/SkillSelection/ScrollContainer/MarginContainer" unique_id=1758141714 node_paths=PackedStringArray("skillScreen", "button1", "button2", "button3") instance=ExtResource("5_kt2ab")]
+layout_mode = 2
+size_flags_horizontal = 0
+columns = 6
+skillScreen = NodePath("../../../..")
+button1 = NodePath("../../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button")
+button2 = NodePath("../../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button2")
+button3 = NodePath("../../../../../HSplit/RightVBox/SkillsSection/SkinColorPanel/HBoxContainer/Button3")
+
+[node name="SkillPreview" parent="CanvasLayer/SkillSelectionBackground/SkillSelection" unique_id=1238233801 instance=ExtResource("6_jbg7u")]
+layout_mode = 2
+
+[connection signal="skill_pressed" from="CanvasLayer/SkillSelectionBackground/SkillSelection/ScrollContainer/MarginContainer/SkillGrid" to="CanvasLayer/SkillSelectionBackground/SkillSelection/SkillPreview" method="_on_skill_grid_skill_pressed"]
