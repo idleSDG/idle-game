@@ -41,7 +41,7 @@ func _notification(what: int) -> void:
 	elif what == NOTIFICATION_APPLICATION_FOCUS_IN:
 		if not isPlaying:
 			return
-		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
+		var elapsed = BattleVariables.battleElapsed #Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
 			simulate(elapsed)
 			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
@@ -62,7 +62,8 @@ func _ready() -> void:
 	pause.set_pressed_no_signal(!BattleVariables.isPaused) 
 	fast.set_pressed_no_signal(!BattleVariables.isFast)
 
-	# PLAYER INIT
+	
+	# ALL OF THE BELOW IS TEMPORARY CODE, THIS INFORMATION WOULD BE LOADED WHEN INSTANTIATING THE BATTLE
 	var instance = character_scene.instantiate()
 	instance.SetStats(BattleVariables.GetPlayer())
 	instance.level = PlayerProgress.level
@@ -72,9 +73,8 @@ func _ready() -> void:
 	characterSpawnPos[0].add_child(instance)
 	characterList[0].hitbox.pressed.connect(select_enemy_unit.bind(0))
 	characterList[0].index = 0
-	SetPotions()
+	# END OF TEMPORARY
 	
-	# ENEMIES INIT
 	for enemy in BattleVariables.current_battle_level.enemies:
 		var instance2 := EnemyTypes.CreateEnemy(enemy, BattleVariables.current_battle_level.enemy_level)
 		remainingEnemiesList.append(instance2)
@@ -83,27 +83,15 @@ func _ready() -> void:
 	# Handles Loading and Simulating the battle after the game turns off OR sets it up for the future
 	if BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE:
 		var now := Time.get_unix_time_from_system()
-		BattleVariables.battleRNG = RandomNumberGenerator.new()
-		BattleVariables.battleRNG.seed = BattleVariables.battleSeed
-		
 		simulate(BattleVariables.battleElapsed) #(now - BattleVariables.battleStart)
 		timerLabel.time = int(now - BattleVariables.battleStart)
 	else:
 		BattleVariables.battleState = BattleVariables.BattleStates.IN_BATTLE
 		BattleVariables.battleStart = Time.get_unix_time_from_system()
 		BattleVariables.battleElapsed = 0.0
-		BattleVariables.potionUsage = {}
-		
-		BattleVariables.battleSeed = RandomNumberGenerator.new().randf() * 100000
-		BattleVariables.battleRNG = RandomNumberGenerator.new()
-		BattleVariables.battleRNG.seed = BattleVariables.battleSeed
-		
-		# potion init must be here
-		SetPotions()
 		SaveManager.save_game()
 	
-	
-	pass
+	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # Drives the primary game logic
@@ -202,13 +190,10 @@ func try_skills() -> bool:
 
 
 # the main driver of gameplay - every character on the field charges their skills
-func pass_time(delta: float, total: float = 0.0) -> void:
+func pass_time(delta: float) -> void:
 	for c in characterList:
 		if c != null:
 			c.PassTime(delta)
-	
-	battle_ui.PassTime(delta, total)
-	
 	pass
 
 # used for bar updates and whatnot (though it'd be better to tie the bar to a variable)
@@ -251,7 +236,7 @@ func simulate(length : float):
 			#update_visuals(delta)
 			check_enemies()
 			if !try_skills():
-				pass_time(delta, BattleVariables.battleElapsed - length)
+				pass_time(delta)
 			else:
 				timer = 1.0
 				check_death()
@@ -288,22 +273,6 @@ func select_enemy_slot(ind : int):
 				i+=1
 		targetIndex = ind
 
-func SetPotions():
-	var pot1 = null
-	var pot2 = null
-	var pot3 = null
-	for i in 3:
-		print(i)
-		for pot in PotionManager.potions:
-			if pot.slot == i + 1:
-				var instance = Potion.new(pot.id, i + 1)
-				if i + 1 == 1:
-					pot1 = instance
-				if i + 1 == 2:
-					pot2 = instance
-				if i + 1 == 3:
-					pot3 = instance
-	battle_ui.SetPotions(pot1, pot2, pot3, characterList)
 
 
 func _on_pause_toggled(toggled_on: bool) -> void:
