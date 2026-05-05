@@ -26,6 +26,9 @@ func _init(newType : StatusEffectType, chance : float = 0.0, targetMe : bool = f
 		StatusEffectType.Haste:
 			Count = 1
 			DecrementRate = 25.0
+		StatusEffectType.Strength:
+			Count = 1
+			DecrementRate = 25.0
 	
 	pass
 
@@ -51,6 +54,8 @@ func Apply(chara : Character):
 			Count = Count - 1
 		StatusEffectType.Haste:
 			pass
+		StatusEffectType.Strength:
+			pass
 	pass
 
 # AlterStats is used for status effects that change stat values
@@ -66,6 +71,9 @@ func AlterStats(stats : CharacterStats):
 		StatusEffectType.Haste:
 			stats.chargeRate *= 1.1
 			pass
+		StatusEffectType.Strength:
+			stats.attack *= 1.15
+			pass
 	pass
 
 func GetColor() -> Color:
@@ -78,6 +86,8 @@ func GetColor() -> Color:
 			return Color.YELLOW
 		StatusEffectType.Haste:
 			return Color.SPRING_GREEN
+		StatusEffectType.Strength:
+			return Color.RED
 	
 	return Color.WHITE
 
@@ -87,5 +97,6 @@ enum StatusEffectType
 	Burn,     # currentHP% damage every 25 charge for 100 charge
 	Freeze,   # reduces chargeRate by 20% for 100 charge
 	Paralyze, # the next spell deals half damage
-	Haste     # increases chargeRate by 10% for 100 charge
+	Haste,    # increases chargeRate by 10% for 100 charge
+	Strength, # increase ATK by 15%
 }

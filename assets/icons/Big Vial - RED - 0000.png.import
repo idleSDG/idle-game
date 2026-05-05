@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be5l1nv268yem"
-path="res://.godot/imported/info.png-3ebaca84559ffb10421569f6372a365b.ctex"
+uid="uid://ckpxfjvfwotvs"
+path="res://.godot/imported/Big Vial - RED - 0000.png-60c1ed99063f75e51a5d77a2f85d1764.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/hud/info.png"
-dest_files=["res://.godot/imported/info.png-3ebaca84559ffb10421569f6372a365b.ctex"]
+source_file="res://assets/icons/Big Vial - RED - 0000.png"
+dest_files=["res://.godot/imported/Big Vial - RED - 0000.png-60c1ed99063f75e51a5d77a2f85d1764.ctex"]
 
 [params]
 
