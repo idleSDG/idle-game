@@ -25,7 +25,6 @@ extends Node
 @onready var item_picker      : Control  = $CanvasLayer/ItemPicker
 @onready var item_grid        : ItemGrid = $CanvasLayer/ItemPicker/PanelContainer/VBox/ItemGrid
 @onready var picker_title     : Label    = $CanvasLayer/ItemPicker/PanelContainer/VBox/PickerTitle
-@onready var picker_close_btn : Button   = $CanvasLayer/ItemPicker/PanelContainer/VBox/HBox/CloseBtn
 @onready var picker_equip_btn : Button   = $CanvasLayer/ItemPicker/PanelContainer/VBox/HBox/EquipBtn
 @onready var picker_info_lbl  : Label    = $CanvasLayer/ItemPicker/PanelContainer/VBox/InfoLabel
 
@@ -46,7 +45,6 @@ func _ready() -> void:
 	hat_btn.pressed.connect(_on_hat_pressed)
 
 	skin_panel.changed.connect(_on_skin_color_changed)
-	picker_close_btn.pressed.connect(_close_picker)
 	picker_equip_btn.pressed.connect(_on_equip_pressed)
 
 	item_grid.item_selected.connect(_on_item_selected)
