@@ -48,7 +48,7 @@ func SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes)
 	pass
 
 func CalculateFinalStats(baseStats : CharacterStats):
-	self.SetValues(baseStats.health, baseStats.attack + self.attack, baseStats.defense + self.defense,
+	self.SetValues(baseStats.health, self.attack, self.defense,
 		baseStats.critRate + self.critRate, baseStats.critDMG + self.critDMG,
 		baseStats.chargeRate * self.chargeRate,
 		baseStats.elementalDMG, baseStats.elementalRES, baseStats.categoryDMG, baseStats.categoryRES)
