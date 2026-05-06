@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dobjjs6ykdmio"]
 
-[ext_resource type="Script" uid="uid://bot7gyad0rwje" path="res://scripts/ui/battle_ui.gd" id="1_aeslv"]
+[ext_resource type="Script" uid="uid://bot7gyad0rwje" path="res://src/ui/battleUI/battle_ui.gd" id="1_aeslv"]
 [ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="2_aeslv"]
 [ext_resource type="PackedScene" uid="uid://ixme676dvwbw" path="res://scenes/potion_button.tscn" id="3_wm05t"]
 

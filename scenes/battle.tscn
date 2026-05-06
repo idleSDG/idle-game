@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c1xf3yvokbqtb"]
 
-[ext_resource type="Script" uid="uid://ev47y4syklsu" path="res://scripts/battle_controller.gd" id="1_dn72j"]
+[ext_resource type="Script" uid="uid://ev47y4syklsu" path="res://src/features/battle/battle_controller.gd" id="1_dn72j"]
 
 [node name="Battle" type="Node2D" unique_id=1983405384]
 script = ExtResource("1_dn72j")
@@ -32,9 +32,22 @@ vertical_scroll_mode = 3
 [node name="Control" type="Control" parent="CanvasLayer/ScrollContainer" unique_id=1528445326]
 layout_mode = 2
 
-[node name="CampaignButtonContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1374128357]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.104
-offset_bottom = 0.31999207
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=688977264]
+offset_right = 1080.0
+offset_bottom = 404.0
+
+[node name="CampaignButtonContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1374128357]
+custom_minimum_size = Vector2(1080, 200)
+layout_mode = 2
 alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1081504305]
+layout_mode = 2
+
+[node name="RandomizeButton" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=1883028290]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Randomize"
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/RandomizeButton" to="." method="_on_randomize_button_pressed"]
