@@ -25,9 +25,10 @@ extends Node
 @onready var item_picker      : Control  = $CanvasLayer/ItemPicker
 @onready var item_grid        : ItemGrid = $CanvasLayer/ItemPicker/PanelContainer/VBox/ItemGrid
 @onready var picker_title     : Label    = $CanvasLayer/ItemPicker/PanelContainer/VBox/PickerTitle
-@onready var picker_close_btn : Button   = $CanvasLayer/ItemPicker/PanelContainer/VBox/HBox/CloseBtn
 @onready var picker_equip_btn : Button   = $CanvasLayer/ItemPicker/PanelContainer/VBox/HBox/EquipBtn
 @onready var picker_info_lbl  : Label    = $CanvasLayer/ItemPicker/PanelContainer/VBox/InfoLabel
+
+@onready var skill_background : Control = $CanvasLayer/SkillSelectionBackground
 
 var _current_picker_slot : EquipmentItem.Slot
 var _selected_item : EquipmentItem = null
@@ -46,11 +47,13 @@ func _ready() -> void:
 	hat_btn.pressed.connect(_on_hat_pressed)
 
 	skin_panel.changed.connect(_on_skin_color_changed)
-	picker_close_btn.pressed.connect(_close_picker)
 	picker_equip_btn.pressed.connect(_on_equip_pressed)
 
 	item_grid.item_selected.connect(_on_item_selected)
 	item_grid.unequip_pressed.connect(_on_unequip_pressed)
+
+	item_picker.gui_input.connect(_on_picker_background_input)
+	skill_background.gui_input.connect(_on_skill_background_input)
 
 	EquipmentManager.equipment_changed.connect(_on_equipment_changed)
 	PlayerProgress.leveled_up.connect(func(_o, _n): _refresh_stats())
@@ -98,6 +101,21 @@ func _open_picker(slot: EquipmentItem.Slot, title: String) -> void:
 func _close_picker() -> void:
 	_selected_item = null
 	item_picker.visible = false
+
+func _on_picker_background_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_close_picker()
+
+func _on_skill_background_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_close_skill_selection()
+
+func _close_skill_selection() -> void:
+	skill_background.visible = false
+	# Reset skill grid state
+	var skill_grid : SkillGrid = $CanvasLayer/SkillSelectionBackground/SkillSelection/ScrollContainer/MarginContainer/SkillGrid
+	skill_grid.currentSelection = -1
+	skill_grid.doSkills()
 
 func _on_item_selected(item: EquipmentItem) -> void:
 	var equipped = EquipmentManager.get_equipped(_current_picker_slot)
