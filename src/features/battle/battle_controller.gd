@@ -17,7 +17,8 @@ var active_pressed_button = preload(("res://assets/battlemap/active_pressed_butt
 
 var current_view: Node = null
 var maps: Array[campaign_map]
-var current_map: String
+var current_map_string: String
+var current_map : campaign_map
 
 var max_button_size: float = 0.55
 var min_button_size: float = 0.45
@@ -33,8 +34,13 @@ func _ready() -> void:
 		if BattleVariables.campaigns.is_empty():
 			BattleVariables.init_new_save()
 		maps = BattleVariables.campaigns
-		current_map = BattleVariables.current_campaign
-		draw_map(maps.filter(func(x): return x.name == current_map).front())
+		current_map_string = BattleVariables.current_campaign
+		current_map = maps.filter(func(x): return x.name == current_map_string).front()
+		
+		if(current_map.levels.filter(func(x): return !x.beaten).is_empty()):
+			_on_restart_pressed(current_map_string)
+			
+		draw_map(current_map)
 		var buttons = $CanvasLayer/VBoxContainer/CampaignButtonContainer.get_children()
 		for button in buttons:
 			button.queue_free()
@@ -68,7 +74,7 @@ func _process(delta: float) -> void:
 func _update_campaign_selection_visuals():
 	var buttons = $CanvasLayer/VBoxContainer/CampaignButtonContainer.get_children()
 	for button in buttons:
-		var is_active: bool = button.text == current_map
+		var is_active: bool = button.text == current_map_string
 		button.add_theme_font_size_override("font_size", 60 if is_active else 32)
 		button.add_theme_color_override("font_color", Color(0.3, 0.8, 1) if is_active else Color(1, 1, 1))
 
@@ -76,7 +82,7 @@ func _update_campaign_selection_visuals():
 func _on_map_changed(map: campaign_map):
 	increasing_scale = true
 	BattleVariables.current_campaign = map.name
-	current_map = map.name
+	current_map_string = map.name
 	draw_map(map)
 	_update_campaign_selection_visuals()
 
@@ -160,14 +166,24 @@ func draw_map(map: campaign_map):
 				level_button.texture_hover = active_hovered_button
 				level_button.texture_pressed = active_pressed_button
 		else:
-			if map.paths.filter(func(x): return x.end == lvl && x.start == highest_level).is_empty():
-				level_button.disabled = true
+			if highest_level.depth == layers - 1:
 				if lvl.beaten:
 					level_button.texture_normal = beaten_button
+					level_button.disabled = true
+				else:
+					level_button.texture_normal = active_normal_button
+					level_button.texture_hover = active_hovered_button
+					level_button.texture_pressed = active_pressed_button
 			else:
-				level_button.texture_normal = active_normal_button
-				level_button.texture_hover = active_hovered_button
-				level_button.texture_pressed = active_pressed_button
+				if map.paths.filter(func(x): return x.end == lvl && x.start == highest_level).is_empty():
+					level_button.disabled = true
+					if lvl.beaten:
+						level_button.texture_normal = beaten_button
+				else:
+					level_button.texture_normal = active_normal_button
+					level_button.texture_hover = active_hovered_button
+					level_button.texture_pressed = active_pressed_button
+					
 		level_button.z_index = 0
 		level_button.pivot_offset = level_button.size / 2 # used for the pulsing effect
 		level_button.position -= level_button.size / 4
@@ -195,7 +211,7 @@ func draw_map(map: campaign_map):
 			restart_button.add_theme_stylebox_override("normal", styleBox)
 			restart_button.add_theme_stylebox_override("pressed", styleBox)
 			restart_button.add_theme_stylebox_override("hover", styleBox)
-			restart_button.pressed.connect(_on_restart_pressed.bind(current_map))
+			restart_button.pressed.connect(_on_restart_pressed.bind(current_map_string))
 			control.add_child(restart_button)
 		max_scroll = highest_level.y - height / 2
 
@@ -241,21 +257,16 @@ func _on_restart_pressed(restart_map: String):
 
 
 func _on_randomize_button_pressed() -> void:
-	var map_index = BattleVariables.campaigns.find_custom(func(x): return x.name == current_map)
-	if map_index == -1:
-		return
-
-	var map = BattleVariables.campaigns[map_index]
-	var enemy_level = map.levels.front().enemy_level
+	var enemy_level = current_map.levels.front().enemy_level
 	var new_map: campaign_map
-	var highest_beaten = map.find_highest_beaten()
+	var highest_beaten = current_map.find_highest_beaten()
 	var existing_levels: Array[battle_level] = []
 	var existing_paths: Array[battle_path] = []
 	if highest_beaten != null:
-		existing_levels = map.levels.filter(func(x): return x.depth <= highest_beaten.depth)
-		existing_paths = map.paths.filter(func(x): return x.end.depth <= highest_beaten.depth)
+		existing_levels = current_map.levels.filter(func(x): return x.depth <= highest_beaten.depth)
+		existing_paths = current_map.paths.filter(func(x): return x.end.depth <= highest_beaten.depth)
 
-	match map.type:
+	match current_map.type:
 		campaign_map.Type.ZOO:
 			new_map = campaign_map.generate_zoo(enemy_level, existing_levels, existing_paths)
 		campaign_map.Type.SKY:
@@ -266,6 +277,6 @@ func _on_randomize_button_pressed() -> void:
 			printerr("Unknown map type")
 			new_map = campaign_map.generate_zoo(enemy_level)
 
-	BattleVariables.campaigns[map_index] = new_map
+	BattleVariables.campaigns[BattleVariables.campaigns.find_custom(func(x): return x.name == current_map_string)] = new_map
 	SaveManager.save_game()
 	_ready()
