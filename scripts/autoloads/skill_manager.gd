@@ -20,8 +20,9 @@ func Equip(skill : Skill, equipNum : int):
 			sk.equipState = skill.equipState
 			skill.equipState = oldState
 			return
-	skill.equipState = equipNum
-
+			
+	if skill != null:
+		skill.equipState = equipNum
 	pass
 
 func get_save_data() -> Dictionary:
