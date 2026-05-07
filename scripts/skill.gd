@@ -4,6 +4,7 @@ var skillUI = load("res://scenes/skillUI.tscn")
 var skillBar #= skillUI.instantiate()
 
 var skillName = "DefaultSkill"
+var levelRequired : int = 1
 
 var potency = 1.0
 var maxPotency = 2.0
@@ -39,7 +40,7 @@ func _init(pot = 1.0, max = 100.0, elem = CharacterStats.Element.None,
 
 static func CreateSkill(name : String = "default", pot = 1.0, maxPot = 2.0, chargeAmnt = 100.0,
 	 elem = CharacterStats.Element.None, aoe : bool = false, addEffect : StatusEffect = null,
-	 lvl = 0, xp = 0) -> Skill:
+	 lvl = 0, xp = 0, req = 1) -> Skill:
 	
 	var newSkill : Skill = new(pot, chargeAmnt, elem, aoe)
 	newSkill.maxPotency = maxPot
@@ -47,6 +48,7 @@ static func CreateSkill(name : String = "default", pot = 1.0, maxPot = 2.0, char
 	newSkill.exp = xp
 	newSkill.additionalEffect = addEffect
 	newSkill.skillName = name
+	newSkill.levelRequired = req
 	
 	return newSkill
 
@@ -55,6 +57,7 @@ static func DuplicateSkill(prevSkill : Skill) -> Skill:
 	var newSkill : Skill = new(pot, prevSkill.maxCharge,
 	 	prevSkill.element, prevSkill.isAoE, prevSkill.additionalEffect)
 	newSkill.skillName = prevSkill.skillName
+	newSkill.equipState = prevSkill.equipState
 	
 	newSkill.set_visuals()
 	return newSkill
@@ -64,7 +67,8 @@ static func to_dictionary(skill: Skill) -> Dictionary:
 		"name": skill.skillName,
 		"lvl": skill.level,
 		"xp": skill.exp,
-		"equip": skill.equipState
+		"equip": skill.equipState,
+		"req": skill.levelRequired
 	}
 
 static func from_dictionary(skill_str: Dictionary) -> Skill:
@@ -72,6 +76,7 @@ static func from_dictionary(skill_str: Dictionary) -> Skill:
 	skill.level = skill_str.lvl
 	skill.exp = skill_str.xp
 	skill.equipState = skill_str.equip
+	skill.levelRequired = skill_str.req
 	
 	return skill
 
@@ -188,18 +193,19 @@ func LevelUp(expAcquired : int):
 static func FromName(name : String) -> Skill:
 	match name:
 		"Strike" : 
-			return Skill.CreateSkill("Strike", 1.0, 2.0, 100.0, CharacterStats.Element.Physical, false, null, 0, 0)
+			return Skill.CreateSkill("Strike", 1.0, 2.0, 100.0, CharacterStats.Element.Physical, false,
+		 	null, 0, 0, 0)
 		"Fireball" : 
 			return Skill.CreateSkill("Fireball", 1.2, 2.4, 150.0, CharacterStats.Element.Fire, false,
-		 	StatusEffect.new(StatusEffect.StatusEffectType.Burn, 0.5, false), 0, 0)
+		 	StatusEffect.new(StatusEffect.StatusEffectType.Burn, 0.5, false), 0, 0, 2)
 		"Windstep" : 
 			return Skill.CreateSkill("Windstep", 1.0, 2.0, 125.0, CharacterStats.Element.Wind, false,
-		 	StatusEffect.new(StatusEffect.StatusEffectType.Haste, 1.0, true), 0, 0)
+		 	StatusEffect.new(StatusEffect.StatusEffectType.Haste, 1.0, true), 0, 0, 4)
 		"Chill" : 
 			return Skill.CreateSkill("Chill", 0.8, 1.6, 150.0, CharacterStats.Element.Ice, false,
-		 	StatusEffect.new(StatusEffect.StatusEffectType.Freeze, 1.0, false), 0, 0)
+		 	StatusEffect.new(StatusEffect.StatusEffectType.Freeze, 1.0, false), 0, 0, 5)
 		"Chain Lightning" : 
 			return Skill.CreateSkill("Chain Lightning", 0.4, 0.8, 200.0, CharacterStats.Element.Lightning, true,
-		 	StatusEffect.new(StatusEffect.StatusEffectType.Paralyze, 0.2, false), 0, 0)
+		 	StatusEffect.new(StatusEffect.StatusEffectType.Paralyze, 0.2, false), 0, 0, 7)
 	
 	return null
