@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://hxjy352wis2i"]
+
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="1_2rnj5"]
+[ext_resource type="Script" uid="uid://dam71dvv6fkjo" path="res://src/ui/labels/auto_size_label.gd" id="2_gdk4n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_trceg"]
+font = ExtResource("1_2rnj5")
+font_size = 48
+
+[node name="AutoSizeLabel" type="Label" unique_id=690584]
+text = "Home"
+label_settings = SubResource("LabelSettings_trceg")
+horizontal_alignment = 1
+script = ExtResource("2_gdk4n")

@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c7poemt28rslu"]
+
+[ext_resource type="Texture2D" uid="uid://byhs7o13gw54d" path="res://assets/hud/buttons/button_white_normal.tres" id="1_a86na"]
+[ext_resource type="Texture2D" uid="uid://r3vieddb76k7" path="res://assets/hud/buttons/button_white_pressed.tres" id="2_6k0f2"]
+[ext_resource type="Script" uid="uid://c7d5n4mlq62cn" path="res://src/ui/button/icon_button.gd" id="3_ykoqy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ykoqy"]
+
+[node name="IconButton" type="TextureButton" unique_id=722163806]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ykoqy")
+custom_minimum_size = Vector2(160, 160)
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("1_a86na")
+texture_pressed = ExtResource("2_6k0f2")
+stretch_mode = 5
+script = ExtResource("3_ykoqy")
+
+[node name="Icon" type="TextureRect" parent="." unique_id=1298052985]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stretch_mode = 5
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
