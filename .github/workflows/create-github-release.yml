@@ -16,10 +16,32 @@ jobs:
 
       - name: Prepare Release Keystore
         run: |
+          update_config() {
+              local key=$1
+              local value=$2
+              local file=$3
+
+              if grep -q "^$key=" "$file"; then
+                  sed -i "s|^$key=.*|$key=\"$value\"|g" "$file"
+              else
+                  echo "$key=\"$value\"" >> "$file"
+              fi
+
+              if grep -q "^$key=\"$value\"" "$file"; then
+                  echo "Successfully set $key"
+              else
+                  echo "FAILED to set $key"
+                  exit 1
+              fi
+          }
+
+          update_config "keystore/release" "res://release.keystore" export_presets.cfg
+          update_config "keystore/release_user" "${{ secrets.ANDROID_KEY_ALIAS }}" export_presets.cfg
+          update_config "keystore/release_password" "${{ secrets.ANDROID_KEY_PASSWORD }}" export_presets.cfg
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
-          sed -i 's|keystore/release=""|keystore/release="res://release.keystore"|g' export_presets.cfg
-          sed -i 's|keystore/release_user=""|keystore/release_user="${{ secrets.ANDROID_KEY_ALIAS }}"|g' export_presets.cfg
-          sed -i 's|keystore/release_password=""|keystore/release_password="${{ secrets.ANDROID_KEY_PASSWORD }}"|g' export_presets.cfg
+
+          echo "--- Config Verification ---"
+          grep "keystore/release" export_presets.cfg | sed 's/password=".*"/password="***"/' | sed 's/release_user=".*"/release_user="***"/'
 
       - name: Export Godot Project
         uses: ./.github/actions/godot-android-export
