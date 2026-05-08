@@ -48,7 +48,7 @@ func _build_stats_text(item: EquipmentItem) -> String:
  
 func _refresh_state() -> void:
 	var owned: bool = ShopCatalogue.is_owned(_item)
-	var afford := PlayerInventory.money >= _item.cost
+	var afford: bool = PlayerInventory.money >= _item.cost
  
 	owned_label.visible = owned
 	buy_button.visible = not owned
