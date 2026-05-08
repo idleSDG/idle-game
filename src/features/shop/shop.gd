@@ -33,7 +33,7 @@ func _on_buy_pressed(item: EquipmentItem) -> void:
 func _on_purchase_confirmed() -> void:
 	if _pending_item == null:
 		return
-	var success := PlayerInventory.purchase_item(_pending_item)
+	var success: bool = PlayerInventory.purchase_item(_pending_item)
 	if not success:
 		# Shouldn't happen since buy button is disabled when broke
 		printerr("Purchase failed — insufficient funds")
