@@ -4,6 +4,11 @@ extends Control
 @onready var title_label : Label  = $PanelContainer/VBox/TitleLabel
 @onready var stats_label : Label  = $PanelContainer/VBox/StatsLabel
 @onready var ok_button   : Button = $PanelContainer/VBox/OkButton
+
+@onready var v_box: VBoxContainer = $PanelContainer/VBox
+@onready var skill_unlock: HBoxContainer = $PanelContainer/VBox/HBox_SkillUnlock
+
+var skillUnlocks = []
  
 func _ready() -> void:
 	visible = false
@@ -30,6 +35,23 @@ func show_level_up(old_level: int, new_level: int) -> void:
  
 	stats_label.text = stats_text
 	visible = true
+	
+	for s in SkillManager.skills:
+		if s.levelRequired > 0 && PlayerProgress.level >= s.levelRequired:
+			s.levelRequired = 0
+			var newUnlock = skill_unlock.duplicate()
+			var proper = Skill.DuplicateSkill(s)
+			
+			newUnlock.visible = true
+			newUnlock.get_child(0).icon = proper.sprite
+			newUnlock.get_child(1).text = proper.skillName + " unlocked!"
+			skill_unlock.add_sibling(newUnlock)
+			skillUnlocks.append(newUnlock)
+			
+			proper.queue_free()
  
 func _on_ok_pressed() -> void:
 	visible = false
+	for s in skillUnlocks:
+		s.queue_free()
+	skillUnlocks.clear()

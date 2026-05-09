@@ -206,6 +206,6 @@ static func FromName(name : String) -> Skill:
 		 	StatusEffect.new(StatusEffect.StatusEffectType.Freeze, 1.0, false), 0, 0, 5)
 		"Chain Lightning" : 
 			return Skill.CreateSkill("Chain Lightning", 0.4, 0.8, 200.0, CharacterStats.Element.Lightning, true,
-		 	StatusEffect.new(StatusEffect.StatusEffectType.Paralyze, 0.2, false), 0, 0, 7)
+		 	StatusEffect.new(StatusEffect.StatusEffectType.Paralyze, 0.2, false), 0, 0, 5)
 	
 	return null
