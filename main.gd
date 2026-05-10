@@ -9,6 +9,7 @@ class_name Main extends Node
 
 @onready var content_area = $ContentArea
 @onready var hud_layer = $HUDLayer
+@onready var ingredient_hud = %SmallIngredientButton
 
 func _ready():
 	# Loads save data upon turning the game on and, if the player was in battle, resumes it
@@ -27,7 +28,8 @@ func _ready():
 
 func _on_tab_switched(tab_name):
 	# Only show HUD on home or battle
-	hud_layer.visible = tab_name in ["home", "character", "shop"]
+	hud_layer.visible = tab_name in ["home", "character", "shop", "potions"]
+	ingredient_hud.visible = tab_name in ["home", "character", "shop"]
 
 func _on_home_button_pressed():
 	SceneManager.switch_tab("home")
