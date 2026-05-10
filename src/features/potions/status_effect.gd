@@ -1,4 +1,4 @@
-class_name  StatusEffect extends Node
+class_name StatusEffect extends Node
 
 var StatusType : StatusEffectType
 var ApplicationRate : float = 0.5

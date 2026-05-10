@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://dsj2cd8s1q002"]
+
+[ext_resource type="Texture2D" uid="uid://dcv6xs8a2iqc5" path="res://assets/icons/potions/potions_spritesheet.png" id="1_d0gim"]
+
+[resource]
+atlas = ExtResource("1_d0gim")
+region = Rect2(128, 360, 16, 24)

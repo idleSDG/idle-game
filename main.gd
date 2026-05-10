@@ -4,7 +4,7 @@ class_name Main extends Node
 @export var battle_scene: PackedScene = preload("res://scenes/battle.tscn")
 @export var character_scene: PackedScene = preload("res://src/features/characters/character_menu.tscn")
 @export var settings_scene: PackedScene = preload("res://scenes/settings.tscn")
-@export var potions_scene: PackedScene = preload("res://src/features/potions/potions.tscn")
+@export var potions_scene: PackedScene = preload("res://src/features/potions/potions_screen.tscn")
 @export var shop_scene: PackedScene = preload("res://src/features/shop/shop.tscn")
 
 @onready var content_area = $ContentArea
@@ -27,7 +27,7 @@ func _ready():
 
 func _on_tab_switched(tab_name):
 	# Only show HUD on home or battle
-	hud_layer.visible = tab_name in ["home", "character", "shop", "potions"]
+	hud_layer.visible = tab_name in ["home", "character", "shop"]
 
 func _on_home_button_pressed():
 	SceneManager.switch_tab("home")

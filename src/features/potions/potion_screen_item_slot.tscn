@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://dytmbif2dd1v4"]
+
+[ext_resource type="Script" uid="uid://bf5et6npx804a" path="res://src/features/potions/potion_screen_item_slot.gd" id="1_j30my"]
+[ext_resource type="Texture2D" uid="uid://d16csp42sfssi" path="res://assets/potions_screen/PotionsScreen_Slot_Background.png" id="1_nxk6g"]
+[ext_resource type="Texture2D" uid="uid://b8dv1iad3xa63" path="res://assets/icons/potions/potion_unknown_icon.tres" id="2_roty8"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="3_8qgxw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_roty8"]
+shader = ExtResource("3_8qgxw")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j30my"]
+shader = ExtResource("3_8qgxw")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.2850000135375
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_roty8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mg63d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o46fn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1xqjb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u4mr4"]
+
+[node name="PotionScreenItemSlot" type="Control" unique_id=57361886]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 256.0
+offset_bottom = 256.0
+script = ExtResource("1_j30my")
+counter_value = 0
+default_icon_texture = ExtResource("2_roty8")
+
+[node name="SlotBackground" type="TextureRect" parent="." unique_id=105013451]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_nxk6g")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SlotShadow" type="TextureRect" parent="SlotBackground" unique_id=1240393802]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_roty8")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_nxk6g")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="SlotItemIcon" type="TextureRect" parent="SlotBackground" unique_id=1796963862]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_roty8")
+stretch_mode = 5
+
+[node name="SlotItemIconShadow" type="TextureRect" parent="SlotBackground/SlotItemIcon" unique_id=1971165673]
+unique_name_in_owner = true
+show_behind_parent = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_j30my")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_roty8")
+stretch_mode = 5
+
+[node name="SlotItemCounterMargin" type="MarginContainer" parent="SlotBackground" unique_id=1429180302]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -65.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SlotItemCounterLabel" type="Label" parent="SlotBackground/SlotItemCounterMargin" unique_id=1277668821]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Button" type="Button" parent="." unique_id=256441812]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_roty8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mg63d")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_o46fn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1xqjb")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_u4mr4")
+
+[connection signal="button_down" from="Button" to="." method="_on_button_down"]

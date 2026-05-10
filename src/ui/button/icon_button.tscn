@@ -3,8 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://byhs7o13gw54d" path="res://assets/hud/buttons/button_white_normal.tres" id="1_a86na"]
 [ext_resource type="Texture2D" uid="uid://r3vieddb76k7" path="res://assets/hud/buttons/button_white_pressed.tres" id="2_6k0f2"]
 [ext_resource type="Script" uid="uid://c7d5n4mlq62cn" path="res://src/ui/button/icon_button.gd" id="3_ykoqy"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="4_a86na"]
+[ext_resource type="Script" uid="uid://dkw7c6rdopwea" path="res://src/ui/button/icon_button_shadow.gd" id="5_6k0f2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykoqy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6k0f2"]
+shader = ExtResource("4_a86na")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
 
 [node name="IconButton" type="TextureButton" unique_id=722163806]
 texture_filter = 1
@@ -29,5 +36,25 @@ grow_vertical = 2
 mouse_filter = 2
 stretch_mode = 5
 
+[node name="IconButtonShadow" type="TextureRect" parent="." unique_id=300353980]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_6k0f2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_a86na")
+stretch_mode = 5
+script = ExtResource("5_6k0f2")
+
 [connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_down" from="." to="IconButtonShadow" method="_on_button_down"]
 [connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="button_up" from="." to="IconButtonShadow" method="_on_button_up"]

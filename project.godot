@@ -51,6 +51,10 @@ version_control/autoload_on_startup=true
 
 enabled=PackedStringArray("res://addons/GodotScreenTimePlugin/plugin.cfg", "res://addons/GodotStepAndSleepPlugin/plugin.cfg")
 
+[gui]
+
+theme/custom="uid://o6ja5ygtgnte"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

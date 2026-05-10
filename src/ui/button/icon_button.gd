@@ -2,6 +2,12 @@
 extends TextureButton
 class_name IconButton
 
+@export var is_disabled: bool = false:
+	set(value):
+		is_disabled = value
+		disabled = value
+		_update_visuals()
+
 @export var icon: Texture2D:
 	set(value):
 		icon = value
@@ -15,6 +21,12 @@ func _update_icon():
 	var icon_node = get_node_or_null("Icon")
 	if icon_node:
 		icon_node.texture = icon
+		
+func _update_visuals():
+	if disabled:
+		self.modulate.a = 0.33
+	else:
+		self.modulate.a = 1.0
 
 func _on_button_down():
 	if Engine.is_editor_hint(): 

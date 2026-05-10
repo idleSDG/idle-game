@@ -2,12 +2,21 @@ class_name Potion extends Node
 
 enum PotionTypes { Status, Damage }
 
+const _icon_array = [
+	preload("res://assets/icons/potions/potion_explosion_icon.tres"),
+	preload("res://assets/icons/potions/potion_health_icon.tres"),
+	preload("res://assets/icons/potions/potion_strength_icon.tres")
+]
+
 var id : int
 var slot : int = -1
 var quantity : int = 10
+var icon: Texture2D
 
 var type : PotionTypes
 var potName : String = ""
+var recipe_description : String = ""
+var recipe: Array[Dictionary] = [] # Should be created as pairs.
 
 var damage : int = 50
 var cooldown : float = 10.0
@@ -19,6 +28,7 @@ var targetSelf : bool = true
 func _init(newId : int, slt : int = -1):
 	id = newId
 	slot = slt
+	icon = _icon_array[newId]
 	
 	match id:
 		0: 
@@ -28,6 +38,8 @@ func _init(newId : int, slt : int = -1):
 			cooldown = 2.0
 			currentCooldown = 0.0
 			targetSelf = false
+			recipe_description = "A explosive concoction that oddly smells like oranges? Deals [color=#FF0000]%d damage[/color] to all enemies." % damage
+			recipe = [{"type": Ingredient.Type.KINETIC_SHARD, "amount": 5}, {"type": Ingredient.Type.FOCUS_FLUX, "amount": 5}]
 		1: 
 			potName = "Healing Potion"
 			type = PotionTypes.Damage
@@ -35,6 +47,8 @@ func _init(newId : int, slt : int = -1):
 			cooldown = 2.0
 			currentCooldown = 0.0
 			targetSelf = true
+			recipe_description = "The most basic Healing potion, known even by novice wizards. Heals [color=#AAFF00]%d health[/color]. Tastes like apples?" % [-damage]
+			recipe = [{"type": Ingredient.Type.FOCUS_FLUX, "amount": 3}, {"type": Ingredient.Type.DREAM_SHARDS, "amount": 2}]
 		2: 
 			potName = "Strength Potion"
 			type = PotionTypes.Status
@@ -42,6 +56,8 @@ func _init(newId : int, slt : int = -1):
 			cooldown = 100.0 / effect.DecrementRate
 			currentCooldown = 0.0
 			targetSelf = true
+			recipe_description = "A bubbly black-ish elixir that tastes like victory and questionable decisions. Applies [color=#FFA500]STRENGTH[/color] to your wizard."
+			recipe = [{"type": Ingredient.Type.DREAM_SHARDS, "amount": 4}, {"type": Ingredient.Type.KINETIC_SHARD, "amount": 6}]
 
 func UsePotion(charList : Array[Character]):
 	UsePotionEffect(charList)
