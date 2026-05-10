@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://ev47y4syklsu" path="res://src/features/battle/battle_controller.gd" id="1_dn72j"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dn72j"]
+bg_color = Color(0.12156863, 0.12156863, 0.12156863, 0.6431373)
+
 [node name="Battle" type="Node2D" unique_id=1983405384]
 script = ExtResource("1_dn72j")
 
@@ -32,22 +35,44 @@ vertical_scroll_mode = 3
 [node name="Control" type="Control" parent="CanvasLayer/ScrollContainer" unique_id=1528445326]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=688977264]
-offset_right = 1080.0
+[node name="BattleTopButtonContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=688977264]
+anchors_preset = 10
+anchor_right = 1.0
 offset_bottom = 404.0
+grow_horizontal = 2
 
-[node name="CampaignButtonContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1374128357]
-custom_minimum_size = Vector2(1080, 200)
+[node name="CampaignButtonContainer" type="HBoxContainer" parent="CanvasLayer/BattleTopButtonContainer" unique_id=1374128357]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer" unique_id=1081504305]
+[node name="RandomizationContainer" type="HBoxContainer" parent="CanvasLayer/BattleTopButtonContainer" unique_id=1081504305]
 layout_mode = 2
 
-[node name="RandomizeButton" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer" unique_id=1883028290]
+[node name="RandomizationLabelPanel" type="PanelContainer" parent="CanvasLayer/BattleTopButtonContainer/RandomizationContainer" unique_id=1679592371]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dn72j")
+
+[node name="RandomizationLabelMarginContainer" type="MarginContainer" parent="CanvasLayer/BattleTopButtonContainer/RandomizationContainer/RandomizationLabelPanel" unique_id=1886226492]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="RandomizationLabel" type="Label" parent="CanvasLayer/BattleTopButtonContainer/RandomizationContainer/RandomizationLabelPanel/RandomizationLabelMarginContainer" unique_id=632045504]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Time until randomization:
+24:60:60"
+horizontal_alignment = 1
+
+[node name="RandomizeButton" type="Button" parent="CanvasLayer/BattleTopButtonContainer/RandomizationContainer" unique_id=1883028290]
+visible = false
 custom_minimum_size = Vector2(300, 200)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "Randomize"
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer/RandomizeButton" to="." method="_on_randomize_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BattleTopButtonContainer/RandomizationContainer/RandomizeButton" to="." method="_on_randomize_button_pressed"]

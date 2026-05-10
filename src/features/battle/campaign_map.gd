@@ -132,7 +132,6 @@ static func generate_map(
 		if !existing_depth_levels.is_empty():
 			for lvl in existing_depth_levels:
 				campaign_levels.append(lvl)
-			print(len(campaign_levels))
 			last_position_count = existing_depth_levels.reduce(func(accum, level): return max(accum, level.position), 0)
 		else:
 			last_position_count = counts[RandomNumberGenerator.new().rand_weighted(weights[last_position_count - 1])]
