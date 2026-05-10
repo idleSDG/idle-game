@@ -27,6 +27,7 @@ var active_buttons: Array[TextureButton] = []
 
 var randomization_timer: Timer
 var highest_level_y: float
+var map_drawn: bool = false
 
 
 func _ready() -> void:
@@ -36,14 +37,13 @@ func _ready() -> void:
 	else:
 		if BattleVariables.campaigns.is_empty():
 			BattleVariables.init_new_save()
+		map_drawn = false
 		maps = BattleVariables.campaigns
 		current_map_string = BattleVariables.current_campaign
 		current_map = maps.filter(func(x): return x.name == current_map_string).front()
 
 		if (current_map.levels.filter(func(x): return !x.beaten).is_empty()):
 			_on_restart_pressed(current_map_string)
-		if randomization_timer == null:
-			init_randomization_loop()
 		draw_map(current_map)
 		var buttons = $CanvasLayer/BattleTopButtonContainer/CampaignButtonContainer.get_children()
 		for button in buttons:
@@ -55,6 +55,9 @@ func _ready() -> void:
 			$CanvasLayer/BattleTopButtonContainer/CampaignButtonContainer.add_child(button)
 			button.pressed.connect(_on_map_changed.bind(map))
 		_update_campaign_selection_visuals()
+
+		if randomization_timer == null:
+			init_randomization_loop()
 
 
 func _process(delta: float) -> void:
@@ -85,6 +88,7 @@ func _update_campaign_selection_visuals():
 
 func _on_map_changed(map: campaign_map):
 	increasing_scale = true
+	BattleVariables.last_campaign = current_map_string
 	BattleVariables.current_campaign = map.name
 	current_map_string = map.name
 	current_map = maps.filter(func(x): return x.name == current_map_string).front()
@@ -97,6 +101,8 @@ func show_level_select() -> void:
 
 
 func enter_battle() -> void:
+	BattleVariables.last_campaign = current_map_string
+	randomization_timer.queue_free()
 	_swap_to(battle_area_scene)
 
 
@@ -134,6 +140,7 @@ func draw_map(map: campaign_map):
 	active_buttons = []
 	var button_draw_order = []
 	var line_draw_order = []
+	var drawable_items_exist = false
 	for i in range(len(depths)):
 		button_draw_order.append([])
 		line_draw_order.append([])
@@ -203,8 +210,9 @@ func draw_map(map: campaign_map):
 			active_buttons.append(level_button)
 		control.add_child(level_button)
 
-		if highest_level == null or !lvl.depth <= highest_level.depth:
+		if (highest_level == null or lvl.depth > highest_level.depth) and (BattleVariables.last_campaign != null and BattleVariables.last_campaign != BattleVariables.current_campaign):
 			level_button.visible = false
+			drawable_items_exist = true
 		button_draw_order[lvl.depth].append(level_button)
 
 	for path in map.paths:
@@ -213,8 +221,9 @@ func draw_map(map: campaign_map):
 		line.add_point(Vector2(path.end.x, path.end.y))
 		line.z_index = -1
 		control.add_child(line)
-		if highest_level == null or !path.end.depth <= highest_level.depth:
+		if (highest_level == null or path.end.depth > highest_level.depth) and (BattleVariables.last_campaign != null and BattleVariables.last_campaign != BattleVariables.current_campaign):
 			line.visible = false
+			drawable_items_exist = true
 		line_draw_order[path.start.depth].append(line)
 
 	control.custom_minimum_size = Vector2(0, max_height + 300)
@@ -246,16 +255,18 @@ func draw_map(map: campaign_map):
 	if highest_level_y == -1:
 		highest_level_y = scroll_ammount
 
-	await get_tree().create_timer(0.3).timeout
-	for i in range(len(button_draw_order)):
-		for button in button_draw_order[i]:
-			if is_instance_valid(button):
-				button.visible = true
-		if highest_level == null or highest_level.depth < i:
-			await get_tree().create_timer(0.3).timeout
-		for line in line_draw_order[i]:
-			if is_instance_valid(line):
-				line.visible = true
+	if drawable_items_exist:
+		await get_tree().create_timer(0.2).timeout
+		for i in range(len(button_draw_order)):
+			for button in button_draw_order[i]:
+				if is_instance_valid(button):
+					button.visible = true
+			if highest_level == null or highest_level.depth < i:
+				await get_tree().create_timer(0.2).timeout
+			for line in line_draw_order[i]:
+				if is_instance_valid(line):
+					line.visible = true
+	map_drawn = true
 
 
 func _on_start_battle_request(level: battle_level) -> void:
@@ -276,7 +287,7 @@ func _on_restart_pressed(restart_map: String):
 		return
 
 	var map = BattleVariables.campaigns[map_index]
-	var enemy_level = map.levels.front().enemy_level + 1
+	var enemy_level = map.levels.back().enemy_level + 1
 	var new_map: campaign_map
 	match map.type:
 		campaign_map.Type.ZOO:
@@ -322,17 +333,20 @@ func randomize_battle() -> void:
 
 		BattleVariables.campaigns[BattleVariables.campaigns.find_custom(func(x): return x.name == campaign.name)] = new_map
 	SaveManager.save_game()
+	BattleVariables.last_campaign = ""
 	_ready()
 
 
 func _randomization_animation():
+	while not map_drawn:
+		await get_tree().process_frame
 	var tween = create_tween()
 	tween.set_parallel(true)
 	var fall_distance = get_viewport_rect().size.y + $CanvasLayer/ScrollContainer.get_v_scroll_bar().max_value
 	# handles buttons
-	var children = $CanvasLayer/ScrollContainer/Control.get_children().filter(func(x): return x.position.y < highest_level_y - 100)
+	var children = $CanvasLayer/ScrollContainer/Control.get_children().filter(func(x): return x.position.y <= highest_level_y - 105)
 	# handles lines
-	children = children.filter(func(x): if x is Line2D: return x.get_point_position(1).y < highest_level_y  else:return true)
+	children = children.filter(func(x): if x is Line2D: return x.get_point_position(1).y <= highest_level_y - 105  else:return true)
 	for element in children:
 		var rand = RandomNumberGenerator.new().randi()
 		tween.tween_property(element, "position", Vector2(element.position.x + (50 - rand % 100), element.position.y + (rand % 100)), 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)

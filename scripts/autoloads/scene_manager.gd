@@ -2,14 +2,16 @@ extends Node
 
 signal tab_switched(tab_name)
 
-var tab_scenes = {}
-var content_area : Node = null
-var current_tab : String = ""
-var current_instance : Node = null
+var tab_scenes = { }
+var content_area: Node = null
+var current_tab: String = ""
+var current_instance: Node = null
 
-func setup(_content_area : Node, _tab_scenes : Dictionary):
+
+func setup(_content_area: Node, _tab_scenes: Dictionary):
 	content_area = _content_area
 	tab_scenes = _tab_scenes
+
 
 func switch_tab(tab_name: String):
 	if not tab_scenes.has(tab_name):
@@ -29,6 +31,9 @@ func switch_tab(tab_name: String):
 	if not scene_res:
 		push_error("Scene resource for tab not loaded: %s" % tab_name)
 		return
+
+	# Reset the last campaign for drawing
+	BattleVariables.last_campaign = ""
 
 	current_instance = scene_res.instantiate()
 	content_area.add_child(current_instance)

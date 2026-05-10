@@ -17,6 +17,7 @@ var isFast: bool = false
 
 var current_battle_level: battle_level
 var current_campaign: String
+var last_campaign: String
 var campaigns: Array[campaign_map]
 
 

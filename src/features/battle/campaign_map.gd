@@ -113,7 +113,6 @@ static func generate_map(
 		p_type: Type,
 		enemy_types: Array[int],
 		p_enemy_level: int,
-		enemy_count: int,
 		existing_levels: Array[battle_level],
 		existing_paths: Array[battle_path],
 ) -> campaign_map:
@@ -128,6 +127,9 @@ static func generate_map(
 		counts.append(i + 1)
 	var last_position_count: int = (randi() % max_possitions) + 1
 	for i in range(depth):
+		var enemy_count = min(p_enemy_level + 2, 10)
+		if (i == int(depth * 0.33) or i == int(depth * 0.66)):
+			p_enemy_level += 1
 		var existing_depth_levels = existing_levels.filter(func(x): return x.depth == i)
 		if !existing_depth_levels.is_empty():
 			for lvl in existing_depth_levels:
@@ -186,12 +188,12 @@ static func from_save(data: Dictionary) -> campaign_map:
 
 
 static func generate_zoo(p_enemy_level: int, existing_levels: Array[battle_level] = [], existing_paths: Array[battle_path] = []):
-	return campaign_map.generate_map(10, 5, "Zoo", "res://assets/battlemap/zoo_background.png", "116802", Type.ZOO, [100, 102], p_enemy_level, min(p_enemy_level * 3, 10), existing_levels, existing_paths)
+	return campaign_map.generate_map(10, 5, "Zoo", "res://assets/battlemap/zoo_background.png", "116802", Type.ZOO, [100, 102], p_enemy_level, existing_levels, existing_paths)
 
 
 static func generate_sky(p_enemy_level: int, existing_levels: Array[battle_level] = [], existing_paths: Array[battle_path] = []):
-	return campaign_map.generate_map(8, 4, "Sky", "res://assets/battlemap/sky_background.png", "9EFDFF", Type.SKY, [101, 102], p_enemy_level, min(p_enemy_level * 3, 10), existing_levels, existing_paths)
+	return campaign_map.generate_map(8, 4, "Sky", "res://assets/battlemap/sky_background.png", "9EFDFF", Type.SKY, [101, 102], p_enemy_level, existing_levels, existing_paths)
 
 
 static func generate_forest(p_enemy_level: int, existing_levels: Array[battle_level] = [], existing_paths: Array[battle_path] = []):
-	return campaign_map.generate_map(10, 3, "Forest", "res://assets/battlemap/forest_background.png", "008600", Type.FOREST, [100, 101], p_enemy_level, min(p_enemy_level * 3, 10), existing_levels, existing_paths)
+	return campaign_map.generate_map(10, 3, "Forest", "res://assets/battlemap/forest_background.png", "008600", Type.FOREST, [100, 101], p_enemy_level, existing_levels, existing_paths)
