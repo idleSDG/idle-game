@@ -17,8 +17,8 @@ var isFast: bool = false
 
 var current_battle_level: battle_level
 var current_campaign: String
-var last_campaign: String
 var campaigns: Array[campaign_map]
+var campaign_already_drawn: Array[bool] = [false, false, false]
 
 
 func GetPlayer() -> CharacterStats:
@@ -68,7 +68,7 @@ func load_save_data(data: Dictionary) -> Error:
 	for key in required_keys:
 		if not data.has(key):
 			return ERR_PARSE_ERROR
-
+			
 	battleState = data["battleState"]
 	lastLogin = data["lastLogin"]
 	battleStart = data["battleStart"]
@@ -120,6 +120,8 @@ func init_new_save():
 
 	current_campaign = campaigns[0].name
 	current_battle_level = campaigns[0].levels[0]
+	
+	campaign_already_drawn = [false, false, false]
 
 
 func get_campaign_save_data():

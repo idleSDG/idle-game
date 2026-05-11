@@ -32,9 +32,6 @@ func switch_tab(tab_name: String):
 		push_error("Scene resource for tab not loaded: %s" % tab_name)
 		return
 
-	# Reset the last campaign for drawing
-	BattleVariables.last_campaign = ""
-
 	current_instance = scene_res.instantiate()
 	content_area.add_child(current_instance)
 	current_tab = tab_name

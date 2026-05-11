@@ -3,7 +3,6 @@ extends Node2D
 @onready var content = $CanvasLayer
 
 var battle_area_scene := preload("res://scenes/battle_area.tscn")
-var level_select_scene := preload("res://scenes/battle.tscn")
 
 var beaten_button = preload("res://assets/battlemap/beaten_button.png")
 
@@ -88,7 +87,6 @@ func _update_campaign_selection_visuals():
 
 func _on_map_changed(map: campaign_map):
 	increasing_scale = true
-	BattleVariables.last_campaign = current_map_string
 	BattleVariables.current_campaign = map.name
 	current_map_string = map.name
 	current_map = maps.filter(func(x): return x.name == current_map_string).front()
@@ -96,19 +94,18 @@ func _on_map_changed(map: campaign_map):
 	_update_campaign_selection_visuals()
 
 
-func show_level_select() -> void:
-	_swap_to(level_select_scene)
-
-
 func enter_battle() -> void:
-	BattleVariables.last_campaign = current_map_string
 	if randomization_timer != null:
 		randomization_timer.queue_free()
+		randomization_timer = null
 	_swap_to(battle_area_scene)
 
 
 func exit_battle() -> void:
-	_swap_to(level_select_scene)
+	if current_view and current_view.get_parent():
+		current_view.queue_free()
+	current_view = null
+	draw_map(current_map)
 
 
 func _swap_to(scene_res: PackedScene) -> void:
@@ -142,6 +139,7 @@ func draw_map(map: campaign_map):
 	var button_draw_order = []
 	var line_draw_order = []
 	var drawable_items_exist = false
+	var map_index =  BattleVariables.campaigns.find_custom(func(x): return x.name == map.name)
 	for i in range(len(depths)):
 		button_draw_order.append([])
 		line_draw_order.append([])
@@ -211,7 +209,7 @@ func draw_map(map: campaign_map):
 			active_buttons.append(level_button)
 		control.add_child(level_button)
 
-		if (highest_level == null or lvl.depth > highest_level.depth) and (BattleVariables.last_campaign != null and BattleVariables.last_campaign != BattleVariables.current_campaign):
+		if (highest_level == null or lvl.depth > highest_level.depth) and !BattleVariables.campaign_already_drawn[map_index]:
 			level_button.visible = false
 			drawable_items_exist = true
 		button_draw_order[lvl.depth].append(level_button)
@@ -222,11 +220,13 @@ func draw_map(map: campaign_map):
 		line.add_point(Vector2(path.end.x, path.end.y))
 		line.z_index = -1
 		control.add_child(line)
-		if (highest_level == null or path.end.depth > highest_level.depth) and (BattleVariables.last_campaign != null and BattleVariables.last_campaign != BattleVariables.current_campaign):
+		if (highest_level == null or path.end.depth > highest_level.depth) and !BattleVariables.campaign_already_drawn[map_index]:
 			line.visible = false
 			drawable_items_exist = true
 		line_draw_order[path.start.depth].append(line)
-
+	
+	BattleVariables.campaign_already_drawn[map_index] = true
+	
 	control.custom_minimum_size = Vector2(0, max_height + 300)
 	var max_scroll = INF
 	if highest_level != null:
@@ -310,7 +310,6 @@ func _on_randomize_button_pressed() -> void:
 
 
 func randomize_battle() -> void:
-	await _randomization_animation()
 	for campaign in BattleVariables.campaigns:
 		var enemy_level = campaign.levels.front().enemy_level
 		var new_map: campaign_map
@@ -334,7 +333,7 @@ func randomize_battle() -> void:
 
 		BattleVariables.campaigns[BattleVariables.campaigns.find_custom(func(x): return x.name == campaign.name)] = new_map
 	SaveManager.save_game()
-	BattleVariables.last_campaign = ""
+	await _randomization_animation()
 	_ready()
 
 

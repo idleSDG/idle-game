@@ -301,7 +301,6 @@ func SetPotions():
 	var pot2 = null
 	var pot3 = null
 	for i in 3:
-		print(i)
 		for pot in PotionManager.potions:
 			if pot.slot == i + 1:
 				var instance = Potion.new(pot.id, i + 1)
