@@ -38,6 +38,7 @@ func load_save_data(data: Dictionary) -> Error:
 	skills.clear()
 	for slot_str in data.get("skills"):
 		var item := Skill.from_dictionary(data.get("skills")[slot_str])
+		if item == null: return ERR_PARSE_ERROR
 		skills.append(item)
 	return OK
 

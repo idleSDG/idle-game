@@ -73,9 +73,16 @@ static func to_dictionary(skill: Skill) -> Dictionary:
 
 static func from_dictionary(skill_str: Dictionary) -> Skill:
 	var skill := Skill.FromName(skill_str.name)
+	if !skill_str.has("lvl"): return null
 	skill.level = skill_str.lvl
+	
+	if !skill_str.has("xp"): return null
 	skill.exp = skill_str.xp
+	
+	if !skill_str.has("equip"): return null
 	skill.equipState = skill_str.equip
+	
+	if !skill_str.has("req"): return null
 	skill.levelRequired = skill_str.req
 	
 	return skill
