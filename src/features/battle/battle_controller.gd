@@ -334,6 +334,7 @@ func randomize_battle() -> void:
 		BattleVariables.campaigns[BattleVariables.campaigns.find_custom(func(x): return x.name == campaign.name)] = new_map
 	SaveManager.save_game()
 	await _randomization_animation()
+	BattleVariables.campaign_already_drawn = [false, false, false]
 	_ready()
 
 
