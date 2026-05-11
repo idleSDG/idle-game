@@ -102,7 +102,8 @@ func show_level_select() -> void:
 
 func enter_battle() -> void:
 	BattleVariables.last_campaign = current_map_string
-	randomization_timer.queue_free()
+	if randomization_timer != null:
+		randomization_timer.queue_free()
 	_swap_to(battle_area_scene)
 
 
