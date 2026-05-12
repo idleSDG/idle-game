@@ -56,7 +56,7 @@ func _ready() -> void:
 		skillBars.add_child(s.skillBar)
 	
 	levelLabel.text = "Lv. " + str(level)
-	expCounter.resize(skills.size())
+	expCounter.resize(3)#skills.size())
 	
 	pass
 
@@ -130,7 +130,7 @@ func UseSkill(target : Array[Character]) -> void:
 		skills[skillToUse].Use(self, target[3])
 	else: skills[skillToUse].Use(self, target[0])
 	
-	expCounter[skillToUse] += 67
+	expCounter[skills[skillToUse].equipState - 1] += 67
 	
 	particles.emitting = true
 	trail.emitting = true

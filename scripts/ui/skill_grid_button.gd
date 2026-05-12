@@ -19,23 +19,32 @@ func set_up_button(skill : Skill):
 		label.visible = true
 		label.text = str(skill.equipState)
 	
+	button.disabled = false
 	button.icon = proper.sprite
 	border.modulate = proper.borderClr
+	
+	if skill.levelRequired > PlayerProgress.level:
+		button.disabled = true
 	
 	proper.queue_free()
 	pass
 
 func set_up_equip(skill : Skill, selected : bool):
-	var proper = Skill.DuplicateSkill(skill)
+	if skill == null:
+		border.modulate = Color.WHITE
+		button.icon = null
+	else:
+		var proper = Skill.DuplicateSkill(skill)
+
+		button.icon = proper.sprite
+		border.modulate = proper.borderClr
+		proper.queue_free()
 	
 	label.visible = true
 	label.text = str(equip)
-	button.icon = proper.sprite
-	border.modulate = proper.borderClr
-	
 	color_rect.visible = true if selected else false
 	
-	proper.queue_free()
+	
 	pass
 
 #func _on_pressed() -> void:
