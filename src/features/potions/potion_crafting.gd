@@ -45,7 +45,7 @@ func _build_slot_grid() -> void:
 			
 		slot_grid.append(row)
 
-func _on_ingredients_changed(p_):
+func _on_ingredients_changed(_ingredients):
 	_update_crafting_section(_selected_potion_index)
 
 func _assign_potion_icons() -> void:
@@ -54,7 +54,7 @@ func _assign_potion_icons() -> void:
 		get_slot_from_index(i).icon_texture = potions[i].icon
 		get_slot_from_index(i).counter_value = "%s" % potions[i].quantity
 
-func _on_slot_pressed(slot, index):
+func _on_slot_pressed(_slot, index):
 	_selected_potion_index = index
 	_update_crafting_section(index)
 	
