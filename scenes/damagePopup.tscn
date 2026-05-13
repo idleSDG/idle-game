@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bm1atpjoj4vmn"]
 
-[ext_resource type="Script" uid="uid://bnqrp1c3g4erh" path="res://scripts/damage_popup.gd" id="1_dpo3m"]
+[ext_resource type="Script" uid="uid://bnqrp1c3g4erh" path="res://src/ui/battleUI/damage_popup.gd" id="1_dpo3m"]
 
 [node name="Node2D" type="Node2D" unique_id=597232159]
 script = ExtResource("1_dpo3m")
