@@ -113,4 +113,6 @@ func _on_craft_button_down():
 				can_craft = false
 		if !can_craft:
 			_potion_craft_button.is_disabled = true
+			
+		SaveManager.save_game()
 		
