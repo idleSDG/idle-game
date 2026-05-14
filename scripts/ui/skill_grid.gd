@@ -33,6 +33,9 @@ func doSkills():
 	doEquipButton(button3)
 	
 	var list = SkillManager.skills
+	if !buttonBase.pressed.is_connected(inv_skill_Button_Pressed):
+		buttonBase.pressed.connect(inv_skill_Button_Pressed.bind(null))
+	
 	for item in list:
 		var newButton = buttonBase.duplicate()
 		newButton.visible = true
@@ -45,11 +48,13 @@ func doSkills():
 	pass
 
 func doEquipButton(equipButton : SkillGridButton):
+	equipButton.set_up_equip(null, true if equipButton.equip == currentSelection else false)
 	for skill in SkillManager.skills:
 		if skill.equipState == equipButton.equip:
 			equipButton.set_up_equip(skill, true if equipButton.equip == currentSelection else false)
 	
-	equipButton.pressed.connect(_on_equip_skill_pressed.bind(equipButton.equip))
+	if !equipButton.pressed.is_connected(_on_equip_skill_pressed):
+		equipButton.pressed.connect(_on_equip_skill_pressed.bind(equipButton.equip))
 	pass
 
 func inv_skill_Button_Pressed(skill : Skill):

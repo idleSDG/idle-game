@@ -10,12 +10,21 @@ extends Control
 @onready var charge =$Control/Name/Charge
 @onready var effects =$Control/Name/Effects
 
+@onready var control: Control = $Control
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
 func set_preview(skill : Skill):
+	if skill == null:
+		button.icon = null
+		border.modulate = Color.WHITE
+		control.visible = false
+		return
+	
 	var proper := Skill.DuplicateSkill(skill)
+	control.visible = true
 	
 	skillName.text = skill.skillName
 	expBar.value = skill.exp * 1.0 / skill.maxExp

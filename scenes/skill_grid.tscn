@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="1_7vxik"]
 [ext_resource type="Script" uid="uid://pgy4d2ut0g4s" path="res://scripts/ui/skill_grid.gd" id="1_0248v"]
+[ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="3_ofkgl"]
 
 [node name="SkillGrid" type="GridContainer" unique_id=1758141714]
 offset_left = 12.0
@@ -15,7 +16,7 @@ columns = 5
 script = ExtResource("1_0248v")
 
 [node name="Skill_Grid_Button" parent="." unique_id=1346103917 instance=ExtResource("1_7vxik")]
-visible = false
 layout_mode = 2
+icon = ExtResource("3_ofkgl")
 
 [connection signal="equipSkillPressed" from="." to="." method="_on_equip_skill_pressed"]

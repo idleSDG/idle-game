@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ixme676dvwbw"]
 
 [ext_resource type="Texture2D" uid="uid://ckpxfjvfwotvs" path="res://assets/icons/Big Vial - RED - 0000.png" id="1_br6ly"]
-[ext_resource type="Script" uid="uid://dh74n32hqprc3" path="res://scripts/ui/potion_button.gd" id="2_br6ly"]
+[ext_resource type="Script" uid="uid://dh74n32hqprc3" path="res://src/ui/battleUI/potion_button.gd" id="2_br6ly"]
 [ext_resource type="Texture2D" uid="uid://b8vmbnqo2idkb" path="res://assets/skills/Grayscale_border.png" id="3_dhn0q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_br6ly"]
