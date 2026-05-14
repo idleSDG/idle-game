@@ -41,9 +41,6 @@ func load_save_data(data: Dictionary) -> Error:
 func init_new_save():
 	potions = [
 		Potion.new(2, 1),
-		Potion.new(0, 1),
-		Potion.new(1, 1)
+		Potion.new(0, 2),
+		Potion.new(1, 3)
 	]
-	potions[0].slot = 1
-	potions[1].slot = 2
-	potions[2].slot = 3

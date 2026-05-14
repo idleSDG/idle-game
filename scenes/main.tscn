@@ -5,14 +5,25 @@
 [ext_resource type="Texture2D" uid="uid://34sx5ru8alpl" path="res://assets/hud/coin.png" id="3_jyhfs"]
 [ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="4_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://hxjy352wis2i" path="res://src/ui/labels/auto_size_label.tscn" id="5_choun"]
+[ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="5_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://y7xumqqfhjfr" path="res://src/ui/invalid_save_popup/invalid_save_pop_up.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://7n7ppwm46eci" path="res://src/features/progression/level_up_popup.tscn" id="5_tefeu"]
+[ext_resource type="Script" uid="uid://cn8rwyettywqc" path="res://src/ui/navbar/nav_bar.gd" id="5_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://bdx52ujh525cf" path="res://assets/hud/navbar/NavBar_Decoration_Top.png" id="6_dp3eg"]
+[ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="6_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://d2aa5rwfqyayy" path="res://assets/hud/progress-bar-circle.png" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://dwh7mcn7npbm0" path="res://assets/hud/progress-bar-frame.png" id="7_85g3d"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="7_muem4"]
 [ext_resource type="Texture2D" uid="uid://pnlvse15jobc" path="res://assets/icons/kinetic.png" id="8_choun"]
 [ext_resource type="Texture2D" uid="uid://be5l1nv268yem" path="res://assets/hud/info.png" id="8_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://dgykxbunxxfly" path="res://assets/hud/buttons/icon_battle_dark.tres" id="10_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://d1hxh3idk7m6r" path="res://assets/hud/buttons/icon_character_dark.tres" id="11_jkv2x"]
 [ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="12_eb6dy"]
-[ext_resource type="Script" uid="uid://b4ych1hv6wmbm" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
+[ext_resource type="Texture2D" uid="uid://dn8sxonh51q6w" path="res://assets/hud/buttons/icon_potion_dark.tres" id="12_jbj1t"]
+[ext_resource type="Script" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
+[ext_resource type="Texture2D" uid="uid://cpmarjf0oqxj2" path="res://assets/hud/buttons/icon_shop_dark.tres" id="13_muem4"]
+[ext_resource type="Texture2D" uid="uid://bttb3vbjujioa" path="res://assets/hud/buttons/icon_home_dark.tres" id="16_y6deb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
@@ -48,6 +59,16 @@ bg_color = Color(1, 1, 1, 0.42745098)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
 bg_color = Color(0.08235294, 0.08235294, 0.08235294, 0.79607844)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_muem4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dp3eg"]
+shader = ExtResource("6_jbj1t")
+shader_parameter/wood_texture = ExtResource("7_muem4")
+shader_parameter/scale = 1.66
+
+[sub_resource type="LabelSettings" id="LabelSettings_ya4ey"]
+font_size = 24
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
 shader = ExtResource("12_eb6dy")
@@ -161,9 +182,9 @@ anchor_left = 1.0
 anchor_top = 0.423
 anchor_right = 1.0
 anchor_bottom = 0.423
-offset_left = -322.0
+offset_left = -381.0
 offset_top = -46.160034
-offset_right = -47.0
+offset_right = -31.0
 offset_bottom = 46.839966
 theme_override_styles/panel = SubResource("StyleBoxFlat_jyhfs")
 
@@ -191,9 +212,10 @@ unique_name_in_owner = true
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -370.0
+offset_top = -474.0
 offset_right = 510.0
-offset_bottom = -200.0
+offset_bottom = -304.0
+grow_vertical = 0
 flat = true
 
 [node name="IngredientSmallHboxContainer" type="HBoxContainer" parent="HUDLayer/SmallIngredientButton" unique_id=681355684]
@@ -568,44 +590,174 @@ autowrap_mode = 2
 
 [node name="NavBarLayer" type="CanvasLayer" parent="." unique_id=435175999]
 
-[node name="NavBar" type="HBoxContainer" parent="NavBarLayer" unique_id=2076489562]
+[node name="NavBar" type="Control" parent="NavBarLayer" unique_id=59531394]
+layout_mode = 3
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -200.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("5_ya4ey")
 
-[node name="HomeButton" type="Button" parent="NavBarLayer/NavBar" unique_id=713203215]
+[node name="VBoxContainer" type="VBoxContainer" parent="NavBarLayer/NavBar" unique_id=1655404208]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = -10
+
+[node name="ColorRect" type="TextureRect" parent="NavBarLayer/NavBar/VBoxContainer" unique_id=1078277746]
+z_index = 1
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+texture = ExtResource("6_dp3eg")
+
+[node name="PanelContainer" type="PanelContainer" parent="NavBarLayer/NavBar/VBoxContainer" unique_id=1481683173]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_muem4")
+
+[node name="ColorRect" type="ColorRect" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer" unique_id=101513442]
+material = SubResource("ShaderMaterial_dp3eg")
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer" unique_id=437735812]
+texture_filter = 1
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer" unique_id=659876277]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=2110625701]
+custom_minimum_size = Vector2(38.165, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "HOME"
 
-[node name="BattleButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1212122017]
+[node name="VBoxContainer" type="VBoxContainer" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=150769024]
+layout_mode = 2
+
+[node name="AutoSizeLabel2" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=690584 instance=ExtResource("5_choun")]
+visible = false
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ya4ey")
+max_font_size = 24
+min_font_size = 16
+
+[node name="HomeButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=722163806 instance=ExtResource("5_o6xl0")]
+layout_mode = 2
+icon = ExtResource("16_y6deb")
+
+[node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1716637295 instance=ExtResource("5_choun")]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1218053897]
+custom_minimum_size = Vector2(38.165, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "BATTLE"
 
-[node name="CharacterButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1832751890]
+[node name="VBoxContainer2" type="VBoxContainer" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=116575]
+layout_mode = 2
+
+[node name="AutoSizeLabel2" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1402687097 instance=ExtResource("5_choun")]
+layout_mode = 2
+text = "Battle"
+label_settings = SubResource("LabelSettings_ya4ey")
+max_font_size = 24
+min_font_size = 16
+
+[node name="BattleButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1837827217 instance=ExtResource("5_o6xl0")]
+layout_mode = 2
+icon = ExtResource("10_eb6dy")
+
+[node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1962940906 instance=ExtResource("5_choun")]
+visible = false
+layout_mode = 2
+text = "Battle"
+
+[node name="Spacer3" type="Control" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1544109900]
+custom_minimum_size = Vector2(38.165, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 48
-text = "CHARACTER"
 
-[node name="InventoryButton" type="Button" parent="NavBarLayer/NavBar" unique_id=862942468]
+[node name="VBoxContainer3" type="VBoxContainer" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1999102386]
+layout_mode = 2
+
+[node name="AutoSizeLabel2" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1754104969 instance=ExtResource("5_choun")]
+layout_mode = 2
+text = "Character"
+label_settings = SubResource("LabelSettings_ya4ey")
+max_font_size = 24
+
+[node name="CharacterButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1386286071 instance=ExtResource("5_o6xl0")]
+layout_mode = 2
+icon = ExtResource("11_jkv2x")
+
+[node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=996423725 instance=ExtResource("5_choun")]
+visible = false
+layout_mode = 2
+text = "Character"
+
+[node name="Spacer4" type="Control" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=26234658]
+custom_minimum_size = Vector2(38.165, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "INVENTORY"
 
-[node name="ShopButton" type="Button" parent="NavBarLayer/NavBar" unique_id=1125663488]
+[node name="VBoxContainer4" type="VBoxContainer" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1219387212]
+layout_mode = 2
+
+[node name="AutoSizeLabel2" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=1235824854 instance=ExtResource("5_choun")]
+layout_mode = 2
+text = "Potions"
+label_settings = SubResource("LabelSettings_ya4ey")
+max_font_size = 24
+min_font_size = 16
+
+[node name="PotionsButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=2084646125 instance=ExtResource("5_o6xl0")]
+layout_mode = 2
+icon = ExtResource("12_jbj1t")
+
+[node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=315906267 instance=ExtResource("5_choun")]
+visible = false
+layout_mode = 2
+text = "Potions"
+
+[node name="Spacer5" type="Control" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1629681941]
+custom_minimum_size = Vector2(38.165, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "SHOP"
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=901233931]
+layout_mode = 2
+
+[node name="AutoSizeLabel2" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer5" unique_id=26731815 instance=ExtResource("5_choun")]
+layout_mode = 2
+text = "Shop"
+label_settings = SubResource("LabelSettings_ya4ey")
+max_font_size = 24
+min_font_size = 16
+
+[node name="ShopButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer5" unique_id=1449168052 instance=ExtResource("5_o6xl0")]
+layout_mode = 2
+icon = ExtResource("13_muem4")
+
+[node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer5" unique_id=1792321631 instance=ExtResource("5_choun")]
+visible = false
+layout_mode = 2
+text = "Shop"
+
+[node name="Spacer6" type="Control" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1825727769]
+custom_minimum_size = Vector2(38.165, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="PopupLayer" type="CanvasLayer" parent="." unique_id=1531632925]
 layer = 3
@@ -703,10 +855,10 @@ text = "Use device's data"
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight/FocusFluxSpendButton" to="HUDLayer" method="_on_focus_flux_spend_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft/DreamShardsInfoButton" to="HUDLayer" method="_on_dream_shards_info_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft/DreamShardsSpendButton" to="HUDLayer" method="_on_dream_shards_spend_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/HomeButton" to="." method="_on_home_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/BattleButton" to="." method="_on_battle_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/CharacterButton" to="." method="_on_character_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/InventoryButton" to="." method="_on_inventory_button_pressed"]
-[connection signal="pressed" from="NavBarLayer/NavBar/ShopButton" to="." method="_on_shop_button_pressed"]
+[connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/BattleButton" to="." method="_on_battle_button_pressed"]
+[connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/CharacterButton" to="." method="_on_character_button_pressed"]
+[connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/PotionsButton" to="." method="_on_potions_button_pressed"]
+[connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer5/ShopButton" to="." method="_on_shop_button_pressed"]
 [connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataFallbackButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_fallback_button_pressed"]
 [connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataDeviceDataButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_device_data_button_pressed"]
