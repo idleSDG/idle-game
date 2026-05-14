@@ -1,0 +1,18 @@
+[gd_resource type="Theme" format=3 uid="uid://o6ja5ygtgnte"]
+
+[ext_resource type="FontFile" uid="uid://csfinobv8w3kr" path="res://assets/fonts/Pixel Code/PixelCode.otf" id="1_5okp8"]
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="1_q72jk"]
+[ext_resource type="FontFile" uid="uid://dn531g1ux5cgt" path="res://assets/fonts/Pixel Code/PixelCode-Bold-Italic.otf" id="3_k41ba"]
+[ext_resource type="FontFile" uid="uid://cxp77bqrigwa3" path="res://assets/fonts/Pixel Code/PixelCode-Italic.otf" id="4_cynxu"]
+
+[resource]
+BoldLabel/base_type = &"Label"
+BoldLabel/fonts/font = ExtResource("1_q72jk")
+Control/fonts/font = ExtResource("1_5okp8")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.27058825)
+Label/constants/shadow_offset_x = 4
+Label/constants/shadow_offset_y = 4
+RichTextLabel/fonts/bold_font = ExtResource("1_q72jk")
+RichTextLabel/fonts/bold_italics_font = ExtResource("3_k41ba")
+RichTextLabel/fonts/italics_font = ExtResource("4_cynxu")
+RichTextLabel/fonts/normal_font = ExtResource("1_5okp8")

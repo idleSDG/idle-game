@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://bwnhgpf8x4dpw"]
+
+[ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="1_bsdad"]
+[ext_resource type="PackedScene" uid="uid://nd1vj0bwvk8j" path="res://src/ui/HUD/editor_only_marker.tscn" id="2_6lg3u"]
+[ext_resource type="Script" uid="uid://25wdgy8koxnc" path="res://src/features/potions/potion_crafting.gd" id="3_7c4cn"]
+[ext_resource type="Texture2D" uid="uid://de53rohfgnvao" path="res://assets/potions_screen/PotionsScreen_Main_Decoration.png" id="3_hrjjp"]
+[ext_resource type="Texture2D" uid="uid://b458plh5o7o1n" path="res://assets/potions_screen/PotionsScreen_Main_Background.png" id="4_847jq"]
+[ext_resource type="PackedScene" uid="uid://dytmbif2dd1v4" path="res://src/features/potions/potion_screen_item_slot.tscn" id="5_286y6"]
+[ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="6_286y6"]
+[ext_resource type="Texture2D" uid="uid://dhen7mb70wskg" path="res://assets/hud/buttons/icon_plus_dark.tres" id="7_snrhs"]
+[ext_resource type="Theme" uid="uid://o6ja5ygtgnte" path="res://src/ui/themes/default_theme.tres" id="8_286y6"]
+[ext_resource type="Texture2D" uid="uid://caako7cjoxwt5" path="res://assets/icons/icon_question_mark.png" id="9_snrhs"]
+[ext_resource type="Texture2D" uid="uid://dowosr46qwakc" path="res://assets/icons/icon_plus.png" id="10_qongc"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="11_flwr8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kqk0h"]
+shader = ExtResource("11_flwr8")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
+
+[node name="PotionsScreen" type="Node2D" unique_id=1594473218]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1000098412]
+
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=1770913597]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bsdad")
+
+[node name="TopScreenMarginArea" parent="CanvasLayer/Background" unique_id=1090058551 instance=ExtResource("2_6lg3u")]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 236.0
+grow_horizontal = 2
+
+[node name="PotionCrafting" type="Control" parent="CanvasLayer/Background" unique_id=869193309]
+custom_minimum_size = Vector2(47.99, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -499.0
+offset_top = -685.57007
+offset_right = 499.0
+offset_bottom = 603.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_7c4cn")
+
+[node name="PanelContainer" type="TextureRect" parent="CanvasLayer/Background/PotionCrafting" unique_id=1056741846]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = 9.570068
+offset_right = -17.0
+offset_bottom = -9.570068
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_847jq")
+
+[node name="Decoration" type="TextureRect" parent="CanvasLayer/Background/PotionCrafting" unique_id=688219296]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_hrjjp")
+
+[node name="ResultItemSlot" parent="CanvasLayer/Background/PotionCrafting" unique_id=57361886 instance=ExtResource("5_286y6")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 204.0
+offset_top = 72.57007
+offset_right = 460.0
+offset_bottom = 328.57007
+counter_value = "0"
+
+[node name="PotionCraftButton" parent="CanvasLayer/Background/PotionCrafting" unique_id=722163806 instance=ExtResource("6_286y6")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.33)
+layout_mode = 0
+offset_left = 585.0
+offset_top = 75.57007
+offset_right = 811.0
+offset_bottom = 333.57007
+disabled = true
+is_disabled = true
+icon = ExtResource("7_snrhs")
+
+[node name="PotionTitleLabel" type="Label" parent="CanvasLayer/Background/PotionCrafting" unique_id=2121399146]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 97.0
+offset_top = 341.57007
+offset_right = 933.0
+offset_bottom = 452.14014
+theme = ExtResource("8_286y6")
+theme_type_variation = &"BoldLabel"
+theme_override_font_sizes/font_size = 64
+text = "???"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="PotionDescriptionRichTextLabel" type="RichTextLabel" parent="CanvasLayer/Background/PotionCrafting" unique_id=1749050816]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 83.0
+offset_top = 454.57007
+offset_right = 943.0
+offset_bottom = 582.57007
+theme = ExtResource("8_286y6")
+theme_override_font_sizes/normal_font_size = 28
+theme_override_font_sizes/bold_font_size = 28
+theme_override_font_sizes/bold_italics_font_size = 28
+theme_override_font_sizes/italics_font_size = 28
+theme_override_font_sizes/mono_font_size = 28
+bbcode_enabled = true
+text = "???"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Background/PotionCrafting" unique_id=2028100451]
+layout_mode = 0
+offset_left = 211.0
+offset_top = 606.57007
+offset_right = 819.0
+offset_bottom = 798.57007
+theme_override_constants/separation = 64
+
+[node name="CraftingSlot1" parent="CanvasLayer/Background/PotionCrafting/HBoxContainer2" unique_id=1113045643 instance=ExtResource("5_286y6")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+counter_value = ""
+default_icon_texture = ExtResource("9_snrhs")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Background/PotionCrafting/HBoxContainer2" unique_id=2046312108]
+texture_filter = 1
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+mouse_filter = 0
+texture = ExtResource("10_qongc")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Background/PotionCrafting/HBoxContainer2/TextureRect" unique_id=184759226]
+show_behind_parent = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_kqk0h")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("10_qongc")
+stretch_mode = 5
+
+[node name="CraftingSlot2" parent="CanvasLayer/Background/PotionCrafting/HBoxContainer2" unique_id=499823542 instance=ExtResource("5_286y6")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+counter_value = ""
+default_icon_texture = ExtResource("9_snrhs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Background/PotionCrafting" unique_id=670974772]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 935.57007
+offset_right = 848.0
+offset_bottom = 1207.5701
+theme_override_constants/separation = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer" unique_id=60457464]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PotionScreenItemSlot" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer" unique_id=359838854 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="PotionScreenItemSlot2" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer" unique_id=1510931642 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="PotionScreenItemSlot3" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer" unique_id=599673749 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="PotionScreenItemSlot4" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer" unique_id=720473476 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="PotionScreenItemSlot5" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer" unique_id=919243629 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer" unique_id=1677482943]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PotionScreenItemSlot" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer2" unique_id=1640139920 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="PotionScreenItemSlot2" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer2" unique_id=1973513278 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="PotionScreenItemSlot3" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer2" unique_id=1349811024 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="PotionScreenItemSlot4" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer2" unique_id=1989270043 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="PotionScreenItemSlot5" parent="CanvasLayer/Background/PotionCrafting/VBoxContainer/HBoxContainer2" unique_id=928781935 instance=ExtResource("5_286y6")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+counter_value = "0"
+
+[node name="NavBarMarginArea" parent="CanvasLayer/Background" unique_id=1067231177 instance=ExtResource("2_6lg3u")]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -278.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[connection signal="button_down" from="CanvasLayer/Background/PotionCrafting/PotionCraftButton" to="CanvasLayer/Background/PotionCrafting" method="_on_craft_button_down"]

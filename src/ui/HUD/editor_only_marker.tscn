@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://nd1vj0bwvk8j"]
+
+[ext_resource type="Script" uid="uid://co4pg34gpjfjj" path="res://src/ui/HUD/editor_only_marker.gd" id="1_0h422"]
+
+[node name="EditorOnlyMarker" type="ColorRect" unique_id=1090058551]
+mouse_filter = 2
+color = Color(1, 0, 0, 1)
+script = ExtResource("1_0h422")
