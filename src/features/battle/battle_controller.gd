@@ -2,6 +2,8 @@ extends Node2D
 
 @onready var content = $CanvasLayer
 
+@onready var campaign_button = $CanvasLayer/BattleTopButtonContainer/CampaignButtonContainer/CampaignButton
+
 var battle_area_scene := preload("res://scenes/battle_area.tscn")
 
 var beaten_button = preload("res://assets/battlemap/beaten_button.png")
@@ -48,7 +50,8 @@ func _ready() -> void:
 		for button in buttons:
 			button.queue_free()
 		for map in maps:
-			var button = Button.new()
+			var button = campaign_button.duplicate()
+			button.visible = true
 			button.text = map.name
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			$CanvasLayer/BattleTopButtonContainer/CampaignButtonContainer.add_child(button)

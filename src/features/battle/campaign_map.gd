@@ -188,12 +188,12 @@ static func from_save(data: Dictionary) -> campaign_map:
 
 
 static func generate_zoo(p_enemy_level: int, existing_levels: Array[battle_level] = [], existing_paths: Array[battle_path] = []):
-	return campaign_map.generate_map(10, 5, "Zoo", "res://assets/battlemap/zoo_background.png", "116802", Type.ZOO, [100, 102], p_enemy_level, existing_levels, existing_paths)
+	return campaign_map.generate_map(10, 5, "Mountain", "res://assets/battlemap/mountain.png", "116802", Type.ZOO, [100, 102], p_enemy_level, existing_levels, existing_paths)
 
 
 static func generate_sky(p_enemy_level: int, existing_levels: Array[battle_level] = [], existing_paths: Array[battle_path] = []):
-	return campaign_map.generate_map(8, 4, "Sky", "res://assets/battlemap/sky_background.png", "9EFDFF", Type.SKY, [101, 102], p_enemy_level, existing_levels, existing_paths)
+	return campaign_map.generate_map(8, 4, "Sky", "res://assets/battlemap/cloud.png", "9EFDFF", Type.SKY, [101, 102], p_enemy_level, existing_levels, existing_paths)
 
 
 static func generate_forest(p_enemy_level: int, existing_levels: Array[battle_level] = [], existing_paths: Array[battle_path] = []):
-	return campaign_map.generate_map(10, 3, "Forest", "res://assets/battlemap/forest_background.png", "008600", Type.FOREST, [100, 101], p_enemy_level, existing_levels, existing_paths)
+	return campaign_map.generate_map(10, 3, "Forest", "res://assets/battlemap/forest.png", "008600", Type.FOREST, [100, 101], p_enemy_level, existing_levels, existing_paths)

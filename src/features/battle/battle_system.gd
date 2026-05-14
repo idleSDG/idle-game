@@ -48,7 +48,8 @@ func _notification(what: int) -> void:
 			return
 		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
-			simulate(elapsed)
+			if !BattleVariables.isPaused:
+				simulate(elapsed)
 			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 
 

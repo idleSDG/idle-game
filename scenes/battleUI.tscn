@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://de53rohfgnvao" path="res://assets/potions_screen/PotionsScreen_Main_Decoration.png" id="3_cyajf"]
 [ext_resource type="PackedScene" uid="uid://ixme676dvwbw" path="res://scenes/potion_button.tscn" id="3_wm05t"]
 [ext_resource type="Texture2D" uid="uid://d16csp42sfssi" path="res://assets/potions_screen/PotionsScreen_Slot_Background.png" id="5_cyajf"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="6_5oidc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dm231"]
 bg_color = Color(0, 0, 0, 1)
@@ -16,6 +17,11 @@ bg_color = Color(0.4710033, 0.853177, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6k20a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aeslv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe70f"]
+shader = ExtResource("6_5oidc")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
 
 [node name="BattleUI" type="Control" unique_id=1238233801]
 custom_minimum_size = Vector2(1000, 285)
@@ -70,7 +76,6 @@ grow_vertical = 2
 texture = ExtResource("3_cyajf")
 
 [node name="UnitPreview" type="Control" parent="." unique_id=2068457909]
-visible = false
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 0.76000005
@@ -162,9 +167,9 @@ anchor_top = 0.41400003
 anchor_right = 0.98700005
 anchor_bottom = 0.95300007
 offset_left = -0.1760006
-offset_top = 10.955978
+offset_top = -14.044022
 offset_right = -0.91516113
-offset_bottom = -100.33801
+offset_bottom = -121.33801
 
 [node name="Stats" type="ScrollContainer" parent="UnitPreview/Control2" unique_id=273177916]
 layout_mode = 1
@@ -237,7 +242,25 @@ bbcode_enabled = true
 text = "[b]EFFECTS[/b] [p] zooted"
 fit_content = true
 
+[node name="SlotShadow" type="TextureRect" parent="UnitPreview/Control2" unique_id=527223827]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_qe70f")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = 8.0
+offset_right = 3.00708
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_cyajf")
+expand_mode = 1
+stretch_mode = 1
+
 [node name="PotionBar" type="Control" parent="." unique_id=1831040683]
+visible = false
 anchors_preset = 0
 offset_right = 1080.0
 offset_bottom = 393.0
@@ -247,9 +270,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.88000005
-offset_top = 146.0
+offset_top = 10.0
 offset_right = 3.0
-offset_bottom = 0.15997314
+offset_bottom = 50.159973
 alignment = 1
 
 [node name="Button" parent="PotionBar/HBoxContainer" unique_id=1101878322 instance=ExtResource("3_wm05t")]

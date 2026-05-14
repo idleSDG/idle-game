@@ -45,22 +45,22 @@ func UpdateStatDisplay():
 
 	stats_text.text = "[b] STATS[/b]
 	[table=2]
-	[cell]Attack:[/cell]      [cell][i]" + str(char.statChanges.attack) + "[/i][/cell]
-	[cell]Defense:[/cell]     [cell][i]" + str(char.statChanges.defense) + "[/i][/cell]
-	[cell]Crit Rate:[/cell]   [cell][i]" + str(char.statChanges.critRate) + "[/i][/cell]
-	[cell]Crit DMG:[/cell]    [cell][i]" + str(char.statChanges.critDMG) + "[/i][/cell]
-	[cell]Charge Rate:  [/cell] [cell][i]" + str(round_place(char.statChanges.chargeRate, 2)) + "[/i][/cell][/table]"
+[cell][img=32]res://assets/icons/atk.png[/img] Attack:[/cell]      [cell][i]" + str(char.statChanges.attack) + "[/i][/cell]
+[cell][img=32]res://assets/icons/def.png[/img] Defense:[/cell]     [cell][i]" + str(char.statChanges.defense) + "[/i][/cell]
+[cell][img=32]res://assets/icons/crt.png[/img] Crit Rate:[/cell]   [cell][i]" + str(char.statChanges.critRate) + "[/i][/cell]
+[cell][img=32]res://assets/icons/cdm.png[/img] Crit DMG:[/cell]    [cell][i]" + str(char.statChanges.critDMG) + "[/i][/cell]
+[cell][img=32]res://assets/icons/chr.png[/img] Charge Rate:  [/cell] [cell][i]" + str(round_place(char.statChanges.chargeRate, 2)) + "[/i][/cell][/table]"
 
 	buffs_text.text = "[b] STATUS EFFECTS[/b][i]"
-	var buffs_dict : Dictionary[String, int] = {}
+	var buffs_dict : Dictionary[StatusEffect.StatusEffectType, int] = {}
 	for se in char.statusEffects:
-		if buffs_dict.has(se.StatusEffectType.keys()[se.StatusType]):
-			buffs_dict[se.StatusEffectType.keys()[se.StatusType]] += 1
+		if buffs_dict.has(se.StatusType):
+			buffs_dict[se.StatusType] += 1
 		else:
-			buffs_dict[se.StatusEffectType.keys()[se.StatusType]] = 1
+			buffs_dict[se.StatusType] = 1
 	
 	for se in buffs_dict:
-		buffs_text.text += "[p]	x" + str(buffs_dict[se]) + " " + se #str(se.StatusEffectType.keys()[se.StatusType])
+		buffs_text.text += "[color=" + StatusEffect.GetClr(se).to_html(false) + "][p]	x" + str(buffs_dict[se]) + " " + StatusEffect.StatusEffectType.keys()[se]
 
 	pass
 
