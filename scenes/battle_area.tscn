@@ -5,7 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cmqf4mvip8xod" path="res://assets/hud/pause.png" id="2_mhs3n"]
 [ext_resource type="Texture2D" uid="uid://blkd7n7vu8yfu" path="res://assets/enemies/Battleground1.png" id="3_cnfnp"]
 [ext_resource type="Texture2D" uid="uid://c3krf2aihmxt6" path="res://assets/hud/fast.png" id="3_osvxu"]
+[ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="5_c54ue"]
+[ext_resource type="Texture2D" uid="uid://cssg7riuvroox" path="res://assets/icons/pause5.png" id="6_3awjj"]
 [ext_resource type="PackedScene" uid="uid://dobjjs6ykdmio" path="res://scenes/battleUI.tscn" id="6_l3vuj"]
+[ext_resource type="Texture2D" uid="uid://cfuooju3mrewg" path="res://assets/icons/fast5.png" id="7_sql3i"]
 
 [sub_resource type="DPITexture" id="DPITexture_mhs3n"]
 
@@ -22,19 +25,21 @@ texture = ExtResource("3_cnfnp")
 [node name="Main Scene" type="CanvasLayer" parent="." unique_id=68912168]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main Scene" unique_id=533918086]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -501.0
-offset_top = -682.0
-offset_right = -57.0
-offset_bottom = -550.0
+anchors_preset = -1
+anchor_right = 0.44700003
+anchor_bottom = 0.11100001
+offset_left = 39.0
+offset_top = 64.0
+offset_right = 0.23995972
+offset_bottom = 0.8799896
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_constants/separation = 26
 
-[node name="Pause" type="CheckBox" parent="Main Scene/HBoxContainer" unique_id=1076112190]
+[node name="Pause3" type="CheckBox" parent="Main Scene/HBoxContainer" unique_id=1076112190]
+visible = false
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -49,7 +54,8 @@ button_pressed = true
 icon = ExtResource("2_mhs3n")
 expand_icon = true
 
-[node name="Fast" type="CheckBox" parent="Main Scene/HBoxContainer" unique_id=1036546450]
+[node name="Fast3" type="CheckBox" parent="Main Scene/HBoxContainer" unique_id=1036546450]
+visible = false
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -64,6 +70,18 @@ button_pressed = true
 icon = ExtResource("3_osvxu")
 expand_icon = true
 
+[node name="Pause" parent="Main Scene/HBoxContainer" unique_id=722163806 instance=ExtResource("5_c54ue")]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("6_3awjj")
+
+[node name="Fast" parent="Main Scene/HBoxContainer" unique_id=1632665865 instance=ExtResource("5_c54ue")]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+toggle_mode = true
+icon = ExtResource("7_sql3i")
+
 [node name="SecondsLabel" type="Label" parent="Main Scene" unique_id=1318015151]
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,9 +89,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -57.0
-offset_top = -760.0
+offset_top = -965.0
 offset_right = 57.0
-offset_bottom = -487.0
+offset_bottom = -692.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -88,16 +106,17 @@ autostart = true
 
 [node name="CombatFinishPopup" type="Label" parent="Main Scene" unique_id=1047311204]
 visible = false
-z_index = 10
+z_index = 100
+z_as_relative = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -441.0
-offset_top = -146.0
+offset_top = -268.0
 offset_right = 442.0
-offset_bottom = 127.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -114,9 +133,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -381.0
-offset_top = -83.0
+offset_top = -201.0
 offset_right = -261.0
-offset_bottom = 50.0
+offset_bottom = -68.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -128,9 +147,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 36.0
-offset_top = -65.0
+offset_top = -183.0
 offset_right = 156.0
-offset_bottom = 68.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -157,9 +176,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 185.0
-offset_top = 86.0
+offset_top = -32.0
 offset_right = 305.0
-offset_bottom = 219.0
+offset_bottom = 101.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -186,40 +205,44 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = 322.0
-offset_top = -152.0
+offset_top = -270.0
 offset_right = 442.0
-offset_bottom = -19.0
+offset_bottom = -137.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ExitBattle" type="Button" parent="Main Scene" unique_id=1896487453]
 visible = false
+z_index = 100
+z_as_relative = false
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.545
 anchor_right = 0.5
 anchor_bottom = 0.545
 offset_left = -400.0
-offset_top = 54.599976
+offset_top = -67.400024
 offset_right = 400.0
-offset_bottom = 181.59998
+offset_bottom = 59.599976
 theme_override_font_sizes/font_size = 87
 text = "Exit Battle
 "
 
 [node name="Container" type="Container" parent="Main Scene" unique_id=150168763]
 anchors_preset = -1
-anchor_top = 0.68
+anchor_top = 0.6
 anchor_right = 1.0150001
 anchor_bottom = 0.94600004
 offset_left = -3.0
-offset_top = -62.599976
-offset_right = -0.20007324
+offset_top = 23.0
+offset_right = -13.200073
 offset_bottom = 1297.6799
 
 [node name="BattleUI" parent="Main Scene/Container" unique_id=1238233801 instance=ExtResource("6_l3vuj")]
 layout_mode = 2
 
+[connection signal="toggled" from="Main Scene/HBoxContainer/Pause3" to="." method="_on_pause_toggled"]
+[connection signal="toggled" from="Main Scene/HBoxContainer/Fast3" to="." method="_on_fast_toggled"]
 [connection signal="toggled" from="Main Scene/HBoxContainer/Pause" to="." method="_on_pause_toggled"]
 [connection signal="toggled" from="Main Scene/HBoxContainer/Fast" to="." method="_on_fast_toggled"]
 [connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]

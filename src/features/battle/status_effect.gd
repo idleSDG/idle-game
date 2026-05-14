@@ -1,9 +1,4 @@
-<<<<<<<< HEAD:src/features/battle/status_effect.gd
-class_name StatusEffect
-extends Node
-========
 class_name StatusEffect extends Node
->>>>>>>> origin/IG-69-Potion-Crafting-System:src/features/potions/status_effect.gd
 
 var StatusType: StatusEffectType
 var ApplicationRate: float = 0.5

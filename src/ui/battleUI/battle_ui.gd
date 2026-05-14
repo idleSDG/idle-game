@@ -52,8 +52,15 @@ func UpdateStatDisplay():
 	[cell]Charge Rate:  [/cell] [cell][i]" + str(round_place(char.statChanges.chargeRate, 2)) + "[/i][/cell][/table]"
 
 	buffs_text.text = "[b] STATUS EFFECTS[/b][i]"
+	var buffs_dict : Dictionary[String, int] = {}
 	for se in char.statusEffects:
-		buffs_text.text += "[p]		" + str(se.StatusEffectType.keys()[se.StatusType])
+		if buffs_dict.has(se.StatusEffectType.keys()[se.StatusType]):
+			buffs_dict[se.StatusEffectType.keys()[se.StatusType]] += 1
+		else:
+			buffs_dict[se.StatusEffectType.keys()[se.StatusType]] = 1
+	
+	for se in buffs_dict:
+		buffs_text.text += "[p]	x" + str(buffs_dict[se]) + " " + se #str(se.StatusEffectType.keys()[se.StatusType])
 
 	pass
 

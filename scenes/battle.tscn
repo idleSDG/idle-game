@@ -29,6 +29,9 @@ color = Color(0.6226508, 0.45791954, 0.59386855, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = -230.0
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
@@ -52,6 +55,7 @@ layout_mode = 2
 [node name="RandomizationLabelPanel" type="PanelContainer" parent="CanvasLayer/BattleTopButtonContainer/RandomizationContainer" unique_id=1679592371]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_dn72j")
 
 [node name="RandomizationLabelMarginContainer" type="MarginContainer" parent="CanvasLayer/BattleTopButtonContainer/RandomizationContainer/RandomizationLabelPanel" unique_id=1886226492]
