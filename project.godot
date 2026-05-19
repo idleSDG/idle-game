@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="idle game"
+config/name="SpellCraft: Idle"
 run/main_scene="uid://bj8tenpaqqsut"
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+boot_splash/use_filter=false
+config/icon="uid://dkbc1nayhna0i"
+config/macos_native_icon="uid://dkbc1nayhna0i"
+config/windows_native_icon="uid://dkbc1nayhna0i"
 
 [autoload]
 
