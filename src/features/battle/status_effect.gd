@@ -1,5 +1,4 @@
-class_name StatusEffect
-extends Node
+class_name StatusEffect extends Node
 
 var StatusType: StatusEffectType
 var ApplicationRate: float = 0.5
@@ -81,7 +80,10 @@ func AlterStats(stats: CharacterStats):
 
 
 func GetColor() -> Color:
-	match StatusType:
+	return GetClr(StatusType)
+
+static func GetClr(type : StatusEffectType) -> Color:
+	match type:
 		StatusEffectType.Burn:
 			return Color.ORANGE
 		StatusEffectType.Freeze:
@@ -92,7 +94,6 @@ func GetColor() -> Color:
 			return Color.SPRING_GREEN
 		StatusEffectType.Strength:
 			return Color.RED
-
 	return Color.WHITE
 
 

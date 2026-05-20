@@ -16,8 +16,8 @@ extends Node
 
 signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
-@onready var pause: CheckBox = $"Main Scene/HBoxContainer/Pause"
-@onready var fast: CheckBox = $"Main Scene/HBoxContainer/Fast"
+@onready var pause = $"Main Scene/HBoxContainer/Pause"
+@onready var fast = $"Main Scene/HBoxContainer/Fast"
 
 @onready var level: battle_level = BattleVariables.current_battle_level
 
@@ -48,7 +48,8 @@ func _notification(what: int) -> void:
 			return
 		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
-			simulate(elapsed)
+			if !BattleVariables.isPaused:
+				simulate(elapsed)
 			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 
 
@@ -65,8 +66,10 @@ func _ready() -> void:
 		timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 		return
 
-	pause.set_pressed_no_signal(!BattleVariables.isPaused)
-	fast.set_pressed_no_signal(!BattleVariables.isFast)
+	pause.button_pressed = (BattleVariables.isPaused)
+	fast.button_pressed = (BattleVariables.isFast)
+	_on_pause_toggled(BattleVariables.isPaused)
+	_on_fast_toggled(BattleVariables.isFast)
 
 	# PLAYER INIT
 	var instance = character_scene.instantiate()
@@ -314,10 +317,12 @@ func SetPotions():
 
 
 func _on_pause_toggled(toggled_on: bool) -> void:
-	BattleVariables.isPaused = !toggled_on
+	BattleVariables.isPaused = toggled_on
+	pause.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.
 
 
 func _on_fast_toggled(toggled_on: bool) -> void:
-	BattleVariables.isFast = !toggled_on
+	BattleVariables.isFast = toggled_on
+	fast.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.

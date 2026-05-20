@@ -2,6 +2,9 @@ extends Node2D
 
 @onready var content = $CanvasLayer
 
+@onready var campaign_button = $CanvasLayer/BattleTopButtonContainer/CampaignButtonContainer/CampaignButton
+var campaign_button_template: Button = null
+
 var battle_area_scene := preload("res://scenes/battle_area.tscn")
 
 var beaten_button = preload("res://assets/battlemap/beaten_button.png")
@@ -44,15 +47,19 @@ func _ready() -> void:
 		if (current_map.levels.filter(func(x): return !x.beaten).is_empty()):
 			_on_restart_pressed(current_map_string)
 		draw_map(current_map)
+		if campaign_button_template == null:
+			campaign_button_template = campaign_button.duplicate()
+
 		var buttons = $CanvasLayer/BattleTopButtonContainer/CampaignButtonContainer.get_children()
-		for button in buttons:
-			button.queue_free()
 		for map in maps:
-			var button = Button.new()
+			var button = campaign_button_template.duplicate()
+			button.visible = true
 			button.text = map.name
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			$CanvasLayer/BattleTopButtonContainer/CampaignButtonContainer.add_child(button)
 			button.pressed.connect(_on_map_changed.bind(map))
+		for button in buttons:
+			button.queue_free()
 		_update_campaign_selection_visuals()
 
 		if randomization_timer == null:
@@ -105,7 +112,7 @@ func exit_battle() -> void:
 	if current_view and current_view.get_parent():
 		current_view.queue_free()
 	current_view = null
-	draw_map(current_map)
+	_ready()
 
 
 func _swap_to(scene_res: PackedScene) -> void:
