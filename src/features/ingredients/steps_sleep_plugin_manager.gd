@@ -31,13 +31,13 @@ func get_classes():
 
 
 func _on_history_permission(steps_granted: bool, sleep_granted: bool):
-	if !sleep.has_sleep_data():
+	if !sleep.has_history_permissions or !sleep.has_sleep_data():
 		if sleep_granted:
 			sleep.has_history_permissions = true
 			sleep.sleep_permissions.emit()
 			sleep.fetch_sleep()
 
-	if !steps.has_steps_data():
+	if !steps.has_history_permissions or !steps.has_steps_data():
 		if steps_granted:
 			steps.has_history_permissions = true
 			steps.steps_permissions.emit()
@@ -48,7 +48,6 @@ func _on_history_permission(steps_granted: bool, sleep_granted: bool):
 			timer.one_shot = false
 			timer.timeout.connect(steps.fetch_steps)
 			add_child(timer)
-
 
 func _set_fallback_data(set_sleep: bool, set_steps: bool):
 	if set_sleep:
