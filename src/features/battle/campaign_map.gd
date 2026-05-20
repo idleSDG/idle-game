@@ -192,7 +192,7 @@ static func generate_zoo(p_enemy_level: int, existing_levels: Array[battle_level
 
 
 static func generate_sky(p_enemy_level: int, existing_levels: Array[battle_level] = [], existing_paths: Array[battle_path] = []):
-	return campaign_map.generate_map(8, 4, "Sky", "res://assets/battlemap/cloud.png", "9EFDFF", Type.SKY, [101, 102], p_enemy_level, existing_levels, existing_paths)
+	return campaign_map.generate_map(8, 4, "Sky", "res://assets/battlemap/cld.png", "9EFDFF", Type.SKY, [101, 102], p_enemy_level, existing_levels, existing_paths)
 
 
 static func generate_forest(p_enemy_level: int, existing_levels: Array[battle_level] = [], existing_paths: Array[battle_path] = []):
