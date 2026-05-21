@@ -1,35 +1,40 @@
 class_name ShopItemCard
 extends PanelContainer
- 
+
 signal buy_pressed(item: EquipmentItem)
- 
-@onready var icon_rect: TextureRect = $MarginContainer/HBox/MarginContainer/Icon
-@onready var name_label: Label = $MarginContainer/HBox/InfoVBox/NameLabel
-@onready var stats_label: Label = $MarginContainer/HBox/InfoVBox/StatsLabel
-@onready var cost_label: Label = $MarginContainer/HBox/InfoVBox/CostLabel
-@onready var buy_button: Button = $MarginContainer/HBox/BuyVBox/BuyButton
-@onready var owned_label: Label = $MarginContainer/HBox/BuyVBox/OwnedLabel
- 
-var _item : EquipmentItem
- 
+
+@onready var icon_rect: TextureRect = %Icon
+@onready var name_label: Label = %NameLabel
+@onready var stats_label: Label = %StatsLabel
+@onready var cost_label: Label = %CostLabel
+@onready var buy_button: TextIconButton = %BuyButton
+@onready var owned_label: Label = %OwnedLabel
+
+var _item: EquipmentItem
+
+
 func setup(item: EquipmentItem) -> void:
 	_item = item
 	name_label.text = item.item_name
 	cost_label.text = "%d gold" % item.cost
 	stats_label.text = _build_stats_text(item)
- 
+
 	# Icon — use slot placeholder for now until real assets exist
 	match item.slot:
-		EquipmentItem.Slot.WEAPON: icon_rect.texture = load("res://assets/equipment/staff1.png")
-		EquipmentItem.Slot.ROBE: icon_rect.texture = load("res://assets/equipment/robe1.png")
-		EquipmentItem.Slot.HAT: icon_rect.texture = load("res://assets/equipment/hat1.png")
- 
+		EquipmentItem.Slot.WEAPON:
+			icon_rect.texture = load("res://assets/icons/staff_icon.tres")
+		EquipmentItem.Slot.ROBE:
+			icon_rect.texture = load("res://assets/icons/robe_icon.tres")
+		EquipmentItem.Slot.HAT:
+			icon_rect.texture = load("res://assets/icons/hat_icon.tres")
+
 	_refresh_state()
- 
+
 	buy_button.pressed.connect(_on_buy_pressed)
 	PlayerInventory.money_changed.connect(_on_money_changed)
 	PlayerInventory.item_purchased.connect(_on_item_purchased)
- 
+
+
 func _build_stats_text(item: EquipmentItem) -> String:
 	var text = ""
 	if item.health_bonus_pct > 0.001:
@@ -45,26 +50,30 @@ func _build_stats_text(item: EquipmentItem) -> String:
 	if item.ingredient_gain_bonus_pct > 0.001:
 		text += "Ingredient +%d%%\n" % int(item.ingredient_gain_bonus_pct * 100)
 	return text.strip_edges()
- 
+
+
 func _refresh_state() -> void:
 	var owned: bool = ShopCatalogue.is_owned(_item)
 	var afford: bool = PlayerInventory.money >= _item.cost
- 
+
 	owned_label.visible = owned
 	buy_button.visible = not owned
-	buy_button.disabled = not afford
+	buy_button.is_disabled = not afford
 
 	# Green when affordable, default when not
 	if afford:
-		buy_button.add_theme_color_override("font_color", Color(0.133, 0.827, 0.0))
+		buy_button.text_color = Color(0.133, 0.827, 0.0)
 	else:
-		buy_button.remove_theme_color_override("font_color")
- 
+		buy_button.text_color = Color(0, 0, 0)
+
+
 func _on_buy_pressed() -> void:
 	buy_pressed.emit(_item)
- 
+
+
 func _on_money_changed(_money: int) -> void:
 	_refresh_state()
- 
+
+
 func _on_item_purchased(_purchased_item: EquipmentItem) -> void:
 	_refresh_state()

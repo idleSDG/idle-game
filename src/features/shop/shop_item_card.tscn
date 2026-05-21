@@ -1,63 +1,125 @@
 [gd_scene format=3 uid="uid://b0bm4dyasccee"]
 
+[ext_resource type="Texture2D" uid="uid://d16csp42sfssi" path="res://assets/potions_screen/PotionsScreen_Slot_Background.png" id="1_1vwdf"]
+[ext_resource type="Texture2D" uid="uid://co8clcexm55wf" path="res://assets/settings/save decoration.png" id="1_17rys"]
 [ext_resource type="Script" uid="uid://d1ionkspg6xpo" path="res://src/features/shop/shop_item_card.gd" id="1_a47r0"]
+[ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="2_hwssb"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1vwdf"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("1_17rys")
+texture_margin_left = 90.0
+texture_margin_top = 90.0
+texture_margin_right = 90.0
+texture_margin_bottom = 90.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_17rys"]
+texture = ExtResource("1_1vwdf")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1vwdf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_17rys"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wmlcb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p33o5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3e0sm"]
 
 [node name="ShopItemCard" type="PanelContainer" unique_id=976444166]
+texture_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_1vwdf")
 script = ExtResource("1_a47r0")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1369249176]
 layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="HBox" type="HBoxContainer" parent="MarginContainer" unique_id=839583959]
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=75623543]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_17rys")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer" unique_id=1916061255]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 20
+
+[node name="HBox" type="HBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=839583959]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBox" unique_id=650828780]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBox" unique_id=650828780]
 layout_mode = 2
 theme_override_constants/margin_top = 20
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/HBox/MarginContainer" unique_id=1498628735]
+[node name="Icon" type="TextureRect" parent="MarginContainer/PanelContainer/MarginContainer/HBox/MarginContainer" unique_id=1498628735]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5
 
-[node name="InfoVBox" type="VBoxContainer" parent="MarginContainer/HBox" unique_id=1220781524]
+[node name="InfoVBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBox" unique_id=1220781524]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme_override_constants/separation = 8
 
-[node name="NameLabel" type="Label" parent="MarginContainer/HBox/InfoVBox" unique_id=198558810]
+[node name="NameLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBox/InfoVBox" unique_id=198558810]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+text = "name"
 horizontal_alignment = 1
 
-[node name="StatsLabel" type="Label" parent="MarginContainer/HBox/InfoVBox" unique_id=737777694]
+[node name="StatsLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBox/InfoVBox" unique_id=737777694]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
+text = "Crit Rate +20%"
 horizontal_alignment = 1
 
-[node name="CostLabel" type="Label" parent="MarginContainer/HBox/InfoVBox" unique_id=1136530513]
+[node name="CostLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBox/InfoVBox" unique_id=1136530513]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 0, 1)
 theme_override_font_sizes/font_size = 32
+text = "100 gold"
 horizontal_alignment = 1
 
-[node name="BuyVBox" type="VBoxContainer" parent="MarginContainer/HBox" unique_id=1182734853]
+[node name="BuyVBox" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBox" unique_id=1182734853]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="BuyButton" type="Button" parent="MarginContainer/HBox/BuyVBox" unique_id=1183072894]
-custom_minimum_size = Vector2(0, 100)
+[node name="BuyButton" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox" unique_id=112168689 instance=ExtResource("2_hwssb")]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Buy"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1vwdf")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_17rys")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wmlcb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_p33o5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3e0sm")
+button_text = "Buy"
+label_font_size = 66
 
-[node name="OwnedLabel" type="Label" parent="MarginContainer/HBox/BuyVBox" unique_id=1842356048]
+[node name="OwnedLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox" unique_id=1842356048]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.13333334, 0.827451, 0, 1)
 theme_override_font_sizes/font_size = 48
 text = "Owned"
 horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1066815857]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1vwdf")
