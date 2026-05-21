@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://d1hxh3idk7m6r" path="res://assets/hud/buttons/icon_character_dark.tres" id="11_jkv2x"]
 [ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="12_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://dn8sxonh51q6w" path="res://assets/hud/buttons/icon_potion_dark.tres" id="12_jbj1t"]
-[ext_resource type="Script" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
+[ext_resource type="Script" uid="uid://b4ych1hv6wmbm" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
 [ext_resource type="Texture2D" uid="uid://cpmarjf0oqxj2" path="res://assets/hud/buttons/icon_shop_dark.tres" id="13_muem4"]
 [ext_resource type="Texture2D" uid="uid://bttb3vbjujioa" path="res://assets/hud/buttons/icon_home_dark.tres" id="16_y6deb"]
 
@@ -141,6 +141,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="SettingsButton" type="Button" parent="HUDLayer/Upper HUD/VBox" unique_id=241068043]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

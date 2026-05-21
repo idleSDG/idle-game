@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://b68whslk43wd6"]
+
+[ext_resource type="Script" uid="uid://dlg881tpvund7" path="res://src/ui/button/text_icon_button.gd" id="3_script"]
+[ext_resource type="Shader" path="res://src/ui/HUD/color_overlay.gdshader" id="4_shader"]
+[ext_resource type="Texture2D" uid="uid://cxw5my7ip4vyn" path="res://assets/hud/buttons/wide_button.png" id="5_7rs22"]
+[ext_resource type="Script" uid="uid://b2n3d4uhatcyo" path="res://src/ui/button/text_icon_button_shadow.gd" id="5_shadow"]
+[ext_resource type="Texture2D" uid="uid://cnbko2rn6lfx" path="res://assets/hud/buttons/wide_button_pressed.png" id="7_rrap5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2y644"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b51ur"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7rs22"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rrap5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yi6ed"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_shadow"]
+shader = ExtResource("4_shader")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
+
+[node name="TextIconButton" type="Button" unique_id=112168689]
+texture_filter = 1
+custom_minimum_size = Vector2(320, 160)
+offset_right = 320.0
+offset_bottom = 160.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2y644")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_b51ur")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7rs22")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rrap5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yi6ed")
+flat = true
+script = ExtResource("3_script")
+metadata/_edit_horizontal_guides_ = [127.0, -184.0]
+metadata/_edit_vertical_guides_ = [287.0]
+
+[node name="Shadow" type="NinePatchRect" parent="." unique_id=2120170121]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_shadow")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+script = ExtResource("5_shadow")
+
+[node name="Background" type="NinePatchRect" parent="." unique_id=677392673]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_7rs22")
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+
+[node name="BackgroundPressed" type="NinePatchRect" parent="." unique_id=1466560136]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_rrap5")
+patch_margin_left = 64
+patch_margin_top = 64
+patch_margin_right = 64
+patch_margin_bottom = 64
+
+[node name="ContentContainer" type="HBoxContainer" parent="." unique_id=1093219519]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 17.0
+offset_right = -30.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="LeftMarginContainer" type="MarginContainer" parent="ContentContainer" unique_id=1575102438]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="LeftIcon" type="TextureRect" parent="ContentContainer/LeftMarginContainer" unique_id=229000144]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+stretch_mode = 5
+
+[node name="Label" type="RichTextLabel" parent="ContentContainer" unique_id=1893948842]
+custom_minimum_size = Vector2(260, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.078431375)
+theme_override_font_sizes/normal_font_size = 16
+theme_override_font_sizes/bold_font_size = 16
+theme_override_font_sizes/italics_font_size = 16
+bbcode_enabled = true
+text = "Button"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightMarginContainer" type="MarginContainer" parent="ContentContainer" unique_id=58538581]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_top = 30
+
+[node name="RightIcon" type="TextureRect" parent="ContentContainer/RightMarginContainer" unique_id=158955802]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+stretch_mode = 5
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_down" from="." to="Shadow" method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="button_up" from="." to="Shadow" method="_on_button_up"]
