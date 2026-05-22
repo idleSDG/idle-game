@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cx17hecqdyakg"
+path="res://.godot/imported/Battle Theme (Boss) Loop - Pixel RPG Pack.ogg-fccb7ea3ed8ac29b9bb7b74ec26aa8ad.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/pixel_rpg_pack/Battle Theme (Boss) Loop - Pixel RPG Pack.ogg"
+dest_files=["res://.godot/imported/Battle Theme (Boss) Loop - Pixel RPG Pack.ogg-fccb7ea3ed8ac29b9bb7b74ec26aa8ad.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

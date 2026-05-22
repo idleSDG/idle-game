@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d16lr6c6lxnx2"
+path="res://.godot/imported/Title Screen Loop - Pixel RPG Pack.ogg-23a05d0e3fe56283513f1719ae332bea.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/pixel_rpg_pack/Title Screen Loop - Pixel RPG Pack.ogg"
+dest_files=["res://.godot/imported/Title Screen Loop - Pixel RPG Pack.ogg-23a05d0e3fe56283513f1719ae332bea.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

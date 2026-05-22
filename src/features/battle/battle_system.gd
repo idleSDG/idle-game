@@ -229,7 +229,6 @@ func update_visuals(delta: float):
 	battle_ui.UpdateStatDisplay()
 	pass
 
-
 # finishes the fight
 func finish_fight(result: bool):
 	BattleVariables.battleState = BattleVariables.BattleStates.AWAITING_EXIT
@@ -241,7 +240,11 @@ func finish_fight(result: bool):
 		combatFinish.text = "YOU WIN"
 		PlayerProgress.add_xp(120)
 		characterList[0].ApplyExp()
+		BattleVariables.last_battle_outcome = BattleVariables.BattleOutcome.VICTORY
+		BattleVariables.battle_finished.emit(BattleVariables.BattleOutcome.VICTORY)
 	else:
+		BattleVariables.last_battle_outcome = BattleVariables.BattleOutcome.DEFEAT
+		BattleVariables.battle_finished.emit(BattleVariables.BattleOutcome.DEFEAT)
 		combatFinish.text = "YOU LOSE"
 
 	SaveManager.save_game()

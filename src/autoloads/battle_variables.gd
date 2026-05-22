@@ -1,7 +1,19 @@
 extends Node
 
+enum BattleOutcome { VICTORY, DEFEAT }
+signal battle_finished(outcome: BattleOutcome)
+
+signal battle_state_changed(old_state: BattleStates, new_state: BattleStates)
 enum BattleStates { IN_BATTLE, AWAITING_EXIT, IN_LEVEL_SELECT }
-var battleState: BattleStates = BattleStates.IN_LEVEL_SELECT
+
+var last_battle_outcome: BattleOutcome
+
+var battleState: BattleStates = BattleStates.IN_LEVEL_SELECT:
+	set(value):
+		print("battle_state_set")
+		battle_state_changed.emit(battleState, value)
+		battleState = value
+
 var lastLogin: float = 0
 var battleStart: float = 0
 var battleElapsed: float = 0
@@ -24,7 +36,6 @@ var campaign_already_drawn: Array[bool] = [false, false, false]
 func GetPlayer() -> CharacterStats:
 	return _get_final_stats()
 
-
 # Returns base stats for a specific level
 func GetPlayerBaseStatsAtLevel(lvl: int) -> CharacterStats:
 	var hp = 500 + (lvl - 1) * 50
@@ -45,7 +56,6 @@ func _get_final_stats() -> CharacterStats:
 	base.critDMG += bonuses["crit_dmg_pct"]
 	return base
 
-
 func get_save_data() -> Dictionary:
 	return {
 		"battleState": battleState,
@@ -61,7 +71,6 @@ func get_save_data() -> Dictionary:
 		"potionUsage": potionUsage,
 		"battleSeed": battleSeed,
 	}
-
 
 func load_save_data(data: Dictionary) -> Error:
 	var required_keys = ["battleState", "lastLogin", "battleStart", "lastRandomize", "isPaused", "isFast", "potionUsage", "battleSeed", "battleElapsed"]
@@ -122,7 +131,6 @@ func init_new_save():
 	current_battle_level = campaigns[0].levels[0]
 	
 	campaign_already_drawn = [false, false, false]
-
 
 func get_campaign_save_data():
 	var campaign_data = []
