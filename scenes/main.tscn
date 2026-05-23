@@ -21,9 +21,17 @@
 [ext_resource type="Texture2D" uid="uid://d1hxh3idk7m6r" path="res://assets/hud/buttons/icon_character_dark.tres" id="11_jkv2x"]
 [ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="12_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://dn8sxonh51q6w" path="res://assets/hud/buttons/icon_potion_dark.tres" id="12_jbj1t"]
-[ext_resource type="Script" uid="uid://b4ych1hv6wmbm" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
+[ext_resource type="Script" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
 [ext_resource type="Texture2D" uid="uid://cpmarjf0oqxj2" path="res://assets/hud/buttons/icon_shop_dark.tres" id="13_muem4"]
 [ext_resource type="Texture2D" uid="uid://bttb3vbjujioa" path="res://assets/hud/buttons/icon_home_dark.tres" id="16_y6deb"]
+[ext_resource type="AudioStream" uid="uid://d16lr6c6lxnx2" path="res://assets/music/pixel_rpg_pack/Title Screen Loop - Pixel RPG Pack.ogg" id="25_2f3dj"]
+[ext_resource type="Script" uid="uid://drtixypia3s68" path="res://src/features/audio/music_player.gd" id="25_og1vs"]
+[ext_resource type="AudioStream" uid="uid://61y74xtkfhc5" path="res://assets/music/pixel_rpg_pack/Battle Theme (Regular) Loop - Pixel RPG Pack.ogg" id="26_yq6so"]
+[ext_resource type="AudioStream" uid="uid://cx17hecqdyakg" path="res://assets/music/pixel_rpg_pack/Battle Theme (Boss) Loop - Pixel RPG Pack.ogg" id="27_fv21b"]
+[ext_resource type="AudioStream" uid="uid://b2bipji36vbmt" path="res://assets/music/pixel_rpg_pack/Victory Intro (use loop after) - Pixel RPG Pack.ogg" id="28_qkpxi"]
+[ext_resource type="AudioStream" uid="uid://r8a6fmslr4aw" path="res://assets/music/pixel_rpg_pack/Victory Loop - Pixel RPG Pack.ogg" id="29_5q0nq"]
+[ext_resource type="AudioStream" uid="uid://bva1qrb4fwdqn" path="res://assets/music/pixel_rpg_pack/Defeat Intro (use loop after) - Pixel RPG Pack.ogg" id="30_dgi5k"]
+[ext_resource type="AudioStream" uid="uid://b2ij7vw74l8se" path="res://assets/music/pixel_rpg_pack/Defeat Loop - Pixel RPG Pack.ogg" id="31_j8jky"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
 
@@ -75,6 +83,76 @@ shader = ExtResource("12_eb6dy")
 shader_parameter/blur_amount = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb6dy"]
+
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_yq6so"]
+clip_count = 7
+clip_0/name = &"ambient_1"
+clip_0/stream = ExtResource("25_2f3dj")
+clip_0/auto_advance = 0
+clip_1/name = &"battle_1"
+clip_1/stream = ExtResource("26_yq6so")
+clip_1/auto_advance = 0
+clip_2/name = &"battle_2"
+clip_2/stream = ExtResource("27_fv21b")
+clip_2/auto_advance = 0
+clip_3/name = &"battle_victory_intro"
+clip_3/stream = ExtResource("28_qkpxi")
+clip_3/auto_advance = 1
+clip_3/next_clip = 4
+clip_4/name = &"battle_victory_loop"
+clip_4/stream = ExtResource("29_5q0nq")
+clip_4/auto_advance = 0
+clip_5/name = &"battle_defeat_intro"
+clip_5/stream = ExtResource("30_dgi5k")
+clip_5/auto_advance = 1
+clip_5/next_clip = 6
+clip_6/name = &"battle_defeat_loop"
+clip_6/stream = ExtResource("31_j8jky")
+clip_6/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 0.2,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 2
+},
+Vector2i(-1, 3): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(-1, 4): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(-1, 5): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(-1, 6): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(3, 4): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(5, 6): {
+"fade_beats": 0.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+}
+}
 
 [node name="Main" type="Node2D" unique_id=868618005]
 script = ExtResource("1_0wfyh")
@@ -845,6 +923,11 @@ theme_override_font_sizes/font_size = 50
 text = "Use device's data"
 
 [node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=978724567]
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1001522815]
+stream = SubResource("AudioStreamInteractive_yq6so")
+bus = &"Music"
+script = ExtResource("25_og1vs")
 
 [connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/Upper HUD/VBox/SettingsButton" to="." method="_on_settings_button_pressed"]

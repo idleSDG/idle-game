@@ -26,7 +26,8 @@ func save_game():
 		"appearance": PlayerAppearance.get_save_data(),
 		"skills": SkillManager.get_save_data(),
 		"battle": BattleVariables.get_save_data(),
-		"potions": PotionManager.get_save_data()
+		"potions": PotionManager.get_save_data(),
+		"audio": AudioManager.get_save_data()
 	}
 	
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -71,7 +72,8 @@ func load_game():
 		"appearance": PlayerAppearance,
 		"skills": SkillManager,
 		"battle": BattleVariables,
-		"potions": PotionManager
+		"potions": PotionManager,
+		"audio": AudioManager
 	}
 
 	PlayerInventory.last_inventory_update_unix_time = data.get("timestamp", Time.get_unix_time_from_system())

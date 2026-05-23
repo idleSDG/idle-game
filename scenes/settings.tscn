@@ -63,7 +63,7 @@ grow_vertical = 2
 texture = ExtResource("2_gis3k")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=1370098209]
-anchors_preset = -1
+anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
@@ -71,7 +71,6 @@ offset_left = -540.0
 offset_right = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-vertical_scroll_mode = 3
 
 [node name="SizingControl" type="Control" parent="CanvasLayer/ScrollContainer" unique_id=1633480222]
 custom_minimum_size = Vector2(1080, 2300)
@@ -190,9 +189,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -480.0
-offset_top = -350.0
+offset_top = -370.9999
 offset_right = -432.0
-offset_bottom = -313.5
+offset_bottom = -332.3999
 scale = Vector2(20, 20)
 texture = ExtResource("3_83j8s")
 stretch_mode = 1
@@ -206,15 +205,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -493.0
-offset_top = -365.0
+offset_top = -396.0
 offset_right = 493.0
-offset_bottom = 365.0
+offset_bottom = 426.0
 texture = ExtResource("5_am25x")
 
 [node name="LabelCenterContainer" type="CenterContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound" unique_id=1114709792]
 layout_mode = 0
+offset_top = -17.0
 offset_right = 986.0
-offset_bottom = 175.0
+offset_bottom = 130.0
 
 [node name="Label" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/LabelCenterContainer" unique_id=1986226125]
 layout_mode = 2
@@ -227,9 +227,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.998
 anchor_bottom = 0.321
-offset_top = 163.0
+offset_top = 175.0
 offset_right = -0.028015137
-offset_bottom = 480.66998
+offset_bottom = 519.67
 
 [node name="VolumeVBoxContainer" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer" unique_id=1099484806]
 layout_mode = 2
@@ -238,7 +238,7 @@ alignment = 1
 [node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer" unique_id=2102913048]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "Master"
+text = "Music"
 horizontal_alignment = 1
 
 [node name="SliderHBoxContainer" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer" unique_id=785212600]
@@ -254,6 +254,7 @@ metadata/_edit_horizontal_guides_ = [160.0]
 [node name="VolumeSlider" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer" unique_id=1563734801 instance=ExtResource("10_1g033")]
 custom_minimum_size = Vector2(527, 100)
 layout_mode = 2
+bus_name = "Music"
 
 [node name="VolumeLabel" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer" unique_id=380214866]
 custom_minimum_size = Vector2(170, 100)
@@ -270,7 +271,7 @@ alignment = 1
 [node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2" unique_id=647063802]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "Master"
+text = "SFX"
 horizontal_alignment = 1
 
 [node name="SliderHBoxContainer" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2" unique_id=1530122629]
@@ -286,6 +287,7 @@ metadata/_edit_horizontal_guides_ = [160.0]
 [node name="VolumeSlider" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2/SliderHBoxContainer" unique_id=1800149925 instance=ExtResource("10_1g033")]
 custom_minimum_size = Vector2(527, 100)
 layout_mode = 2
+bus_name = "SFX"
 
 [node name="VolumeLabel" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2/SliderHBoxContainer" unique_id=1821766266]
 custom_minimum_size = Vector2(170, 100)
@@ -302,7 +304,7 @@ alignment = 1
 [node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3" unique_id=383705271]
 layout_mode = 2
 theme_override_font_sizes/font_size = 56
-text = "Master"
+text = "Ambience"
 horizontal_alignment = 1
 
 [node name="SliderHBoxContainer" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3" unique_id=1902298121]
@@ -318,6 +320,7 @@ metadata/_edit_horizontal_guides_ = [160.0]
 [node name="VolumeSlider" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3/SliderHBoxContainer" unique_id=1298970032 instance=ExtResource("10_1g033")]
 custom_minimum_size = Vector2(527, 100)
 layout_mode = 2
+bus_name = "Ambience"
 
 [node name="VolumeLabel" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3/SliderHBoxContainer" unique_id=848525471]
 custom_minimum_size = Vector2(170, 100)

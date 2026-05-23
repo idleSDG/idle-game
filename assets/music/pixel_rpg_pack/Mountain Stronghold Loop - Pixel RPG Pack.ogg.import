@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ckdvofe8ihjia"
+path="res://.godot/imported/Mountain Stronghold Loop - Pixel RPG Pack.ogg-c3ec6b2d220d398e13cad310b2e13969.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/pixel_rpg_pack/Mountain Stronghold Loop - Pixel RPG Pack.ogg"
+dest_files=["res://.godot/imported/Mountain Stronghold Loop - Pixel RPG Pack.ogg-c3ec6b2d220d398e13cad310b2e13969.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

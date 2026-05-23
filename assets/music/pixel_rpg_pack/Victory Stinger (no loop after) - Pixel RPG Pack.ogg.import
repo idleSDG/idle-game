@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://n6piw5fudnpr"
+path="res://.godot/imported/Victory Stinger (no loop after) - Pixel RPG Pack.ogg-4e40fc403af873d23e501e86f2e13c6b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/pixel_rpg_pack/Victory Stinger (no loop after) - Pixel RPG Pack.ogg"
+dest_files=["res://.godot/imported/Victory Stinger (no loop after) - Pixel RPG Pack.ogg-4e40fc403af873d23e501e86f2e13c6b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

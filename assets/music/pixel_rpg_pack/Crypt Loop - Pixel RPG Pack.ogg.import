@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cyuen2rgfc5un"
+path="res://.godot/imported/Crypt Loop - Pixel RPG Pack.ogg-ac1afcbc4ffb1b39dbc52b792f4e1e83.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/pixel_rpg_pack/Crypt Loop - Pixel RPG Pack.ogg"
+dest_files=["res://.godot/imported/Crypt Loop - Pixel RPG Pack.ogg-ac1afcbc4ffb1b39dbc52b792f4e1e83.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
