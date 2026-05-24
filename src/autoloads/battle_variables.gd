@@ -1,6 +1,8 @@
 extends Node
 
 enum BattleOutcome { VICTORY, DEFEAT }
+
+@warning_ignore("unused_signal")
 signal battle_finished(outcome: BattleOutcome)
 
 signal battle_state_changed(old_state: BattleStates, new_state: BattleStates)

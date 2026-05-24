@@ -41,12 +41,6 @@ func update_progress(last_timestamp: float, current_timestamp: float):
 		return
 		
 	var seconds_passed: float = current_timestamp - last_timestamp
-	var effective_momentum = momentum_tracker.get_time_weighted_multiplier(
-		last_timestamp, 
-		current_timestamp
-	)
-	var bonuses = EquipmentManager.get_total_bonuses()
-	var multiplier = 1.0 + bonuses["ingredient_gain_pct"]
 	var units_to_add: float = get_effective_gain_rate(last_timestamp, current_timestamp) * seconds_passed
 	
 	self.progress += units_to_add
@@ -69,18 +63,18 @@ static func to_dictionary(ingredient: Ingredient) -> Dictionary:
 		"capacity": ingredient.capacity,
 	}
 	
-static func get_type_as_string(type: Type) -> String:
-	return Ingredient.Type.keys()[type]
+static func get_type_as_string(p_type: Type) -> String:
+	return Ingredient.Type.keys()[p_type]
 	
-static func get_type_from_string(type_string: String) -> Type:
-	if type_string in Type:
-		return Type[type_string]
+static func get_type_from_string(p_type_as_string: String) -> Type:
+	if p_type_as_string in Type:
+		return Type[p_type_as_string]
 	else:
 		return Type.UNKNOWN
 	
 static func get_type_from_dictionary(dictionary: Dictionary) -> Type:
-	var type_string = dictionary.get('type')  
-	return get_type_from_string(type_string)
+	var type_as_string: String = dictionary.get('type')  
+	return get_type_from_string(type_as_string)
 	
 static func from_dictionary(p_ingredient: Ingredient, dictionary: Dictionary) -> void:
 	p_ingredient.progress = dictionary.get('progress')

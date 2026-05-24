@@ -27,8 +27,8 @@ func set_preview(skill : Skill):
 	control.visible = true
 	
 	skillName.text = skill.skillName
-	expBar.value = skill.exp * 1.0 / skill.maxExp
-	expCount.text = str(skill.exp) + "/" + str(skill.maxExp)
+	expBar.value = skill.experience * 1.0 / skill.max_experience
+	expCount.text = str(skill.experience) + "/" + str(skill.max_experience)
 	levelCount.text = "Level " + str(skill.level) + "/10"
 	button.icon = proper.sprite
 	border.modulate = proper.borderClr

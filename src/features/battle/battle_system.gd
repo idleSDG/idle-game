@@ -102,6 +102,7 @@ func _ready() -> void:
 		BattleVariables.battleElapsed = 0.0
 		BattleVariables.potionUsage = { }
 
+		@warning_ignore("narrowing_conversion")
 		BattleVariables.battleSeed = RandomNumberGenerator.new().randf() * 100000
 		BattleVariables.battleRNG = RandomNumberGenerator.new()
 		BattleVariables.battleRNG.seed = BattleVariables.battleSeed
@@ -291,16 +292,12 @@ func select_enemy_unit(ind: int):
 	battle_ui.StartPreview(characterList[ind])
 	pass
 
-
 func select_enemy_slot(ind: int):
 	if (ind != 0):
-		var i: int = 0
 		for c in characterList:
 			if c != null:
 				c.select(c.index == ind)
-				i += 1
 		targetIndex = ind
-
 
 func SetPotions():
 	var pot1 = null

@@ -34,7 +34,7 @@ func play_track(track_name: StringName, interrupt_self: bool = false) -> Error:
 		
 	return ERR_CANT_CREATE
 	
-func _on_battle_state_changed(old_state: BattleVariables.BattleStates, new_state: BattleVariables.BattleStates):
+func _on_battle_state_changed(_old_state: BattleVariables.BattleStates, new_state: BattleVariables.BattleStates):
 	if SceneManager.current_tab == "battle" and new_state == BattleVariables.BattleStates.IN_BATTLE:
 		play_track("battle_1")
 

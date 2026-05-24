@@ -17,7 +17,7 @@ extends Node
 
 var potionMem
 
-var char: Character
+var character: Character
 var charList: Array[Character]
 
 
@@ -25,35 +25,35 @@ func _ready() -> void:
 	pass
 
 
-func StartPreview(chara: Character):
+func StartPreview(p_character: Character):
 	unit_preview.visible = true
-	char = chara
+	character = p_character
 	potion_bar.visible = false
 	UpdateStatDisplay()
 
 
 func UpdateStatDisplay():
-	if (char == null):
+	if (character == null):
 		unit_preview.visible = false
 		potion_bar.visible = true
 		return
 
-	name_field.text = char.charName
-	hp_count.text = str(char.statChanges.health) + "/" + str(char.baseStats.maxHealth)
-	hp_bar.value = char.statChanges.health * 1.0 / char.baseStats.maxHealth
-	level_count.text = "Level " + str(char.level)
+	name_field.text = character.charName
+	hp_count.text = str(character.statChanges.health) + "/" + str(character.baseStats.maxHealth)
+	hp_bar.value = character.statChanges.health * 1.0 / character.baseStats.maxHealth
+	level_count.text = "Level " + str(character.level)
 
 	stats_text.text = "[b] STATS[/b]
 	[table=2]
-[cell][img=32]res://assets/icons/atk.png[/img] Attack:[/cell]      [cell][i]" + str(char.statChanges.attack) + "[/i][/cell]
-[cell][img=32]res://assets/icons/def.png[/img] Defense:[/cell]     [cell][i]" + str(char.statChanges.defense) + "[/i][/cell]
-[cell][img=32]res://assets/icons/crt.png[/img] Crit Rate:[/cell]   [cell][i]" + str(char.statChanges.critRate) + "[/i][/cell]
-[cell][img=32]res://assets/icons/cdm.png[/img] Crit DMG:[/cell]    [cell][i]" + str(char.statChanges.critDMG) + "[/i][/cell]
-[cell][img=32]res://assets/icons/chr.png[/img] Charge Rate:  [/cell] [cell][i]" + str(round_place(char.statChanges.chargeRate, 2)) + "[/i][/cell][/table]"
+[cell][img=32]res://assets/icons/atk.png[/img] Attack:[/cell]      [cell][i]" + str(character.statChanges.attack) + "[/i][/cell]
+[cell][img=32]res://assets/icons/def.png[/img] Defense:[/cell]     [cell][i]" + str(character.statChanges.defense) + "[/i][/cell]
+[cell][img=32]res://assets/icons/crt.png[/img] Crit Rate:[/cell]   [cell][i]" + str(character.statChanges.critRate) + "[/i][/cell]
+[cell][img=32]res://assets/icons/cdm.png[/img] Crit DMG:[/cell]    [cell][i]" + str(character.statChanges.critDMG) + "[/i][/cell]
+[cell][img=32]res://assets/icons/chr.png[/img] Charge Rate:  [/cell] [cell][i]" + str(round_place(character.statChanges.chargeRate, 2)) + "[/i][/cell][/table]"
 
 	buffs_text.text = "[b] STATUS EFFECTS[/b][i]"
 	var buffs_dict : Dictionary[StatusEffect.StatusEffectType, int] = {}
-	for se in char.statusEffects:
+	for se in character.statusEffects:
 		if buffs_dict.has(se.StatusType):
 			buffs_dict[se.StatusType] += 1
 		else:

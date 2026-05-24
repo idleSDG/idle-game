@@ -8,9 +8,9 @@ const DEFAULT_ICON_SIZE := Vector2(64.0, 64.0)
 
 var container_height = 0
 
-@export var is_disabled: bool = false:
+@export var button_is_disabled: bool = false:
 	set(value):
-		is_disabled = value
+		button_is_disabled = value
 		disabled = value
 		_update_visuals()
 

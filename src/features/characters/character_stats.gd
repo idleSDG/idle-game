@@ -2,10 +2,10 @@ class_name CharacterStats extends Object
 
 var characterCategory : Category
 
-var maxHealth : int = 100
-var health : int = maxHealth
-var attack : int = 10
-var defense : int = 10
+var maxHealth : float = 100
+var health : float = maxHealth
+var attack : float = 10
+var defense : float = 10
 
 var critRate = 0.05
 var critDMG = 0.5
@@ -23,17 +23,12 @@ func _init():
 
 # Create a new character stats object from all of its variables
 static func Create(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes) -> CharacterStats:
-	var char : CharacterStats = CharacterStats.new()
+	var character : CharacterStats = CharacterStats.new()
 	
-	char.SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes)
-	char.maxHealth = char.health
+	character.SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes)
+	character.maxHealth = character.health
 	
-	return char
-
-# Parse string to create a new character stats object
-static func CreateFromText(line : String):
-	# tikriausiai parse'int .CSV faila, kuris veiks kaip musu duombaze
-	pass
+	return character
 
 # Sets the values of an already existing characterStats object
 func SetValues(hp, atk, def, cr, cdmg, charge, elemDmg, elemRes, catDmg, catRes):

@@ -26,6 +26,7 @@ func _ready() -> void:
 	PlayerInventory.ingredients_changed.connect(_on_ingredients_changed)
 
 func get_slot_from_index(index: int) -> PotionScreenItemSlot:
+	@warning_ignore("integer_division")
 	var row = int(index / INVENTORY_GRID_COLUMNS)
 	var column = index % INVENTORY_GRID_COLUMNS
 	return slot_grid[row][column]
@@ -64,7 +65,7 @@ func _update_crafting_section(index: int) -> void:
 		_potion_description.text = "???"
 		_result_item_slot.icon_texture = null
 		_result_item_slot.counter_value = "0"
-		_potion_craft_button.is_disabled = true
+		_potion_craft_button.button_is_disabled = true
 		_potion_crafting_slots[0].icon_texture = null
 		_potion_crafting_slots[0].counter_value = ""
 		_potion_crafting_slots[1].icon_texture = null
@@ -84,7 +85,7 @@ func _update_crafting_section(index: int) -> void:
 	_potion_crafting_slots[1].counter_value = "%d / %d" % [PlayerInventory.ingredients[potion.recipe[1].type].count, potion.recipe[1].amount]
 	
 	var can_craft_potion = _can_craft_potion(index)
-	_potion_craft_button.is_disabled = !can_craft_potion
+	_potion_craft_button.button_is_disabled = !can_craft_potion
 	
 	
 func _can_craft_potion(index: int) -> bool:
@@ -112,7 +113,7 @@ func _on_craft_button_down():
 			if PlayerInventory.ingredients[potion.recipe[i].type].count < potion.recipe[i].amount:
 				can_craft = false
 		if !can_craft:
-			_potion_craft_button.is_disabled = true
+			_potion_craft_button.button_is_disabled = true
 			
 		SaveManager.save_game()
 		

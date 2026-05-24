@@ -2,6 +2,8 @@ class_name steps_progress
 extends Node
 
 signal steps_data_ready
+
+@warning_ignore("unused_signal")
 signal steps_permissions
 
 var _plugin_name = "GodotStepAndSleepPlugin"

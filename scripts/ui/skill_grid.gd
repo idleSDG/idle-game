@@ -1,6 +1,8 @@
 class_name SkillGrid extends Node
 
 signal skill_pressed(skill : Skill)
+
+@warning_ignore("unused_signal")
 signal equipSkillPressed(equip : int) # SET UP THE THREE MAIN SKILL EQUIP BUTTONS
 
 @onready var buttonBase = $Skill_Grid_Button
