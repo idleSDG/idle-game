@@ -320,6 +320,7 @@ layout_mode = 2
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer/ItemPicker/PanelContainer/VBox/ItemGrid" unique_id=1491204186]
 position = Vector2(-540, -124)
+bus = &"SFX"
 
 [node name="InfoLabel" type="Label" parent="CanvasLayer/ItemPicker/PanelContainer/VBox" unique_id=682111993]
 layout_mode = 2
