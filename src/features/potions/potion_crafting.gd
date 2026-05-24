@@ -15,6 +15,9 @@ var ingredient_icon_map: Dictionary[Ingredient.Type, Resource] = {
 @onready var _potion_description: RichTextLabel = %PotionDescriptionRichTextLabel
 @onready var _potion_craft_button: IconButton = %PotionCraftButton
 @onready var _potion_crafting_slots: Array[PotionScreenItemSlot] = [%CraftingSlot1, %CraftingSlot2]
+@onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+@export var craft_sfx: AudioStream
 
 var _selected_potion_index: int = -1
 
@@ -115,5 +118,9 @@ func _on_craft_button_down():
 		if !can_craft:
 			_potion_craft_button.button_is_disabled = true
 			
+		_play_craft_sfx()
 		SaveManager.save_game()
 		
+func _play_craft_sfx():
+	sfx_player.stream = craft_sfx
+	sfx_player.play()
