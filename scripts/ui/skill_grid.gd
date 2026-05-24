@@ -13,6 +13,9 @@ signal equipSkillPressed(equip : int) # SET UP THE THREE MAIN SKILL EQUIP BUTTON
 @export var button2 : SkillGridButton
 @export var button3 : SkillGridButton
 
+@export var equip_skill_sfx: AudioStream
+@export var unequip_skill_sfx: AudioStream
+
 var currentSelection : int = -1
 
 var gridItems = []
@@ -61,6 +64,10 @@ func doEquipButton(equipButton : SkillGridButton):
 
 func inv_skill_Button_Pressed(skill : Skill):
 	skill_pressed.emit(skill)
+	if skill:
+		_play_equip_sfx()
+	else:
+		_play_unequip_sfx()
 	if currentSelection == 1 || currentSelection == 2 || currentSelection == 3:
 		if BattleVariables.battleState == BattleVariables.BattleStates.IN_LEVEL_SELECT:
 			SkillManager.Equip(skill, currentSelection)
@@ -82,3 +89,11 @@ func _on_equip_skill_pressed(equip: int) -> void:
 			if skill.equipState == currentSelection:
 				skill_pressed.emit(skill)
 	pass
+
+func _play_equip_sfx():
+	$AudioStreamPlayer2D.stream = equip_skill_sfx
+	$AudioStreamPlayer2D.play()
+	
+func _play_unequip_sfx():
+	$AudioStreamPlayer2D.stream = unequip_skill_sfx
+	$AudioStreamPlayer2D.play()
