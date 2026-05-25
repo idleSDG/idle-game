@@ -155,9 +155,8 @@ horizontal_alignment = 1
 z_index = -2
 layout_mode = 0
 offset_left = -7.000014
-offset_top = 2.0
 offset_right = 24.265394
-offset_bottom = 8.2896805
+offset_bottom = 6.7389436
 scale = Vector2(1.6631804, 4.4517384)
 color = Color(0, 0, 0, 1)
 
@@ -165,9 +164,9 @@ color = Color(0, 0, 0, 1)
 z_index = -1
 layout_mode = 0
 offset_left = -2.9999974
-offset_top = 4.999996
+offset_top = 4.0000005
 offset_right = 23.405031
-offset_bottom = 9.876839
+offset_bottom = 9.101473
 scale = Vector2(1.6631804, 4.4517384)
 
 [node name="BaseSprite" type="Sprite2D" parent="VBoxContainer" unique_id=1791605079]
