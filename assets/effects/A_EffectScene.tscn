@@ -604,7 +604,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ice",
-"speed": 10.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -736,7 +736,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_2bdhp")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_viptf")
-animation = &"wind"
-frame = 15
+animation = &"ice"
+frame = 7
 frame_progress = 1.0
 script = ExtResource("8_2bdhp")
