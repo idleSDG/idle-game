@@ -49,7 +49,16 @@ bg_color = Color(1, 1, 1, 0.42745098)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
 bg_color = Color(0.08235294, 0.08235294, 0.08235294, 0.79607844)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmb1v"]
+draw_center = false
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0, 0.050980393, 0.06666667, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
 bg_color = Color(0.13433829, 0.82624876, 0, 1)
@@ -549,18 +558,32 @@ autowrap_mode = 2
 custom_minimum_size = Vector2(250, 0)
 offset_left = 22.0
 offset_top = 31.0
-offset_right = 272.0
-offset_bottom = 240.0
+offset_right = 336.0
+offset_bottom = 273.0
+theme_override_constants/separation = 8
 
 [node name="PlayerXPLevelLabel" type="Label" parent="HUDLayer/XP" unique_id=1273892403]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_dgi5k")
 theme_override_font_sizes/font_size = 50
 text = "Level"
 
-[node name="PlayerXPBar" type="ProgressBar" parent="HUDLayer/XP" unique_id=1480575437]
+[node name="PanelContainer" type="PanelContainer" parent="HUDLayer/XP" unique_id=1650697116]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kmb1v")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUDLayer/XP/PanelContainer" unique_id=2070952800]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PlayerXPBar" type="ProgressBar" parent="HUDLayer/XP/PanelContainer/MarginContainer" unique_id=1480575437]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -572,8 +595,9 @@ show_percentage = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_dgi5k")
+theme_override_font_sizes/font_size = 32
 text = "XP"
 
 [node name="PlayerXPTestButton" type="Button" parent="HUDLayer/XP" unique_id=1047275507]
@@ -613,6 +637,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("11_kmb1v")
 expand_mode = 2
 
