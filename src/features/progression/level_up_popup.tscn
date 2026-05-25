@@ -4,13 +4,24 @@
 [ext_resource type="AudioStream" uid="uid://bvucqj1pxw4c6" path="res://assets/sfx/ui/013_Confirm_03.ogg" id="2_k4fq0"]
 [ext_resource type="Texture2D" uid="uid://cier8g417hph3" path="res://assets/skills/Wind_borderless.png" id="2_slxsh"]
 [ext_resource type="AudioStream" uid="uid://dsbo3sl8igoud" path="res://assets/sfx/ui/levelup.ogg" id="3_700ke"]
+[ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="4_57ao5"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="5_mu5mm"]
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="5_tsomc"]
+[ext_resource type="FontFile" uid="uid://dn531g1ux5cgt" path="res://assets/fonts/Pixel Code/PixelCode-Bold-Italic.otf" id="6_60t36"]
+[ext_resource type="Texture2D" uid="uid://b5b4h853pvvcj" path="res://assets/settings/Popup decoration.png" id="6_mu5mm"]
+[ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="10_mcn8b"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k5glt"]
-bg_color = Color(0, 0, 0, 0.78431374)
-expand_margin_left = 15.0
-expand_margin_top = 15.0
-expand_margin_right = 15.0
-expand_margin_bottom = 15.0
+bg_color = Color(1, 1, 1, 0.78431374)
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mcn8b"]
+shader = ExtResource("4_57ao5")
+shader_parameter/wood_texture = ExtResource("5_mu5mm")
+shader_parameter/scale = 1.66
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_slxsh"]
 
@@ -19,6 +30,16 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4fq0"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mcn8b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s25sg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_auf0a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5f6ue"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wfnpw"]
 
 [node name="LevelUpPopup" type="Control" unique_id=1366411805]
 layout_mode = 3
@@ -46,24 +67,56 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_k5glt")
 
-[node name="VBox" type="VBoxContainer" parent="PanelContainer" unique_id=2089781882]
+[node name="ColorRect" type="ColorRect" parent="PanelContainer" unique_id=1221403673]
+material = SubResource("ShaderMaterial_mcn8b")
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="PanelContainer/VBox" unique_id=1668198004]
+[node name="Control" type="TextureRect" parent="PanelContainer/ColorRect" unique_id=625374921]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.025, 1.025)
+texture = ExtResource("6_mu5mm")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1137408493]
+layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="VBox" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2089781882]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBox" unique_id=1668198004]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13333334, 0.827451, 0, 1)
+theme_override_fonts/font = ExtResource("5_tsomc")
+theme_override_font_sizes/font_size = 64
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="PanelContainer/MarginContainer/VBox" unique_id=1247843410]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.13333334, 0.827451, 0, 1)
 theme_override_font_sizes/font_size = 64
 horizontal_alignment = 1
 
-[node name="StatsLabel" type="Label" parent="PanelContainer/VBox" unique_id=1865122117]
+[node name="StatsLabel" type="Label" parent="PanelContainer/MarginContainer/VBox" unique_id=1865122117]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 
-[node name="HBox_SkillUnlock" type="HBoxContainer" parent="PanelContainer/VBox" unique_id=1920993203]
+[node name="HBox_SkillUnlock" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBox" unique_id=1920993203]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 32
 
-[node name="SkillIcon" type="Button" parent="PanelContainer/VBox/HBox_SkillUnlock" unique_id=30886080]
+[node name="SkillIcon" type="Button" parent="PanelContainer/MarginContainer/VBox/HBox_SkillUnlock" unique_id=30886080]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
@@ -79,15 +132,23 @@ icon = ExtResource("2_slxsh")
 icon_alignment = 1
 expand_icon = true
 
-[node name="SkillLabel" type="Label" parent="PanelContainer/VBox/HBox_SkillUnlock" unique_id=1103701524]
+[node name="SkillLabel" type="Label" parent="PanelContainer/MarginContainer/VBox/HBox_SkillUnlock" unique_id=1103701524]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("6_60t36")
 theme_override_font_sizes/font_size = 48
 autowrap_mode = 2
 
-[node name="OkButton" type="Button" parent="PanelContainer/VBox" unique_id=1009972530]
+[node name="OkButton" parent="PanelContainer/MarginContainer/VBox" unique_id=112168689 instance=ExtResource("10_mcn8b")]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "OK"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mcn8b")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_s25sg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_auf0a")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5f6ue")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_wfnpw")
+button_text = "AWESOME!"
+label_font = ExtResource("5_tsomc")
+label_font_size = 64
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=324860346]

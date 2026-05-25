@@ -1,12 +1,13 @@
 class_name LevelUpPopup
 extends Control
  
-@onready var title_label : Label  = $PanelContainer/VBox/TitleLabel
-@onready var stats_label : Label  = $PanelContainer/VBox/StatsLabel
-@onready var ok_button   : Button = $PanelContainer/VBox/OkButton
+@onready var title_label : Label  = $PanelContainer/MarginContainer/VBox/TitleLabel
+@onready var level_label : Label  = $PanelContainer/MarginContainer/VBox/LevelLabel
+@onready var stats_label : Label  = $PanelContainer/MarginContainer/VBox/StatsLabel
+@onready var ok_button   : Button = $PanelContainer/MarginContainer/VBox/OkButton
 
-@onready var v_box: VBoxContainer = $PanelContainer/VBox
-@onready var skill_unlock: HBoxContainer = $PanelContainer/VBox/HBox_SkillUnlock
+@onready var v_box: VBoxContainer = $PanelContainer/MarginContainer/VBox
+@onready var skill_unlock: HBoxContainer = $PanelContainer/MarginContainer/VBox/HBox_SkillUnlock
 
 @onready var sfx_player = $AudioStreamPlayer2D
 
@@ -29,10 +30,11 @@ func show_level_up(old_level: int, new_level: int) -> void:
 	var old_stats = BattleVariables.GetPlayerBaseStatsAtLevel(old_level)
 	var new_stats = BattleVariables.GetPlayerBaseStatsAtLevel(new_level)
  
+	title_label.text = "Level Up!"
 	if new_level - old_level == 1:
-		title_label.text = "Level Up!\nYou are now level %d" % new_level
+		level_label.text = "You are now level %d!" % new_level
 	else:
-		title_label.text = "Level Up!\nYou are now level %d\n(+%d levels!)" % [new_level, new_level - old_level]
+		level_label.text = "You are now level %d\n(+%d levels!)" % [new_level, new_level - old_level]
  
 	var stats_text = ""
 	stats_text += "HP: %d → %d  (+%d)\n" % [old_stats.maxHealth, new_stats.maxHealth, new_stats.maxHealth - old_stats.maxHealth]
