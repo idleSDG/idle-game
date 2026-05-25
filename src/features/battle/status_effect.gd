@@ -19,16 +19,16 @@ func _init(newType: StatusEffectType, chance: float = 0.0, targetMe: bool = fals
 			DecrementRate = 400.0
 		StatusEffectType.Freeze:
 			Count = 1
-			DecrementRate = 25.0
+			DecrementRate = 50.0
 		StatusEffectType.Paralyze:
 			Count = 1
 			DecrementRate = 0.0
 		StatusEffectType.Haste:
 			Count = 1
-			DecrementRate = 25.0
+			DecrementRate = 50.0
 		StatusEffectType.Strength:
 			Count = 1
-			DecrementRate = 25.0
+			DecrementRate = 50.0
 
 	pass
 

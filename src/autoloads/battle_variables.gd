@@ -28,6 +28,7 @@ var currentLogin: float = 0
 
 var isPaused: bool = false
 var isFast: bool = false
+var isSimulated: bool = false
 
 var current_battle_level: battle_level
 var current_campaign: String

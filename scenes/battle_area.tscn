@@ -25,6 +25,7 @@ texture = ExtResource("3_cnfnp")
 [node name="Main Scene" type="CanvasLayer" parent="." unique_id=68912168]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main Scene" unique_id=533918086]
+z_index = 150
 anchors_preset = -1
 anchor_right = 0.44700003
 anchor_bottom = 0.11100001
@@ -107,7 +108,7 @@ autostart = true
 
 [node name="CombatFinishPopup" type="Label" parent="Main Scene" unique_id=1047311204]
 visible = false
-z_index = 100
+z_index = 200
 z_as_relative = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -147,10 +148,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 93.0
-offset_top = -183.0
-offset_right = 213.0
-offset_bottom = -50.0
+offset_left = 75.0
+offset_top = -194.0
+offset_right = 195.0
+offset_bottom = -61.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -176,10 +177,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 283.0
-offset_top = -16.0
-offset_right = 403.0
-offset_bottom = 117.0
+offset_left = 278.0
+offset_top = 3.0
+offset_right = 398.0
+offset_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -205,16 +206,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 379.0
-offset_top = -270.0
-offset_right = 499.0
-offset_bottom = -137.0
+offset_left = 374.0
+offset_top = -309.0
+offset_right = 494.0
+offset_bottom = -176.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ExitBattle" type="Button" parent="Main Scene" unique_id=1896487453]
 visible = false
-z_index = 100
+z_index = 200
 z_as_relative = false
 anchors_preset = -1
 anchor_left = 0.5
@@ -230,6 +231,7 @@ text = "Exit Battle
 "
 
 [node name="Container" type="Container" parent="Main Scene" unique_id=150168763]
+z_index = 150
 anchors_preset = -1
 anchor_top = 0.6
 anchor_right = 1.0150001

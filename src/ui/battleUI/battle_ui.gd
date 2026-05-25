@@ -39,16 +39,16 @@ func UpdateStatDisplay():
 		return
 
 	name_field.text = character.charName
-	hp_count.text = str(character.statChanges.health) + "/" + str(character.baseStats.maxHealth)
+	hp_count.text = str(int(character.statChanges.health)) + "/" + str(int(character.baseStats.maxHealth))
 	hp_bar.value = character.statChanges.health * 1.0 / character.baseStats.maxHealth
 	level_count.text = "Level " + str(character.level)
 
 	stats_text.text = "[b] STATS[/b]
 	[table=2]
-[cell][img=32]res://assets/icons/atk.png[/img] Attack:[/cell]      [cell][i]" + str(character.statChanges.attack) + "[/i][/cell]
-[cell][img=32]res://assets/icons/def.png[/img] Defense:[/cell]     [cell][i]" + str(character.statChanges.defense) + "[/i][/cell]
-[cell][img=32]res://assets/icons/crt.png[/img] Crit Rate:[/cell]   [cell][i]" + str(character.statChanges.critRate) + "[/i][/cell]
-[cell][img=32]res://assets/icons/cdm.png[/img] Crit DMG:[/cell]    [cell][i]" + str(character.statChanges.critDMG) + "[/i][/cell]
+[cell][img=32]res://assets/icons/atk.png[/img] Attack:[/cell]      [cell][i]" + str(int(character.statChanges.attack)) + "[/i][/cell]
+[cell][img=32]res://assets/icons/def.png[/img] Defense:[/cell]     [cell][i]" + str(int(character.statChanges.defense)) + "[/i][/cell]
+[cell][img=32]res://assets/icons/crt.png[/img] Crit Rate:[/cell]   [cell][i]" + str(round_place(character.statChanges.critRate * 100, 1)) + "[/i][/cell]
+[cell][img=32]res://assets/icons/cdm.png[/img] Crit DMG:[/cell]    [cell][i]" + str(round_place(character.statChanges.critDMG * 100, 1)) + "[/i][/cell]
 [cell][img=32]res://assets/icons/chr.png[/img] Charge Rate:  [/cell] [cell][i]" + str(round_place(character.statChanges.chargeRate, 2)) + "[/i][/cell][/table]"
 
 	buffs_text.text = "[b] STATUS EFFECTS[/b][i]"
@@ -65,13 +65,13 @@ func UpdateStatDisplay():
 	pass
 
 
-func SetPotions(pot1: Potion, pot2: Potion, pot3: Potion, charsList: Array[Character]):
+func SetPotions(pot1: Potion, pot2: Potion, pot3: Potion, charsList: Array[Character], posit : Vector2):
 	potionMem = BattleVariables.potionUsage.duplicate(true)
 
 	charList = charsList
-	button.SetupPotion(pot1, charList, self)
-	button_2.SetupPotion(pot2, charList, self)
-	button_3.SetupPotion(pot3, charList, self)
+	button.  SetupPotion(pot1, charList, self, posit)
+	button_2.SetupPotion(pot2, charList, self, posit)
+	button_3.SetupPotion(pot3, charList, self, posit)
 
 
 func PassTime(delta: float, total: float = 0.0):
