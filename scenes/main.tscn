@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://rsqrntdrfr6h" path="res://main.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://src/ui/HUD/hud.gd" id="2_sugp2"]
-[ext_resource type="Texture2D" uid="uid://34sx5ru8alpl" path="res://assets/hud/coin.png" id="3_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://buc0genkds163" path="res://assets/hud/coin_16x16.png" id="3_qkpxi"]
 [ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_sugp2"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="4_5q0nq"]
+[ext_resource type="Texture2D" uid="uid://sh4da3rja6gt" path="res://assets/hud/buttons/icon_settings_dark.tres" id="4_j8jky"]
 [ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="4_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://hxjy352wis2i" path="res://src/ui/labels/auto_size_label.tscn" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="5_o6xl0"]
@@ -14,42 +16,30 @@
 [ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="6_jbj1t"]
 [ext_resource type="Texture2D" uid="uid://d2aa5rwfqyayy" path="res://assets/hud/progress-bar-circle.png" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://dwh7mcn7npbm0" path="res://assets/hud/progress-bar-frame.png" id="7_85g3d"]
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="7_dgi5k"]
 [ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="7_muem4"]
 [ext_resource type="Texture2D" uid="uid://pnlvse15jobc" path="res://assets/icons/kinetic.png" id="8_choun"]
 [ext_resource type="Texture2D" uid="uid://be5l1nv268yem" path="res://assets/hud/info.png" id="8_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://dgykxbunxxfly" path="res://assets/hud/buttons/icon_battle_dark.tres" id="10_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://d1hxh3idk7m6r" path="res://assets/hud/buttons/icon_character_dark.tres" id="11_jkv2x"]
+[ext_resource type="Texture2D" uid="uid://co8clcexm55wf" path="res://assets/settings/save decoration.png" id="11_kmb1v"]
 [ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="12_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://dn8sxonh51q6w" path="res://assets/hud/buttons/icon_potion_dark.tres" id="12_jbj1t"]
-[ext_resource type="Script" uid="uid://b4ych1hv6wmbm" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
+[ext_resource type="Script" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
 [ext_resource type="Texture2D" uid="uid://cpmarjf0oqxj2" path="res://assets/hud/buttons/icon_shop_dark.tres" id="13_muem4"]
 [ext_resource type="Texture2D" uid="uid://bttb3vbjujioa" path="res://assets/hud/buttons/icon_home_dark.tres" id="16_y6deb"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
-bg_color = Color(0.13433829, 0.82624876, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tipki"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[ext_resource type="Texture2D" uid="uid://brukslchvljem" path="res://assets/hud/buttons/icon_battle_red.tres" id="18_fuf3a"]
+[ext_resource type="AudioStream" uid="uid://d16lr6c6lxnx2" path="res://assets/music/pixel_rpg_pack/Title Screen Loop - Pixel RPG Pack.ogg" id="25_2f3dj"]
+[ext_resource type="Script" uid="uid://drtixypia3s68" path="res://src/features/audio/music_player.gd" id="25_og1vs"]
+[ext_resource type="AudioStream" uid="uid://61y74xtkfhc5" path="res://assets/music/pixel_rpg_pack/Battle Theme (Regular) Loop - Pixel RPG Pack.ogg" id="26_yq6so"]
+[ext_resource type="AudioStream" uid="uid://cx17hecqdyakg" path="res://assets/music/pixel_rpg_pack/Battle Theme (Boss) Loop - Pixel RPG Pack.ogg" id="27_fv21b"]
+[ext_resource type="AudioStream" uid="uid://b2bipji36vbmt" path="res://assets/music/pixel_rpg_pack/Victory Intro (use loop after) - Pixel RPG Pack.ogg" id="28_qkpxi"]
+[ext_resource type="AudioStream" uid="uid://r8a6fmslr4aw" path="res://assets/music/pixel_rpg_pack/Victory Loop - Pixel RPG Pack.ogg" id="29_5q0nq"]
+[ext_resource type="AudioStream" uid="uid://bva1qrb4fwdqn" path="res://assets/music/pixel_rpg_pack/Defeat Intro (use loop after) - Pixel RPG Pack.ogg" id="30_dgi5k"]
+[ext_resource type="AudioStream" uid="uid://b2ij7vw74l8se" path="res://assets/music/pixel_rpg_pack/Defeat Loop - Pixel RPG Pack.ogg" id="31_j8jky"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
 bg_color = Color(0.48657194, 0.60121614, 0.60121614, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbgi4"]
-content_margin_left = 16.0
-content_margin_top = 8.0
-content_margin_right = 16.0
-content_margin_bottom = 8.0
-bg_color = Color(0.6, 0.6, 0.6, 0.5294118)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
-content_margin_left = 16.0
-content_margin_right = 16.0
-bg_color = Color(0.6, 0.6, 0.6, 0.4862745)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
 bg_color = Color(0.8156863, 1, 1, 1)
@@ -59,6 +49,30 @@ bg_color = Color(1, 1, 1, 0.42745098)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ya4ey"]
 bg_color = Color(0.08235294, 0.08235294, 0.08235294, 0.79607844)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmb1v"]
+draw_center = false
+border_width_left = 12
+border_width_top = 12
+border_width_right = 12
+border_width_bottom = 12
+border_color = Color(0, 0.050980393, 0.06666667, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.13433829, 0.82624876, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q0nq"]
+shader = ExtResource("6_jbj1t")
+shader_parameter/wood_texture = ExtResource("7_muem4")
+shader_parameter/scale = 1.66
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dgi5k"]
+shader = ExtResource("4_5q0nq")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_muem4"]
 
@@ -76,6 +90,76 @@ shader_parameter/blur_amount = 2.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb6dy"]
 
+[sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_yq6so"]
+clip_count = 7
+clip_0/name = &"ambient_1"
+clip_0/stream = ExtResource("25_2f3dj")
+clip_0/auto_advance = 0
+clip_1/name = &"battle_1"
+clip_1/stream = ExtResource("26_yq6so")
+clip_1/auto_advance = 0
+clip_2/name = &"battle_2"
+clip_2/stream = ExtResource("27_fv21b")
+clip_2/auto_advance = 0
+clip_3/name = &"battle_victory_intro"
+clip_3/stream = ExtResource("28_qkpxi")
+clip_3/auto_advance = 1
+clip_3/next_clip = 4
+clip_4/name = &"battle_victory_loop"
+clip_4/stream = ExtResource("29_5q0nq")
+clip_4/auto_advance = 0
+clip_5/name = &"battle_defeat_intro"
+clip_5/stream = ExtResource("30_dgi5k")
+clip_5/auto_advance = 1
+clip_5/next_clip = 6
+clip_6/name = &"battle_defeat_loop"
+clip_6/stream = ExtResource("31_j8jky")
+clip_6/auto_advance = 0
+_transitions = {
+Vector2i(-1, -1): {
+"fade_beats": 0.2,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 2
+},
+Vector2i(-1, 3): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(-1, 4): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(-1, 5): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(-1, 6): {
+"fade_beats": 1.0,
+"fade_mode": 4,
+"from_time": 0,
+"to_time": 1
+},
+Vector2i(3, 4): {
+"fade_beats": 1.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+},
+Vector2i(5, 6): {
+"fade_beats": 0.0,
+"fade_mode": 0,
+"from_time": 0,
+"to_time": 0
+}
+}
+
 [node name="Main" type="Node2D" unique_id=868618005]
 script = ExtResource("1_0wfyh")
 
@@ -89,124 +173,6 @@ grow_vertical = 2
 
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=921580546]
 script = ExtResource("2_sugp2")
-
-[node name="Upper HUD" type="HBoxContainer" parent="HUDLayer" unique_id=1053733074]
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.125
-offset_left = 22.0
-offset_top = 31.0
-offset_right = -36.0
-
-[node name="XP" type="VBoxContainer" parent="HUDLayer/Upper HUD" unique_id=548802942]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-
-[node name="PlayerXPLevelLabel" type="Label" parent="HUDLayer/Upper HUD/XP" unique_id=1273892403]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "Level"
-
-[node name="PlayerXPBar" type="ProgressBar" parent="HUDLayer/Upper HUD/XP" unique_id=1480575437]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/background = SubResource("StyleBoxFlat_h2yge")
-theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
-show_percentage = false
-
-[node name="PlayerXPLabel" type="Label" parent="HUDLayer/Upper HUD/XP" unique_id=1563330439]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
-text = "XP"
-
-[node name="PlayerXPTestButton" type="Button" parent="HUDLayer/Upper HUD/XP" unique_id=1047275507]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 25
-text = "Add +50 XP"
-
-[node name="Spacer" type="Control" parent="HUDLayer/Upper HUD" unique_id=596966626]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="VBox" type="VBoxContainer" parent="HUDLayer/Upper HUD" unique_id=1453854805]
-layout_mode = 2
-
-[node name="SettingsButton" type="Button" parent="HUDLayer/Upper HUD/VBox" unique_id=241068043]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxFlat_tefeu")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_tipki")
-theme_override_styles/hover = SubResource("StyleBoxFlat_o6xl0")
-text = "⚙"
-
-[node name="MoneyPanelContainer" type="PanelContainer" parent="HUDLayer/Upper HUD/VBox" unique_id=47610890]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_tbgi4")
-
-[node name="MoneyHBoxContainer" type="HBoxContainer" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer" unique_id=523972392]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="MoneyIcon" type="TextureRect" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer/MoneyHBoxContainer" unique_id=488510758]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("3_jyhfs")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="MoneyAmountLabel" type="Label" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer/MoneyHBoxContainer" unique_id=684867495]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "99"
-
-[node name="MoneyCollectionPanelContainer" type="PanelContainer" parent="HUDLayer" unique_id=329402899]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.423
-anchor_right = 1.0
-anchor_bottom = 0.423
-offset_left = -381.0
-offset_top = -46.160034
-offset_right = -31.0
-offset_bottom = 46.839966
-theme_override_styles/panel = SubResource("StyleBoxFlat_jyhfs")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUDLayer/MoneyCollectionPanelContainer" unique_id=1013152147]
-layout_mode = 2
-
-[node name="MoneyIcon" type="TextureRect" parent="HUDLayer/MoneyCollectionPanelContainer/HBoxContainer" unique_id=698980689]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("3_jyhfs")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="MoneyCollectionLabel" type="Label" parent="HUDLayer/MoneyCollectionPanelContainer/HBoxContainer" unique_id=955367077]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "10 / 10"
 
 [node name="SmallIngredientButton" type="Button" parent="HUDLayer" unique_id=430342629]
 unique_name_in_owner = true
@@ -589,6 +555,182 @@ theme_override_font_sizes/font_size = 48
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="XP" type="VBoxContainer" parent="HUDLayer" unique_id=548802942]
+custom_minimum_size = Vector2(250, 0)
+offset_left = 22.0
+offset_top = 31.0
+offset_right = 336.0
+offset_bottom = 273.0
+theme_override_constants/separation = 8
+
+[node name="PlayerXPLevelLabel" type="Label" parent="HUDLayer/XP" unique_id=1273892403]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_dgi5k")
+theme_override_font_sizes/font_size = 50
+text = "Level"
+
+[node name="PanelContainer" type="PanelContainer" parent="HUDLayer/XP" unique_id=1650697116]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kmb1v")
+
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/XP/PanelContainer" unique_id=1694334535]
+layout_mode = 2
+color = Color(0.18431373, 0.18431373, 0.18431373, 0.7019608)
+
+[node name="MarginContainer" type="MarginContainer" parent="HUDLayer/XP/PanelContainer" unique_id=2070952800]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PlayerXPBar" type="ProgressBar" parent="HUDLayer/XP/PanelContainer/MarginContainer" unique_id=1480575437]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+show_percentage = false
+
+[node name="PlayerXPLabel" type="Label" parent="HUDLayer/XP" unique_id=1563330439]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_dgi5k")
+theme_override_font_sizes/font_size = 32
+text = "XP"
+
+[node name="PlayerXPTestButton" type="Button" parent="HUDLayer/XP" unique_id=1047275507]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+text = "Add +50 XP"
+
+[node name="Settings + Money" type="HBoxContainer" parent="HUDLayer" unique_id=1803441940]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -434.995
+offset_top = 57.04
+offset_right = -44.994385
+offset_bottom = 177.04001
+grow_horizontal = 0
+
+[node name="Spacer" type="Control" parent="HUDLayer/Settings + Money" unique_id=1586684584]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoneyPanelContainer" type="PanelContainer" parent="HUDLayer/Settings + Money" unique_id=47610890]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/Settings + Money/MoneyPanelContainer" unique_id=1114186088]
+material = SubResource("ShaderMaterial_5q0nq")
+layout_mode = 2
+
+[node name="Control" type="TextureRect" parent="HUDLayer/Settings + Money/MoneyPanelContainer/ColorRect" unique_id=1151149796]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.05, 1.05)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("11_kmb1v")
+expand_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUDLayer/Settings + Money/MoneyPanelContainer" unique_id=923350456]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="MoneyHBoxContainer" type="HBoxContainer" parent="HUDLayer/Settings + Money/MoneyPanelContainer/MarginContainer" unique_id=523972392]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Spacer" type="Control" parent="HUDLayer/Settings + Money/MoneyPanelContainer/MarginContainer/MoneyHBoxContainer" unique_id=1861235624]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoneyIcon" type="TextureRect" parent="HUDLayer/Settings + Money/MoneyPanelContainer/MarginContainer/MoneyHBoxContainer" unique_id=488510758]
+texture_filter = 1
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_qkpxi")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MoneyIcon" type="TextureRect" parent="HUDLayer/Settings + Money/MoneyPanelContainer/MarginContainer/MoneyHBoxContainer/MoneyIcon" unique_id=796125948]
+show_behind_parent = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_dgi5k")
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 66.0
+offset_bottom = 66.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_qkpxi")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Spacer2" type="Control" parent="HUDLayer/Settings + Money/MoneyPanelContainer/MarginContainer/MoneyHBoxContainer" unique_id=1917690977]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoneyAmountLabel" type="Label" parent="HUDLayer/Settings + Money/MoneyPanelContainer/MarginContainer/MoneyHBoxContainer" unique_id=684867495]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_dgi5k")
+theme_override_font_sizes/font_size = 42
+text = "99"
+
+[node name="Spacer3" type="Control" parent="HUDLayer/Settings + Money/MoneyPanelContainer/MarginContainer/MoneyHBoxContainer" unique_id=1432968572]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer2" type="Control" parent="HUDLayer/Settings + Money" unique_id=81111973]
+custom_minimum_size = Vector2(32.59, 10)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="HUDLayer/Settings + Money" unique_id=1568151463]
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+
+[node name="SettingsButton" parent="HUDLayer/Settings + Money/Control" unique_id=722163806 instance=ExtResource("5_o6xl0")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -123.0
+offset_top = -1.0
+offset_right = 37.0
+offset_bottom = 159.0
+grow_horizontal = 0
+scale = Vector2(0.75, 0.75)
+icon = ExtResource("4_j8jky")
+
+[node name="Spacer3" type="Control" parent="HUDLayer/Settings + Money" unique_id=1891544803]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="NavBarLayer" type="CanvasLayer" parent="." unique_id=435175999]
 
 [node name="NavBar" type="Control" parent="NavBarLayer" unique_id=59531394]
@@ -600,6 +742,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("5_ya4ey")
+battle_icon_normal = ExtResource("10_eb6dy")
+battle_icon_in_battle = ExtResource("18_fuf3a")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NavBarLayer/NavBar" unique_id=1655404208]
 texture_filter = 1
@@ -653,7 +797,7 @@ label_settings = SubResource("LabelSettings_ya4ey")
 max_font_size = 24
 min_font_size = 16
 
-[node name="HomeButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=722163806 instance=ExtResource("5_o6xl0")]
+[node name="HomeButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1310330143 instance=ExtResource("5_o6xl0")]
 layout_mode = 2
 icon = ExtResource("16_y6deb")
 
@@ -846,8 +990,11 @@ text = "Use device's data"
 
 [node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=978724567]
 
-[connection signal="pressed" from="HUDLayer/Upper HUD/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
-[connection signal="pressed" from="HUDLayer/Upper HUD/VBox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1001522815]
+stream = SubResource("AudioStreamInteractive_yq6so")
+bus = &"Music"
+script = ExtResource("25_og1vs")
+
 [connection signal="pressed" from="HUDLayer/SmallIngredientButton" to="HUDLayer" method="_on_small_ingredient_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/IngredientTopPanel/ButtonControl/IngredientCloseButton" to="HUDLayer" method="_on_ingredient_close_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight/KineticShardsInfoButton" to="HUDLayer" method="_on_kinetic_shards_info_button_pressed"]
@@ -856,6 +1003,8 @@ text = "Use device's data"
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight/FocusFluxSpendButton" to="HUDLayer" method="_on_focus_flux_spend_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft/DreamShardsInfoButton" to="HUDLayer" method="_on_dream_shards_info_button_pressed"]
 [connection signal="pressed" from="HUDLayer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft/DreamShardsSpendButton" to="HUDLayer" method="_on_dream_shards_spend_button_pressed"]
+[connection signal="pressed" from="HUDLayer/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
+[connection signal="pressed" from="HUDLayer/Settings + Money/Control/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2/BattleButton" to="." method="_on_battle_button_pressed"]
 [connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/CharacterButton" to="." method="_on_character_button_pressed"]

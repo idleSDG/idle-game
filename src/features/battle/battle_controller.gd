@@ -31,7 +31,6 @@ var randomization_timer: Timer
 var highest_level_y: float
 var map_drawn: bool = false
 
-
 func _ready() -> void:
 	if (BattleVariables.battleState == BattleVariables.BattleStates.IN_BATTLE
 		or BattleVariables.battleState == BattleVariables.BattleStates.AWAITING_EXIT ):
@@ -107,13 +106,11 @@ func enter_battle() -> void:
 		randomization_timer = null
 	_swap_to(battle_area_scene)
 
-
 func exit_battle() -> void:
 	if current_view and current_view.get_parent():
 		current_view.queue_free()
 	current_view = null
 	_ready()
-
 
 func _swap_to(scene_res: PackedScene) -> void:
 	if current_view and current_view.get_parent():

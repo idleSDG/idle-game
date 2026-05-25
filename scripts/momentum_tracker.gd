@@ -39,5 +39,6 @@ func get_time_weighted_multiplier(start_t: float, end_t: float) -> float:
 
 	return total_area / total_duration if total_duration > 0 else momentumConfig.get_multiplier(0.0)
 
-func get_momentum_at_timestamp(p_timestamp: float) -> float:
+## TODO: is this correct? why is param unused
+func get_momentum_at_timestamp(_p_timestamp: float) -> float:
 	return momentumConfig.get_multiplier(datasource.get_latest_value().val)

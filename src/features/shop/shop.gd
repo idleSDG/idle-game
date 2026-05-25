@@ -4,6 +4,9 @@ extends Node
 @onready var robe_container: VBoxContainer = %RobesItemList
 @onready var hat_container: VBoxContainer = %HatsItemList
 @onready var confirm_popup: ConfirmationPopup = $CanvasLayer/ConfirmationPopup
+@onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+@export var buy_sfx: AudioStream
 
 var _card_scene := preload("res://src/features/shop/shop_item_card.tscn")
 var _pending_item: EquipmentItem = null
@@ -45,7 +48,12 @@ func _on_purchase_confirmed() -> void:
 		# Shouldn't happen since buy button is disabled when broke
 		printerr("Purchase failed — insufficient funds")
 	_pending_item = null
+	_play_buy_sfx()
 
 
 func _on_purchase_cancelled() -> void:
 	_pending_item = null
+	
+func _play_buy_sfx():
+	sfx_player.stream = buy_sfx
+	sfx_player.play()

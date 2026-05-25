@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cpescux65n1mi"]
 
 [ext_resource type="Script" uid="uid://cbfhpc2isblxe" path="res://src/features/shop/shop.gd" id="1_3qqm6"]
+[ext_resource type="AudioStream" uid="uid://bem5staq4v8cj" path="res://assets/sfx/ui/079_Buy_sell_01.ogg" id="2_2cg8f"]
 [ext_resource type="PackedScene" uid="uid://cusy6esly6ldh" path="res://src/features/shop/confirmation_popup.tscn" id="2_d5h42"]
 [ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="2_lajo1"]
 [ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="2_qbvc6"]
@@ -36,6 +37,7 @@ texture_margin_bottom = 50.0
 
 [node name="Shop" type="Node2D" unique_id=1111039072]
 script = ExtResource("1_3qqm6")
+buy_sfx = ExtResource("2_2cg8f")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2106166239]
 
@@ -165,3 +167,6 @@ patch_margin_bottom = 93
 
 [node name="ConfirmationPopup" parent="CanvasLayer" unique_id=1443002165 instance=ExtResource("2_d5h42")]
 visible = false
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1661012727]
+bus = &"SFX"

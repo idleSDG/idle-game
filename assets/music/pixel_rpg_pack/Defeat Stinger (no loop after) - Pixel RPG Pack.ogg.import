@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cr2c6p1ql1pdr"
+path="res://.godot/imported/Defeat Stinger (no loop after) - Pixel RPG Pack.ogg-77abe2fc9943fb19689cb79d89e1ed55.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/pixel_rpg_pack/Defeat Stinger (no loop after) - Pixel RPG Pack.ogg"
+dest_files=["res://.godot/imported/Defeat Stinger (no loop after) - Pixel RPG Pack.ogg-77abe2fc9943fb19689cb79d89e1ed55.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

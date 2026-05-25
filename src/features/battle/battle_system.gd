@@ -10,14 +10,16 @@ extends Node
 	$"Main Scene/Control4",
 	$"Main Scene/Control6",
 	$"Main Scene/Control5",
-	$"Main Scene/Control6",
+	$"Main Scene/Control3",
 ]
 @onready var timerLabel = $"Main Scene/SecondsLabel"
 
 signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
-@onready var pause = $"Main Scene/HBoxContainer/Pause"
-@onready var fast = $"Main Scene/HBoxContainer/Fast"
+@onready var pause_label = $"Main Scene/HBoxContainer/VBoxContainer/Label"
+@onready var pause = $"Main Scene/HBoxContainer/VBoxContainer/Pause"
+@onready var fast_label = $"Main Scene/HBoxContainer/VBoxContainer2/Label"
+@onready var fast = $"Main Scene/HBoxContainer/VBoxContainer2/Fast"
 
 @onready var level: battle_level = BattleVariables.current_battle_level
 
@@ -49,6 +51,7 @@ func _notification(what: int) -> void:
 		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
 			if !BattleVariables.isPaused:
+				BattleVariables.battleElapsed += elapsed
 				simulate(elapsed)
 			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 
@@ -56,6 +59,8 @@ func _notification(what: int) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	characterList.resize(enemyAmount)
+	BattleVariables.isSimulated = false
+	
 	if exit_button:
 		exit_button.pressed.connect(_on_exit_battle_pressed)
 	if BattleVariables.battleState == BattleVariables.BattleStates.AWAITING_EXIT:
@@ -66,6 +71,7 @@ func _ready() -> void:
 		timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 		return
 
+	var battleStart = BattleVariables.battleStart
 	pause.button_pressed = (BattleVariables.isPaused)
 	fast.button_pressed = (BattleVariables.isFast)
 	_on_pause_toggled(BattleVariables.isPaused)
@@ -94,7 +100,11 @@ func _ready() -> void:
 		BattleVariables.battleRNG = RandomNumberGenerator.new()
 		BattleVariables.battleRNG.seed = BattleVariables.battleSeed
 
-		simulate(BattleVariables.battleElapsed) #(now - BattleVariables.battleStart)
+		var timeElapsed = (now - battleStart) if !BattleVariables.isPaused else 0.0
+
+		BattleVariables.battleElapsed += timeElapsed
+
+		simulate(BattleVariables.battleElapsed)
 		timerLabel.time = int(now - BattleVariables.battleStart)
 	else:
 		BattleVariables.battleState = BattleVariables.BattleStates.IN_BATTLE
@@ -102,6 +112,7 @@ func _ready() -> void:
 		BattleVariables.battleElapsed = 0.0
 		BattleVariables.potionUsage = { }
 
+		@warning_ignore("narrowing_conversion")
 		BattleVariables.battleSeed = RandomNumberGenerator.new().randf() * 100000
 		BattleVariables.battleRNG = RandomNumberGenerator.new()
 		BattleVariables.battleRNG.seed = BattleVariables.battleSeed
@@ -110,6 +121,7 @@ func _ready() -> void:
 		SetPotions()
 		SaveManager.save_game()
 
+	BattleVariables.isSimulated = false
 	pass
 
 
@@ -168,7 +180,9 @@ func check_enemies():
 				remainingEnemiesList.pop_front()
 		else:
 			break
-
+	
+	select_enemy_slot(targetIndex)
+	
 	tempIndex = -1
 	for j in range(1, enemyAmount):
 		if characterList[j] != null:
@@ -229,7 +243,6 @@ func update_visuals(delta: float):
 	battle_ui.UpdateStatDisplay()
 	pass
 
-
 # finishes the fight
 func finish_fight(result: bool):
 	BattleVariables.battleState = BattleVariables.BattleStates.AWAITING_EXIT
@@ -241,7 +254,11 @@ func finish_fight(result: bool):
 		combatFinish.text = "YOU WIN"
 		PlayerProgress.add_xp(120)
 		characterList[0].ApplyExp()
+		BattleVariables.last_battle_outcome = BattleVariables.BattleOutcome.VICTORY
+		BattleVariables.battle_finished.emit(BattleVariables.BattleOutcome.VICTORY)
 	else:
+		BattleVariables.last_battle_outcome = BattleVariables.BattleOutcome.DEFEAT
+		BattleVariables.battle_finished.emit(BattleVariables.BattleOutcome.DEFEAT)
 		combatFinish.text = "YOU LOSE"
 
 	SaveManager.save_game()
@@ -252,6 +269,7 @@ func finish_fight(result: bool):
 # Simulates the game state in [length] seconds from battle start
 func simulate(length: float):
 	var step: float = 1.0 / 120.0
+	BattleVariables.isSimulated = true
 
 	while (length > 0):
 		var delta = step
@@ -267,12 +285,15 @@ func simulate(length: float):
 				check_death()
 
 				if timer > length:
+					BattleVariables.isSimulated = false
 					return
 				else:
 					length -= timer
 					timer = 0.0
 		else:
 			length = 0
+	
+	BattleVariables.isSimulated = false
 	pass
 
 
@@ -288,16 +309,12 @@ func select_enemy_unit(ind: int):
 	battle_ui.StartPreview(characterList[ind])
 	pass
 
-
 func select_enemy_slot(ind: int):
 	if (ind != 0):
-		var i: int = 0
 		for c in characterList:
 			if c != null:
 				c.select(c.index == ind)
-				i += 1
 		targetIndex = ind
-
 
 func SetPotions():
 	var pot1 = null
@@ -313,16 +330,21 @@ func SetPotions():
 					pot2 = instance
 				if i + 1 == 3:
 					pot3 = instance
-	battle_ui.SetPotions(pot1, pot2, pot3, characterList)
+	battle_ui.SetPotions(pot1, pot2, pot3, characterList, characterSpawnPos[5].position)
 
 
 func _on_pause_toggled(toggled_on: bool) -> void:
 	BattleVariables.isPaused = toggled_on
+	BattleVariables.battleStart = Time.get_unix_time_from_system()
+	SaveManager.save_game()
+	
+	pause_label.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pause.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.
 
 
 func _on_fast_toggled(toggled_on: bool) -> void:
 	BattleVariables.isFast = toggled_on
+	fast_label.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	fast.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.

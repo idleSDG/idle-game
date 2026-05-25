@@ -2,6 +2,8 @@ class_name Potion extends Node
 
 enum PotionTypes { Status, Damage }
 
+var effectScene = load("res://assets/effects/A_EffectScene.tscn")
+
 const _icon_array = [
 	preload("res://assets/icons/potions/potion_explosion_icon.tres"),
 	preload("res://assets/icons/potions/potion_health_icon.tres"),
@@ -23,6 +25,8 @@ var cooldown : float = 10.0
 var currentCooldown : float
 var effect : StatusEffect
 var targetSelf : bool = true
+
+var posit : Vector2
 
 
 func _init(newId : int, slt : int = -1):
@@ -73,6 +77,10 @@ func UsePotionEffect(charList : Array[Character]):
 			if charList[1] != null: charList[1].TakeTrueDamage(damage, 1)
 			if charList[2] != null: charList[2].TakeTrueDamage(damage, 1)
 			if charList[3] != null: charList[3].TakeTrueDamage(damage, 1)
+			
+			var effect = effectScene.instantiate()
+			charList[0].get_parent().get_parent().add_child(effect)
+			effect.SetUp(posit + Vector2(0, -100), 0)
 	
 	if type == PotionTypes.Status:
 		if targetSelf:

@@ -2,7 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="1_7vxik"]
 [ext_resource type="Script" uid="uid://pgy4d2ut0g4s" path="res://scripts/ui/skill_grid.gd" id="1_0248v"]
+[ext_resource type="AudioStream" uid="uid://ce5ff7v05xwo3" path="res://assets/sfx/ui/071_Unequip_01.ogg" id="3_ks86g"]
 [ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="3_ofkgl"]
+[ext_resource type="AudioStream" uid="uid://cxndout5wl1gq" path="res://assets/sfx/ui/070_Equip_10.ogg" id="4_tlpu1"]
 
 [node name="SkillGrid" type="GridContainer" unique_id=1758141714]
 offset_left = 12.0
@@ -14,9 +16,15 @@ theme_override_constants/h_separation = 14
 theme_override_constants/v_separation = 14
 columns = 5
 script = ExtResource("1_0248v")
+equip_skill_sfx = ExtResource("4_tlpu1")
+unequip_skill_sfx = ExtResource("3_ks86g")
 
 [node name="Skill_Grid_Button" parent="." unique_id=1346103917 instance=ExtResource("1_7vxik")]
 layout_mode = 2
 icon = ExtResource("3_ofkgl")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=332920649]
+stream = ExtResource("4_tlpu1")
+bus = &"SFX"
 
 [connection signal="equipSkillPressed" from="." to="." method="_on_equip_skill_pressed"]

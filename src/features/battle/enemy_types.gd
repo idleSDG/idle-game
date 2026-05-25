@@ -5,10 +5,9 @@ static var character_scene = load("res://scenes/character.tscn")
 #ELEMENTS 		|| None, Fire, Ice, Lightning, Wind, Physical
 #STAT STANDARDS || Health: 100-100000;  Attack: 10-5000;  Defense: 10-5000
 
-
 static func CreateEnemy(id: int, level: int = 1) -> Character:
-	var char: Character = character_scene.instantiate()
-	char.level = level
+	var character: Character = character_scene.instantiate()
+	character.level = level
 	var stats: CharacterStats
 
 	match id:
@@ -26,12 +25,12 @@ static func CreateEnemy(id: int, level: int = 1) -> Character:
 				[],
 				[],
 			) # weak to Fire
-			char.SetStats(stats)
+			character.SetStats(stats)
 
-			char.skills.append(Skill.FromName("Chill"))
+			character.skills.append(Skill.FromName("Chill"))
 
-			char.charName = "Wolf"
-			char.sprite = load("res://assets/enemies/wolf.png")
+			character.charName = "Wolf"
+			character.sprite = load("res://assets/enemies/wolf.png")
 		101:
 			var lv = InterpStats(level, 120, 110000, 15, 5500, 20, 7500)
 			stats = CharacterStats.Create(
@@ -46,12 +45,12 @@ static func CreateEnemy(id: int, level: int = 1) -> Character:
 				[],
 				[],
 			) # weak to Wind
-			char.SetStats(stats)
+			character.SetStats(stats)
 
-			char.skills.append(Skill.FromName("Strike"))
+			character.skills.append(Skill.FromName("Strike"))
 
-			char.charName = "Skeleton"
-			char.sprite = load("res://assets/enemies/skeleton.png")
+			character.charName = "Skeleton"
+			character.sprite = load("res://assets/enemies/skeleton.png")
 		102:
 			var lv = InterpStats(level, 220, 200000, 10, 5100, 15, 6000)
 			stats = CharacterStats.Create(
@@ -66,17 +65,17 @@ static func CreateEnemy(id: int, level: int = 1) -> Character:
 				[],
 				[],
 			) # weak to Ice and Lightning
-			char.SetStats(stats)
+			character.SetStats(stats)
 
-			char.skills.append(Skill.FromName("Windstep"))
-			char.skills.append(Skill.FromName("Strike"))
+			character.skills.append(Skill.FromName("Windstep"))
+			character.skills.append(Skill.FromName("Strike"))
 
-			char.charName = "Big Bird"
-			char.sprite = load("res://assets/enemies/bird.png")
+			character.charName = "Big Bird"
+			character.sprite = load("res://assets/enemies/bird.png")
 		_:
-			char = null
+			character = null
 
-	return char
+	return character
 
 
 static func InterpStats(level, hp1, hp100, atk1, atk100, def1, def100) -> Vector3:
