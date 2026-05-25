@@ -16,8 +16,10 @@ extends Node
 
 signal request_exit_signal
 @onready var exit_button: Button = $"Main Scene/ExitBattle"
-@onready var pause = $"Main Scene/HBoxContainer/Pause"
-@onready var fast = $"Main Scene/HBoxContainer/Fast"
+@onready var pause_label = $"Main Scene/HBoxContainer/VBoxContainer/Label"
+@onready var pause = $"Main Scene/HBoxContainer/VBoxContainer/Pause"
+@onready var fast_label = $"Main Scene/HBoxContainer/VBoxContainer2/Label"
+@onready var fast = $"Main Scene/HBoxContainer/VBoxContainer2/Fast"
 
 @onready var level: battle_level = BattleVariables.current_battle_level
 
@@ -336,11 +338,13 @@ func _on_pause_toggled(toggled_on: bool) -> void:
 	BattleVariables.battleStart = Time.get_unix_time_from_system()
 	SaveManager.save_game()
 	
+	pause_label.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pause.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.
 
 
 func _on_fast_toggled(toggled_on: bool) -> void:
 	BattleVariables.isFast = toggled_on
+	fast_label.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	fast.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.
