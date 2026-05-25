@@ -125,13 +125,13 @@ func _ready():
 	_init_equipment()
 	
 func _init_equipment() -> void:
-	var starter_weapon = EquipmentItem.new("weap1", EquipmentItem.Slot.WEAPON)
+	var starter_weapon = EquipmentItem.new("Starter Staff", EquipmentItem.Slot.WEAPON)
 	starter_weapon.attack_bonus_pct = 0.1
 
-	var starter_robe = EquipmentItem.new("robe1", EquipmentItem.Slot.ROBE)
+	var starter_robe = EquipmentItem.new("Starter Robe", EquipmentItem.Slot.ROBE)
 	starter_robe.ingredient_gain_bonus_pct = 0.1
 
-	var starter_hat = EquipmentItem.new("hat1", EquipmentItem.Slot.HAT)
+	var starter_hat = EquipmentItem.new("Starter Hat", EquipmentItem.Slot.HAT)
 	starter_hat.crit_rate_bonus_pct = 0.1
 
 	equipment = [starter_weapon, starter_robe, starter_hat]
@@ -184,7 +184,7 @@ func get_save_data() -> Dictionary:
 		ingredient_map[Ingredient.get_type_as_string(type)] = Ingredient.to_dictionary(ingredients[type])
 	
 	# Save purchased item names (exclude starters — they're always added in _init_equipment)
-	var starter_names = ["weap1", "robe1", "hat1"]
+	var starter_names = ["Starter Staff", "Starter Robe", "Starter Hat"]
 	var purchased_names: Array = []
 	for item in equipment:
 		if item.item_name not in starter_names:

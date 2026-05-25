@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://biposm34yae1j" path="res://assets/settings/Permissions decoration.png" id="4_gjs24"]
 [ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="5_1g033"]
 [ext_resource type="Texture2D" uid="uid://cvg0b8nke6dp5" path="res://assets/settings/Sound decoration.png" id="5_am25x"]
-[ext_resource type="Texture2D" uid="uid://co8clcexm55wf" path="res://assets/settings/save decoration.png" id="6_4ppmf"]
 [ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="6_gjs24"]
 [ext_resource type="Texture2D" uid="uid://c0k8nuv3qo418" path="res://assets/hud/buttons/foot_icon.tres" id="6_ql1j0"]
 [ext_resource type="Texture2D" uid="uid://bjyfonkmu4yx5" path="res://assets/hud/buttons/cup_icon.tres" id="7_6dbjw"]
@@ -16,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://ctibijkxblylk" path="res://assets/hud/buttons/sound_icon.tres" id="10_01roj"]
 [ext_resource type="Texture2D" uid="uid://bndgabvf53eat" path="res://assets/hud/buttons/icon_battle_light.tres" id="13_01roj"]
 [ext_resource type="Texture2D" uid="uid://dujcs88wm1h4n" path="res://assets/hud/buttons/wide_red_button.png" id="14_oe2nd"]
+[ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="14_ql1j0"]
 [ext_resource type="Texture2D" uid="uid://deum40cvyrm2o" path="res://assets/hud/buttons/wide_red_button_pressed.png" id="15_7kvyq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql1j0"]
@@ -370,7 +370,7 @@ offset_left = -493.0
 offset_top = -175.0
 offset_right = 493.0
 offset_bottom = 175.0
-texture = ExtResource("6_4ppmf")
+texture = ExtResource("14_ql1j0")
 
 [node name="ClearSaveButton" parent="CanvasLayer/ScrollContainer/SizingControl/ClearSave" unique_id=654409858 instance=ExtResource("5_1g033")]
 layout_mode = 1

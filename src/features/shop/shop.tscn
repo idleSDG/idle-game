@@ -3,6 +3,37 @@
 [ext_resource type="Script" uid="uid://cbfhpc2isblxe" path="res://src/features/shop/shop.gd" id="1_3qqm6"]
 [ext_resource type="AudioStream" uid="uid://bem5staq4v8cj" path="res://assets/sfx/ui/079_Buy_sell_01.ogg" id="2_2cg8f"]
 [ext_resource type="PackedScene" uid="uid://cusy6esly6ldh" path="res://src/features/shop/confirmation_popup.tscn" id="2_d5h42"]
+[ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="2_lajo1"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="2_qbvc6"]
+[ext_resource type="Texture2D" uid="uid://cxw5my7ip4vyn" path="res://assets/hud/buttons/wide_button.png" id="3_lajo1"]
+[ext_resource type="Texture2D" uid="uid://cnbko2rn6lfx" path="res://assets/hud/buttons/wide_button_pressed.png" id="3_qcwep"]
+[ext_resource type="Texture2D" uid="uid://bse1emdawkvjp" path="res://assets/icons/staff.png" id="4_lajo1"]
+[ext_resource type="Texture2D" uid="uid://bxnw8gaspsw07" path="res://assets/icons/robe.png" id="5_ckpi3"]
+[ext_resource type="Texture2D" uid="uid://dydabj0wh8gpu" path="res://assets/icons/hat.png" id="6_1g5d4"]
+[ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="9_ckpi3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckpi3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1g5d4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3boso"]
+texture = ExtResource("3_lajo1")
+texture_margin_left = 30.0
+texture_margin_top = 20.0
+texture_margin_right = 30.0
+texture_margin_bottom = 60.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ckpi3"]
+content_margin_top = 30.0
+texture = ExtResource("3_qcwep")
+texture_margin_left = 30.0
+texture_margin_top = 10.0
+texture_margin_right = 30.0
+texture_margin_bottom = 50.0
 
 [node name="Shop" type="Node2D" unique_id=1111039072]
 script = ExtResource("1_3qqm6")
@@ -10,71 +41,135 @@ buy_sfx = ExtResource("2_2cg8f")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2106166239]
 
-[node name="TabContainer" type="TabContainer" parent="CanvasLayer" unique_id=1377137858]
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=275060665]
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = 250.0
-offset_right = 400.0
-offset_bottom = -700.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_lajo1")
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer" unique_id=1915458368]
+texture_filter = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.42700002
+anchor_right = 0.5
+anchor_bottom = 0.42700002
+offset_left = -486.0
+offset_top = -555.83997
+offset_right = -437.5
+offset_bottom = -499.23993
+scale = Vector2(20, 20)
+texture = ExtResource("2_qbvc6")
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1540575395]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.432
+anchor_right = 0.5
+anchor_bottom = 0.432
+offset_left = -500.0
+offset_top = -569.44
+offset_right = 500.0
+offset_bottom = 588.56
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 31
+
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/MarginContainer" unique_id=1377137858]
+texture_filter = 1
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/side_margin = 10
-theme_override_constants/icon_max_width = 0
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
+theme_override_colors/font_unselected_color = Color(0.3515629, 0.3515629, 0.35156286, 1)
+theme_override_constants/side_margin = 15
 theme_override_font_sizes/font_size = 48
+theme_override_styles/panel = SubResource("StyleBoxFlat_ckpi3")
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1g5d4")
+theme_override_styles/tab_unselected = SubResource("StyleBoxTexture_3boso")
+theme_override_styles/tab_hovered = SubResource("StyleBoxTexture_3boso")
+theme_override_styles/tab_selected = SubResource("StyleBoxTexture_ckpi3")
 tab_alignment = 1
 current_tab = 0
 clip_tabs = false
+tab_0/icon = ExtResource("4_lajo1")
+tab_1/icon = ExtResource("5_ckpi3")
+tab_2/icon = ExtResource("6_1g5d4")
 
-[node name="Weapons" type="VBoxContainer" parent="CanvasLayer/TabContainer" unique_id=1813735390]
+[node name="Weapons" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer" unique_id=1813735390]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TabContainer/Weapons" unique_id=2035650289]
+[node name="WeaponsScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Weapons" unique_id=2035650289]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ItemList" type="VBoxContainer" parent="CanvasLayer/TabContainer/Weapons/ScrollContainer" unique_id=24865365]
+[node name="WeaponsItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Weapons/WeaponsScrollContainer" unique_id=24865365]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_constants/separation = 10
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 25
 
-[node name="Robes" type="VBoxContainer" parent="CanvasLayer/TabContainer" unique_id=1611525778]
+[node name="Robes" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer" unique_id=1611525778]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TabContainer/Robes" unique_id=1855723439]
+[node name="RobesScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Robes" unique_id=1855723439]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ItemList" type="VBoxContainer" parent="CanvasLayer/TabContainer/Robes/ScrollContainer" unique_id=1802707247]
+[node name="RobesItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Robes/RobesScrollContainer" unique_id=1802707247]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_constants/separation = 10
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 25
 
-[node name="Hats" type="VBoxContainer" parent="CanvasLayer/TabContainer" unique_id=659004302]
+[node name="Hats" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer" unique_id=659004302]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/TabContainer/Hats" unique_id=662333019]
+[node name="HatsScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Hats" unique_id=662333019]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ItemList" type="VBoxContainer" parent="CanvasLayer/TabContainer/Hats/ScrollContainer" unique_id=1355433802]
+[node name="HatsItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Hats/HatsScrollContainer" unique_id=1355433802]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-theme_override_constants/separation = 10
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_constants/separation = 25
+
+[node name="TextureRect" type="NinePatchRect" parent="CanvasLayer" unique_id=961395682]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.43100002
+anchor_right = 0.5
+anchor_bottom = 0.43100002
+offset_left = -500.0
+offset_top = -579.52
+offset_right = 500.0
+offset_bottom = 585.48
+texture = ExtResource("9_ckpi3")
+region_rect = Rect2(2, 0, 984, 350)
+patch_margin_left = 88
+patch_margin_top = 91
+patch_margin_right = 85
+patch_margin_bottom = 93
 
 [node name="ConfirmationPopup" parent="CanvasLayer" unique_id=1443002165 instance=ExtResource("2_d5h42")]
+visible = false
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1661012727]
 bus = &"SFX"
