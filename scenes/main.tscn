@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
 [ext_resource type="Texture2D" uid="uid://cpmarjf0oqxj2" path="res://assets/hud/buttons/icon_shop_dark.tres" id="13_muem4"]
 [ext_resource type="Texture2D" uid="uid://bttb3vbjujioa" path="res://assets/hud/buttons/icon_home_dark.tres" id="16_y6deb"]
+[ext_resource type="Texture2D" uid="uid://brukslchvljem" path="res://assets/hud/buttons/icon_battle_red.tres" id="18_fuf3a"]
 [ext_resource type="AudioStream" uid="uid://d16lr6c6lxnx2" path="res://assets/music/pixel_rpg_pack/Title Screen Loop - Pixel RPG Pack.ogg" id="25_2f3dj"]
 [ext_resource type="Script" uid="uid://drtixypia3s68" path="res://src/features/audio/music_player.gd" id="25_og1vs"]
 [ext_resource type="AudioStream" uid="uid://61y74xtkfhc5" path="res://assets/music/pixel_rpg_pack/Battle Theme (Regular) Loop - Pixel RPG Pack.ogg" id="26_yq6so"]
@@ -737,6 +738,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("5_ya4ey")
+battle_icon_normal = ExtResource("10_eb6dy")
+battle_icon_in_battle = ExtResource("18_fuf3a")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="NavBarLayer/NavBar" unique_id=1655404208]
 texture_filter = 1
