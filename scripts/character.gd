@@ -57,7 +57,9 @@ func _ready() -> void:
 		s.set_visuals()
 		skillBars.add_child(s.skillBar)
 	
-	levelLabel.text = "Lv. " + str(level)
+	levelLabel.text = str(level)
+	levelLabel.self_modulate = Color.RED if level > PlayerProgress.level else Color.BLACK
+	
 	expCounter.resize(3)#skills.size())
 	
 	pass
@@ -320,3 +322,4 @@ func CreatePlayerCompositeImage():
 
 func select(on : bool):
 	$"VBoxContainer/Container--Sprite2D/Selection".visible = on
+	$VBoxContainer/BaseSprite/TextureRect.visible = on

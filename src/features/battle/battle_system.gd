@@ -178,7 +178,9 @@ func check_enemies():
 				remainingEnemiesList.pop_front()
 		else:
 			break
-
+	
+	select_enemy_slot(targetIndex)
+	
 	tempIndex = -1
 	for j in range(1, enemyAmount):
 		if characterList[j] != null:
