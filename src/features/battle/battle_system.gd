@@ -10,7 +10,7 @@ extends Node
 	$"Main Scene/Control4",
 	$"Main Scene/Control6",
 	$"Main Scene/Control5",
-	$"Main Scene/Control6",
+	$"Main Scene/Control3",
 ]
 @onready var timerLabel = $"Main Scene/SecondsLabel"
 
@@ -49,6 +49,7 @@ func _notification(what: int) -> void:
 		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
 			if !BattleVariables.isPaused:
+				BattleVariables.battleElapsed += elapsed
 				simulate(elapsed)
 			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 
@@ -56,6 +57,8 @@ func _notification(what: int) -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	characterList.resize(enemyAmount)
+	BattleVariables.isSimulated = false
+	
 	if exit_button:
 		exit_button.pressed.connect(_on_exit_battle_pressed)
 	if BattleVariables.battleState == BattleVariables.BattleStates.AWAITING_EXIT:
@@ -66,6 +69,7 @@ func _ready() -> void:
 		timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 		return
 
+	var battleStart = BattleVariables.battleStart
 	pause.button_pressed = (BattleVariables.isPaused)
 	fast.button_pressed = (BattleVariables.isFast)
 	_on_pause_toggled(BattleVariables.isPaused)
@@ -94,7 +98,11 @@ func _ready() -> void:
 		BattleVariables.battleRNG = RandomNumberGenerator.new()
 		BattleVariables.battleRNG.seed = BattleVariables.battleSeed
 
-		simulate(BattleVariables.battleElapsed) #(now - BattleVariables.battleStart)
+		var timeElapsed = (now - battleStart) if !BattleVariables.isPaused else 0.0
+
+		BattleVariables.battleElapsed += timeElapsed
+
+		simulate(BattleVariables.battleElapsed)
 		timerLabel.time = int(now - BattleVariables.battleStart)
 	else:
 		BattleVariables.battleState = BattleVariables.BattleStates.IN_BATTLE
@@ -111,6 +119,7 @@ func _ready() -> void:
 		SetPotions()
 		SaveManager.save_game()
 
+	BattleVariables.isSimulated = false
 	pass
 
 
@@ -256,6 +265,7 @@ func finish_fight(result: bool):
 # Simulates the game state in [length] seconds from battle start
 func simulate(length: float):
 	var step: float = 1.0 / 120.0
+	BattleVariables.isSimulated = true
 
 	while (length > 0):
 		var delta = step
@@ -271,12 +281,15 @@ func simulate(length: float):
 				check_death()
 
 				if timer > length:
+					BattleVariables.isSimulated = false
 					return
 				else:
 					length -= timer
 					timer = 0.0
 		else:
 			length = 0
+	
+	BattleVariables.isSimulated = false
 	pass
 
 
@@ -313,11 +326,14 @@ func SetPotions():
 					pot2 = instance
 				if i + 1 == 3:
 					pot3 = instance
-	battle_ui.SetPotions(pot1, pot2, pot3, characterList)
+	battle_ui.SetPotions(pot1, pot2, pot3, characterList, characterSpawnPos[5].position)
 
 
 func _on_pause_toggled(toggled_on: bool) -> void:
 	BattleVariables.isPaused = toggled_on
+	BattleVariables.battleStart = Time.get_unix_time_from_system()
+	SaveManager.save_game()
+	
 	pause.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.
 

@@ -95,7 +95,6 @@ offset_top = 75.57007
 offset_right = 811.0
 offset_bottom = 333.57007
 disabled = true
-is_disabled = true
 icon = ExtResource("7_snrhs")
 
 [node name="PotionTitleLabel" type="Label" parent="CanvasLayer/Background/PotionCrafting" unique_id=2121399146]

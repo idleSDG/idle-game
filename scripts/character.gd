@@ -2,6 +2,7 @@ class_name Character extends Node
 
 var damagePopup = load("res://scenes/damagePopup.tscn")
 var skillUiScene = load("res://scenes/skillUI.tscn")
+var effectScene = load("res://assets/effects/A_EffectScene.tscn")
 var charName = "Character"
 var level : int = 1
 var index : int = -1
@@ -20,6 +21,7 @@ var sprite
 @onready var trail = $VBoxContainer/BaseSprite/GPU_TrailParticles
 var image = Image.new() 
 var isFollowing : bool = false
+var isHurt : float = 0.0
 var timePass
 var orig
 var end
@@ -96,8 +98,16 @@ func UpdateVisuals(delta : float):
 			self.global_position = orig
 			isFollowing = false
 			trail.emitting = false
+		elif timePass >= 0.25:
+			self.global_position = lerp(end, orig, (timePass - 0.25) / 0.25)
 		else: 
-			self.global_position = lerp(orig, end, timePass / 0.5)
+			self.global_position = lerp(orig, end, timePass / 0.25)
+	
+	if isHurt > 0.0:
+		isHurt -= delta
+		baseSprite.modulate = Color.RED if fmod(floor((fmod(isHurt, 1) * 10)), 2) == 0 else Color.WHITE
+	else:
+		baseSprite.modulate = Color.WHITE
 	
 	pass
 
@@ -132,9 +142,10 @@ func UseSkill(target : Array[Character]) -> void:
 	
 	expCounter[skills[skillToUse].equipState - 1] += 67
 	
-	particles.emitting = true
+	#particles.emitting = true
 	trail.emitting = true
 	Follow(target[0])
+	
 	
 	skills[skillToUse].isParalyzed = false
 	
@@ -174,6 +185,7 @@ func TakeDamage(dmg : int, itCrit : bool):
 	var popup = damagePopup.instantiate()
 	character.get_parent().get_parent().add_child(popup)
 	popup.SetUp(character.get_parent().position, dmg, itCrit)
+	isHurt = 0.5
 	
 	CalculateStatChanges()
 	pass
@@ -188,9 +200,18 @@ func TakeTrueDamage(dmg : int, source : int): # source will be used to denote wh
 		source = 2
 	
 	match source:
-		2: popup.SetUpText(character.get_parent().position, abs(dmg), " heal", Color.SPRING_GREEN)
-		1: popup.SetUpText(character.get_parent().position, dmg, " explosion", Color.ORANGE)
-		_: popup.SetUpText(character.get_parent().position, dmg, " burn", Color.ORANGE)
+		2: 
+			popup.SetUpText(character.get_parent().position, abs(dmg), " heal", Color.SPRING_GREEN)
+			var effect = effectScene.instantiate()
+			get_parent().get_parent().add_child(effect)
+			effect.SetUp(get_parent().position, 1)
+		1: 
+			popup.SetUpText(character.get_parent().position, dmg, " explosion", Color.ORANGE)
+			isHurt = 0.5
+		_: 
+			popup.SetUpText(character.get_parent().position, dmg, " burn", Color.ORANGE)
+			isHurt = 0.1
+			
 	
 	CalculateStatChanges()
 	pass
@@ -199,7 +220,8 @@ func TakeTrueDamage(dmg : int, source : int): # source will be used to denote wh
 
 func Follow(target : Character):
 	end = target.global_position
-	end.x = (end.x - orig.x) * 0.8 + orig.x
+	end.x = (end.x - orig.x) * 0.3 + orig.x
+	end.y = (end.y - orig.y) * 0.3 + orig.y
 	
 	timePass = 0.0
 	isFollowing = true

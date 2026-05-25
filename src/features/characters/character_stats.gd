@@ -107,7 +107,7 @@ func TakeDamage(dmgTaken : int) :
 
 enum Element 
 {
-	None, Fire, Ice, Lightning, Wind, Physical
+	None, Physical, Fire, Wind, Ice, Lightning
 }
 
 enum Category

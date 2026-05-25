@@ -13,7 +13,7 @@ var battleUI
 var queued = false
 
 
-func SetupPotion(pot: Potion, list: Array[Character], battUI):
+func SetupPotion(pot: Potion, list: Array[Character], battUI, posit : Vector2):
 	if pot == null:
 		potion = null
 		quantity.text = ""
@@ -29,6 +29,7 @@ func SetupPotion(pot: Potion, list: Array[Character], battUI):
 
 	charList = list
 	battleUI = battUI
+	pot.posit = posit
 
 	VerifyPotion()
 

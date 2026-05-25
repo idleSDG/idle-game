@@ -1,5 +1,6 @@
 class_name Skill extends Node
 
+var effectScene = load("res://assets/effects/A_EffectScene.tscn")
 var skillUI = load("res://scenes/skillUI.tscn")
 var skillBar #= skillUI.instantiate()
 
@@ -128,6 +129,10 @@ func Use(user : Character, target : Character) -> bool:
 	
 	if isCurrentAttack:
 		charge = charge - maxCharge
+	
+	var effect = effectScene.instantiate()
+	target.get_parent().get_parent().add_child(effect)
+	effect.SetUp(target.get_parent().position, element + 1, user.isPlayer)
 	
 	UpdateBar()
 	isCurrentAttack = false
