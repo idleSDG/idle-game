@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bse1emdawkvjp" path="res://assets/icons/staff.png" id="4_lajo1"]
 [ext_resource type="Texture2D" uid="uid://bxnw8gaspsw07" path="res://assets/icons/robe.png" id="5_ckpi3"]
 [ext_resource type="Texture2D" uid="uid://dydabj0wh8gpu" path="res://assets/icons/hat.png" id="6_1g5d4"]
-[ext_resource type="Texture2D" uid="uid://co8clcexm55wf" path="res://assets/settings/save decoration.png" id="9_ckpi3"]
+[ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="9_ckpi3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ckpi3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

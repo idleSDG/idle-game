@@ -3,12 +3,10 @@
 [ext_resource type="Script" uid="uid://cpss73dwfj4qe" path="res://src/features/shop/confirmation_popup.gd" id="1_8giav"]
 [ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="2_jyv5h"]
 [ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="2_n78s0"]
-[ext_resource type="Texture2D" uid="uid://co8clcexm55wf" path="res://assets/settings/save decoration.png" id="4_1o24j"]
+[ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="4_1o24j"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1o24j"]
 texture = ExtResource("2_n78s0")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n78s0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1o24j"]
 
@@ -27,6 +25,19 @@ texture = ExtResource("2_n78s0")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vwox7"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c1ftm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hb3bq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_erc4k"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+texture = ExtResource("4_1o24j")
+texture_margin_left = 90.0
+texture_margin_top = 90.0
+texture_margin_right = 90.0
+texture_margin_bottom = 90.0
 
 [node name="ConfirmationPopup" type="Control" unique_id=1443002165]
 z_index = 100
@@ -47,10 +58,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -150.0
-offset_right = 250.0
-offset_bottom = 150.0
+offset_left = -500.0
+offset_top = -175.0
+offset_right = 500.0
+offset_bottom = 197.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_1o24j")
@@ -70,12 +81,12 @@ theme_override_constants/separation = 16
 
 [node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBox" unique_id=334700133]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 horizontal_alignment = 1
 
 [node name="MessageLabel" type="Label" parent="PanelContainer/MarginContainer/VBox" unique_id=1624312257]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 36
 horizontal_alignment = 1
 
 [node name="HBox" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBox" unique_id=1442652703]
@@ -86,28 +97,36 @@ theme_override_constants/separation = 20
 
 [node name="ConfirmBtn" parent="PanelContainer/MarginContainer/VBox/HBox" unique_id=112168689 instance=ExtResource("2_jyv5h")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_n78s0")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_1o24j")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_8i1wg")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_iumif")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_n8021")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1o24j")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8i1wg")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_iumif")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_n8021")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_e81al")
 button_text = "Buy"
 text_color = Color(0.3938333, 0.85, 0.06799999, 1)
 label_font_size = 56
 
 [node name="CancelBtn" parent="PanelContainer/MarginContainer/VBox/HBox" unique_id=1154169417 instance=ExtResource("2_jyv5h")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_e81al")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_n8ugs")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_po7c1")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_vwox7")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_c1ftm")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n8ugs")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_po7c1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vwox7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_c1ftm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_hb3bq")
 button_text = "Cancel"
 text_color = Color(0.81, 0, 0, 1)
 label_font_size = 56
 
-[node name="TextureRect" type="TextureRect" parent="PanelContainer" unique_id=377955972]
-layout_mode = 2
+[node name="Decoration" type="PanelContainer" parent="." unique_id=817416013]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -510.0
+offset_top = -190.0
+offset_right = 510.0
+offset_bottom = 214.0
 mouse_filter = 2
-texture = ExtResource("4_1o24j")
-stretch_mode = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_erc4k")

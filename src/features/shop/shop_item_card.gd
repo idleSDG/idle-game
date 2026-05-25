@@ -6,7 +6,6 @@ signal buy_pressed(item: EquipmentItem)
 @onready var icon_rect: TextureRect = %Icon
 @onready var name_label: Label = %NameLabel
 @onready var stats_label: Label = %StatsLabel
-@onready var cost_label: Label = %CostLabel
 @onready var buy_button: TextIconButton = %BuyButton
 @onready var owned_label: Label = %OwnedLabel
 
@@ -16,10 +15,9 @@ var _item: EquipmentItem
 func setup(item: EquipmentItem) -> void:
 	_item = item
 	name_label.text = item.item_name
-	cost_label.text = "%d gold" % item.cost
+	buy_button.button_text = str(item.cost)
 	stats_label.text = _build_stats_text(item)
 
-	# Icon — use slot placeholder for now until real assets exist
 	match item.slot:
 		EquipmentItem.Slot.WEAPON:
 			icon_rect.texture = load("res://assets/icons/staff_icon.tres")
@@ -68,6 +66,7 @@ func _refresh_state() -> void:
 
 
 func _on_buy_pressed() -> void:
+	print("a")
 	buy_pressed.emit(_item)
 
 
