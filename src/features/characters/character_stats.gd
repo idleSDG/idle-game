@@ -7,9 +7,9 @@ var health : float = maxHealth
 var attack : float = 10
 var defense : float = 10
 
-var critRate = 0.05
-var critDMG = 0.5
-var chargeRate = 1.0
+var critRate: float = 0.05
+var critDMG: float = 0.5
+var chargeRate: float = 1.0
 
 var elementalDMG = []
 var elementalRES = []

@@ -2,9 +2,10 @@
 
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="1_6csx8"]
 [ext_resource type="PackedScene" uid="uid://c7cxvb8mciwtr" path="res://src/ui/wizard_avatar/wizard_avatar.tscn" id="1_nxnce"]
-[ext_resource type="Script" uid="uid://bunaox6btcotb" path="res://src/features/home/money_collection_label.gd" id="2_d7jb7"]
+[ext_resource type="Texture2D" uid="uid://bohiimqvuqgg5" path="res://assets/home/origbig.png" id="1_rqwu7"]
+[ext_resource type="Script" path="res://src/features/home/money_collection_label.gd" id="2_d7jb7"]
 [ext_resource type="Script" uid="uid://clfi2mpmubow6" path="res://src/features/home/wizard_tap_button.gd" id="2_v0gh6"]
-[ext_resource type="Script" uid="uid://d22bq356j4ms3" path="res://src/features/home/money_collection_panel_container.gd" id="3_d7jb7"]
+[ext_resource type="Script" path="res://src/features/home/money_collection_panel_container.gd" id="3_d7jb7"]
 [ext_resource type="PackedScene" uid="uid://b1r7cm1uluuj2" path="res://scenes/money_drop.tscn" id="3_qhgor"]
 [ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="3_rqwu7"]
 [ext_resource type="AudioStream" uid="uid://ee4g2ouw3m6x" path="res://assets/sfx/ui/coin_collect.ogg" id="4_2i8ff"]
@@ -12,6 +13,7 @@
 [ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="5_oc05o"]
 [ext_resource type="Texture2D" uid="uid://buc0genkds163" path="res://assets/hud/coin_16x16.png" id="6_61t4w"]
 [ext_resource type="Texture2D" uid="uid://co8clcexm55wf" path="res://assets/settings/save decoration.png" id="7_2swb7"]
+[ext_resource type="Texture2D" uid="uid://daqrowqflcjb1" path="res://assets/wizard_defaults/pngimg.com - circle_PNG36.png" id="14_l4syc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mvpds"]
 shader = ExtResource("3_rqwu7")
@@ -42,54 +44,45 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=167412646]
 layer = 0
 
-[node name="Background" type="ColorRect" parent="UILayer" unique_id=1439679217]
-z_index = -1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.6331167, 0.9999699, 0.9999998, 1)
-
-[node name="MoneyCollectionLabel" type="Label" parent="UILayer/Background" unique_id=467805842]
-layout_mode = 1
+[node name="MoneyCollectionLabel" type="Label" parent="UILayer" unique_id=467805842]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -240.0
-offset_top = -673.685
+offset_top = -632.5
 offset_right = 240.0
-offset_bottom = -608.685
+offset_bottom = -567.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_6csx8")
 theme_override_font_sizes/font_size = 48
 text = "Tap to Collect!"
 script = ExtResource("2_d7jb7")
+metadata/_edit_use_anchors_ = true
 
-[node name="MoneyCollectionPanelContainer" type="PanelContainer" parent="UILayer/Background" unique_id=1344015046]
+[node name="MoneyCollectionPanelContainer" type="PanelContainer" parent="UILayer" unique_id=1344015046]
 unique_name_in_owner = true
-layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -233.0
-offset_top = -579.685
-offset_right = 232.99976
-offset_bottom = -449.57495
+offset_top = -537.05505
+offset_right = 233.0
+offset_bottom = -406.94495
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_d7jb7")
+metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="UILayer/Background/MoneyCollectionPanelContainer" unique_id=1140042062]
+[node name="ColorRect" type="ColorRect" parent="UILayer/MoneyCollectionPanelContainer" unique_id=1140042062]
 material = SubResource("ShaderMaterial_mvpds")
 layout_mode = 2
 
-[node name="ColorRect2" type="ColorRect" parent="UILayer/Background/MoneyCollectionPanelContainer/ColorRect" unique_id=579226115]
+[node name="ColorRect2" type="ColorRect" parent="UILayer/MoneyCollectionPanelContainer/ColorRect" unique_id=579226115]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_867kl")
 layout_mode = 0
@@ -98,21 +91,21 @@ offset_top = 3.0549927
 offset_right = 479.99976
 offset_bottom = 155.10999
 
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/Background/MoneyCollectionPanelContainer" unique_id=2125843381]
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/MoneyCollectionPanelContainer" unique_id=2125843381]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/Background/MoneyCollectionPanelContainer/MarginContainer" unique_id=1024521888]
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MoneyCollectionPanelContainer/MarginContainer" unique_id=1024521888]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="UILayer/Background/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=1770658635]
+[node name="Spacer" type="Control" parent="UILayer/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=1770658635]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MoneyIcon" type="TextureRect" parent="UILayer/Background/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=2114918598]
+[node name="MoneyIcon" type="TextureRect" parent="UILayer/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=2114918598]
 texture_filter = 1
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
@@ -122,7 +115,7 @@ texture = ExtResource("6_61t4w")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="MoneyIcon" type="TextureRect" parent="UILayer/Background/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer/MoneyIcon" unique_id=121526597]
+[node name="MoneyIcon" type="TextureRect" parent="UILayer/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer/MoneyIcon" unique_id=121526597]
 show_behind_parent = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_ypitg")
@@ -138,11 +131,11 @@ texture = ExtResource("6_61t4w")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Spacer2" type="Control" parent="UILayer/Background/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=694532299]
+[node name="Spacer2" type="Control" parent="UILayer/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=694532299]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MoneyCollectionLabel" type="Label" parent="UILayer/Background/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=1038033964]
+[node name="MoneyCollectionLabel" type="Label" parent="UILayer/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=1038033964]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -152,14 +145,28 @@ theme_override_font_sizes/font_size = 50
 text = "10 / 10"
 horizontal_alignment = 1
 
-[node name="Spacer3" type="Control" parent="UILayer/Background/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=1719617881]
+[node name="Spacer3" type="Control" parent="UILayer/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=1719617881]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SaveDecoration" type="Sprite2D" parent="UILayer/Background/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=1644910737]
+[node name="SaveDecoration" type="Sprite2D" parent="UILayer/MoneyCollectionPanelContainer/MarginContainer/HBoxContainer" unique_id=1644910737]
 position = Vector2(224.49979, 56.582485)
 scale = Vector2(0.48985797, 0.4372999)
 texture = ExtResource("7_2swb7")
+
+[node name="Background" type="TextureRect" parent="UILayer" unique_id=218213974]
+z_index = -1
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -930.0
+offset_top = -3959.0
+offset_right = 4760.4023
+offset_bottom = -237.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_rqwu7")
 
 [node name="CenterContainer" type="CenterContainer" parent="UILayer" unique_id=1372644241]
 anchors_preset = 15
@@ -190,5 +197,13 @@ money_drop_scene = ExtResource("3_qhgor")
 stream = ExtResource("4_2i8ff")
 max_polyphony = 3
 bus = &"SFX"
+
+[node name="Shadow" type="Sprite2D" parent="UILayer/CenterContainer/WizardControl" unique_id=1423471628]
+modulate = Color(1, 1, 1, 0.4)
+z_index = 1
+z_as_relative = false
+position = Vector2(-4.0000057, 366)
+scale = Vector2(0.38544974, 0.0936508)
+texture = ExtResource("14_l4syc")
 
 [connection signal="pressed" from="UILayer/CenterContainer/WizardControl/WizardTapButton" to="UILayer/CenterContainer/WizardControl/WizardTapButton" method="_on_pressed"]

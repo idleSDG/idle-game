@@ -35,7 +35,7 @@ func save_game():
 		var json_string = JSON.stringify(save_data, "\t")
 		file.store_string(json_string)
 		file.close()
-		print("Game Saved.")
+		print("Game Saved at %s.")
 
 func init_new_save():
 	PlayerProgress.init_new_save()

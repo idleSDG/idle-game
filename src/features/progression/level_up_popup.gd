@@ -1,12 +1,13 @@
 class_name LevelUpPopup
 extends Control
  
-@onready var title_label : Label  = $PanelContainer/VBox/TitleLabel
-@onready var stats_label : Label  = $PanelContainer/VBox/StatsLabel
-@onready var ok_button   : Button = $PanelContainer/VBox/OkButton
+@onready var title_label : Label  = $PanelContainer/MarginContainer/VBox/TitleLabel
+@onready var level_label : Label  = $PanelContainer/MarginContainer/VBox/LevelLabel
+@onready var stats_label : RichTextLabel  = $PanelContainer/MarginContainer/VBox/StatsLabel
+@onready var ok_button   : Button = $PanelContainer/MarginContainer/VBox/OkButton
 
-@onready var v_box: VBoxContainer = $PanelContainer/VBox
-@onready var skill_unlock: HBoxContainer = $PanelContainer/VBox/HBox_SkillUnlock
+@onready var v_box: VBoxContainer = $PanelContainer/MarginContainer/VBox
+@onready var skill_unlock: HBoxContainer = $PanelContainer/MarginContainer/VBox/HBox_SkillUnlock
 
 @onready var sfx_player = $AudioStreamPlayer2D
 
@@ -29,16 +30,22 @@ func show_level_up(old_level: int, new_level: int) -> void:
 	var old_stats = BattleVariables.GetPlayerBaseStatsAtLevel(old_level)
 	var new_stats = BattleVariables.GetPlayerBaseStatsAtLevel(new_level)
  
+	title_label.text = "^ Level Up! ^"
 	if new_level - old_level == 1:
-		title_label.text = "Level Up!\nYou are now level %d" % new_level
+		level_label.text = "You are now level %d!" % new_level
 	else:
-		title_label.text = "Level Up!\nYou are now level %d\n(+%d levels!)" % [new_level, new_level - old_level]
+		level_label.text = "You are now level %d\n(+%d levels!)" % [new_level, new_level - old_level]
  
-	var stats_text = ""
-	stats_text += "HP: %d → %d  (+%d)\n" % [old_stats.maxHealth, new_stats.maxHealth, new_stats.maxHealth - old_stats.maxHealth]
-	stats_text += "ATK: %d → %d  (+%d)\n" % [old_stats.attack,    new_stats.attack,    new_stats.attack    - old_stats.attack]
-	stats_text += "Defense: %d → %d  (+%d)"   % [old_stats.defense,   new_stats.defense,   new_stats.defense   - old_stats.defense]
- 
+	#var stats_text = ""
+	#stats_text += "HP: %d → %d  (+%d)\n" % [old_stats.maxHealth, new_stats.maxHealth, new_stats.maxHealth - old_stats.maxHealth]
+	#stats_text += "ATK: %d → %d  (+%d)\n" % [old_stats.attack,    new_stats.attack,    new_stats.attack    - old_stats.attack]
+	#stats_text += "Defense: %d → %d  (+%d)"   % [old_stats.defense,   new_stats.defense,   new_stats.defense   - old_stats.defense]
+
+	var stats_text = "[table=4]
+[cell][img=32]res://assets/icons/icon_plus.png[/img][b] HP: [/b][/cell]      [cell][i]" + str(int(old_stats.maxHealth)) + "[/i][/cell] [cell][i]" + "   →   " + "[/i][/cell] [cell][color=#22d300][b][i]" + str(int(new_stats.maxHealth)) + "[/i][/b][/color][/cell]
+[cell][img=32]res://assets/icons/atk.png[/img][b] Attack: [/b][/cell]      [cell][i]" + str(int(old_stats.attack)) + "[/i][/cell] [cell][i]" + "   →   " + "[/i][/cell] [cell][color=#22d300][b][i]" + str(int(new_stats.attack)) + "[/i][/b][/color][/cell]
+[cell][img=32]res://assets/icons/def.png[/img][b] Defense: [/b][/cell]     [cell][i]" + str(int(old_stats.defense)) + "[/i][/cell] [cell][i]" + "   →   " + "[/i][/cell] [cell][color=#22d300][b][i]" + str(int(new_stats.defense)) + "[/i][/b][/color][/cell] [/table]"
+
 	stats_label.text = stats_text
 	visible = true
 	
