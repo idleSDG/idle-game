@@ -16,6 +16,9 @@ func _ready() -> void:
 	_populate()
 	confirm_popup.confirmed.connect(_on_purchase_confirmed)
 	confirm_popup.cancelled.connect(_on_purchase_cancelled)
+	var scroll_containers = [%WeaponsScrollContainer, %RobesScrollContainer, %HatsScrollContainer]
+	for container in scroll_containers:
+		container.get_v_scroll_bar().custom_minimum_size.x = 20
 
 
 func _populate() -> void:

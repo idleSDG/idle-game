@@ -105,11 +105,12 @@ tab_2/icon = ExtResource("6_1g5d4")
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Weapons" unique_id=2035650289]
+[node name="WeaponsScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Weapons" unique_id=2035650289]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="WeaponsItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Weapons/ScrollContainer" unique_id=24865365]
+[node name="WeaponsItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Weapons/WeaponsScrollContainer" unique_id=24865365]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -121,11 +122,12 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Robes" unique_id=1855723439]
+[node name="RobesScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Robes" unique_id=1855723439]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RobesItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Robes/ScrollContainer" unique_id=1802707247]
+[node name="RobesItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Robes/RobesScrollContainer" unique_id=1802707247]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
@@ -137,11 +139,12 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Hats" unique_id=662333019]
+[node name="HatsScrollContainer" type="ScrollContainer" parent="CanvasLayer/MarginContainer/TabContainer/Hats" unique_id=662333019]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="HatsItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Hats/ScrollContainer" unique_id=1355433802]
+[node name="HatsItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Hats/HatsScrollContainer" unique_id=1355433802]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
