@@ -11,13 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://b5b4h853pvvcj" path="res://assets/settings/Popup decoration.png" id="6_mu5mm"]
 [ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="10_mcn8b"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k5glt"]
-bg_color = Color(1, 1, 1, 0.78431374)
-expand_margin_left = 8.0
-expand_margin_top = 8.0
-expand_margin_right = 8.0
-expand_margin_bottom = 8.0
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mcn8b"]
 shader = ExtResource("4_57ao5")
 shader_parameter/wood_texture = ExtResource("5_mu5mm")
@@ -65,14 +58,12 @@ offset_right = 300.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_k5glt")
 
 [node name="ColorRect" type="ColorRect" parent="PanelContainer" unique_id=1221403673]
 material = SubResource("ShaderMaterial_mcn8b")
 layout_mode = 2
 
 [node name="Control" type="TextureRect" parent="PanelContainer/ColorRect" unique_id=625374921]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,6 +71,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.025, 1.025)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_mu5mm")
 expand_mode = 2
 
@@ -98,7 +90,7 @@ theme_override_constants/separation = 16
 layout_mode = 2
 theme_override_colors/font_color = Color(0.13333334, 0.827451, 0, 1)
 theme_override_fonts/font = ExtResource("5_tsomc")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 96
 horizontal_alignment = 1
 
 [node name="LevelLabel" type="Label" parent="PanelContainer/MarginContainer/VBox" unique_id=1247843410]
