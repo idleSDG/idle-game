@@ -103,7 +103,10 @@ func _update_label() -> void:
 	var lbl := get_node_or_null("ContentContainer/Label") as RichTextLabel
 	if lbl:
 		lbl.text = button_text
-		lbl.add_theme_font_override("normal_font", label_font)
+		var font_to_use = label_font
+		if font_to_use == null:
+			font_to_use = get_theme_font("font")
+		lbl.add_theme_font_override("normal_font", font_to_use)
 		lbl.add_theme_font_size_override("normal_font_size", label_font_size)
 		lbl.add_theme_font_size_override("bold_font_size", label_font_size)
 		lbl.add_theme_font_size_override("italics_font_size", label_font_size)

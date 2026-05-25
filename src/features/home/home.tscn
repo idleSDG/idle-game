@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="4_l4syc"]
 [ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="5_oc05o"]
 [ext_resource type="Texture2D" uid="uid://buc0genkds163" path="res://assets/hud/coin_16x16.png" id="6_61t4w"]
-[ext_resource type="Texture2D" uid="uid://co8clcexm55wf" path="res://assets/settings/save decoration.png" id="7_2swb7"]
+[ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="7_2swb7"]
 [ext_resource type="Texture2D" uid="uid://daqrowqflcjb1" path="res://assets/wizard_defaults/pngimg.com - circle_PNG36.png" id="14_l4syc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mvpds"]

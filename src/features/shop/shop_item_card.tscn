@@ -20,6 +20,8 @@ texture_margin_bottom = 90.0
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_17rys"]
 texture = ExtResource("1_1vwdf")
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wmlcb"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p33o5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3e0sm"]
@@ -27,8 +29,6 @@ texture = ExtResource("1_1vwdf")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eqc00"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6o8ni"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o3mja"]
 
 [node name="ShopItemCard" type="PanelContainer" unique_id=976444166]
 texture_filter = 1
@@ -98,14 +98,15 @@ size_flags_vertical = 4
 [node name="BuyButton" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox" unique_id=112168689 instance=ExtResource("2_hwssb")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_p33o5")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_3e0sm")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_eqc00")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_6o8ni")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_o3mja")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wmlcb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_p33o5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_3e0sm")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_eqc00")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6o8ni")
 right_icon = ExtResource("5_wmlcb")
 button_text = "100"
 label_font_size = 66
+icon_size = Vector2(72, 72)
 
 [node name="ContentContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox/BuyButton" index="3" unique_id=1093219519]
 offset_left = 51.0
@@ -114,18 +115,22 @@ offset_right = -59.0
 [node name="LeftMarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox/BuyButton/ContentContainer" index="0" unique_id=1575102438]
 theme_override_constants/margin_top = 10
 
+[node name="LeftIcon" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox/BuyButton/ContentContainer/LeftMarginContainer" index="0" unique_id=229000144]
+custom_minimum_size = Vector2(72, 72)
+
 [node name="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox/BuyButton/ContentContainer" index="1" unique_id=1893948842]
 custom_minimum_size = Vector2(0, 100)
 theme_override_font_sizes/normal_font_size = 66
 theme_override_font_sizes/bold_font_size = 66
 theme_override_font_sizes/italics_font_size = 66
-text = "100"
+text = "0"
 
 [node name="RightMarginContainer" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox/BuyButton/ContentContainer" index="2" unique_id=58538581]
 visible = true
-theme_override_constants/margin_top = 10
+theme_override_constants/margin_top = 0
 
 [node name="RightIcon" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox/BuyButton/ContentContainer/RightMarginContainer" index="0" unique_id=158955802]
+custom_minimum_size = Vector2(72, 72)
 texture = ExtResource("5_wmlcb")
 
 [node name="OwnedLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/HBox/BuyVBox" unique_id=1842356048]

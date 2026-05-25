@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="14_ql1j0"]
 [ext_resource type="Texture2D" uid="uid://deum40cvyrm2o" path="res://assets/hud/buttons/wide_red_button_pressed.png" id="15_7kvyq"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql1j0"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6dbjw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g5y2q"]
@@ -45,8 +47,6 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g1x8m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5tgmq"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bvmy7"]
 
 [node name="Settings" type="Node2D" unique_id=322031731]
 script = ExtResource("1_f4mfi")
@@ -140,11 +140,11 @@ layout_mode = 2
 
 [node name="StepAndSleepButton" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer" unique_id=112168689 instance=ExtResource("5_1g033")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6dbjw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_g5y2q")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_k00b3")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_aisiw")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_f1e71")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ql1j0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6dbjw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g5y2q")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_k00b3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aisiw")
 left_icon = ExtResource("6_ql1j0")
 right_icon = ExtResource("7_6dbjw")
 button_text = "Request step and[br]sleep permissions"
@@ -157,11 +157,11 @@ layout_mode = 2
 
 [node name="ScreenTimeButton" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer" unique_id=1510744690 instance=ExtResource("5_1g033")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_gcetw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_i24gk")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_3gwh8")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_q4e06")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w3ind")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_f1e71")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gcetw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_i24gk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3gwh8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q4e06")
 left_icon = ExtResource("8_ql1j0")
 right_icon = ExtResource("9_6dbjw")
 button_text = "Request screen[br]usage permission"
@@ -383,11 +383,11 @@ offset_left = -375.0
 offset_top = -80.0
 offset_right = 385.0
 offset_bottom = 80.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_nilcw")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_6dg6e")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_g1x8m")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_5tgmq")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bvmy7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w3ind")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nilcw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6dg6e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g1x8m")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5tgmq")
 left_icon = ExtResource("13_01roj")
 right_icon = ExtResource("13_01roj")
 button_text = "Clear save"

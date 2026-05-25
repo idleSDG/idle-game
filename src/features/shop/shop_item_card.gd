@@ -56,7 +56,7 @@ func _refresh_state() -> void:
 
 	owned_label.visible = owned
 	buy_button.visible = not owned
-	buy_button.is_disabled = not afford
+	buy_button.button_is_disabled = not afford
 
 	# Green when affordable, default when not
 	if afford:
