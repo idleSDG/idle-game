@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://7n7ppwm46eci"]
 
 [ext_resource type="Script" uid="uid://d128kiikmoqdg" path="res://src/features/progression/level_up_popup.gd" id="1_k5glt"]
+[ext_resource type="AudioStream" uid="uid://bvucqj1pxw4c6" path="res://assets/sfx/ui/013_Confirm_03.ogg" id="2_k4fq0"]
 [ext_resource type="Texture2D" uid="uid://cier8g417hph3" path="res://assets/skills/Wind_borderless.png" id="2_slxsh"]
+[ext_resource type="AudioStream" uid="uid://dsbo3sl8igoud" path="res://assets/sfx/ui/levelup.ogg" id="3_700ke"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k5glt"]
 bg_color = Color(0, 0, 0, 0.78431374)
@@ -26,6 +28,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k5glt")
+confirm_sfx = ExtResource("2_k4fq0")
+level_up_sfx = ExtResource("3_700ke")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=198171043]
 layout_mode = 1
@@ -85,3 +89,5 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "OK"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=324860346]

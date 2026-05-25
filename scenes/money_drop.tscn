@@ -1,10 +1,23 @@
 [gd_scene format=3 uid="uid://b1r7cm1uluuj2"]
 
-[ext_resource type="Texture2D" uid="uid://34sx5ru8alpl" path="res://assets/hud/coin.png" id="1_k6kpj"]
+[ext_resource type="Texture2D" uid="uid://buc0genkds163" path="res://assets/hud/coin_16x16.png" id="1_k6kpj"]
 [ext_resource type="Script" uid="uid://bd78dciepb2um" path="res://scenes/money_drop.gd" id="2_mqm5r"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="3_mqm5r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hd8b"]
+shader = ExtResource("3_mqm5r")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
 
 [node name="MoneyDrop" type="Sprite2D" unique_id=1150470496]
 z_index = 100
-scale = Vector2(0.01525, 0.015250001)
+texture_filter = 1
+scale = Vector2(5, 5)
 texture = ExtResource("1_k6kpj")
 script = ExtResource("2_mqm5r")
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1801097656]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_4hd8b")
+position = Vector2(1, 1)
+texture = ExtResource("1_k6kpj")

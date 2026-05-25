@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://25wdgy8koxnc" path="res://src/features/potions/potion_crafting.gd" id="3_7c4cn"]
 [ext_resource type="Texture2D" uid="uid://de53rohfgnvao" path="res://assets/potions_screen/PotionsScreen_Main_Decoration.png" id="3_hrjjp"]
 [ext_resource type="Texture2D" uid="uid://b458plh5o7o1n" path="res://assets/potions_screen/PotionsScreen_Main_Background.png" id="4_847jq"]
+[ext_resource type="AudioStream" uid="uid://bvucqj1pxw4c6" path="res://assets/sfx/ui/013_Confirm_03.ogg" id="4_kqk0h"]
 [ext_resource type="PackedScene" uid="uid://dytmbif2dd1v4" path="res://src/features/potions/potion_screen_item_slot.tscn" id="5_286y6"]
 [ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="6_286y6"]
 [ext_resource type="Texture2D" uid="uid://dhen7mb70wskg" path="res://assets/hud/buttons/icon_plus_dark.tres" id="7_snrhs"]
@@ -52,6 +53,7 @@ offset_bottom = 603.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_7c4cn")
+craft_sfx = ExtResource("4_kqk0h")
 
 [node name="PanelContainer" type="TextureRect" parent="CanvasLayer/Background/PotionCrafting" unique_id=1056741846]
 texture_filter = 1
@@ -95,7 +97,6 @@ offset_top = 75.57007
 offset_right = 811.0
 offset_bottom = 333.57007
 disabled = true
-is_disabled = true
 icon = ExtResource("7_snrhs")
 
 [node name="PotionTitleLabel" type="Label" parent="CanvasLayer/Background/PotionCrafting" unique_id=2121399146]
@@ -243,6 +244,9 @@ counter_value = "0"
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 counter_value = "0"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer/Background/PotionCrafting" unique_id=693887998]
+bus = &"SFX"
 
 [node name="NavBarMarginArea" parent="CanvasLayer/Background" unique_id=1067231177 instance=ExtResource("2_6lg3u")]
 layout_mode = 1

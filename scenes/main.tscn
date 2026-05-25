@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://rsqrntdrfr6h" path="res://main.gd" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://cl7ygcpiyui2w" path="res://src/ui/HUD/hud.gd" id="2_sugp2"]
-[ext_resource type="Texture2D" uid="uid://34sx5ru8alpl" path="res://assets/hud/coin.png" id="3_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://buc0genkds163" path="res://assets/hud/coin_16x16.png" id="3_qkpxi"]
 [ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_sugp2"]
 [ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="4_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://hxjy352wis2i" path="res://src/ui/labels/auto_size_label.tscn" id="5_choun"]
@@ -53,11 +53,6 @@ content_margin_top = 8.0
 content_margin_right = 16.0
 content_margin_bottom = 8.0
 bg_color = Color(0.6, 0.6, 0.6, 0.5294118)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jyhfs"]
-content_margin_left = 16.0
-content_margin_right = 16.0
-bg_color = Color(0.6, 0.6, 0.6, 0.4862745)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
 bg_color = Color(0.8156863, 1, 1, 1)
@@ -239,11 +234,12 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="MoneyIcon" type="TextureRect" parent="HUDLayer/Upper HUD/VBox/MoneyPanelContainer/MoneyHBoxContainer" unique_id=488510758]
+texture_filter = 1
 custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("3_jyhfs")
+texture = ExtResource("3_qkpxi")
 expand_mode = 1
 stretch_mode = 4
 
@@ -253,38 +249,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 text = "99"
-
-[node name="MoneyCollectionPanelContainer" type="PanelContainer" parent="HUDLayer" unique_id=329402899]
-unique_name_in_owner = true
-anchors_preset = -1
-anchor_left = 1.0
-anchor_top = 0.423
-anchor_right = 1.0
-anchor_bottom = 0.423
-offset_left = -381.0
-offset_top = -46.160034
-offset_right = -31.0
-offset_bottom = 46.839966
-theme_override_styles/panel = SubResource("StyleBoxFlat_jyhfs")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUDLayer/MoneyCollectionPanelContainer" unique_id=1013152147]
-layout_mode = 2
-
-[node name="MoneyIcon" type="TextureRect" parent="HUDLayer/MoneyCollectionPanelContainer/HBoxContainer" unique_id=698980689]
-custom_minimum_size = Vector2(80, 80)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture = ExtResource("3_jyhfs")
-expand_mode = 1
-stretch_mode = 4
-
-[node name="MoneyCollectionLabel" type="Label" parent="HUDLayer/MoneyCollectionPanelContainer/HBoxContainer" unique_id=955367077]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-text = "10 / 10"
 
 [node name="SmallIngredientButton" type="Button" parent="HUDLayer" unique_id=430342629]
 unique_name_in_owner = true

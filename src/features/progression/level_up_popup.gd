@@ -8,6 +8,11 @@ extends Control
 @onready var v_box: VBoxContainer = $PanelContainer/VBox
 @onready var skill_unlock: HBoxContainer = $PanelContainer/VBox/HBox_SkillUnlock
 
+@onready var sfx_player = $AudioStreamPlayer2D
+
+@export var confirm_sfx: AudioStream
+@export var level_up_sfx: AudioStream
+
 var skillUnlocks = []
  
 func _ready() -> void:
@@ -20,6 +25,7 @@ func _on_leveled_up(old_level: int, new_level: int) -> void:
 		show_level_up(old_level, new_level)
  
 func show_level_up(old_level: int, new_level: int) -> void:
+	_play_level_up_sfx()
 	var old_stats = BattleVariables.GetPlayerBaseStatsAtLevel(old_level)
 	var new_stats = BattleVariables.GetPlayerBaseStatsAtLevel(new_level)
  
@@ -52,6 +58,15 @@ func show_level_up(old_level: int, new_level: int) -> void:
  
 func _on_ok_pressed() -> void:
 	visible = false
+	_play_confirm_sfx()
 	for s in skillUnlocks:
 		s.queue_free()
 	skillUnlocks.clear()
+
+func _play_confirm_sfx():
+	sfx_player.stream = confirm_sfx
+	sfx_player.play()
+	
+func _play_level_up_sfx():
+	sfx_player.stream = level_up_sfx
+	sfx_player.play()
