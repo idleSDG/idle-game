@@ -576,6 +576,10 @@ text = "Level"
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kmb1v")
 
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/XP/PanelContainer" unique_id=1694334535]
+layout_mode = 2
+color = Color(0.18431373, 0.18431373, 0.18431373, 0.7019608)
+
 [node name="MarginContainer" type="MarginContainer" parent="HUDLayer/XP/PanelContainer" unique_id=2070952800]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
