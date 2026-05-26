@@ -211,7 +211,7 @@ equip = 3
 [node name="HBoxBottom" type="HBoxContainer" parent="CanvasLayer/Background/VBox" unique_id=2144475456]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 40
+theme_override_constants/separation = 10
 
 [node name="Equip" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxBottom" unique_id=1397294558]
 layout_mode = 2
@@ -230,7 +230,7 @@ text = "Equipment"
 horizontal_alignment = 1
 
 [node name="WeaponSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=751680909]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(470, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -242,7 +242,7 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
 text = "Staff: [tap to equip]"
 
 [node name="RobeSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=286484683]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(470, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -254,7 +254,7 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
 text = "Robe: [tap to equip]"
 
 [node name="HatSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=137611829]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(470, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -300,83 +300,30 @@ expand_mode = 1
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin" unique_id=1181952807]
 layout_mode = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 30
-theme_override_constants/margin_bottom = 30
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
 
-[node name="StatsGrid" type="GridContainer" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin" unique_id=1353690450]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin" unique_id=1909524349]
 layout_mode = 2
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 15
-columns = 2
 
-[node name="LabelHP" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=1836242561]
+[node name="StatsNames" type="RichTextLabel" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/HBoxContainer" unique_id=1699757648]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "HP"
+size_flags_horizontal = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
 
-[node name="HPFinalLabel" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=184791996]
+[node name="StatsValues" type="RichTextLabel" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/HBoxContainer" unique_id=1708318856]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-
-[node name="LabelATK" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=617938271]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "ATK"
-
-[node name="ATKFinalLabel" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=315643193]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-
-[node name="LabelDEF" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=608634292]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "DEF"
-
-[node name="DEFFinalLabel" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=1640019501]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-
-[node name="LabelCR" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=527176026]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Crit Rate"
-
-[node name="CRFinalLabel" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=151764387]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-
-[node name="LabelCDMG" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=1174177183]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Crit DMG"
-
-[node name="CDMGFinalLabel" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=1427239518]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-
-[node name="LabelIng" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=204997484]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
-text = "Ingredient 
-Gain"
-
-[node name="IngFinalLabel" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid" unique_id=1190353638]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 30
+size_flags_horizontal = 10
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 2
 
 [node name="Deco" type="TextureRect" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin" unique_id=1501489643]
 layout_mode = 2

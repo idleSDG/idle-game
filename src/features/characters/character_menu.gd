@@ -1,12 +1,8 @@
 extends Node
 
-# Stats labels
-@onready var hp_final_label      : Label = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid/HPFinalLabel
-@onready var atk_final_label     : Label = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid/ATKFinalLabel
-@onready var def_final_label     : Label = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid/DEFFinalLabel
-@onready var crit_final_label    : Label = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid/CRFinalLabel
-@onready var critdmg_final_label : Label = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid/CDMGFinalLabel
-@onready var ing_final_label     : Label = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/StatsGrid/IngFinalLabel
+# Stats label
+@onready var stats_names_label  : RichTextLabel = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/HBoxContainer/StatsNames
+@onready var stats_values_label : RichTextLabel = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/HBoxContainer/StatsValues
 
 # Equipment buttons
 @onready var weapon_btn : Button = $CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection/WeaponSlotBtn
@@ -65,20 +61,44 @@ func _ready() -> void:
 
 # ── Stats ─────────────────────────────────────────────────────────────────────
 func _refresh_stats() -> void:
-	var base      : CharacterStats = BattleVariables.GetPlayerBaseStatsAtLevel(PlayerProgress.level)
-	var final     : CharacterStats = BattleVariables.GetPlayer()
-	var bonuses   : Dictionary     = EquipmentManager.get_total_bonuses()
-	var final_ing : float          = 1.0 + bonuses["ingredient_gain_pct"]
+	var base : CharacterStats = BattleVariables.GetPlayerBaseStatsAtLevel(PlayerProgress.level)
+	var final : CharacterStats = BattleVariables.GetPlayer()
+	var bonuses : Dictionary = EquipmentManager.get_total_bonuses()
+	var final_ing : float = 1.0 + bonuses["ingredient_gain_pct"]
 
-	_set_stat(hp_final_label,      _fmt_int(final.maxHealth,        final.maxHealth  - base.maxHealth),  final.maxHealth  != base.maxHealth)
-	_set_stat(atk_final_label,     _fmt_int(final.attack,           final.attack     - base.attack),     final.attack     != base.attack)
-	_set_stat(def_final_label,     _fmt_int(final.defense,          final.defense    - base.defense),    final.defense    != base.defense)
-	_set_stat(crit_final_label,    _fmt_pct(final.critRate,         final.critRate   - base.critRate),   final.critRate   != base.critRate)
-	_set_stat(critdmg_final_label, _fmt_pct(1.0 + final.critDMG,   final.critDMG    - base.critDMG),    final.critDMG    != base.critDMG)
-	_set_stat(ing_final_label,     _fmt_pct(final_ing,              bonuses["ingredient_gain_pct"]),     final_ing        != 1.0)
+	var names := ""
+	var values := ""
+
+	names  += _name_row("res://assets/icons/icon_plus.png", "HP")
+	values += _value_row(_fmt_int(final.maxHealth, final.maxHealth - base.maxHealth), final.maxHealth != base.maxHealth)
+
+	names  += _name_row("res://assets/icons/atk.png", "ATK")
+	values += _value_row(_fmt_int(final.attack, final.attack - base.attack), final.attack != base.attack)
+
+	names  += _name_row("res://assets/icons/def.png", "DEF")
+	values += _value_row(_fmt_int(final.defense, final.defense - base.defense), final.defense != base.defense)
+
+	names  += _name_row("res://assets/icons/crt.png", "Crit Rate")
+	values += _value_row(_fmt_pct(final.critRate, final.critRate - base.critRate), final.critRate != base.critRate)
+
+	names  += _name_row("res://assets/icons/cdm.png", "Crit DMG")
+	values += _value_row(_fmt_pct(1.0 + final.critDMG, final.critDMG - base.critDMG), final.critDMG != base.critDMG)
+
+	names  += _name_row("res://assets/icons/chr.png", "Ing Gain")
+	values += _value_row(_fmt_pct(final_ing, bonuses["ingredient_gain_pct"]), final_ing  != 1.0)
+
+	stats_names_label.text  = names
+	stats_values_label.text = values
+
+func _name_row(icon: String, stat_name: String) -> String:
+	return "[font_size=32][img=32]%s[/img] %s[/font_size]\n" % [icon, stat_name]
+
+func _value_row(value: String, boosted: bool) -> String:
+	var color := "00d400" if boosted else "ffffff"
+	return "[font_size=32][color=#%s]%s[/color][/font_size]\n" % [color, value]
 
 func _set_stat(lbl: Label, text: String, boosted: bool) -> void:
-	lbl.text     = text
+	lbl.text = text
 	lbl.modulate = GREEN if boosted else WHITE
 
 func _fmt_int(final_val: int, delta: int) -> String:
