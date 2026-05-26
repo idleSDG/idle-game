@@ -10,6 +10,7 @@ signal equipSkillPressed(equip : int) # SET UP THE THREE MAIN SKILL EQUIP BUTTON
 @export var button1 : SkillGridButton
 @export var button2 : SkillGridButton
 @export var button3 : SkillGridButton
+@export var slotTitleLabel : Label
 
 var currentSelection : int = -1
 
@@ -64,7 +65,6 @@ func inv_skill_Button_Pressed(skill : Skill):
 			SkillManager.Equip(skill, currentSelection)
 	doSkills()
 
-
 func _on_equip_skill_pressed(equip: int) -> void:
 	if currentSelection == equip:
 		skillScreen.visible = false
@@ -74,9 +74,12 @@ func _on_equip_skill_pressed(equip: int) -> void:
 	else:
 		skillScreen.visible = true
 		currentSelection = equip
+		if slotTitleLabel:
+			slotTitleLabel.text = "SLOT " + str(equip)
 		doSkills()
-		
+		var equipped_skill : Skill = null
 		for skill in SkillManager.skills:
-			if skill.equipState == currentSelection:
-				skill_pressed.emit(skill)
-	pass
+			if skill.equipState == equip:
+				equipped_skill = skill
+				break
+		skill_pressed.emit(equipped_skill)

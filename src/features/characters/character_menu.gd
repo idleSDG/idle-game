@@ -17,17 +17,20 @@ extends Node
 @onready var skin_color_panel : PanelContainer = $CanvasLayer/Background/SkinColorPicker/SkinColorPanel
 
 # Item picker popup
-@onready var item_picker : Control = $CanvasLayer/Background/ItemPicker
-@onready var item_grid : ItemGrid = $CanvasLayer/Background/ItemPicker/PanelContainer/VBox/ItemGrid
-@onready var picker_title : Label = $CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBox/PickerTitle
-@onready var picker_equip_btn : Button = $CanvasLayer/Background/ItemPicker/PanelContainer/VBox/EquipBtn
-@onready var preview_icon : TextureRect = $CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent/TextureRect
-@onready var preview_name : Label = $CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentName
-@onready var picker_info_lbl : Label = $CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentInfo
-@onready var picker_close_btn : TextureButton = $CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBox/TextureButton
+@onready var item_picker : Control = $CanvasLayer2/ItemPicker
+@onready var item_grid : ItemGrid = $CanvasLayer2/ItemPicker/PanelContainer/VBox/ItemGrid
+@onready var picker_title : Label = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBox/PickerTitle
+@onready var picker_equip_btn : Button = $CanvasLayer2/ItemPicker/PanelContainer/VBox/EquipBtn
+@onready var preview_icon : TextureRect = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/TextureRect
+@onready var preview_name : Label = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentName
+@onready var picker_info_lbl : Label = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentInfo
+@onready var picker_close_btn : TextureButton = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBox/TextureButton
 
 # Skill selection popup
-@onready var skill_background : Control = $CanvasLayer/Background/SkillSelectionBackground
+@onready var skill_background : Control = $CanvasLayer2/SkillSelectionBackground
+@onready var skill_slot_title : Label = $CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/HBox/SlotTitle
+@onready var skill_close_btn : TextureButton = $CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/HBox/TextureButton
+@onready var skill_grid : SkillGrid = $CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/MarginContainer/SkillGrid
 
 var _current_picker_slot : EquipmentItem.Slot
 var _selected_item : EquipmentItem = null
@@ -59,6 +62,7 @@ func _ready() -> void:
 
 	item_picker.gui_input.connect(_on_picker_background_input)
 	skill_background.gui_input.connect(_on_skill_background_input)
+	skill_close_btn.pressed.connect(_close_skill_selection)
 
 	EquipmentManager.equipment_changed.connect(_on_equipment_changed)
 	PlayerProgress.leveled_up.connect(func(_o, _n): _refresh_stats())
@@ -193,9 +197,9 @@ func _on_skill_background_input(event: InputEvent) -> void:
 
 func _close_skill_selection() -> void:
 	skill_background.visible = false
-	var skill_grid : SkillGrid = $CanvasLayer/Background/SkillSelectionBackground/SkillSelection/ScrollContainer/MarginContainer/SkillGrid
 	skill_grid.currentSelection = -1
 	skill_grid.doSkills()
+	skill_slot_title.text = ""
 
 # Skin color popup
 func _on_skin_btn_pressed() -> void:

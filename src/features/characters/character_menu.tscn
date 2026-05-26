@@ -37,8 +37,17 @@ region_rect = Rect2(0, 0, 48.01725, 16.006632)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vrfog"]
 texture = ExtResource("11_syx3m")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2xjd"]
-bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v3agd"]
+content_margin_left = 50.0
+content_margin_top = 50.0
+content_margin_right = 50.0
+content_margin_bottom = 50.0
+texture = ExtResource("15_syx3m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aiw4e"]
+content_margin_left = 10.0
+content_margin_right = 10.0
+texture = ExtResource("15_syx3m")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f5f5t"]
 content_margin_left = 50.0
@@ -420,10 +429,13 @@ sliders_visible = false
 hex_visible = false
 presets_visible = false
 
-[node name="SkillSelectionBackground" type="Control" parent="CanvasLayer/Background" unique_id=1691713966]
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=2044313974]
+layer = 2
+
+[node name="SkillSelectionBackground" type="Control" parent="CanvasLayer2" unique_id=1691713966]
 visible = false
 z_index = 99
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -431,7 +443,17 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="SkillSelection" type="VBoxContainer" parent="CanvasLayer/Background/SkillSelectionBackground" unique_id=776300045]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2/SkillSelectionBackground" unique_id=2002920484]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.8627451)
+
+[node name="SkillSelection" type="VBoxContainer" parent="CanvasLayer2/SkillSelectionBackground" unique_id=776300045]
 z_index = 100
 layout_mode = 1
 anchors_preset = 8
@@ -445,57 +467,82 @@ offset_right = 500.00006
 offset_bottom = 483.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
+theme_override_constants/separation = 10
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer/Background/SkillSelectionBackground/SkillSelection" unique_id=1544014948]
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection" unique_id=1544014948]
 custom_minimum_size = Vector2(0, 670)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_l2xjd")
+theme_override_styles/panel = SubResource("StyleBoxTexture_v3agd")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Background/SkillSelectionBackground/SkillSelection/ScrollContainer" unique_id=915604959]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer" unique_id=853935645]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox" unique_id=37132302]
+layout_mode = 2
+
+[node name="SlotTitle" type="Label" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/HBox" unique_id=593170449]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("8_ahy0h")
+theme_override_font_sizes/font_size = 60
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/HBox" unique_id=1050467180]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture_normal = ExtResource("13_f5f5t")
+texture_pressed = ExtResource("13_f5f5t")
+texture_hover = ExtResource("13_f5f5t")
+stretch_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox" unique_id=915604959]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="SkillGrid" parent="CanvasLayer/Background/SkillSelectionBackground/SkillSelection/ScrollContainer/MarginContainer" unique_id=1758141714 node_paths=PackedStringArray("skillScreen", "button1", "button2", "button3") instance=ExtResource("5_kt2ab")]
+[node name="SkillGrid" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/MarginContainer" unique_id=1758141714 node_paths=PackedStringArray("skillScreen", "button1", "button2", "button3", "slotTitleLabel") instance=ExtResource("5_kt2ab")]
 layout_mode = 2
 size_flags_horizontal = 0
-columns = 6
-skillScreen = NodePath("../../../..")
-button1 = NodePath("../../../../../VBox/HBoxTop/Skills/SkillsSection/Margin/Margin2/HBox/Button")
-button2 = NodePath("../../../../../VBox/HBoxTop/Skills/SkillsSection/Margin/Margin2/HBox/Button2")
-button3 = NodePath("../../../../../VBox/HBoxTop/Skills/SkillsSection/Margin/Margin2/HBox/Button3")
+skillScreen = NodePath("../../../../..")
+button1 = NodePath("../../../../../../../CanvasLayer/Background/VBox/HBoxTop/Skills/SkillsSection/Margin/Margin2/HBox/Button")
+button2 = NodePath("../../../../../../../CanvasLayer/Background/VBox/HBoxTop/Skills/SkillsSection/Margin/Margin2/HBox/Button2")
+button3 = NodePath("../../../../../../../CanvasLayer/Background/VBox/HBoxTop/Skills/SkillsSection/Margin/Margin2/HBox/Button3")
+slotTitleLabel = NodePath("../../HBox/SlotTitle")
 
-[node name="SkillPreview" parent="CanvasLayer/Background/SkillSelectionBackground/SkillSelection" unique_id=1238233801 instance=ExtResource("6_jbg7u")]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection" unique_id=720014738]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_aiw4e")
+
+[node name="SkillPreview" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/PanelContainer" unique_id=1238233801 instance=ExtResource("6_jbg7u")]
 layout_mode = 2
 
-[node name="ItemPicker" type="Control" parent="CanvasLayer/Background" unique_id=1096475004]
+[node name="ItemPicker" type="Control" parent="CanvasLayer2" unique_id=1096475004]
+visible = false
 z_index = 100
-layout_mode = 1
-anchor_top = 0.123
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.855
-offset_top = -0.16000366
-offset_bottom = 0.39990234
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Background/ItemPicker" unique_id=1119856064]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2/ItemPicker" unique_id=1119856064]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = -0.16800001
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 1.1980001
-offset_top = 0.20802307
-offset_bottom = -0.38806152
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 color = Color(0, 0, 0, 0.8627451)
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Background/ItemPicker" unique_id=640481598]
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer2/ItemPicker" unique_id=640481598]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -506,21 +553,21 @@ offset_bottom = 357.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_f5f5t")
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer" unique_id=1875629436]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer2/ItemPicker/PanelContainer" unique_id=1875629436]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=2014432554]
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=2014432554]
 layout_mode = 2
 
-[node name="PickerTitle" type="Label" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBox" unique_id=2053736038]
+[node name="PickerTitle" type="Label" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBox" unique_id=2053736038]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_fonts/font = ExtResource("8_ahy0h")
 theme_override_font_sizes/font_size = 60
 
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBox" unique_id=17790609]
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBox" unique_id=17790609]
 texture_filter = 1
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -529,31 +576,31 @@ texture_pressed = ExtResource("13_f5f5t")
 texture_hover = ExtResource("13_f5f5t")
 stretch_mode = 0
 
-[node name="ItemGrid" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=1779284087 instance=ExtResource("7_ahy0h")]
+[node name="ItemGrid" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=1779284087 instance=ExtResource("7_ahy0h")]
 layout_mode = 2
 
-[node name="HBoxCurrent" type="HBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=1206423183]
+[node name="HBoxCurrent" type="HBoxContainer" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=1206423183]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=276525877]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=276525877]
 custom_minimum_size = Vector2(160, 160)
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=1224369523]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=1224369523]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CurrentName" type="Label" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=10285727]
+[node name="CurrentName" type="Label" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=10285727]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ahy0h")
 theme_override_font_sizes/font_size = 48
 
-[node name="CurrentInfo" type="Label" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=682111993]
+[node name="CurrentInfo" type="Label" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=682111993]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 
-[node name="EquipBtn" type="Button" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=612806409]
+[node name="EquipBtn" type="Button" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=612806409]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -569,4 +616,4 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_5f6dy")
 theme_override_styles/focus = SubResource("StyleBoxTexture_5f6dy")
 text = "Equip"
 
-[connection signal="skill_pressed" from="CanvasLayer/Background/SkillSelectionBackground/SkillSelection/ScrollContainer/MarginContainer/SkillGrid" to="CanvasLayer/Background/SkillSelectionBackground/SkillSelection/SkillPreview" method="_on_skill_grid_skill_pressed"]
+[connection signal="skill_pressed" from="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/MarginContainer/SkillGrid" to="CanvasLayer2/SkillSelectionBackground/SkillSelection/PanelContainer/SkillPreview" method="_on_skill_grid_skill_pressed"]
