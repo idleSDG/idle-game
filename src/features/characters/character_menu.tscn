@@ -14,6 +14,8 @@
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="8_ahy0h"]
 [ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="9_g64kq"]
 [ext_resource type="Texture2D" uid="uid://yj46gmaufevo" path="res://assets/character_screen/stat_deco.png" id="10_bbp5v"]
+[ext_resource type="Texture2D" uid="uid://3yfhmovm6r4x" path="res://assets/character_screen/skin_back.png" id="11_syx3m"]
+[ext_resource type="Texture2D" uid="uid://d20uxmsskevy4" path="res://assets/character_screen/x.png" id="13_f5f5t"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ti4qo"]
 content_margin_left = 20.0
@@ -31,17 +33,8 @@ content_margin_bottom = 20.0
 texture = ExtResource("6_ahy0h")
 region_rect = Rect2(0, 0, 48.01725, 16.006632)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7bf8i"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.19506672, 0.19506672, 0.19506669, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vrfog"]
+texture = ExtResource("11_syx3m")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2xjd"]
 bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
@@ -404,41 +397,57 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="SkinColorPicker" type="Control" parent="CanvasLayer/Background" unique_id=1542870993]
-visible = false
+z_index = 99
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
 
 [node name="SkinColorPanel" type="PanelContainer" parent="CanvasLayer/Background/SkinColorPicker" unique_id=1383197197]
-layout_mode = 0
-offset_left = 176.0
-offset_right = 494.0
-offset_bottom = 334.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.418
+anchor_top = 0.49100003
+anchor_right = 0.418
+anchor_bottom = 0.49100003
+offset_left = 12.559998
+offset_top = -72.72003
+offset_right = 567.56
+offset_bottom = 312.27997
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_7bf8i")
+theme_override_styles/panel = SubResource("StyleBoxTexture_vrfog")
 script = ExtResource("3_ifdmm")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel" unique_id=513128103]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel" unique_id=708597476]
 layout_mode = 2
-theme_override_constants/separation = 15
+theme_override_constants/margin_left = 35
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 35
+theme_override_constants/margin_bottom = 40
 
-[node name="Label" type="Label" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/VBoxContainer" unique_id=141646674]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer" unique_id=513128103]
 layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer" unique_id=1529799181]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=141646674]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 26
 text = "Skin Color"
 horizontal_alignment = 1
 
-[node name="ColorPicker" type="ColorPicker" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/VBoxContainer" unique_id=927931353]
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1674186909]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+texture_normal = ExtResource("13_f5f5t")
+stretch_mode = 0
+
+[node name="ColorPicker" type="ColorPicker" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer" unique_id=927931353]
 layout_mode = 2
 edit_alpha = false
 edit_intensity = false

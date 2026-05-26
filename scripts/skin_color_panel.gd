@@ -2,7 +2,7 @@ class_name SkinColorPanel extends PanelContainer
 
 signal changed(color: Color)
 
-@onready var color_picker : ColorPicker = $VBoxContainer/ColorPicker
+@onready var color_picker : ColorPicker = $MarginContainer/VBoxContainer/ColorPicker
 
 func _ready() -> void:
 	color_picker.color = PlayerAppearance.appearance.skin_color
