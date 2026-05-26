@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="9_g64kq"]
 [ext_resource type="Texture2D" uid="uid://3yfhmovm6r4x" path="res://assets/character_screen/skin_back.png" id="11_syx3m"]
 [ext_resource type="Texture2D" uid="uid://d20uxmsskevy4" path="res://assets/character_screen/x.png" id="13_f5f5t"]
+[ext_resource type="Texture2D" uid="uid://bjn0vbgrih47r" path="res://assets/character_screen/equip_back.png" id="15_syx3m"]
+[ext_resource type="Texture2D" uid="uid://byhs7o13gw54d" path="res://assets/hud/buttons/button_white_normal.tres" id="17_f5f5t"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ti4qo"]
 content_margin_left = 20.0
@@ -38,8 +40,19 @@ texture = ExtResource("11_syx3m")
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l2xjd"]
 bg_color = Color(0.18000486, 0.1800049, 0.1800048, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqv88"]
-bg_color = Color(0.19607843, 0.19607843, 0.19607843, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f5f5t"]
+content_margin_left = 50.0
+content_margin_top = 50.0
+content_margin_right = 50.0
+content_margin_bottom = 80.0
+texture = ExtResource("15_syx3m")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5f6dy"]
+content_margin_left = 50.0
+content_margin_top = 20.0
+content_margin_right = 50.0
+content_margin_bottom = 50.0
+texture = ExtResource("17_f5f5t")
 
 [node name="CharacterMenu" type="Node2D" unique_id=1633184879]
 script = ExtResource("1_viems")
@@ -137,6 +150,7 @@ size_flags_vertical = 3
 mouse_filter = 1
 
 [node name="SkinBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox" unique_id=541459334]
+texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -230,6 +244,7 @@ text = "Equipment"
 horizontal_alignment = 1
 
 [node name="WeaponSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=751680909]
+texture_filter = 1
 custom_minimum_size = Vector2(470, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -242,6 +257,7 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
 text = "Staff: [tap to equip]"
 
 [node name="RobeSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=286484683]
+texture_filter = 1
 custom_minimum_size = Vector2(470, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -254,6 +270,7 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
 text = "Robe: [tap to equip]"
 
 [node name="HatSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=137611829]
+texture_filter = 1
 custom_minimum_size = Vector2(470, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -387,6 +404,7 @@ text = "Skin Color"
 horizontal_alignment = 1
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1674186909]
+texture_filter = 1
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 texture_normal = ExtResource("13_f5f5t")
@@ -453,55 +471,102 @@ button3 = NodePath("../../../../../VBox/HBoxTop/Skills/SkillsSection/Margin/Marg
 layout_mode = 2
 
 [node name="ItemPicker" type="Control" parent="CanvasLayer/Background" unique_id=1096475004]
-visible = false
 z_index = 100
 layout_mode = 1
-anchors_preset = 15
+anchor_top = 0.123
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.855
+offset_top = -0.16000366
+offset_bottom = 0.39990234
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Background/ItemPicker" unique_id=1119856064]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.16800001
+anchor_right = 1.0
+anchor_bottom = 1.1980001
+offset_top = 0.20802307
+offset_bottom = -0.38806152
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 0.8627451)
 
 [node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Background/ItemPicker" unique_id=640481598]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-offset_left = 20.0
-offset_top = 20.0
-offset_right = -20.0
-offset_bottom = 146.0
+offset_left = 39.0
+offset_top = 55.0
+offset_right = -42.0
+offset_bottom = 357.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_oqv88")
+theme_override_styles/panel = SubResource("StyleBoxTexture_f5f5t")
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer" unique_id=1875629436]
 layout_mode = 2
+theme_override_constants/separation = 20
 
-[node name="PickerTitle" type="Label" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=2053736038]
+[node name="HBox" type="HBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=2014432554]
+layout_mode = 2
+
+[node name="PickerTitle" type="Label" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBox" unique_id=2053736038]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("8_ahy0h")
+theme_override_font_sizes/font_size = 60
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBox" unique_id=17790609]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+texture_normal = ExtResource("13_f5f5t")
+texture_pressed = ExtResource("13_f5f5t")
+texture_hover = ExtResource("13_f5f5t")
+stretch_mode = 0
 
 [node name="ItemGrid" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=1779284087 instance=ExtResource("7_ahy0h")]
 layout_mode = 2
 
-[node name="InfoLabel" type="Label" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=682111993]
+[node name="HBoxCurrent" type="HBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=1206423183]
 layout_mode = 2
-theme_override_font_sizes/font_size = 48
-horizontal_alignment = 1
+size_flags_horizontal = 4
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=638167887]
-custom_minimum_size = Vector2(0, 125)
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=276525877]
+custom_minimum_size = Vector2(160, 160)
 layout_mode = 2
-size_flags_vertical = 3
 
-[node name="EquipBtn" type="Button" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBox" unique_id=612806409]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=1224369523]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.2, 1, 0.2, 1)
+
+[node name="CurrentName" type="Label" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=10285727]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_ahy0h")
+theme_override_font_sizes/font_size = 48
+
+[node name="CurrentInfo" type="Label" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=682111993]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="EquipBtn" type="Button" parent="CanvasLayer/Background/ItemPicker/PanelContainer/VBox" unique_id=612806409]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.11764706, 0.627451, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.11764706, 0.627451, 0, 1)
+theme_override_colors/font_hover_color = Color(0.11764706, 0.627451, 0, 1)
+theme_override_fonts/font = ExtResource("8_ahy0h")
 theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxTexture_5f6dy")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_5f6dy")
+theme_override_styles/hover = SubResource("StyleBoxTexture_5f6dy")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_5f6dy")
+theme_override_styles/focus = SubResource("StyleBoxTexture_5f6dy")
 text = "Equip"
 
 [connection signal="skill_pressed" from="CanvasLayer/Background/SkillSelectionBackground/SkillSelection/ScrollContainer/MarginContainer/SkillGrid" to="CanvasLayer/Background/SkillSelectionBackground/SkillSelection/SkillPreview" method="_on_skill_grid_skill_pressed"]
