@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://kcnv1ayyf06w" path="res://assets/character_screen/Avatar_decoration.png" id="7_bbp5v"]
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="8_ahy0h"]
 [ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="9_g64kq"]
-[ext_resource type="Texture2D" uid="uid://yj46gmaufevo" path="res://assets/character_screen/stat_deco.png" id="10_bbp5v"]
 [ext_resource type="Texture2D" uid="uid://3yfhmovm6r4x" path="res://assets/character_screen/skin_back.png" id="11_syx3m"]
 [ext_resource type="Texture2D" uid="uid://d20uxmsskevy4" path="res://assets/character_screen/x.png" id="13_f5f5t"]
 
@@ -77,65 +76,67 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Avatar" type="Control" parent="CanvasLayer/Background/VBox/HBoxTop" unique_id=445394344]
+[node name="Char" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop" unique_id=1075572043]
 layout_mode = 2
 size_flags_horizontal = 3
-mouse_filter = 1
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
 
-[node name="Back" type="TextureRect" parent="CanvasLayer/Background/VBox/HBoxTop/Avatar" unique_id=1651792966]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.061000004
-anchor_top = 0.049000002
-anchor_right = 0.93600005
-anchor_bottom = 0.998
-offset_left = 6.1429977
-offset_top = 7.338997
-offset_right = -9.232056
-offset_bottom = -6.421997
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Char" unique_id=2072240033]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox" unique_id=2050550122]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("8_ahy0h")
+theme_override_font_sizes/font_size = 60
+text = "Character"
+horizontal_alignment = 1
+
+[node name="Avatar" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox" unique_id=418064527]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar" unique_id=52365698]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 6
+
+[node name="Back" type="TextureRect" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/MarginContainer" unique_id=1651792966]
+layout_mode = 2
 texture = ExtResource("4_jbg7u")
 
-[node name="Deco" type="TextureRect" parent="CanvasLayer/Background/VBox/HBoxTop/Avatar" unique_id=552565252]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.061000004
-anchor_top = 0.049000002
-anchor_right = 0.93600005
-anchor_bottom = 0.99700004
-offset_left = 0.14299774
-offset_top = 0.3389969
-offset_right = -0.23205566
-offset_bottom = 0.36694336
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Deco" type="TextureRect" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar" unique_id=552565252]
+layout_mode = 2
 texture = ExtResource("7_bbp5v")
 
-[node name="Margin" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Avatar" unique_id=588660485]
-layout_mode = 0
-offset_left = 46.0
-offset_top = 46.0
-offset_right = 589.0
-offset_bottom = 783.0
+[node name="Margin" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar" unique_id=588660485]
+layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 40
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Avatar/Margin" unique_id=255376412]
+[node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin" unique_id=255376412]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="WizardAvatar" parent="CanvasLayer/Background/VBox/HBoxTop/Avatar/Margin/VBox" unique_id=1894489798 instance=ExtResource("2_oqv88")]
-position = Vector2(220, 300)
+[node name="WizardAvatar" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox" unique_id=1894489798 instance=ExtResource("2_oqv88")]
+position = Vector2(240, 280)
 scale = Vector2(4, 4)
 
-[node name="Spacer" type="Control" parent="CanvasLayer/Background/VBox/HBoxTop/Avatar/Margin/VBox" unique_id=1089306947]
-custom_minimum_size = Vector2(0, 500)
+[node name="Spacer" type="Control" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox" unique_id=1089306947]
+custom_minimum_size = Vector2(0, 550)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="SkinBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxTop/Avatar/Margin/VBox" unique_id=541459334]
+[node name="SkinBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox" unique_id=541459334]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -147,11 +148,6 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_ti4qo")
 theme_override_styles/disabled = SubResource("StyleBoxTexture_ti4qo")
 theme_override_styles/focus = SubResource("StyleBoxTexture_ti4qo")
 text = "Skin color"
-
-[node name="Spacer" type="Control" parent="CanvasLayer/Background/VBox/HBoxTop" unique_id=939132621]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-mouse_filter = 1
 
 [node name="Skills" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop" unique_id=214867289]
 layout_mode = 2
@@ -173,10 +169,11 @@ horizontal_alignment = 1
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Skills/SkillsSection" unique_id=1167604772]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Skills/SkillsSection/Margin" unique_id=1488131653]
 layout_mode = 2
-theme_override_constants/margin_left = 5
+theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
@@ -192,8 +189,8 @@ expand_mode = 1
 
 [node name="Margin2" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Skills/SkillsSection/Margin" unique_id=456377802]
 layout_mode = 2
-theme_override_constants/margin_top = 40
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_bottom = 80
 
 [node name="HBox" type="VBoxContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Skills/SkillsSection/Margin/Margin2" unique_id=1986815152]
 layout_mode = 2
@@ -219,12 +216,11 @@ theme_override_constants/separation = 40
 [node name="Equip" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxBottom" unique_id=1397294558]
 layout_mode = 2
 theme_override_constants/margin_left = 40
-theme_override_constants/margin_top = 40
 theme_override_constants/margin_bottom = 40
 
 [node name="EquipSection" type="VBoxContainer" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip" unique_id=1684116850]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 30
 
 [node name="EquipTitle" type="Label" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=793848911]
 layout_mode = 2
@@ -234,7 +230,7 @@ text = "Equipment"
 horizontal_alignment = 1
 
 [node name="WeaponSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=751680909]
-custom_minimum_size = Vector2(0, 75)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -246,7 +242,7 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
 text = "Staff: [tap to equip]"
 
 [node name="RobeSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=286484683]
-custom_minimum_size = Vector2(0, 75)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -258,7 +254,7 @@ theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
 text = "Robe: [tap to equip]"
 
 [node name="HatSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=137611829]
-custom_minimum_size = Vector2(0, 75)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
@@ -292,10 +288,10 @@ theme_override_constants/margin_left = 10
 
 [node name="Margin" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin" unique_id=2044538930]
 layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 15
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_bottom = 5
 
 [node name="Back" type="TextureRect" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin" unique_id=141421180]
 layout_mode = 2
@@ -384,7 +380,8 @@ theme_override_font_sizes/font_size = 30
 
 [node name="Deco" type="TextureRect" parent="CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin" unique_id=1501489643]
 layout_mode = 2
-texture = ExtResource("10_bbp5v")
+texture = ExtResource("7_bbp5v")
+expand_mode = 1
 
 [node name="NavBarMarginArea" parent="CanvasLayer/Background" unique_id=1386662058 instance=ExtResource("2_ifdmm")]
 layout_mode = 1
@@ -397,6 +394,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="SkinColorPicker" type="Control" parent="CanvasLayer/Background" unique_id=1542870993]
+visible = false
 z_index = 99
 layout_mode = 1
 anchors_preset = 15

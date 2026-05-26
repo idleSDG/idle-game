@@ -14,7 +14,7 @@ extends Node
 @onready var hat_btn    : Button = $CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection/HatSlotBtn
 
 # Skin color
-@onready var skin_btn          : Button        = $CanvasLayer/Background/VBox/HBoxTop/Avatar/Margin/VBox/SkinBtn
+@onready var skin_btn          : Button        = $CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox/SkinBtn
 @onready var skin_color_picker : Control       = $CanvasLayer/Background/SkinColorPicker
 @onready var skin_close_btn    : TextureButton = $CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer/HBoxContainer/TextureButton
 @onready var color_picker      : ColorPicker   = $CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer/ColorPicker
