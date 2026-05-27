@@ -85,6 +85,9 @@ func _ready() -> void:
 
 	EquipmentManager.equipment_changed.connect(_on_equipment_changed)
 	PlayerProgress.leveled_up.connect(func(_o, _n): _refresh_stats())
+	
+	if(BattleVariables.battleState != BattleVariables.BattleStates.IN_LEVEL_SELECT):
+		%LockMargin.visible = true
 
 # Stats
 func _refresh_stats() -> void:
@@ -249,3 +252,7 @@ func _on_skin_color_changed(color: Color) -> void:
 func _on_equipment_changed() -> void:
 	_refresh_equipment_buttons()
 	_refresh_stats()
+
+
+func _on_skill_lock_button_pressed() -> void:
+	%SkillLockPopup.popup_centered()
