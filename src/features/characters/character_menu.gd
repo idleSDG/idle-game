@@ -1,5 +1,24 @@
 extends Node
 
+@onready var sfx_player: AudioStreamPlayer2D = $CanvasLayer2/ItemPicker/PanelContainer/VBox/ItemGrid/AudioStreamPlayer2D
+
+@export var equipment_equip_sfx: AudioStream
+@export var equipment_unequip_sfx: AudioStream
+@export var equipment_open_menu: AudioStream
+@export var equipment_close_menu: AudioStream
+
+func _play_equipment_equip_sfx() -> void:
+	sfx_player.stream = equipment_equip_sfx
+	sfx_player.play()
+	
+func _play_equipment_unequip_sfx() -> void:
+	sfx_player.stream = equipment_unequip_sfx
+	sfx_player.play()
+	
+func _play_equipment_open_menu_sfx() -> void:
+	sfx_player.stream = equipment_open_menu
+	sfx_player.play()
+
 # Stats label
 @onready var stats_names_label : RichTextLabel = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/HBoxContainer/StatsNames
 @onready var stats_values_label : RichTextLabel = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/HBoxContainer/StatsValues
@@ -145,6 +164,7 @@ func _open_picker(slot: EquipmentItem.Slot, title: String) -> void:
 	picker_equip_btn.disabled = true
 	item_grid.doEquipment(slot, true, true)
 	item_picker.visible = true
+	_play_equipment_open_menu_sfx()
 
 func _close_picker() -> void:
 	_selected_item  = null
@@ -190,11 +210,13 @@ func _show_item_info(item: EquipmentItem) -> void:
 func _on_equip_pressed() -> void:
 	if _selected_item == null:
 		return
+	_play_equipment_equip_sfx()
 	EquipmentManager.equip(_selected_item)
 	_close_picker()
 
 func _on_unequip_pressed(_slot: EquipmentItem.Slot) -> void:
 	EquipmentManager.unequip(_current_picker_slot)
+	_play_equipment_unequip_sfx()
 	_close_picker()
 
 # Skill selection popup

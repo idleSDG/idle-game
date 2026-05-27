@@ -1,5 +1,6 @@
 class_name Skill extends Node
 
+var effectScene = load("res://assets/effects/A_EffectScene.tscn")
 var skillUI = load("res://scenes/skillUI.tscn")
 var skillBar #= skillUI.instantiate()
 
@@ -10,8 +11,8 @@ var potency = 1.0
 var maxPotency = 2.0
 var equipState : int = -1
 var level : int = 0
-var exp : int = 0
-var maxExp : int = 1000
+var experience : int = 0
+var max_experience : int = 1000
 
 var charge = 0.0
 var maxCharge = 100.0
@@ -25,29 +26,28 @@ var isCurrentAttack : bool = false
 var sprite
 var borderClr
 
-
-func _init(pot = 1.0, max = 100.0, elem = CharacterStats.Element.None,
-		 aoe : bool = false, addEffect : StatusEffect = null):
-	potency = pot
+func _init(p_potency = 1.0, p_max = 100.0, p_element = CharacterStats.Element.None,
+		 p_is_aoe : bool = false, p_additionalEffect : StatusEffect = null):
+	potency = p_potency
 	
-	maxCharge = max
-	element = elem
-	isAoE = aoe
-	additionalEffect = addEffect
+	maxCharge = p_max
+	element = p_element
+	isAoE = p_is_aoe
+	additionalEffect = p_additionalEffect
 	
 	#set_visuals()
 	pass
 
-static func CreateSkill(name : String = "default", pot = 1.0, maxPot = 2.0, chargeAmnt = 100.0,
-	 elem = CharacterStats.Element.None, aoe : bool = false, addEffect : StatusEffect = null,
+static func CreateSkill(p_skillName : String = "default", p_potency = 1.0, p_maxPotency = 2.0, p_chargeAmount = 100.0,
+	 p_element = CharacterStats.Element.None, p_is_aoe : bool = false, p_additionalEffect : StatusEffect = null,
 	 lvl = 0, xp = 0, req = 1) -> Skill:
 	
-	var newSkill : Skill = new(pot, chargeAmnt, elem, aoe)
-	newSkill.maxPotency = maxPot
+	var newSkill : Skill = new(p_potency, p_chargeAmount, p_element, p_is_aoe)
+	newSkill.maxPotency = p_maxPotency
 	newSkill.level = lvl
-	newSkill.exp = xp
-	newSkill.additionalEffect = addEffect
-	newSkill.skillName = name
+	newSkill.experience = xp
+	newSkill.additionalEffect = p_additionalEffect
+	newSkill.skillName = p_skillName
 	newSkill.levelRequired = req
 	
 	return newSkill
@@ -66,7 +66,7 @@ static func to_dictionary(skill: Skill) -> Dictionary:
 	return {
 		"name": skill.skillName,
 		"lvl": skill.level,
-		"xp": skill.exp,
+		"xp": skill.experience,
 		"equip": skill.equipState,
 		"req": skill.levelRequired
 	}
@@ -77,7 +77,7 @@ static func from_dictionary(skill_str: Dictionary) -> Skill:
 	skill.level = skill_str.lvl
 	
 	if !skill_str.has("xp"): return null
-	skill.exp = skill_str.xp
+	skill.experience = skill_str.xp
 	
 	if !skill_str.has("equip"): return null
 	skill.equipState = skill_str.equip
@@ -120,18 +120,29 @@ func Use(user : Character, target : Character) -> bool:
 		dmg.x *= 0.5
 	target.TakeDamage(dmg.x, dmg.y > 0.0)
 	
+	if additionalEffect == null:
+		target.play_sfx(Character.SFX_TYPE.MELEE_HIT)
+	
 	if additionalEffect != null && BattleVariables.battleRNG.randf() < additionalEffect.ApplicationRate:
 		if additionalEffect.TargetSelf && isCurrentAttack:
+			user.play_status_effect_sfx(additionalEffect.StatusType)
 			user.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 		else:
+			target.play_status_effect_sfx(additionalEffect.StatusType)
 			target.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 	
 	if isCurrentAttack:
 		charge = charge - maxCharge
 	
+	var effect = effectScene.instantiate()
+	target.get_parent().get_parent().add_child(effect)
+	effect.SetUp(target.get_parent().position, element + 1, user.isPlayer)
+	
 	UpdateBar()
 	isCurrentAttack = false
 	return true
+
+
 
 # Damage formula function
 func DamageCalculation(user : CharacterStats, target : CharacterStats) -> Vector2:
@@ -185,20 +196,20 @@ func get_images():
 			sprite = load("res://assets/skills/Physical_borderless.png")
 			borderClr = Color.GOLDENROD
 
-func LevelUp(expAcquired : int):
-	var xpNeeded = maxExp - exp
-	if (expAcquired > xpNeeded && !(level >= 10)):
-		expAcquired -= xpNeeded
-		exp = 0
+func LevelUp(experienceAcquired : int):
+	var xpNeeded = max_experience - experience
+	if (experienceAcquired > xpNeeded && !(level >= 10)):
+		experienceAcquired -= xpNeeded
+		experience = 0
 		level = level + 1
-		LevelUp(expAcquired)
+		LevelUp(experienceAcquired)
 	else:
-		exp += expAcquired
+		experience += experienceAcquired
 	pass
 
 
-static func FromName(name : String) -> Skill:
-	match name:
+static func FromName(p_skill_name : String) -> Skill:
+	match p_skill_name:
 		"Strike" : 
 			return Skill.CreateSkill("Strike", 1.0, 2.0, 100.0, CharacterStats.Element.Physical, false,
 		 	null, 0, 0, 0)

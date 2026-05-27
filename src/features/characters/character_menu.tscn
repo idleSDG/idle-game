@@ -6,9 +6,11 @@
 [ext_resource type="Script" uid="uid://c1exhlvctr7py" path="res://scripts/skin_color_panel.gd" id="3_ifdmm"]
 [ext_resource type="PackedScene" uid="uid://ohafseoqfphk" path="res://scenes/skill_grid_button.tscn" id="4_g64kq"]
 [ext_resource type="Texture2D" uid="uid://b8lay0nj1nldp" path="res://assets/character_screen/Avatar_background.png" id="4_jbg7u"]
+[ext_resource type="AudioStream" uid="uid://cwudm2jtaxxm4" path="res://assets/sfx/ui/001_Hover_01_reverse.ogg" id="5_jbg7u"]
 [ext_resource type="PackedScene" uid="uid://dx8hs5u3c2ruw" path="res://scenes/skill_grid.tscn" id="5_kt2ab"]
 [ext_resource type="Texture2D" uid="uid://dhbuj8njcjydc" path="res://assets/hud/buttons/UI_Buttons.png" id="6_ahy0h"]
 [ext_resource type="PackedScene" uid="uid://ioxsx0fl2xta" path="res://scenes/skill_grid_preview.tscn" id="6_jbg7u"]
+[ext_resource type="AudioStream" uid="uid://cxndout5wl1gq" path="res://assets/sfx/ui/070_Equip_10.ogg" id="6_qpts6"]
 [ext_resource type="PackedScene" uid="uid://dbwsw84mds467" path="res://scenes/item_grid.tscn" id="7_ahy0h"]
 [ext_resource type="Texture2D" uid="uid://kcnv1ayyf06w" path="res://assets/character_screen/Avatar_decoration.png" id="7_bbp5v"]
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="8_ahy0h"]
@@ -17,6 +19,8 @@
 [ext_resource type="Texture2D" uid="uid://dg644utogun2k" path="res://assets/equipment/skill_panel.png" id="15_vrfog"]
 [ext_resource type="Texture2D" uid="uid://drsk0k83a26n8" path="res://assets/equipment/equip_panel.png" id="16_vrfog"]
 [ext_resource type="Texture2D" uid="uid://byhs7o13gw54d" path="res://assets/hud/buttons/button_white_normal.tres" id="17_f5f5t"]
+[ext_resource type="AudioStream" uid="uid://ce5ff7v05xwo3" path="res://assets/sfx/ui/071_Unequip_01.ogg" id="7_ifdmm"]
+[ext_resource type="AudioStream" uid="uid://mbu1s8krdivp" path="res://assets/sfx/ui/001_Hover_01.ogg" id="8_g64kq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ti4qo"]
 content_margin_left = 20.0
@@ -67,6 +71,10 @@ texture = ExtResource("17_f5f5t")
 
 [node name="CharacterMenu" type="Node2D" unique_id=1633184879]
 script = ExtResource("1_viems")
+equipment_equip_sfx = ExtResource("6_qpts6")
+equipment_unequip_sfx = ExtResource("7_ifdmm")
+equipment_open_menu = ExtResource("8_g64kq")
+equipment_close_menu = ExtResource("5_jbg7u")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=344208635]
 
@@ -581,6 +589,9 @@ stretch_mode = 0
 
 [node name="ItemGrid" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=1779284087 instance=ExtResource("7_ahy0h")]
 layout_mode = 2
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/ItemGrid" unique_id=1491204186]
+position = Vector2(-540, -124)
+bus = &"SFX"
 
 [node name="HBoxCurrent" type="HBoxContainer" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=1206423183]
 layout_mode = 2

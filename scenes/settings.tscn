@@ -1,15 +1,52 @@
 [gd_scene format=3 uid="uid://bgqftdi2ey53h"]
 
 [ext_resource type="Script" uid="uid://cj2q6elpwkvgn" path="res://scripts/settings_scene.gd" id="1_f4mfi"]
+[ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="2_gis3k"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="3_83j8s"]
+[ext_resource type="Texture2D" uid="uid://biposm34yae1j" path="res://assets/settings/Permissions decoration.png" id="4_gjs24"]
+[ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="5_1g033"]
+[ext_resource type="Texture2D" uid="uid://cvg0b8nke6dp5" path="res://assets/settings/Sound decoration.png" id="5_am25x"]
+[ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="6_gjs24"]
+[ext_resource type="Texture2D" uid="uid://c0k8nuv3qo418" path="res://assets/hud/buttons/foot_icon.tres" id="6_ql1j0"]
+[ext_resource type="Texture2D" uid="uid://bjyfonkmu4yx5" path="res://assets/hud/buttons/cup_icon.tres" id="7_6dbjw"]
+[ext_resource type="Texture2D" uid="uid://bkxokqy7ur4ue" path="res://assets/hud/buttons/clock_icon.tres" id="8_ql1j0"]
+[ext_resource type="Texture2D" uid="uid://ceoqr5rpaatyv" path="res://assets/hud/buttons/eye_icon.tres" id="9_6dbjw"]
+[ext_resource type="PackedScene" uid="uid://bel6qkf5a4mnw" path="res://src/ui/button/volume_slider.tscn" id="10_1g033"]
+[ext_resource type="Texture2D" uid="uid://ctibijkxblylk" path="res://assets/hud/buttons/sound_icon.tres" id="10_01roj"]
+[ext_resource type="Texture2D" uid="uid://bndgabvf53eat" path="res://assets/hud/buttons/icon_battle_light.tres" id="13_01roj"]
+[ext_resource type="Texture2D" uid="uid://dujcs88wm1h4n" path="res://assets/hud/buttons/wide_red_button.png" id="14_oe2nd"]
+[ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="14_ql1j0"]
+[ext_resource type="Texture2D" uid="uid://deum40cvyrm2o" path="res://assets/hud/buttons/wide_red_button_pressed.png" id="15_7kvyq"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6d6q"]
-bg_color = Color(0.65891117, 1.9131974e-06, 5.2943824e-07, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql1j0"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6wm04"]
-bg_color = Color(0.42306718, 0.0003871758, 0.00021218442, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6dbjw"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4mfi"]
-bg_color = Color(1, 0.23488575, 0.17882189, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g5y2q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k00b3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aisiw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1e71"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gcetw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i24gk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3gwh8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q4e06"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w3ind"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nilcw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6dg6e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g1x8m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5tgmq"]
 
 [node name="Settings" type="Node2D" unique_id=322031731]
 script = ExtResource("1_f4mfi")
@@ -17,60 +54,355 @@ script = ExtResource("1_f4mfi")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1971251208]
 layer = 0
 
-[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=1544346080]
-z_index = -1
+[node name="Background" type="TextureRect" parent="CanvasLayer" unique_id=414756056]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 0, 1)
+texture = ExtResource("2_gis3k")
 
-[node name="ClearSaveButton" type="Button" parent="CanvasLayer" unique_id=1535614000]
-anchors_preset = -1
+[node name="ScrollContainer" type="ScrollContainer" parent="CanvasLayer" unique_id=1370098209]
+anchors_preset = 13
 anchor_left = 0.5
-anchor_top = 0.108
 anchor_right = 0.5
-anchor_bottom = 0.108
-offset_left = -190.0
-offset_top = -50.36
-offset_right = 190.0
-offset_bottom = 49.64
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_r6d6q")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_6wm04")
-theme_override_styles/hover = SubResource("StyleBoxFlat_f4mfi")
-text = "Clear Save"
-
-[node name="StepPermissionsButton" type="Button" parent="CanvasLayer" unique_id=1864113747]
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.29900002
-anchor_right = 0.5
-anchor_bottom = 0.29900002
-offset_left = -350.0
-offset_top = -74.08008
-offset_right = 350.0
-offset_bottom = 75.91992
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_right = 540.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 48
-text = "Request Step and Sleep Permissions"
+grow_vertical = 2
 
-[node name="ScreenUsagePermissionsButton" type="Button" parent="CanvasLayer" unique_id=384963872]
+[node name="SizingControl" type="Control" parent="CanvasLayer/ScrollContainer" unique_id=1633480222]
+custom_minimum_size = Vector2(1080, 2300)
+layout_mode = 2
+
+[node name="Permissions" type="Control" parent="CanvasLayer/ScrollContainer/SizingControl" unique_id=314178131]
+layout_mode = 1
+anchor_left = 0.044000003
+anchor_top = 0.033
+anchor_right = 0.95500004
+anchor_bottom = 0.324
+offset_left = -0.5200043
+offset_top = 1.0999985
+offset_right = 1.5999756
+offset_bottom = -0.2000122
+
+[node name="PermissionWood" type="TextureRect" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions" unique_id=2017174488]
+texture_filter = 3
+custom_minimum_size = Vector2(48, 32)
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.404
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.404
-offset_left = -350.0
-offset_top = -75.68005
-offset_right = 350.0
-offset_bottom = 74.31995
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 48
-text = "Request screen usage permissions"
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -318.0
+offset_right = -432.0
+offset_bottom = -286.0
+scale = Vector2(20, 20)
+texture = ExtResource("3_83j8s")
+stretch_mode = 1
 
-[connection signal="pressed" from="CanvasLayer/ClearSaveButton" to="." method="_on_clear_save_pressed"]
-[connection signal="pressed" from="CanvasLayer/StepPermissionsButton" to="." method="_on_request_step_permissions_pressed"]
-[connection signal="pressed" from="CanvasLayer/ScreenUsagePermissionsButton" to="." method="_on_request_screen_time_permissions_pressed"]
+[node name="PermissionDecoration" type="TextureRect" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions" unique_id=1837414609]
+custom_minimum_size = Vector2(986, 668)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -493.0
+offset_top = -334.0
+offset_right = 493.0
+offset_bottom = 334.0
+texture = ExtResource("4_gjs24")
+
+[node name="PermissionVBoxContainer" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions" unique_id=1581535989]
+layout_mode = 0
+offset_left = 56.0
+offset_right = 931.0
+offset_bottom = 668.0
+
+[node name="LabelCenterContainer" type="CenterContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer" unique_id=313016417]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/LabelCenterContainer" unique_id=361702943]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 96
+text = "Permissions"
+
+[node name="Spacer" type="Control" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer" unique_id=458476754]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="StepAndSleepButton" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer" unique_id=112168689 instance=ExtResource("5_1g033")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ql1j0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6dbjw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_g5y2q")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_k00b3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_aisiw")
+left_icon = ExtResource("6_ql1j0")
+right_icon = ExtResource("7_6dbjw")
+button_text = "Request step and[br]sleep permissions"
+label_font_size = 38
+icon_size = Vector2(128, 128)
+
+[node name="Spacer2" type="Control" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer" unique_id=1731165829]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="ScreenTimeButton" parent="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer" unique_id=1510744690 instance=ExtResource("5_1g033")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_f1e71")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_gcetw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_i24gk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3gwh8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q4e06")
+left_icon = ExtResource("8_ql1j0")
+right_icon = ExtResource("9_6dbjw")
+button_text = "Request screen[br]usage permission"
+label_font_size = 38
+icon_size = Vector2(128, 128)
+
+[node name="Sound" type="Control" parent="CanvasLayer/ScrollContainer/SizingControl" unique_id=1217724239]
+layout_mode = 1
+anchor_left = 0.042000003
+anchor_top = 0.36200002
+anchor_right = 0.95600003
+anchor_bottom = 0.679
+offset_left = 1.6399956
+offset_top = -0.6000366
+offset_right = 0.52001953
+offset_bottom = 0.29992676
+
+[node name="SoundWood" type="TextureRect" parent="CanvasLayer/ScrollContainer/SizingControl/Sound" unique_id=1389489478]
+texture_filter = 3
+custom_minimum_size = Vector2(48, 36.5)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -480.0
+offset_top = -370.9999
+offset_right = -432.0
+offset_bottom = -332.3999
+scale = Vector2(20, 20)
+texture = ExtResource("3_83j8s")
+stretch_mode = 1
+
+[node name="SoundDecoration" type="TextureRect" parent="CanvasLayer/ScrollContainer/SizingControl/Sound" unique_id=737655947]
+custom_minimum_size = Vector2(986, 730)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -493.0
+offset_top = -396.0
+offset_right = 493.0
+offset_bottom = 426.0
+texture = ExtResource("5_am25x")
+
+[node name="LabelCenterContainer" type="CenterContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound" unique_id=1114709792]
+layout_mode = 0
+offset_top = -17.0
+offset_right = 986.0
+offset_bottom = 130.0
+
+[node name="Label" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/LabelCenterContainer" unique_id=1986226125]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 96
+text = "Sound"
+
+[node name="VolumeVBoxContainer" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound" unique_id=1329500012]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 0.321
+offset_top = 175.0
+offset_right = -0.028015137
+offset_bottom = 519.67
+
+[node name="VolumeVBoxContainer" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer" unique_id=1099484806]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer" unique_id=2102913048]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Music"
+horizontal_alignment = 1
+
+[node name="SliderHBoxContainer" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer" unique_id=785212600]
+layout_mode = 2
+alignment = 1
+
+[node name="VolumeButton" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer" unique_id=722163806 instance=ExtResource("6_gjs24")]
+custom_minimum_size = Vector2(160, 100)
+layout_mode = 2
+icon = ExtResource("10_01roj")
+metadata/_edit_horizontal_guides_ = [160.0]
+
+[node name="VolumeSlider" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer" unique_id=1563734801 instance=ExtResource("10_1g033")]
+custom_minimum_size = Vector2(527, 100)
+layout_mode = 2
+bus_name = "Music"
+
+[node name="VolumeLabel" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer" unique_id=380214866]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolumeVBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer" unique_id=1505882462]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2" unique_id=647063802]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "SFX"
+horizontal_alignment = 1
+
+[node name="SliderHBoxContainer" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2" unique_id=1530122629]
+layout_mode = 2
+alignment = 1
+
+[node name="VolumeButton" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2/SliderHBoxContainer" unique_id=1216459582 instance=ExtResource("6_gjs24")]
+custom_minimum_size = Vector2(160, 100)
+layout_mode = 2
+icon = ExtResource("10_01roj")
+metadata/_edit_horizontal_guides_ = [160.0]
+
+[node name="VolumeSlider" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2/SliderHBoxContainer" unique_id=1800149925 instance=ExtResource("10_1g033")]
+custom_minimum_size = Vector2(527, 100)
+layout_mode = 2
+bus_name = "SFX"
+
+[node name="VolumeLabel" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2/SliderHBoxContainer" unique_id=1821766266]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VolumeVBoxContainer3" type="VBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer" unique_id=148021650]
+layout_mode = 2
+alignment = 1
+
+[node name="Name" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3" unique_id=383705271]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Ambience"
+horizontal_alignment = 1
+
+[node name="SliderHBoxContainer" type="HBoxContainer" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3" unique_id=1902298121]
+layout_mode = 2
+alignment = 1
+
+[node name="VolumeButton" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3/SliderHBoxContainer" unique_id=232838121 instance=ExtResource("6_gjs24")]
+custom_minimum_size = Vector2(160, 100)
+layout_mode = 2
+icon = ExtResource("10_01roj")
+metadata/_edit_horizontal_guides_ = [160.0]
+
+[node name="VolumeSlider" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3/SliderHBoxContainer" unique_id=1298970032 instance=ExtResource("10_1g033")]
+custom_minimum_size = Vector2(527, 100)
+layout_mode = 2
+bus_name = "Ambience"
+
+[node name="VolumeLabel" type="Label" parent="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3/SliderHBoxContainer" unique_id=848525471]
+custom_minimum_size = Vector2(170, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "100%"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClearSave" type="Control" parent="CanvasLayer/ScrollContainer/SizingControl" unique_id=966539152]
+layout_mode = 1
+anchor_left = 0.042000003
+anchor_top = 0.72800004
+anchor_right = 0.95600003
+anchor_bottom = 0.88000005
+offset_left = -0.36000443
+offset_top = -0.40014648
+offset_right = -1.4799805
+offset_bottom = -0.00012207031
+
+[node name="SaveWood" type="TextureRect" parent="CanvasLayer/ScrollContainer/SizingControl/ClearSave" unique_id=1496612258]
+texture_filter = 3
+custom_minimum_size = Vector2(48, 16)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.503
+anchor_right = 0.5
+anchor_bottom = 0.503
+offset_left = -480.0
+offset_top = -160.05
+offset_right = -432.0
+offset_bottom = -144.05
+scale = Vector2(20, 20)
+texture = ExtResource("3_83j8s")
+stretch_mode = 1
+
+[node name="SaveDecoration" type="TextureRect" parent="CanvasLayer/ScrollContainer/SizingControl/ClearSave" unique_id=237840512]
+custom_minimum_size = Vector2(986, 350)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -493.0
+offset_top = -175.0
+offset_right = 493.0
+offset_bottom = 175.0
+texture = ExtResource("14_ql1j0")
+
+[node name="ClearSaveButton" parent="CanvasLayer/ScrollContainer/SizingControl/ClearSave" unique_id=654409858 instance=ExtResource("5_1g033")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -80.0
+offset_right = 385.0
+offset_bottom = 80.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w3ind")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_nilcw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6dg6e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_g1x8m")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5tgmq")
+left_icon = ExtResource("13_01roj")
+right_icon = ExtResource("13_01roj")
+button_text = "Clear save"
+text_color = Color(1, 1, 1, 1)
+label_font_size = 49
+icon_size = Vector2(180, 180)
+normal_texture = ExtResource("14_oe2nd")
+pressed_texture = ExtResource("15_7kvyq")
+
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/StepAndSleepButton" to="." method="_on_request_step_permissions_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/ScreenTimeButton" to="." method="_on_request_screen_time_permissions_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer/VolumeButton" to="." method="_on_volume_button_1_pressed"]
+[connection signal="value_changed" from="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer/VolumeSlider" to="." method="_on_volume_slider_1_value_changed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2/SliderHBoxContainer/VolumeButton" to="." method="_on_volume_button_2_pressed"]
+[connection signal="value_changed" from="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer2/SliderHBoxContainer/VolumeSlider" to="." method="_on_volume_slider_2_value_changed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3/SliderHBoxContainer/VolumeButton" to="." method="_on_volume_button_3_pressed"]
+[connection signal="value_changed" from="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer3/SliderHBoxContainer/VolumeSlider" to="." method="_on_volume_slider_3_value_changed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/ClearSave/ClearSaveButton" to="." method="_on_clear_save_pressed"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bli3663eti5rj"
+path="res://.godot/imported/MAGAngl_BUFF-Speed Debuff_HY_PC-002.wav-e456256d67d2c6fdaec04cae419dadbb.sample"
+
+[deps]
+
+source_file="res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-002.wav"
+dest_files=["res://.godot/imported/MAGAngl_BUFF-Speed Debuff_HY_PC-002.wav-e456256d67d2c6fdaec04cae419dadbb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

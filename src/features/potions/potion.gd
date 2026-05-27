@@ -2,6 +2,8 @@ class_name Potion extends Node
 
 enum PotionTypes { Status, Damage }
 
+var effectScene = load("res://assets/effects/A_EffectScene.tscn")
+
 const _icon_array = [
 	preload("res://assets/icons/potions/potion_explosion_icon.tres"),
 	preload("res://assets/icons/potions/potion_health_icon.tres"),
@@ -23,6 +25,8 @@ var cooldown : float = 10.0
 var currentCooldown : float
 var effect : StatusEffect
 var targetSelf : bool = true
+
+var posit : Vector2
 
 
 func _init(newId : int, slt : int = -1):
@@ -69,18 +73,31 @@ func UsePotionEffect(charList : Array[Character]):
 	if type == PotionTypes.Damage:
 		if targetSelf:
 			charList[0].TakeTrueDamage(damage, 1)
+			charList[0].play_sfx(Character.SFX_TYPE.HEAL)
 		else:
+			charList[1].play_sfx(Character.SFX_TYPE.EXPLOSION)
 			if charList[1] != null: charList[1].TakeTrueDamage(damage, 1)
 			if charList[2] != null: charList[2].TakeTrueDamage(damage, 1)
 			if charList[3] != null: charList[3].TakeTrueDamage(damage, 1)
+			
+			var effect = effectScene.instantiate()
+			charList[0].get_parent().get_parent().add_child(effect)
+			effect.SetUp(posit + Vector2(0, -100), 0)
 	
 	if type == PotionTypes.Status:
 		if targetSelf:
 			charList[0].ApplyStatus(effect)
+			charList[0].play_status_effect_sfx(effect.StatusType)
 		else:
-			if charList[1] != null: charList[1].ApplyStatus(effect)
-			if charList[2] != null: charList[2].ApplyStatus(effect)
-			if charList[3] != null: charList[3].ApplyStatus(effect)
+			if charList[1] != null: 
+				charList[1].ApplyStatus(effect)
+				charList[1].play_status_effect_sfx(effect.StatusType)
+			if charList[2] != null: 
+				charList[2].ApplyStatus(effect)
+				charList[2].play_status_effect_sfx(effect.StatusType)
+			if charList[3] != null: 
+				charList[3].ApplyStatus(effect)
+				charList[3].play_status_effect_sfx(effect.StatusType)
 	
 	currentCooldown = cooldown
 

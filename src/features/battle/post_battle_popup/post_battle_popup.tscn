@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://d0ewq16x8pf7j"]
+
+[ext_resource type="Script" uid="uid://dh4448j3dy2ed" path="res://src/features/battle/post_battle_popup/post_battle_popup.gd" id="1_p1ysw"]
+[ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="1_t3hjw"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="2_mwuy7"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="2_p1ysw"]
+[ext_resource type="Texture2D" uid="uid://b5b4h853pvvcj" path="res://assets/settings/Popup decoration.png" id="3_hore8"]
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="4_mwuy7"]
+[ext_resource type="FontFile" uid="uid://csfinobv8w3kr" path="res://assets/fonts/Pixel Code/PixelCode.otf" id="6_hore8"]
+[ext_resource type="FontFile" uid="uid://dn531g1ux5cgt" path="res://assets/fonts/Pixel Code/PixelCode-Bold-Italic.otf" id="6_xoup4"]
+[ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="7_wj5lf"]
+[ext_resource type="FontFile" uid="uid://cxp77bqrigwa3" path="res://assets/fonts/Pixel Code/PixelCode-Italic.otf" id="8_mwuy7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bye7g"]
+shader = ExtResource("2_mwuy7")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4gpl0"]
+shader = ExtResource("1_t3hjw")
+shader_parameter/wood_texture = ExtResource("2_p1ysw")
+shader_parameter/scale = 1.66
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mwuy7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bye7g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xoup4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wj5lf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gpl0"]
+
+[node name="PostBattlePopup" type="Control" unique_id=1411234404]
+z_index = 500
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p1ysw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1077454683]
+material = SubResource("ShaderMaterial_bye7g")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PopupPanelContainer" type="PanelContainer" parent="." unique_id=780673963]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -346.0
+offset_top = -412.58984
+offset_right = 346.0
+offset_bottom = 6.4101563
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="PopupPanelContainer" unique_id=1809218102]
+material = SubResource("ShaderMaterial_4gpl0")
+layout_mode = 2
+
+[node name="Control" type="TextureRect" parent="PopupPanelContainer/Background" unique_id=193332454]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.025, 1.025)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("3_hore8")
+expand_mode = 2
+
+[node name="TextMarginContainer" type="MarginContainer" parent="PopupPanelContainer" unique_id=1254548440]
+layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="TextVBox" type="VBoxContainer" parent="PopupPanelContainer/TextMarginContainer" unique_id=884233410]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="PopupPanelContainer/TextMarginContainer/TextVBox" unique_id=2131694372]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.13333334, 0.827451, 0, 1)
+theme_override_fonts/font = ExtResource("4_mwuy7")
+theme_override_font_sizes/font_size = 72
+text = "Victory!"
+horizontal_alignment = 1
+
+[node name="DescriptionRichTextLabel" type="RichTextLabel" parent="PopupPanelContainer/TextMarginContainer/TextVBox" unique_id=2020563858]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("6_hore8")
+theme_override_fonts/bold_font = ExtResource("4_mwuy7")
+theme_override_fonts/bold_italics_font = ExtResource("6_xoup4")
+theme_override_fonts/italics_font = ExtResource("8_mwuy7")
+theme_override_font_sizes/normal_font_size = 54
+theme_override_font_sizes/bold_font_size = 54
+theme_override_font_sizes/bold_italics_font_size = 54
+theme_override_font_sizes/italics_font_size = 54
+theme_override_font_sizes/mono_font_size = 54
+text = "+ 123 XP!"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="ExitButton" parent="PopupPanelContainer/TextMarginContainer/TextVBox" unique_id=112168689 instance=ExtResource("7_wj5lf")]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mwuy7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bye7g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xoup4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wj5lf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4gpl0")
+button_text = "EXIT"
+label_font = ExtResource("4_mwuy7")
+label_font_size = 48
+
+[connection signal="pressed" from="PopupPanelContainer/TextMarginContainer/TextVBox/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,18 +1,13 @@
 [gd_scene format=3 uid="uid://c1xf3yvokbqtb"]
 
 [ext_resource type="Script" uid="uid://drhkhd4gfdf3i" path="res://src/features/battle/battle_system.gd" id="1_th188"]
-[ext_resource type="Script" uid="uid://biqv00sj5thfe" path="res://src/ui/battleUI/battleLabel.gd" id="2_1xk2j"]
-[ext_resource type="Texture2D" uid="uid://cmqf4mvip8xod" path="res://assets/hud/pause.png" id="2_mhs3n"]
 [ext_resource type="Texture2D" uid="uid://blkd7n7vu8yfu" path="res://assets/enemies/Battleground1.png" id="3_cnfnp"]
-[ext_resource type="Texture2D" uid="uid://c3krf2aihmxt6" path="res://assets/hud/fast.png" id="3_osvxu"]
 [ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="5_c54ue"]
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="5_sql3i"]
 [ext_resource type="Texture2D" uid="uid://cssg7riuvroox" path="res://assets/icons/pause5.png" id="6_3awjj"]
 [ext_resource type="PackedScene" uid="uid://dobjjs6ykdmio" path="res://scenes/battleUI.tscn" id="6_l3vuj"]
+[ext_resource type="PackedScene" uid="uid://d0ewq16x8pf7j" path="res://src/features/battle/post_battle_popup/post_battle_popup.tscn" id="7_1k1bx"]
 [ext_resource type="Texture2D" uid="uid://cfuooju3mrewg" path="res://assets/icons/fast5.png" id="7_sql3i"]
-
-[sub_resource type="DPITexture" id="DPITexture_mhs3n"]
-
-[sub_resource type="DPITexture" id="DPITexture_osvxu"]
 
 [node name="Battle" type="Node2D" unique_id=868618005]
 script = ExtResource("1_th188")
@@ -25,6 +20,7 @@ texture = ExtResource("3_cnfnp")
 [node name="Main Scene" type="CanvasLayer" parent="." unique_id=68912168]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Main Scene" unique_id=533918086]
+z_index = 150
 anchors_preset = -1
 anchor_right = 0.44700003
 anchor_bottom = 0.11100001
@@ -38,93 +34,39 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 26
 
-[node name="Pause3" type="CheckBox" parent="Main Scene/HBoxContainer" unique_id=1076112190]
-visible = false
-custom_minimum_size = Vector2(150, 150)
+[node name="VBoxContainer" type="VBoxContainer" parent="Main Scene/HBoxContainer" unique_id=376076960]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
-theme_override_colors/icon_hover_color = Color(0.72464263, 0.7246426, 0.7246426, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.74978, 0.74978, 0.74977994, 1)
-theme_override_icons/checked = SubResource("DPITexture_mhs3n")
-theme_override_icons/unchecked = SubResource("DPITexture_osvxu")
-button_pressed = true
-icon = ExtResource("2_mhs3n")
-expand_icon = true
 
-[node name="Fast3" type="CheckBox" parent="Main Scene/HBoxContainer" unique_id=1036546450]
-visible = false
-custom_minimum_size = Vector2(150, 150)
+[node name="Label" type="Label" parent="Main Scene/HBoxContainer/VBoxContainer" unique_id=1687056533]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(0.34407577, 0.34407574, 0.34407574, 1)
-theme_override_colors/icon_hover_color = Color(0.72464263, 0.7246426, 0.7246426, 1)
-theme_override_colors/icon_hover_pressed_color = Color(0.74978, 0.74978, 0.74977994, 1)
-theme_override_icons/checked = SubResource("DPITexture_mhs3n")
-theme_override_icons/unchecked = SubResource("DPITexture_osvxu")
-button_pressed = true
-icon = ExtResource("3_osvxu")
-expand_icon = true
+theme_override_fonts/font = ExtResource("5_sql3i")
+theme_override_font_sizes/font_size = 32
+text = "Pause"
+horizontal_alignment = 1
 
-[node name="Pause" parent="Main Scene/HBoxContainer" unique_id=722163806 instance=ExtResource("5_c54ue")]
+[node name="Pause" parent="Main Scene/HBoxContainer/VBoxContainer" unique_id=722163806 instance=ExtResource("5_c54ue")]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 toggle_mode = true
 icon = ExtResource("6_3awjj")
 
-[node name="Fast" parent="Main Scene/HBoxContainer" unique_id=1632665865 instance=ExtResource("5_c54ue")]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Main Scene/HBoxContainer" unique_id=144563456]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Main Scene/HBoxContainer/VBoxContainer2" unique_id=45767045]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_sql3i")
+theme_override_font_sizes/font_size = 32
+text = "2x"
+horizontal_alignment = 1
+
+[node name="Fast" parent="Main Scene/HBoxContainer/VBoxContainer2" unique_id=1632665865 instance=ExtResource("5_c54ue")]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 toggle_mode = true
 icon = ExtResource("7_sql3i")
 
-[node name="SecondsLabel" type="Label" parent="Main Scene" unique_id=1318015151]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -57.0
-offset_top = -965.0
-offset_right = 57.0
-offset_bottom = -692.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 200
-text = "1"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("2_1xk2j")
-
-[node name="SecondsTimer" type="Timer" parent="Main Scene/SecondsLabel" unique_id=804062277]
-autostart = true
-
-[node name="CombatFinishPopup" type="Label" parent="Main Scene" unique_id=1047311204]
-visible = false
-z_index = 100
-z_as_relative = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -441.0
-offset_top = -268.0
-offset_right = 442.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 200
-text = "YOU WIN"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="PostBattlePopup" parent="Main Scene" unique_id=1411234404 instance=ExtResource("7_1k1bx")]
 
 [node name="Control" type="Control" parent="Main Scene" unique_id=1175551475]
 layout_mode = 3
@@ -147,10 +89,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 93.0
-offset_top = -183.0
-offset_right = 213.0
-offset_bottom = -50.0
+offset_left = 75.0
+offset_top = -194.0
+offset_right = 195.0
+offset_bottom = -61.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -176,10 +118,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 283.0
-offset_top = -16.0
-offset_right = 403.0
-offset_bottom = 117.0
+offset_left = 278.0
+offset_top = 3.0
+offset_right = 398.0
+offset_bottom = 136.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -205,31 +147,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 379.0
-offset_top = -270.0
-offset_right = 499.0
-offset_bottom = -137.0
+offset_left = 374.0
+offset_top = -309.0
+offset_right = 494.0
+offset_bottom = -176.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ExitBattle" type="Button" parent="Main Scene" unique_id=1896487453]
-visible = false
-z_index = 100
-z_as_relative = false
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.545
-anchor_right = 0.5
-anchor_bottom = 0.545
-offset_left = -400.0
-offset_top = -67.400024
-offset_right = 400.0
-offset_bottom = 59.599976
-theme_override_font_sizes/font_size = 87
-text = "Exit Battle
-"
-
 [node name="Container" type="Container" parent="Main Scene" unique_id=150168763]
+z_index = 150
 anchors_preset = -1
 anchor_top = 0.6
 anchor_right = 1.0150001
@@ -242,8 +168,6 @@ offset_bottom = 1297.6799
 [node name="BattleUI" parent="Main Scene/Container" unique_id=1238233801 instance=ExtResource("6_l3vuj")]
 layout_mode = 2
 
-[connection signal="toggled" from="Main Scene/HBoxContainer/Pause3" to="." method="_on_pause_toggled"]
-[connection signal="toggled" from="Main Scene/HBoxContainer/Fast3" to="." method="_on_fast_toggled"]
-[connection signal="toggled" from="Main Scene/HBoxContainer/Pause" to="." method="_on_pause_toggled"]
-[connection signal="toggled" from="Main Scene/HBoxContainer/Fast" to="." method="_on_fast_toggled"]
-[connection signal="timeout" from="Main Scene/SecondsLabel/SecondsTimer" to="Main Scene/SecondsLabel" method="_on_timer_timeout"]
+[connection signal="toggled" from="Main Scene/HBoxContainer/VBoxContainer/Pause" to="." method="_on_pause_toggled"]
+[connection signal="toggled" from="Main Scene/HBoxContainer/VBoxContainer2/Fast" to="." method="_on_fast_toggled"]
+[connection signal="exit_button_pressed" from="Main Scene/PostBattlePopup" to="." method="_on_exit_battle_pressed"]

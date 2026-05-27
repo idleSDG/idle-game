@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dj2kccchjn45g"
+path="res://.godot/imported/Overworld Loop - Pixel RPG Pack.ogg-9619ac1ad84685d7b325121bf40c120d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/pixel_rpg_pack/Overworld Loop - Pixel RPG Pack.ogg"
+dest_files=["res://.godot/imported/Overworld Loop - Pixel RPG Pack.ogg-9619ac1ad84685d7b325121bf40c120d.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

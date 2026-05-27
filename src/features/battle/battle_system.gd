@@ -3,23 +3,24 @@ extends Node
 @onready var battle_ui: Control = $"Main Scene/Container/BattleUI"
 
 @onready var canvas = $"Main Scene"
-@onready var combatFinish = $"Main Scene/CombatFinishPopup"
 @onready var characterSpawnPos = [
 	$"Main Scene/Control",
 	$"Main Scene/Control2",
 	$"Main Scene/Control4",
 	$"Main Scene/Control6",
 	$"Main Scene/Control5",
-	$"Main Scene/Control6",
+	$"Main Scene/Control3",
 ]
-@onready var timerLabel = $"Main Scene/SecondsLabel"
 
 signal request_exit_signal
-@onready var exit_button: Button = $"Main Scene/ExitBattle"
-@onready var pause = $"Main Scene/HBoxContainer/Pause"
-@onready var fast = $"Main Scene/HBoxContainer/Fast"
+@onready var pause_label = $"Main Scene/HBoxContainer/VBoxContainer/Label"
+@onready var pause = $"Main Scene/HBoxContainer/VBoxContainer/Pause"
+@onready var fast_label = $"Main Scene/HBoxContainer/VBoxContainer2/Label"
+@onready var fast = $"Main Scene/HBoxContainer/VBoxContainer2/Fast"
 
 @onready var level: battle_level = BattleVariables.current_battle_level
+
+@onready var post_battle_popup: PostBattlePopup = $"Main Scene/PostBattlePopup"
 
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd")
@@ -49,23 +50,21 @@ func _notification(what: int) -> void:
 		var elapsed = Time.get_unix_time_from_system() - _focus_lost_at
 		if elapsed > 0.5:
 			if !BattleVariables.isPaused:
+				BattleVariables.battleElapsed += elapsed
 				simulate(elapsed)
-			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	characterList.resize(enemyAmount)
-	if exit_button:
-		exit_button.pressed.connect(_on_exit_battle_pressed)
+	BattleVariables.isSimulated = false
+	
 	if BattleVariables.battleState == BattleVariables.BattleStates.AWAITING_EXIT:
 		isPlaying = false
-		combatFinish.visible = true
-		combatFinish.text = "YOU WIN"
-		exit_button.visible = true
-		timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
+		post_battle_popup.show_popup(true)
 		return
 
+	var battleStart = BattleVariables.battleStart
 	pause.button_pressed = (BattleVariables.isPaused)
 	fast.button_pressed = (BattleVariables.isFast)
 	_on_pause_toggled(BattleVariables.isPaused)
@@ -94,14 +93,18 @@ func _ready() -> void:
 		BattleVariables.battleRNG = RandomNumberGenerator.new()
 		BattleVariables.battleRNG.seed = BattleVariables.battleSeed
 
-		simulate(BattleVariables.battleElapsed) #(now - BattleVariables.battleStart)
-		timerLabel.time = int(now - BattleVariables.battleStart)
+		var timeElapsed = (now - battleStart) if !BattleVariables.isPaused else 0.0
+
+		BattleVariables.battleElapsed += timeElapsed
+
+		simulate(BattleVariables.battleElapsed)
 	else:
 		BattleVariables.battleState = BattleVariables.BattleStates.IN_BATTLE
 		BattleVariables.battleStart = Time.get_unix_time_from_system()
 		BattleVariables.battleElapsed = 0.0
 		BattleVariables.potionUsage = { }
 
+		@warning_ignore("narrowing_conversion")
 		BattleVariables.battleSeed = RandomNumberGenerator.new().randf() * 100000
 		BattleVariables.battleRNG = RandomNumberGenerator.new()
 		BattleVariables.battleRNG.seed = BattleVariables.battleSeed
@@ -110,6 +113,7 @@ func _ready() -> void:
 		SetPotions()
 		SaveManager.save_game()
 
+	BattleVariables.isSimulated = false
 	pass
 
 
@@ -143,15 +147,22 @@ func _process(delta: float) -> void:
 # checks if the player and enemies are alive, handles them and finishes the Fight if conditions are met
 func check_death():
 	if characterList[0].baseStats.health <= 0:
+		_detach_character_sfx_for_death(characterList[0])
 		characterList[0].queue_free()
 		characterList[0] = null
 		finish_fight(false)
 
 	for i in range(1, enemyAmount):
 		if characterList[i] != null && characterList[i].baseStats.health <= 0:
+			_detach_character_sfx_for_death(characterList[i])
 			characterList[i].queue_free()
 			characterList[i] = null
 
+## Workaround for playing sfx after character dies by reparenting sfx player.
+func _detach_character_sfx_for_death(character: Character) -> void:
+	character.play_sfx(Character.SFX_TYPE.DEATH)
+	character.sfx_player.finished.connect(character.sfx_player.queue_free)
+	character.sfx_player.reparent(get_tree().current_scene)
 
 # spawns new enemies if there are any left in remainingEnemiesList
 func check_enemies():
@@ -168,7 +179,9 @@ func check_enemies():
 				remainingEnemiesList.pop_front()
 		else:
 			break
-
+	
+	select_enemy_slot(targetIndex)
+	
 	tempIndex = -1
 	for j in range(1, enemyAmount):
 		if characterList[j] != null:
@@ -229,29 +242,39 @@ func update_visuals(delta: float):
 	battle_ui.UpdateStatDisplay()
 	pass
 
-
 # finishes the fight
 func finish_fight(result: bool):
 	BattleVariables.battleState = BattleVariables.BattleStates.AWAITING_EXIT
 	isPlaying = false
-	combatFinish.visible = true
+
+	var xp_reward: int = 120
+	
+	var will_level_up: bool = xp_reward >= PlayerProgress.xp_required_for_next_level()
 
 	if result:
 		BattleVariables.current_battle_level.beaten = true
-		combatFinish.text = "YOU WIN"
+		BattleVariables.last_battle_outcome = BattleVariables.BattleOutcome.VICTORY
+		BattleVariables.battle_finished.emit(BattleVariables.BattleOutcome.VICTORY)
+		
+		post_battle_popup.description_label.text = "+ %d XP!" % xp_reward
+		post_battle_popup.show_popup(true)
 		PlayerProgress.add_xp(120)
 		characterList[0].ApplyExp()
 	else:
-		combatFinish.text = "YOU LOSE"
+		BattleVariables.last_battle_outcome = BattleVariables.BattleOutcome.DEFEAT
+		BattleVariables.battle_finished.emit(BattleVariables.BattleOutcome.DEFEAT)
+		
+		post_battle_popup.description_label.text = ""
+		post_battle_popup.show_popup(false)
 
+	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
 	SaveManager.save_game()
-	exit_button.visible = true
-
 
 # [length] is in seconds
 # Simulates the game state in [length] seconds from battle start
 func simulate(length: float):
 	var step: float = 1.0 / 120.0
+	BattleVariables.isSimulated = true
 
 	while (length > 0):
 		var delta = step
@@ -267,12 +290,15 @@ func simulate(length: float):
 				check_death()
 
 				if timer > length:
+					BattleVariables.isSimulated = false
 					return
 				else:
 					length -= timer
 					timer = 0.0
 		else:
 			length = 0
+	
+	BattleVariables.isSimulated = false
 	pass
 
 
@@ -281,23 +307,18 @@ func _on_exit_battle_pressed() -> void:
 	SaveManager.save_game()
 	request_exit_signal.emit()
 
-
 func select_enemy_unit(ind: int):
 	select_enemy_slot(ind)
 
 	battle_ui.StartPreview(characterList[ind])
 	pass
 
-
 func select_enemy_slot(ind: int):
 	if (ind != 0):
-		var i: int = 0
 		for c in characterList:
 			if c != null:
 				c.select(c.index == ind)
-				i += 1
 		targetIndex = ind
-
 
 func SetPotions():
 	var pot1 = null
@@ -313,16 +334,21 @@ func SetPotions():
 					pot2 = instance
 				if i + 1 == 3:
 					pot3 = instance
-	battle_ui.SetPotions(pot1, pot2, pot3, characterList)
+	battle_ui.SetPotions(pot1, pot2, pot3, characterList, characterSpawnPos[5].position)
 
 
 func _on_pause_toggled(toggled_on: bool) -> void:
 	BattleVariables.isPaused = toggled_on
+	BattleVariables.battleStart = Time.get_unix_time_from_system()
+	SaveManager.save_game()
+	
+	pause_label.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pause.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.
 
 
 func _on_fast_toggled(toggled_on: bool) -> void:
 	BattleVariables.isFast = toggled_on
+	fast_label.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	fast.modulate = (Color.WHITE if toggled_on else Color.DARK_GRAY)
 	pass # Replace with function body.

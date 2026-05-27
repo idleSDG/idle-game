@@ -2,9 +2,9 @@
 extends TextureButton
 class_name IconButton
 
-@export var is_disabled: bool = false:
+@export var button_is_disabled: bool = false:
 	set(value):
-		is_disabled = value
+		button_is_disabled = value
 		disabled = value
 		_update_visuals()
 

@@ -6,8 +6,6 @@ extends CanvasLayer
 @onready var test_button: Button = %PlayerXPTestButton
 
 @onready var money_amount_label: Label = %MoneyAmountLabel
-@onready var money_collection_panel_container: PanelContainer = %MoneyCollectionPanelContainer
-@onready var collectable_money_amount_label: Label = %MoneyCollectionLabel
 
 @onready var ingredient_hud: Dictionary = {
 	Ingredient.Type.KINETIC_SHARD: {
@@ -45,7 +43,6 @@ func _ready() -> void:
 	# Connect to Ingredient signals
 	PlayerInventory.ingredients_changed.connect(_on_ingredients_changed)
 	PlayerInventory.money_changed.connect(_on_money_changed)
-	PlayerInventory.collectable_money_changed.connect(_on_collectable_money_changed)
 	SceneManager.tab_switched.connect(_on_tab_switched)
 	# Set test button text
 	test_button.text = "Add +50 XP"
@@ -64,7 +61,7 @@ func _on_xp_changed(current_xp: int, xp_required: int) -> void:
 	xp_label.text = "%d / %d XP" % [current_xp, xp_required]
 
 
-func _on_leveled_up(old_level: int, new_level: int) -> void:
+func _on_leveled_up(_old_level: int, new_level: int) -> void:
 	level_label.text = "Level %d" % new_level
 
 
@@ -115,20 +112,9 @@ func _on_kinetic_shards_spend_button_pressed() -> void:
 func _on_money_changed(money: int) -> void:
 	money_amount_label.text = "%d" % money
 
-
-func _on_collectable_money_changed(collectable_money: int) -> void:
-	collectable_money_amount_label.text = "%d / %d" % [collectable_money, PlayerInventory.collectable_money_capacity]
-
-
 func _on_tab_switched(tab_name: String) -> void:
 	print(tab_name)
 	%IngredientVBoxContainer.visible = false
-	if tab_name == "home":
-		money_collection_panel_container.visible = true
-		%SmallIngredientButton.disabled = false
-	else:
-		money_collection_panel_container.visible = false
-		%SmallIngredientButton.disabled = true
 
 
 func _on_focus_flux_spend_button_pressed() -> void:

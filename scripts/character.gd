@@ -2,6 +2,7 @@ class_name Character extends Node
 
 var damagePopup = load("res://scenes/damagePopup.tscn")
 var skillUiScene = load("res://scenes/skillUI.tscn")
+var effectScene = load("res://assets/effects/A_EffectScene.tscn")
 var charName = "Character"
 var level : int = 1
 var index : int = -1
@@ -13,6 +14,80 @@ var index : int = -1
 @onready var skillBars = $"VBoxContainer/Container--Sprite2D/HBox_Skills"
 @onready var levelLabel = $"VBoxContainer/Container--Sprite2D/Level"
 
+@onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+enum SFX_TYPE { MELEE_HIT, BURN, STRENGTH, HEAL, FREEZE, PARALYZE, HASTE, EXPLOSION, DEATH }
+var attack_sfx = {
+	SFX_TYPE.MELEE_HIT: [
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-005.wav"),
+		],
+	SFX_TYPE.BURN: [
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-006.wav"),
+	],
+	SFX_TYPE.STRENGTH: [
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-006.wav"),
+	],
+	SFX_TYPE.HEAL: [
+		preload("res://assets/sfx/battle/heal/MAGAngl_BUFF-Healing Gusts_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/heal/MAGAngl_BUFF-Healing Gusts_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/heal/MAGAngl_BUFF-Healing Gusts_HY_PC-003.wav"),
+	],
+	SFX_TYPE.FREEZE: [
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-006.wav"),
+	],
+	SFX_TYPE.PARALYZE: [
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-006.wav"),
+	],
+	SFX_TYPE.HASTE: [
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-006.wav"),
+	],
+	SFX_TYPE.EXPLOSION: [
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-006.wav"),
+	],
+	SFX_TYPE.DEATH: [
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-006.wav"),
+	],
+}
+
 var sprite
 @onready var baseSprite = $VBoxContainer/BaseSprite
 @onready var wizardSprites = $VBoxContainer/BaseSprite/WIZARDSPECIFIC
@@ -20,6 +95,7 @@ var sprite
 @onready var trail = $VBoxContainer/BaseSprite/GPU_TrailParticles
 var image = Image.new() 
 var isFollowing : bool = false
+var isHurt : float = 0.0
 var timePass
 var orig
 var end
@@ -55,11 +131,35 @@ func _ready() -> void:
 		s.set_visuals()
 		skillBars.add_child(s.skillBar)
 	
-	levelLabel.text = "Lv. " + str(level)
+	levelLabel.text = str(level)
+	levelLabel.self_modulate = Color.RED if level > PlayerProgress.level else Color.BLACK
+	
 	expCounter.resize(3)#skills.size())
 	
 	pass
 
+func play_sfx(sfx_name: SFX_TYPE) -> void:
+	sfx_player.stream = attack_sfx.get(sfx_name).pick_random()
+	sfx_player.play()
+	
+func play_status_effect_sfx(effect: StatusEffect.StatusEffectType) -> void:
+	var sfx: AudioStream = null
+	
+	match effect:
+		StatusEffect.StatusEffectType.Burn:
+			sfx = attack_sfx.get(SFX_TYPE.BURN).pick_random()
+		StatusEffect.StatusEffectType.Freeze:
+			sfx = attack_sfx.get(SFX_TYPE.FREEZE).pick_random()
+		StatusEffect.StatusEffectType.Paralyze:
+			sfx = attack_sfx.get(SFX_TYPE.PARALYZE).pick_random()
+		StatusEffect.StatusEffectType.Haste:
+			sfx = attack_sfx.get(SFX_TYPE.HASTE).pick_random()
+		StatusEffect.StatusEffectType.Strength:
+			sfx = attack_sfx.get(SFX_TYPE.STRENGTH).pick_random()
+
+	if sfx != null:
+		sfx_player.stream = sfx
+		sfx_player.play()
 
 func SetStats(stats : CharacterStats) :
 	baseStats = stats
@@ -96,8 +196,16 @@ func UpdateVisuals(delta : float):
 			self.global_position = orig
 			isFollowing = false
 			trail.emitting = false
+		elif timePass >= 0.25:
+			self.global_position = lerp(end, orig, (timePass - 0.25) / 0.25)
 		else: 
-			self.global_position = lerp(orig, end, timePass / 0.5)
+			self.global_position = lerp(orig, end, timePass / 0.25)
+	
+	if isHurt > 0.0:
+		isHurt -= delta
+		baseSprite.modulate = Color.RED if fmod(floor((fmod(isHurt, 1) * 10)), 2) == 0 else Color.WHITE
+	else:
+		baseSprite.modulate = Color.WHITE
 	
 	pass
 
@@ -132,9 +240,10 @@ func UseSkill(target : Array[Character]) -> void:
 	
 	expCounter[skills[skillToUse].equipState - 1] += 67
 	
-	particles.emitting = true
+	#particles.emitting = true
 	trail.emitting = true
 	Follow(target[0])
+	
 	
 	skills[skillToUse].isParalyzed = false
 	
@@ -174,6 +283,7 @@ func TakeDamage(dmg : int, itCrit : bool):
 	var popup = damagePopup.instantiate()
 	character.get_parent().get_parent().add_child(popup)
 	popup.SetUp(character.get_parent().position, dmg, itCrit)
+	isHurt = 0.5
 	
 	CalculateStatChanges()
 	pass
@@ -188,9 +298,18 @@ func TakeTrueDamage(dmg : int, source : int): # source will be used to denote wh
 		source = 2
 	
 	match source:
-		2: popup.SetUpText(character.get_parent().position, abs(dmg), " heal", Color.SPRING_GREEN)
-		1: popup.SetUpText(character.get_parent().position, dmg, " explosion", Color.ORANGE)
-		_: popup.SetUpText(character.get_parent().position, dmg, " burn", Color.ORANGE)
+		2: 
+			popup.SetUpText(character.get_parent().position, abs(dmg), " heal", Color.SPRING_GREEN)
+			var effect = effectScene.instantiate()
+			get_parent().get_parent().add_child(effect)
+			effect.SetUp(get_parent().position, 1)
+		1: 
+			popup.SetUpText(character.get_parent().position, dmg, " explosion", Color.ORANGE)
+			isHurt = 0.5
+		_: 
+			popup.SetUpText(character.get_parent().position, dmg, " burn", Color.ORANGE)
+			isHurt = 0.1
+			
 	
 	CalculateStatChanges()
 	pass
@@ -199,7 +318,8 @@ func TakeTrueDamage(dmg : int, source : int): # source will be used to denote wh
 
 func Follow(target : Character):
 	end = target.global_position
-	end.x = (end.x - orig.x) * 0.8 + orig.x
+	end.x = (end.x - orig.x) * 0.3 + orig.x
+	end.y = (end.y - orig.y) * 0.3 + orig.y
 	
 	timePass = 0.0
 	isFollowing = true
@@ -298,3 +418,4 @@ func CreatePlayerCompositeImage():
 
 func select(on : bool):
 	$"VBoxContainer/Container--Sprite2D/Selection".visible = on
+	$VBoxContainer/BaseSprite/TextureRect.visible = on

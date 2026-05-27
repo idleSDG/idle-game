@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://61y74xtkfhc5"
+path="res://.godot/imported/Battle Theme (Regular) Loop - Pixel RPG Pack.ogg-b8fa86a29fa6ba307c539a0566d8fa48.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/pixel_rpg_pack/Battle Theme (Regular) Loop - Pixel RPG Pack.ogg"
+dest_files=["res://.godot/imported/Battle Theme (Regular) Loop - Pixel RPG Pack.ogg-b8fa86a29fa6ba307c539a0566d8fa48.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
