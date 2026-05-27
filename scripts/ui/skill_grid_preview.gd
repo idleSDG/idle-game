@@ -19,10 +19,12 @@ func _ready() -> void:
 func set_preview(skill : Skill):
 	if skill == null:
 		button.icon = null
+		button.visible = false
 		border.modulate = Color.WHITE
 		control.visible = false
 		return
-	
+
+	button.visible = true
 	var proper := Skill.DuplicateSkill(skill)
 	control.visible = true
 	
