@@ -121,15 +121,15 @@ func Use(user : Character, target : Character) -> bool:
 	target.TakeDamage(dmg.x, dmg.y > 0.0)
 	
 	if additionalEffect == null:
-		target._play_hit_sfx(Character.SFX_TYPE.MELEE_HIT)
+		target.play_sfx(Character.SFX_TYPE.MELEE_HIT)
 	
 	if additionalEffect != null && BattleVariables.battleRNG.randf() < additionalEffect.ApplicationRate:
 		if additionalEffect.TargetSelf && isCurrentAttack:
+			user.play_status_effect_sfx(additionalEffect.StatusType)
 			user.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
-			user._play_status_effect_sfx(additionalEffect.StatusType)
 		else:
+			target.play_status_effect_sfx(additionalEffect.StatusType)
 			target.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
-			target._play_status_effect_sfx(additionalEffect.StatusType)
 	
 	if isCurrentAttack:
 		charge = charge - maxCharge

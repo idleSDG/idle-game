@@ -16,7 +16,7 @@ var index : int = -1
 
 @onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
-enum SFX_TYPE { MELEE_HIT, BURN, STRENGTH, HEAL, FREEZE, PARALYZE, HASTE }
+enum SFX_TYPE { MELEE_HIT, BURN, STRENGTH, HEAL, FREEZE, PARALYZE, HASTE, EXPLOSION, DEATH }
 var attack_sfx = {
 	SFX_TYPE.MELEE_HIT: [
 		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-001.wav"),
@@ -70,6 +70,22 @@ var attack_sfx = {
 		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-005.wav"),
 		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-006.wav"),
 	],
+	SFX_TYPE.EXPLOSION: [
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-006.wav"),
+	],
+	SFX_TYPE.DEATH: [
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-006.wav"),
+	],
 }
 
 var sprite
@@ -122,11 +138,11 @@ func _ready() -> void:
 	
 	pass
 
-func _play_hit_sfx(sfx_name: SFX_TYPE) -> void:
+func play_sfx(sfx_name: SFX_TYPE) -> void:
 	sfx_player.stream = attack_sfx.get(sfx_name).pick_random()
 	sfx_player.play()
 	
-func _play_status_effect_sfx(effect: StatusEffect.StatusEffectType) -> void:
+func play_status_effect_sfx(effect: StatusEffect.StatusEffectType) -> void:
 	var sfx: AudioStream = null
 	
 	match effect:

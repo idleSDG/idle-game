@@ -147,15 +147,22 @@ func _process(delta: float) -> void:
 # checks if the player and enemies are alive, handles them and finishes the Fight if conditions are met
 func check_death():
 	if characterList[0].baseStats.health <= 0:
+		_detach_character_sfx_for_death(characterList[0])
 		characterList[0].queue_free()
 		characterList[0] = null
 		finish_fight(false)
 
 	for i in range(1, enemyAmount):
 		if characterList[i] != null && characterList[i].baseStats.health <= 0:
+			_detach_character_sfx_for_death(characterList[i])
 			characterList[i].queue_free()
 			characterList[i] = null
 
+## Workaround for playing sfx after character dies by reparenting sfx player.
+func _detach_character_sfx_for_death(character: Character) -> void:
+	character.play_sfx(Character.SFX_TYPE.DEATH)
+	character.sfx_player.finished.connect(character.sfx_player.queue_free)
+	character.sfx_player.reparent(get_tree().current_scene)
 
 # spawns new enemies if there are any left in remainingEnemiesList
 func check_enemies():

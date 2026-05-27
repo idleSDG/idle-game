@@ -287,4 +287,6 @@ size_flags_vertical = 4
 layout_mode = 2
 size_flags_vertical = 4
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1039973797]
+
 [connection signal="pressed" from="UnitPreview/Button" to="." method="_on_button_pressed"]

@@ -992,6 +992,7 @@ text = "Use device's data"
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1001522815]
 stream = SubResource("AudioStreamInteractive_yq6so")
+volume_db = -10.0
 bus = &"Music"
 script = ExtResource("25_og1vs")
 
