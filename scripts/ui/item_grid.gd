@@ -39,8 +39,7 @@ func doEquipment(slot : EquipmentItem.Slot,
 	if show_unequip:
 		var unequipButton = buttonBase.duplicate()
 		unequipButton.visible = true
-		unequipButton.icon = null
-		unequipButton.text = "X"
+		unequipButton.icon = load("res://assets/character_screen/xd.png")
 		unequipButton.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		unequipButton.add_theme_font_size_override("font_size", 128)
 		grid.add_child(unequipButton)
@@ -66,14 +65,12 @@ func doEquipment(slot : EquipmentItem.Slot,
 
 			# Green border on currently equipped item
 			if equipped != null and item == equipped and show_highlight:
-				var style = StyleBoxFlat.new()
-				style.border_width_left = 8
-				style.border_width_top = 8
-				style.border_width_right = 8
-				style.border_width_bottom = 8
-				style.border_color = Color(0.2, 1.0, 0.2)
-				style.bg_color = Color(0, 0, 0, 0)  # transparent background
-				newButton.add_theme_stylebox_override("normal", style)
+					var border = TextureRect.new()
+					border.texture = load("res://assets/character_screen/green_border.png")
+					border.set_anchors_preset(Control.PRESET_FULL_RECT)
+					border.stretch_mode = TextureRect.STRETCH_SCALE
+					border.mouse_filter = Control.MOUSE_FILTER_IGNORE
+					newButton.add_child(border)
 				
 			newButton.pressed.connect(func():
 				equipment_pressed.emit(item)
