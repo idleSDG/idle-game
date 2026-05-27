@@ -7,21 +7,25 @@
 [ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="4_5q0nq"]
 [ext_resource type="Texture2D" uid="uid://sh4da3rja6gt" path="res://assets/hud/buttons/icon_settings_dark.tres" id="4_j8jky"]
 [ext_resource type="Texture2D" uid="uid://caytxe2qvgcnm" path="res://assets/icons/X.png" id="4_o6xl0"]
+[ext_resource type="Texture2D" uid="uid://c7qat0xfachrg" path="res://assets/hud/circle_bars/32x32 circle bar progress dark brown.png" id="5_chjal"]
 [ext_resource type="PackedScene" uid="uid://hxjy352wis2i" path="res://src/ui/labels/auto_size_label.tscn" id="5_choun"]
 [ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="5_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://d02f0ipjgx01a" path="res://assets/icons/ingredients/ingredient_kinetic_shard.tres" id="5_pibwh"]
 [ext_resource type="PackedScene" uid="uid://y7xumqqfhjfr" path="res://src/ui/invalid_save_popup/invalid_save_pop_up.tscn" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://7n7ppwm46eci" path="res://src/features/progression/level_up_popup.tscn" id="5_tefeu"]
 [ext_resource type="Script" uid="uid://cn8rwyettywqc" path="res://src/ui/navbar/nav_bar.gd" id="5_ya4ey"]
+[ext_resource type="Theme" uid="uid://o6ja5ygtgnte" path="res://src/ui/themes/default_theme.tres" id="6_5he1u"]
 [ext_resource type="Texture2D" uid="uid://p3xbsmht3fm3" path="res://assets/icons/ingredients/ingredient_dream_shard.tres" id="6_c6pm6"]
 [ext_resource type="Texture2D" uid="uid://bdx52ujh525cf" path="res://assets/hud/navbar/NavBar_Decoration_Top.png" id="6_dp3eg"]
 [ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="6_jbj1t"]
-[ext_resource type="Texture2D" uid="uid://d2aa5rwfqyayy" path="res://assets/hud/progress-bar-circle.png" id="6_tipki"]
 [ext_resource type="Texture2D" uid="uid://cpd60mpuiy4iv" path="res://assets/icons/ingredients/ingredient_focus_flux.tres" id="7_5he1u"]
-[ext_resource type="Texture2D" uid="uid://dwh7mcn7npbm0" path="res://assets/hud/progress-bar-frame.png" id="7_85g3d"]
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="7_dgi5k"]
 [ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="7_muem4"]
 [ext_resource type="Texture2D" uid="uid://be5l1nv268yem" path="res://assets/hud/info.png" id="8_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://bhdmmt2opur7a" path="res://assets/hud/circle_bars/32x32 circle bar under.png" id="9_chjal"]
+[ext_resource type="Texture2D" uid="uid://bs128jj4g5bas" path="res://assets/hud/circle_bars/32x32 circle bar progress blue.png" id="9_cjqg0"]
+[ext_resource type="Texture2D" uid="uid://oj6jn8yf6v4o" path="res://assets/hud/circle_bars/32x32 circle bar progress red orange.png" id="9_vchkt"]
+[ext_resource type="Texture2D" uid="uid://bd4aeawy2xq44" path="res://assets/hud/circle_bars/32x32 circle bar over.png" id="10_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://dgykxbunxxfly" path="res://assets/hud/buttons/icon_battle_dark.tres" id="10_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://d1hxh3idk7m6r" path="res://assets/hud/buttons/icon_character_dark.tres" id="11_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="11_kmb1v"]
@@ -39,6 +43,11 @@
 [ext_resource type="AudioStream" uid="uid://r8a6fmslr4aw" path="res://assets/music/pixel_rpg_pack/Victory Loop - Pixel RPG Pack.ogg" id="29_5q0nq"]
 [ext_resource type="AudioStream" uid="uid://bva1qrb4fwdqn" path="res://assets/music/pixel_rpg_pack/Defeat Intro (use loop after) - Pixel RPG Pack.ogg" id="30_dgi5k"]
 [ext_resource type="AudioStream" uid="uid://b2ij7vw74l8se" path="res://assets/music/pixel_rpg_pack/Defeat Loop - Pixel RPG Pack.ogg" id="31_j8jky"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chjal"]
+shader = ExtResource("4_5q0nq")
+shader_parameter/overlay_color = Color(1, 1, 1, 1)
+shader_parameter/final_alpha = 0.35
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
 bg_color = Color(0.48657194, 0.60121614, 0.60121614, 1)
@@ -178,87 +187,227 @@ script = ExtResource("2_sugp2")
 
 [node name="SmallIngredientButton" type="Button" parent="HUDLayer" unique_id=430342629]
 unique_name_in_owner = true
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_top = -474.0
-offset_right = 510.0
-offset_bottom = -304.0
+offset_left = -359.0
+offset_top = -545.0
+offset_right = 311.0
+offset_bottom = -329.0
+grow_horizontal = 2
 grow_vertical = 0
 flat = true
 
 [node name="IngredientSmallHboxContainer" type="HBoxContainer" parent="HUDLayer/SmallIngredientButton" unique_id=681355684]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.896
-anchor_bottom = 0.896
-offset_left = -0.521
-offset_top = -152.32
-offset_right = 391.479
-offset_bottom = -24.320007
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -79.400055
+offset_top = -94.80005
+offset_right = -75.24609
+offset_bottom = -114.03076
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.3, 1.3)
+theme_override_constants/separation = 41
 
 [node name="KineticShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1365023928]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 3
 step = 0.01
 value = 33.0
 fill_mode = 4
-texture_under = ExtResource("6_tipki")
-texture_over = ExtResource("7_85g3d")
-texture_progress = ExtResource("6_tipki")
-tint_under = Color(0.49411765, 0.6666667, 0.6666667, 1)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0.4, 0.85882354, 0.9019608, 1)
+nine_patch_stretch = true
+texture_under = ExtResource("9_chjal")
+texture_over = ExtResource("10_cjqg0")
+texture_progress = ExtResource("5_chjal")
 
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=818379365]
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=2009361924]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_chjal")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.19236
+offset_top = -64.923096
+offset_right = 57.192383
+offset_bottom = 64.923096
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="TextureRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=2126167017]
 texture_filter = 1
-position = Vector2(-91.821655, -91.82166)
-scale = Vector2(2.4347134, 2.4347134)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.961487
+offset_top = -17.38446
+offset_right = 8.961594
+offset_bottom = 8.154053
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_pibwh")
-offset = Vector2(64, 64)
+
+[node name="Label" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=322136845]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = 7.669998
+offset_right = 96.0
+offset_bottom = 51.67
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("6_5he1u")
+theme_override_fonts/font = ExtResource("7_dgi5k")
+theme_override_font_sizes/font_size = 32
+text = "1000/1000"
 
 [node name="FocusFluxTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1086528486]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 3
 step = 0.01
 value = 33.0
 fill_mode = 4
-texture_under = ExtResource("6_tipki")
-texture_over = ExtResource("7_85g3d")
-texture_progress = ExtResource("6_tipki")
-tint_under = Color(0.05862423, 0.16963479, 0.2188414, 1)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0.07857873, 0.40549615, 0.5018992, 1)
+nine_patch_stretch = true
+texture_under = ExtResource("9_chjal")
+texture_over = ExtResource("10_cjqg0")
+texture_progress = ExtResource("9_vchkt")
 
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1870068454]
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1325664442]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_chjal")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.192383
+offset_top = -64.923096
+offset_right = 57.192352
+offset_bottom = 64.923096
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="TextureRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1753205370]
 texture_filter = 1
-position = Vector2(-118.89856, -118.89857)
-scale = Vector2(2.85779, 2.85779)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.730728
+offset_top = -14.307625
+offset_right = 10.711609
+offset_bottom = 12.384697
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_c6pm6")
-offset = Vector2(64, 64)
+
+[node name="Label" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1136599745]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = 7.669998
+offset_right = 96.0
+offset_bottom = 51.67
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("6_5he1u")
+theme_override_fonts/font = ExtResource("7_dgi5k")
+theme_override_font_sizes/font_size = 32
+text = "1000/1000"
 
 [node name="DreamShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1791962131]
 unique_name_in_owner = true
+texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 3
 step = 0.01
 value = 33.0
 fill_mode = 4
-texture_under = ExtResource("6_tipki")
-texture_over = ExtResource("7_85g3d")
-texture_progress = ExtResource("6_tipki")
-tint_under = Color(0.41732287, 0.3616535, 0.574478, 1)
-tint_over = Color(0, 0, 0, 1)
-tint_progress = Color(0.60784316, 0.5568628, 0.76862746, 1)
+nine_patch_stretch = true
+texture_under = ExtResource("9_chjal")
+texture_over = ExtResource("10_cjqg0")
+texture_progress = ExtResource("9_cjqg0")
 
-[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=550219596]
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=199410995]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_chjal")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.192383
+offset_top = -64.923096
+offset_right = 57.192352
+offset_bottom = 64.923096
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="TextureRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1184623471]
 texture_filter = 1
-position = Vector2(-84.43701, -84.43702)
-scale = Vector2(2.3193283, 2.3193283)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.9999695
+offset_top = -14.307617
+offset_right = 8.0000305
+offset_bottom = 9.692383
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("7_5he1u")
-offset = Vector2(64, 64)
+
+[node name="Label" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1737735179]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = 7.669998
+offset_right = 96.0
+offset_bottom = 51.67
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("6_5he1u")
+theme_override_fonts/font = ExtResource("7_dgi5k")
+theme_override_font_sizes/font_size = 32
+text = "1000/1000"
 
 [node name="IngredientVBoxContainer" type="VBoxContainer" parent="HUDLayer" unique_id=557320581]
 unique_name_in_owner = true
