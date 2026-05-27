@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://be5l1nv268yem" path="res://assets/hud/info.png" id="8_ya4ey"]
 [ext_resource type="Texture2D" uid="uid://bhdmmt2opur7a" path="res://assets/hud/circle_bars/32x32 circle bar under.png" id="9_chjal"]
 [ext_resource type="Texture2D" uid="uid://bs128jj4g5bas" path="res://assets/hud/circle_bars/32x32 circle bar progress blue.png" id="9_cjqg0"]
+[ext_resource type="FontFile" uid="uid://dvkmw44ofrw88" path="res://assets/fonts/Pixel Code/PixelCode-DemiBold.otf" id="9_txyw0"]
 [ext_resource type="Texture2D" uid="uid://oj6jn8yf6v4o" path="res://assets/hud/circle_bars/32x32 circle bar progress red orange.png" id="9_vchkt"]
 [ext_resource type="Texture2D" uid="uid://bd4aeawy2xq44" path="res://assets/hud/circle_bars/32x32 circle bar over.png" id="10_cjqg0"]
 [ext_resource type="Texture2D" uid="uid://dgykxbunxxfly" path="res://assets/hud/buttons/icon_battle_dark.tres" id="10_eb6dy"]
@@ -261,7 +262,8 @@ scale = Vector2(4, 4)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("5_pibwh")
 
-[node name="Label" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=322136845]
+[node name="MainKineticShardsCounterLabel" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=322136845]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -275,9 +277,10 @@ offset_bottom = 51.67
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("6_5he1u")
-theme_override_fonts/font = ExtResource("7_dgi5k")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("9_txyw0")
+theme_override_font_sizes/font_size = 24
 text = "1000/1000"
+horizontal_alignment = 1
 
 [node name="FocusFluxTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1086528486]
 unique_name_in_owner = true
@@ -326,7 +329,8 @@ scale = Vector2(4, 4)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_c6pm6")
 
-[node name="Label" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1136599745]
+[node name="MainDreamShardsCounterLabel" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1136599745]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -340,9 +344,10 @@ offset_bottom = 51.67
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("6_5he1u")
-theme_override_fonts/font = ExtResource("7_dgi5k")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("9_txyw0")
+theme_override_font_sizes/font_size = 24
 text = "1000/1000"
+horizontal_alignment = 1
 
 [node name="DreamShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1791962131]
 unique_name_in_owner = true
@@ -391,7 +396,8 @@ scale = Vector2(4, 4)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("7_5he1u")
 
-[node name="Label" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1737735179]
+[node name="MainFocusFluxCounterLabel" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1737735179]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -405,9 +411,10 @@ offset_bottom = 51.67
 grow_horizontal = 2
 grow_vertical = 0
 theme = ExtResource("6_5he1u")
-theme_override_fonts/font = ExtResource("7_dgi5k")
-theme_override_font_sizes/font_size = 32
+theme_override_fonts/font = ExtResource("9_txyw0")
+theme_override_font_sizes/font_size = 24
 text = "1000/1000"
+horizontal_alignment = 1
 
 [node name="IngredientVBoxContainer" type="VBoxContainer" parent="HUDLayer" unique_id=557320581]
 unique_name_in_owner = true

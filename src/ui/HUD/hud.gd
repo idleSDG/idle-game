@@ -9,6 +9,7 @@ extends CanvasLayer
 
 @onready var ingredient_hud: Dictionary = {
 	Ingredient.Type.KINETIC_SHARD: {
+		"main_counter": %MainKineticShardsCounterLabel,
 		"counter": %KineticShardsCounterLabel,
 		"gain_rate": %KineticShardsGainRateLabel,
 		"progress_bar": %KineticShardsProgressBar,
@@ -18,6 +19,7 @@ extends CanvasLayer
 		"momentum_graph_line": %KineticShardsMomentumGraphLine,
 	},
 	Ingredient.Type.FOCUS_FLUX: {
+		"main_counter": %MainFocusFluxCounterLabel,
 		"counter": %FocusFluxCounterLabel,
 		"gain_rate": %FocusFluxGainRateLabel,
 		"progress_bar": %FocusFluxProgressBar,
@@ -26,6 +28,7 @@ extends CanvasLayer
 		"momentum_graph_line": %FocusFluxMomentumGraphLine,
 	},
 	Ingredient.Type.DREAM_SHARDS: {
+		"main_counter": %MainDreamShardsCounterLabel,
 		"counter": %DreamShardsCounterLabel,
 		"gain_rate": %DreamShardsGainRateLabel,
 		"progress_bar": %DreamShardsProgressBar,
@@ -77,6 +80,7 @@ func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient
 			var todays_steps: int = PlayerInventory.steps.get_steps_for_day_offset(0)
 			var today_momentum_pct = ingredient.momentum_tracker.momentumConfig.get_multiplier(float(yesterday_steps)) * 100.0
 			var tomorrow_momentum_pct = ingredient.momentum_tracker.momentumConfig.get_multiplier(float(todays_steps)) * 100.0
+			ingredient_hud[type].main_counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
 			ingredient_hud[type].counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
 			ingredient_hud[type].gain_rate.text = "%.02f / min" % (ingredient.get_current_gain_rate() * 60)
 			ingredient_hud[type].momentum_label_today.text = "today's momentum:\n%d steps (%.02f %%)" % [yesterday_steps, today_momentum_pct]
@@ -85,6 +89,7 @@ func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient
 		elif type == Ingredient.Type.FOCUS_FLUX:
 			var screen_time: int = PlayerInventory.screentime.get_latest_value_for_profile().get("val", 0)
 			var screen_momentum_pct: int = ingredient.momentum_tracker.momentumConfig.get_multiplier(float(screen_time)) * 100.0
+			ingredient_hud[type].main_counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
 			ingredient_hud[type].counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
 			ingredient_hud[type].gain_rate.text = "%.02f / min" % (ingredient.get_current_gain_rate() * 60)
 			ingredient_hud[type].momentum_label.text = "current momentum:\n%d minutes (%.02f %%)\n\n" % [-screen_time, screen_momentum_pct]
@@ -92,6 +97,7 @@ func _on_ingredients_changed(ingredients: Dictionary[Ingredient.Type, Ingredient
 		elif type == Ingredient.Type.DREAM_SHARDS:
 			var sleep_time: int = PlayerInventory.sleep.get_latest_value_for_profile().get("val", 0)
 			var sleep_momentum_pct: int = ingredient.momentum_tracker.momentumConfig.get_multiplier(float(sleep_time)) * 100.0
+			ingredient_hud[type].main_counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
 			ingredient_hud[type].counter.text = "%d / %d" % [ingredient.count, ingredient.capacity]
 			ingredient_hud[type].gain_rate.text = "%.02f / min" % (ingredient.get_current_gain_rate() * 60)
 			ingredient_hud[type].momentum_label.text = "current momentum:\n%.02f hours (%.02f %%)\n\n" % [sleep_time / 60.0, sleep_momentum_pct]

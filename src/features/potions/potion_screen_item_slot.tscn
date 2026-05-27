@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://d16csp42sfssi" path="res://assets/potions_screen/PotionsScreen_Slot_Background.png" id="1_nxk6g"]
 [ext_resource type="Texture2D" uid="uid://b8dv1iad3xa63" path="res://assets/icons/potions/potion_unknown_icon.tres" id="2_roty8"]
 [ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="3_8qgxw"]
+[ext_resource type="Theme" uid="uid://o6ja5ygtgnte" path="res://src/ui/themes/default_theme.tres" id="5_mg63d"]
+[ext_resource type="FontFile" uid="uid://dvkmw44ofrw88" path="res://assets/fonts/Pixel Code/PixelCode-DemiBold.otf" id="6_o46fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_roty8"]
 shader = ExtResource("3_8qgxw")
@@ -31,7 +33,6 @@ anchors_preset = 0
 offset_right = 256.0
 offset_bottom = 256.0
 script = ExtResource("1_j30my")
-counter_value = 0
 default_icon_texture = ExtResource("2_roty8")
 
 [node name="SlotBackground" type="TextureRect" parent="." unique_id=105013451]
@@ -64,6 +65,7 @@ stretch_mode = 5
 
 [node name="SlotItemIcon" type="TextureRect" parent="SlotBackground" unique_id=1796963862]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.5)
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
@@ -112,6 +114,9 @@ theme_override_constants/margin_bottom = 8
 unique_name_in_owner = true
 z_index = 2
 layout_mode = 2
+theme = ExtResource("5_mg63d")
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("6_o46fn")
 theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 2
@@ -124,6 +129,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_roty8")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_mg63d")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_o46fn")
