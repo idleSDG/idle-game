@@ -75,7 +75,8 @@ func UsePotionEffect(charList : Array[Character]):
 			charList[0].TakeTrueDamage(damage, 1)
 			charList[0].play_sfx(Character.SFX_TYPE.HEAL)
 		else:
-			charList[1].play_sfx(Character.SFX_TYPE.EXPLOSION)
+			if charList[0]:
+				charList[0].play_sfx(Character.SFX_TYPE.EXPLOSION)
 			if charList[1] != null: charList[1].TakeTrueDamage(damage, 1)
 			if charList[2] != null: charList[2].TakeTrueDamage(damage, 1)
 			if charList[3] != null: charList[3].TakeTrueDamage(damage, 1)
