@@ -56,12 +56,14 @@ func doEquipment(slot : EquipmentItem.Slot,
 			grid.add_child(newButton)
 			gridItems.append(newButton)
 
-			if slot == EquipmentItem.Slot.WEAPON:
-				newButton.icon = load("res://assets/icons/staff.png")
+			if item.icon:
+					newButton.icon = item.icon
+			elif slot == EquipmentItem.Slot.WEAPON:
+					newButton.icon = load("res://assets/icons/staff.png")
 			elif slot == EquipmentItem.Slot.ROBE:
-				newButton.icon = load("res://assets/icons/robe.png")
+					newButton.icon = load("res://assets/icons/robe.png")
 			else:
-				newButton.icon = load("res://assets/icons/hat.png")
+					newButton.icon = load("res://assets/icons/hat.png")
 
 			# Green border on currently equipped item
 			if equipped != null and item == equipped and show_highlight:
