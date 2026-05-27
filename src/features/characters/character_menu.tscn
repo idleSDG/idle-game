@@ -15,7 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="9_g64kq"]
 [ext_resource type="Texture2D" uid="uid://3yfhmovm6r4x" path="res://assets/character_screen/skin_back.png" id="11_syx3m"]
 [ext_resource type="Texture2D" uid="uid://d20uxmsskevy4" path="res://assets/character_screen/x.png" id="13_f5f5t"]
-[ext_resource type="Texture2D" uid="uid://bjn0vbgrih47r" path="res://assets/character_screen/equip_back.png" id="15_syx3m"]
+[ext_resource type="Texture2D" uid="uid://dg644utogun2k" path="res://assets/equipment/skill_panel.png" id="15_vrfog"]
+[ext_resource type="Texture2D" uid="uid://drsk0k83a26n8" path="res://assets/equipment/equip_panel.png" id="16_vrfog"]
 [ext_resource type="Texture2D" uid="uid://byhs7o13gw54d" path="res://assets/hud/buttons/button_white_normal.tres" id="17_f5f5t"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ti4qo"]
@@ -38,23 +39,25 @@ region_rect = Rect2(0, 0, 48.01725, 16.006632)
 texture = ExtResource("11_syx3m")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v3agd"]
-content_margin_left = 50.0
+content_margin_left = 70.0
 content_margin_top = 50.0
-content_margin_right = 50.0
+content_margin_right = 70.0
 content_margin_bottom = 50.0
-texture = ExtResource("15_syx3m")
+texture = ExtResource("16_vrfog")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aiw4e"]
 content_margin_left = 10.0
+content_margin_top = 20.0
 content_margin_right = 10.0
-texture = ExtResource("15_syx3m")
+content_margin_bottom = 10.0
+texture = ExtResource("15_vrfog")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f5f5t"]
-content_margin_left = 50.0
+content_margin_left = 70.0
 content_margin_top = 50.0
-content_margin_right = 50.0
-content_margin_bottom = 80.0
-texture = ExtResource("15_syx3m")
+content_margin_right = 70.0
+content_margin_bottom = 50.0
+texture = ExtResource("16_vrfog")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5f6dy"]
 content_margin_left = 50.0
@@ -433,7 +436,6 @@ presets_visible = false
 layer = 2
 
 [node name="SkillSelectionBackground" type="Control" parent="CanvasLayer2" unique_id=1691713966]
-visible = false
 z_index = 99
 layout_mode = 3
 anchors_preset = 15
@@ -500,9 +502,9 @@ stretch_mode = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox" unique_id=915604959]
 layout_mode = 2
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
+theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 10
 
 [node name="SkillGrid" parent="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/MarginContainer" unique_id=1758141714 node_paths=PackedStringArray("skillScreen", "button1", "button2", "button3", "slotTitleLabel") instance=ExtResource("5_kt2ab")]
@@ -549,7 +551,7 @@ anchor_right = 1.0
 offset_left = 39.0
 offset_top = 55.0
 offset_right = -42.0
-offset_bottom = 357.0
+offset_bottom = 662.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_f5f5t")
 
@@ -584,12 +586,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=276525877]
+texture_filter = 1
 custom_minimum_size = Vector2(160, 160)
 layout_mode = 2
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=1224369523]
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="CurrentName" type="Label" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=10285727]
 layout_mode = 2

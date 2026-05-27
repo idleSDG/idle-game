@@ -140,8 +140,8 @@ func _open_picker(slot: EquipmentItem.Slot, title: String) -> void:
 	_selected_item = null
 	picker_title.text = title
 	picker_info_lbl.text = ""
-	preview_icon.texture = null
-	preview_name.text = ""
+	preview_icon.texture = load("res://assets/icons/icon_question_mark.png")
+	preview_name.text = "No item selected"
 	picker_equip_btn.disabled = true
 	item_grid.doEquipment(slot, true, true)
 	item_picker.visible = true
