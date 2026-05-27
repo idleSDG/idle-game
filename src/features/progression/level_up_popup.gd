@@ -1,6 +1,8 @@
 class_name LevelUpPopup
 extends Control
- 
+
+signal ok_button_pressed()
+
 @onready var title_label : Label  = $PanelContainer/MarginContainer/VBox/TitleLabel
 @onready var level_label : Label  = $PanelContainer/MarginContainer/VBox/LevelLabel
 @onready var stats_label : RichTextLabel  = $PanelContainer/MarginContainer/VBox/StatsLabel
@@ -77,3 +79,7 @@ func _play_confirm_sfx():
 func _play_level_up_sfx():
 	sfx_player.stream = level_up_sfx
 	sfx_player.play()
+
+func _on_ok_button_pressed() -> void:
+	ok_button_pressed.emit()
+	PlayerProgress.level_up_popup_closed.emit()
