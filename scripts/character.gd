@@ -14,6 +14,80 @@ var index : int = -1
 @onready var skillBars = $"VBoxContainer/Container--Sprite2D/HBox_Skills"
 @onready var levelLabel = $"VBoxContainer/Container--Sprite2D/Level"
 
+@onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+enum SFX_TYPE { MELEE_HIT, BURN, STRENGTH, HEAL, FREEZE, PARALYZE, HASTE, EXPLOSION, DEATH }
+var attack_sfx = {
+	SFX_TYPE.MELEE_HIT: [
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/hit/FGHTImpt_HIT-Smack_HY_PC-005.wav"),
+		],
+	SFX_TYPE.BURN: [
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/fire/DSGNImpt_EXPLOSION-Fire Hit_HY_PC-006.wav"),
+	],
+	SFX_TYPE.STRENGTH: [
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/strength/DSGNSynth_BUFF-Plus Damage_HY_PC-006.wav"),
+	],
+	SFX_TYPE.HEAL: [
+		preload("res://assets/sfx/battle/heal/MAGAngl_BUFF-Healing Gusts_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/heal/MAGAngl_BUFF-Healing Gusts_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/heal/MAGAngl_BUFF-Healing Gusts_HY_PC-003.wav"),
+	],
+	SFX_TYPE.FREEZE: [
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/freeze/DSGNMisc_HIT-Zap Metal_HY_PC-006.wav"),
+	],
+	SFX_TYPE.PARALYZE: [
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-006.wav"),
+	],
+	SFX_TYPE.HASTE: [
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/haste/MAGAngl_BUFF-Speed Debuff_HY_PC-006.wav"),
+	],
+	SFX_TYPE.EXPLOSION: [
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/explosion/DSGNImpt_EXPLOSION-Bass Hit_HY_PC-006.wav"),
+	],
+	SFX_TYPE.DEATH: [
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-001.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-002.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-003.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-004.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-005.wav"),
+		preload("res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-006.wav"),
+	],
+}
+
 var sprite
 @onready var baseSprite = $VBoxContainer/BaseSprite
 @onready var wizardSprites = $VBoxContainer/BaseSprite/WIZARDSPECIFIC
@@ -64,6 +138,28 @@ func _ready() -> void:
 	
 	pass
 
+func play_sfx(sfx_name: SFX_TYPE) -> void:
+	sfx_player.stream = attack_sfx.get(sfx_name).pick_random()
+	sfx_player.play()
+	
+func play_status_effect_sfx(effect: StatusEffect.StatusEffectType) -> void:
+	var sfx: AudioStream = null
+	
+	match effect:
+		StatusEffect.StatusEffectType.Burn:
+			sfx = attack_sfx.get(SFX_TYPE.BURN).pick_random()
+		StatusEffect.StatusEffectType.Freeze:
+			sfx = attack_sfx.get(SFX_TYPE.FREEZE).pick_random()
+		StatusEffect.StatusEffectType.Paralyze:
+			sfx = attack_sfx.get(SFX_TYPE.PARALYZE).pick_random()
+		StatusEffect.StatusEffectType.Haste:
+			sfx = attack_sfx.get(SFX_TYPE.HASTE).pick_random()
+		StatusEffect.StatusEffectType.Strength:
+			sfx = attack_sfx.get(SFX_TYPE.STRENGTH).pick_random()
+
+	if sfx != null:
+		sfx_player.stream = sfx
+		sfx_player.play()
 
 func SetStats(stats : CharacterStats) :
 	baseStats = stats

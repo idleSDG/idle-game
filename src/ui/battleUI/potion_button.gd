@@ -61,14 +61,12 @@ func VerifyPotion():
 	else:
 		potion_button.disabled = false
 
-
 func UsePotion():
 	potion.UsePotion(charList)
 	queued = false
 	color_rect.visible = false
 
 	BattleVariables.potionUsage[BattleVariables.potionUsage.size()] = [BattleVariables.battleElapsed, potion.slot]
-
 
 func SetCooldown():
 	potion.currentCooldown = potion.cooldown

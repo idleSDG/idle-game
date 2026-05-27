@@ -26,7 +26,6 @@ var isCurrentAttack : bool = false
 var sprite
 var borderClr
 
-
 func _init(p_potency = 1.0, p_max = 100.0, p_element = CharacterStats.Element.None,
 		 p_is_aoe : bool = false, p_additionalEffect : StatusEffect = null):
 	potency = p_potency
@@ -121,10 +120,15 @@ func Use(user : Character, target : Character) -> bool:
 		dmg.x *= 0.5
 	target.TakeDamage(dmg.x, dmg.y > 0.0)
 	
+	if additionalEffect == null:
+		target.play_sfx(Character.SFX_TYPE.MELEE_HIT)
+	
 	if additionalEffect != null && BattleVariables.battleRNG.randf() < additionalEffect.ApplicationRate:
 		if additionalEffect.TargetSelf && isCurrentAttack:
+			user.play_status_effect_sfx(additionalEffect.StatusType)
 			user.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 		else:
+			target.play_status_effect_sfx(additionalEffect.StatusType)
 			target.ApplyStatus(StatusEffect.new(additionalEffect.StatusType, 0.0))
 	
 	if isCurrentAttack:
@@ -137,6 +141,8 @@ func Use(user : Character, target : Character) -> bool:
 	UpdateBar()
 	isCurrentAttack = false
 	return true
+
+
 
 # Damage formula function
 func DamageCalculation(user : CharacterStats, target : CharacterStats) -> Vector2:

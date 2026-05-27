@@ -73,7 +73,9 @@ func UsePotionEffect(charList : Array[Character]):
 	if type == PotionTypes.Damage:
 		if targetSelf:
 			charList[0].TakeTrueDamage(damage, 1)
+			charList[0].play_sfx(Character.SFX_TYPE.HEAL)
 		else:
+			charList[1].play_sfx(Character.SFX_TYPE.EXPLOSION)
 			if charList[1] != null: charList[1].TakeTrueDamage(damage, 1)
 			if charList[2] != null: charList[2].TakeTrueDamage(damage, 1)
 			if charList[3] != null: charList[3].TakeTrueDamage(damage, 1)
@@ -85,10 +87,17 @@ func UsePotionEffect(charList : Array[Character]):
 	if type == PotionTypes.Status:
 		if targetSelf:
 			charList[0].ApplyStatus(effect)
+			charList[0].play_status_effect_sfx(effect.StatusType)
 		else:
-			if charList[1] != null: charList[1].ApplyStatus(effect)
-			if charList[2] != null: charList[2].ApplyStatus(effect)
-			if charList[3] != null: charList[3].ApplyStatus(effect)
+			if charList[1] != null: 
+				charList[1].ApplyStatus(effect)
+				charList[1].play_status_effect_sfx(effect.StatusType)
+			if charList[2] != null: 
+				charList[2].ApplyStatus(effect)
+				charList[2].play_status_effect_sfx(effect.StatusType)
+			if charList[3] != null: 
+				charList[3].ApplyStatus(effect)
+				charList[3].play_status_effect_sfx(effect.StatusType)
 	
 	currentCooldown = cooldown
 

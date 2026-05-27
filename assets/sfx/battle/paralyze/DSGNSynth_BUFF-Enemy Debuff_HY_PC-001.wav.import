@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d2q3dav1l4n2n"
+path="res://.godot/imported/DSGNSynth_BUFF-Enemy Debuff_HY_PC-001.wav-d68f19730a6f1196aeef7827703919eb.sample"
+
+[deps]
+
+source_file="res://assets/sfx/battle/paralyze/DSGNSynth_BUFF-Enemy Debuff_HY_PC-001.wav"
+dest_files=["res://.godot/imported/DSGNSynth_BUFF-Enemy Debuff_HY_PC-001.wav-d68f19730a6f1196aeef7827703919eb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

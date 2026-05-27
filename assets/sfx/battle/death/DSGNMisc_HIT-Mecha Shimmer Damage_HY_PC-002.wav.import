@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dv57dkfm88dc4"
+path="res://.godot/imported/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-002.wav-e0d63acb1b1a7fd81b5e27dcb449e584.sample"
+
+[deps]
+
+source_file="res://assets/sfx/battle/death/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-002.wav"
+dest_files=["res://.godot/imported/DSGNMisc_HIT-Mecha Shimmer Damage_HY_PC-002.wav-e0d63acb1b1a7fd81b5e27dcb449e584.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

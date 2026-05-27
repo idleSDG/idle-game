@@ -168,5 +168,6 @@ label_font = ExtResource("5_tsomc")
 label_font_size = 64
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=324860346]
+volume_db = 5.0
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBox/OkButton" to="." method="_on_ok_button_pressed"]
