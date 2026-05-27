@@ -3,7 +3,6 @@ extends Node
 @onready var battle_ui: Control = $"Main Scene/Container/BattleUI"
 
 @onready var canvas = $"Main Scene"
-@onready var combatFinish = $"Main Scene/CombatFinishPopup"
 @onready var characterSpawnPos = [
 	$"Main Scene/Control",
 	$"Main Scene/Control2",
@@ -12,16 +11,16 @@ extends Node
 	$"Main Scene/Control5",
 	$"Main Scene/Control3",
 ]
-@onready var timerLabel = $"Main Scene/SecondsLabel"
 
 signal request_exit_signal
-@onready var exit_button: Button = $"Main Scene/ExitBattle"
 @onready var pause_label = $"Main Scene/HBoxContainer/VBoxContainer/Label"
 @onready var pause = $"Main Scene/HBoxContainer/VBoxContainer/Pause"
 @onready var fast_label = $"Main Scene/HBoxContainer/VBoxContainer2/Label"
 @onready var fast = $"Main Scene/HBoxContainer/VBoxContainer2/Fast"
 
 @onready var level: battle_level = BattleVariables.current_battle_level
+
+@onready var post_battle_popup: PostBattlePopup = $"Main Scene/PostBattlePopup"
 
 var character_scene = load("res://scenes/character.tscn")
 var character_class = load("res://scripts/character.gd")
@@ -53,7 +52,6 @@ func _notification(what: int) -> void:
 			if !BattleVariables.isPaused:
 				BattleVariables.battleElapsed += elapsed
 				simulate(elapsed)
-			timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -61,14 +59,9 @@ func _ready() -> void:
 	characterList.resize(enemyAmount)
 	BattleVariables.isSimulated = false
 	
-	if exit_button:
-		exit_button.pressed.connect(_on_exit_battle_pressed)
 	if BattleVariables.battleState == BattleVariables.BattleStates.AWAITING_EXIT:
 		isPlaying = false
-		combatFinish.visible = true
-		combatFinish.text = "YOU WIN"
-		exit_button.visible = true
-		timerLabel.time = int(Time.get_unix_time_from_system() - BattleVariables.battleStart)
+		post_battle_popup.show_popup(true)
 		return
 
 	var battleStart = BattleVariables.battleStart
@@ -105,7 +98,6 @@ func _ready() -> void:
 		BattleVariables.battleElapsed += timeElapsed
 
 		simulate(BattleVariables.battleElapsed)
-		timerLabel.time = int(now - BattleVariables.battleStart)
 	else:
 		BattleVariables.battleState = BattleVariables.BattleStates.IN_BATTLE
 		BattleVariables.battleStart = Time.get_unix_time_from_system()
@@ -247,23 +239,29 @@ func update_visuals(delta: float):
 func finish_fight(result: bool):
 	BattleVariables.battleState = BattleVariables.BattleStates.AWAITING_EXIT
 	isPlaying = false
-	combatFinish.visible = true
+
+	var xp_reward: int = 120
+	
+	var will_level_up: bool = xp_reward >= PlayerProgress.xp_required_for_next_level()
 
 	if result:
 		BattleVariables.current_battle_level.beaten = true
-		combatFinish.text = "YOU WIN"
-		PlayerProgress.add_xp(120)
-		characterList[0].ApplyExp()
 		BattleVariables.last_battle_outcome = BattleVariables.BattleOutcome.VICTORY
 		BattleVariables.battle_finished.emit(BattleVariables.BattleOutcome.VICTORY)
+		
+		post_battle_popup.description_label.text = "+ %d XP!" % xp_reward
+		post_battle_popup.show_popup(true)
+		PlayerProgress.add_xp(120)
+		characterList[0].ApplyExp()
 	else:
 		BattleVariables.last_battle_outcome = BattleVariables.BattleOutcome.DEFEAT
 		BattleVariables.battle_finished.emit(BattleVariables.BattleOutcome.DEFEAT)
-		combatFinish.text = "YOU LOSE"
+		
+		post_battle_popup.description_label.text = ""
+		post_battle_popup.show_popup(false)
 
+	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
 	SaveManager.save_game()
-	exit_button.visible = true
-
 
 # [length] is in seconds
 # Simulates the game state in [length] seconds from battle start
@@ -301,7 +299,6 @@ func _on_exit_battle_pressed() -> void:
 	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
 	SaveManager.save_game()
 	request_exit_signal.emit()
-
 
 func select_enemy_unit(ind: int):
 	select_enemy_slot(ind)

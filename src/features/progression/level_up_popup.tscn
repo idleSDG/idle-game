@@ -5,11 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://cier8g417hph3" path="res://assets/skills/Wind_borderless.png" id="2_slxsh"]
 [ext_resource type="AudioStream" uid="uid://dsbo3sl8igoud" path="res://assets/sfx/ui/levelup.ogg" id="3_700ke"]
 [ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="4_57ao5"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="4_s25sg"]
 [ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="5_mu5mm"]
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="5_tsomc"]
 [ext_resource type="FontFile" uid="uid://dn531g1ux5cgt" path="res://assets/fonts/Pixel Code/PixelCode-Bold-Italic.otf" id="6_60t36"]
 [ext_resource type="Texture2D" uid="uid://b5b4h853pvvcj" path="res://assets/settings/Popup decoration.png" id="6_mu5mm"]
 [ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="10_mcn8b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_auf0a"]
+shader = ExtResource("4_s25sg")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mcn8b"]
 shader = ExtResource("4_57ao5")
@@ -24,8 +30,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k4fq0"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mcn8b"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s25sg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_auf0a"]
@@ -34,7 +38,10 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wfnpw"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1tw63"]
+
 [node name="LevelUpPopup" type="Control" unique_id=1366411805]
+z_index = 500
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -44,6 +51,16 @@ grow_vertical = 2
 script = ExtResource("1_k5glt")
 confirm_sfx = ExtResource("2_k4fq0")
 level_up_sfx = ExtResource("3_700ke")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2016085597]
+material = SubResource("ShaderMaterial_auf0a")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=198171043]
 layout_mode = 1
@@ -141,13 +158,15 @@ autowrap_mode = 2
 [node name="OkButton" parent="PanelContainer/MarginContainer/VBox" unique_id=112168689 instance=ExtResource("10_mcn8b")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_mcn8b")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_s25sg")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_auf0a")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_5f6ue")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wfnpw")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s25sg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_auf0a")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5f6ue")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wfnpw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1tw63")
 button_text = "AWESOME!"
 label_font = ExtResource("5_tsomc")
 label_font_size = 64
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=324860346]
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBox/OkButton" to="." method="_on_ok_button_pressed"]

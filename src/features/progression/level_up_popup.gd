@@ -1,6 +1,8 @@
 class_name LevelUpPopup
 extends Control
- 
+
+signal ok_button_pressed()
+
 @onready var title_label : Label  = $PanelContainer/MarginContainer/VBox/TitleLabel
 @onready var level_label : Label  = $PanelContainer/MarginContainer/VBox/LevelLabel
 @onready var stats_label : RichTextLabel  = $PanelContainer/MarginContainer/VBox/StatsLabel
@@ -18,7 +20,6 @@ var skillUnlocks = []
  
 func _ready() -> void:
 	visible = false
-	ok_button.pressed.connect(_on_ok_pressed)
 	PlayerProgress.leveled_up.connect(_on_leveled_up)
 	
 func _on_leveled_up(old_level: int, new_level: int) -> void:
@@ -63,7 +64,8 @@ func show_level_up(old_level: int, new_level: int) -> void:
 			
 			proper.queue_free()
  
-func _on_ok_pressed() -> void:
+func _on_ok_button_pressed() -> void:
+	ok_button_pressed.emit()
 	visible = false
 	_play_confirm_sfx()
 	for s in skillUnlocks:
