@@ -23,7 +23,7 @@ extends Node
 @onready var picker_equip_btn : Button = $CanvasLayer2/ItemPicker/PanelContainer/VBox/EquipBtn
 @onready var preview_icon : TextureRect = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/TextureRect
 @onready var preview_name : Label = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentName
-@onready var picker_info_lbl : Label = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentInfo
+@onready var picker_info_lbl : RichTextLabel = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentInfo
 @onready var picker_close_btn : TextureButton = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBox/TextureButton
 
 # Skill selection popup
@@ -170,15 +170,22 @@ func _on_item_selected(item: EquipmentItem) -> void:
 	_selected_item = item
 	picker_equip_btn.disabled = false
 
+
 func _show_item_info(item: EquipmentItem) -> void:
 	var info := ""
-	if item.health_bonus_pct != 0: info += "Health +%d%%\n" % int(item.health_bonus_pct * 100)
-	if item.attack_bonus_pct != 0: info += "Attack +%d%%\n" % int(item.attack_bonus_pct * 100)
-	if item.defense_bonus_pct != 0: info += "Defense +%d%%\n" % int(item.defense_bonus_pct * 100)
-	if item.crit_rate_bonus_pct != 0: info += "Crit Rate +%d%%\n" % int(item.crit_rate_bonus_pct * 100)
-	if item.crit_dmg_bonus_pct != 0: info += "Crit DMG +%d%%\n" % int(item.crit_dmg_bonus_pct * 100)
-	if item.ingredient_gain_bonus_pct != 0: info += "Ingredient Gain +%d%%\n" % int(item.ingredient_gain_bonus_pct * 100)
-	picker_info_lbl.text = info.strip_edges()
+	if item.health_bonus_pct != 0:
+		info += "[img=32]res://assets/icons/icon_plus.png[/img] HP  +%d%%\n" % int(item.health_bonus_pct * 100)
+	if item.attack_bonus_pct != 0:
+		info += "[img=32]res://assets/icons/atk.png[/img] ATK  +%d%%\n" % int(item.attack_bonus_pct * 100)
+	if item.defense_bonus_pct != 0:
+		info += "[img=32]res://assets/icons/def.png[/img] DEF  +%d%%\n" % int(item.defense_bonus_pct * 100)
+	if item.crit_rate_bonus_pct != 0:
+		info += "[img=32]res://assets/icons/crt.png[/img] Crit Rate  +%d%%\n" % int(item.crit_rate_bonus_pct * 100)
+	if item.crit_dmg_bonus_pct != 0:
+		info += "[img=32]res://assets/icons/cdm.png[/img] Crit DMG  +%d%%\n" % int(item.crit_dmg_bonus_pct * 100)
+	if item.ingredient_gain_bonus_pct != 0:
+		info += "[img=32]res://assets/icons/chr.png[/img] Ing Gain  +%d%%\n" % int(item.ingredient_gain_bonus_pct * 100)
+	picker_info_lbl.parse_bbcode("[font_size=30]" + info.strip_edges() + "[/font_size]")
 
 func _on_equip_pressed() -> void:
 	if _selected_item == null:

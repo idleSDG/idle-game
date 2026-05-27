@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://kcnv1ayyf06w" path="res://assets/character_screen/Avatar_decoration.png" id="7_bbp5v"]
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="8_ahy0h"]
 [ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="9_g64kq"]
-[ext_resource type="Texture2D" uid="uid://3yfhmovm6r4x" path="res://assets/character_screen/skin_back.png" id="11_syx3m"]
 [ext_resource type="Texture2D" uid="uid://d20uxmsskevy4" path="res://assets/character_screen/x.png" id="13_f5f5t"]
 [ext_resource type="Texture2D" uid="uid://dg644utogun2k" path="res://assets/equipment/skill_panel.png" id="15_vrfog"]
 [ext_resource type="Texture2D" uid="uid://drsk0k83a26n8" path="res://assets/equipment/equip_panel.png" id="16_vrfog"]
@@ -36,7 +35,7 @@ texture = ExtResource("6_ahy0h")
 region_rect = Rect2(0, 0, 48.01725, 16.006632)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vrfog"]
-texture = ExtResource("11_syx3m")
+texture = ExtResource("16_vrfog")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v3agd"]
 content_margin_left = 70.0
@@ -386,20 +385,20 @@ anchor_left = 0.418
 anchor_top = 0.49100003
 anchor_right = 0.418
 anchor_bottom = 0.49100003
-offset_left = 12.559998
-offset_top = -72.72003
-offset_right = 567.56
-offset_bottom = 312.27997
+offset_left = 42.559998
+offset_top = -149.72003
+offset_right = 597.56
+offset_bottom = 229.27997
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_vrfog")
 script = ExtResource("3_ifdmm")
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel" unique_id=708597476]
 layout_mode = 2
-theme_override_constants/margin_left = 35
+theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 35
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 30
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer" unique_id=513128103]
 layout_mode = 2
@@ -411,7 +410,8 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer/HBoxContainer" unique_id=141646674]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 26
+theme_override_fonts/font = ExtResource("8_ahy0h")
+theme_override_font_sizes/font_size = 30
 text = "Skin Color"
 horizontal_alignment = 1
 
@@ -436,6 +436,7 @@ presets_visible = false
 layer = 2
 
 [node name="SkillSelectionBackground" type="Control" parent="CanvasLayer2" unique_id=1691713966]
+visible = false
 z_index = 99
 layout_mode = 3
 anchors_preset = 15
@@ -598,9 +599,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("8_ahy0h")
 theme_override_font_sizes/font_size = 48
 
-[node name="CurrentInfo" type="Label" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=682111993]
+[node name="CurrentInfo" type="RichTextLabel" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox" unique_id=1102601543]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
 
 [node name="EquipBtn" type="Button" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=612806409]
 texture_filter = 1
