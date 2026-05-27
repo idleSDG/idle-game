@@ -260,6 +260,7 @@ func finish_fight(result: bool):
 		post_battle_popup.description_label.text = ""
 		post_battle_popup.show_popup(false)
 
+	BattleVariables.battleState = BattleVariables.BattleStates.IN_LEVEL_SELECT
 	SaveManager.save_game()
 
 # [length] is in seconds
