@@ -14,6 +14,9 @@ enum Slot { WEAPON, ROBE, HAT }
 
 @export var cost: int = 0
 
+@export var icon: Texture2D
+@export var sprite: Texture2D
+
 func _init(name, nSlot: Slot, p_health: float = 0.0, p_attack: float = 0.0, 
 	p_defense: float = 0.0, p_crit_r: float = 0.0, p_crit_dmg: float = 0.0, 
 	p_ing: float = 0.0):

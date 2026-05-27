@@ -18,13 +18,16 @@ func setup(item: EquipmentItem) -> void:
 	buy_button.button_text = str(item.cost)
 	stats_label.text = _build_stats_text(item)
 
-	match item.slot:
-		EquipmentItem.Slot.WEAPON:
-			icon_rect.texture = load("res://assets/icons/staff_icon.tres")
-		EquipmentItem.Slot.ROBE:
-			icon_rect.texture = load("res://assets/icons/robe_icon.tres")
-		EquipmentItem.Slot.HAT:
-			icon_rect.texture = load("res://assets/icons/hat_icon.tres")
+	if item.icon:
+		icon_rect.texture = item.icon
+	else:
+		match item.slot:
+			EquipmentItem.Slot.WEAPON:
+				icon_rect.texture = load("res://assets/icons/staff_icon.tres")
+			EquipmentItem.Slot.ROBE:
+				icon_rect.texture = load("res://assets/icons/robe_icon.tres")
+			EquipmentItem.Slot.HAT:
+				icon_rect.texture = load("res://assets/icons/hat_icon.tres")
 
 	_refresh_state()
 

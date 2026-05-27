@@ -179,7 +179,9 @@ func _on_picker_background_input(event: InputEvent) -> void:
 
 func _on_item_selected(item: EquipmentItem) -> void:
 	var equipped = EquipmentManager.get_equipped(_current_picker_slot)
-	if _current_picker_slot == EquipmentItem.Slot.WEAPON:
+	if item.sprite:
+		preview_icon.texture = item.sprite
+	elif _current_picker_slot == EquipmentItem.Slot.WEAPON:
 		preview_icon.texture = load("res://assets/icons/staff.png")
 	elif _current_picker_slot == EquipmentItem.Slot.ROBE:
 		preview_icon.texture = load("res://assets/icons/robe.png")

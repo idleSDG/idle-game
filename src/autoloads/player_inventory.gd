@@ -122,20 +122,6 @@ func _ready():
 	if screentime.has_screen_time_data():
 		_on_screen_time_data_ready()
 
-	_init_equipment()
-	
-func _init_equipment() -> void:
-	var starter_weapon = EquipmentItem.new("Starter Staff", EquipmentItem.Slot.WEAPON)
-	starter_weapon.attack_bonus_pct = 0.1
-
-	var starter_robe = EquipmentItem.new("Starter Robe", EquipmentItem.Slot.ROBE)
-	starter_robe.ingredient_gain_bonus_pct = 0.1
-
-	var starter_hat = EquipmentItem.new("Starter Hat", EquipmentItem.Slot.HAT)
-	starter_hat.crit_rate_bonus_pct = 0.1
-
-	equipment = [starter_weapon, starter_robe, starter_hat]
-
 func purchase_item(item: EquipmentItem) -> bool:
 	if money < item.cost:
 		return false
@@ -183,11 +169,9 @@ func get_save_data() -> Dictionary:
 	for type in ingredients:
 		ingredient_map[Ingredient.get_type_as_string(type)] = Ingredient.to_dictionary(ingredients[type])
 	
-	# Save purchased item names (exclude starters — they're always added in _init_equipment)
-	var starter_names = ["Starter Staff", "Starter Robe", "Starter Hat"]
+	# Save purchased item names
 	var purchased_names: Array = []
 	for item in equipment:
-		if item.item_name not in starter_names:
 			purchased_names.append(item.item_name)
 
 	return {
@@ -231,14 +215,14 @@ func load_save_data(data: Variant) -> Error:
 	collectable_money = data.get("collectable_money")
 
 	# Restore purchased items from shop catalogue
-	_init_equipment()
+	equipment = []
 	if data.has("purchased_items"):
-		for item_name in data["purchased_items"]:
-			var item = ShopCatalogue.find_by_name(item_name)
-			if item != null:
-				equipment.append(item)
-			else:
-				printerr("Could not find shop item: ", item_name)
+			for item_name in data["purchased_items"]:
+					var item = ShopCatalogue.find_by_name(item_name)
+					if item != null:
+							equipment.append(item)
+					else:
+							printerr("Could not find shop item: ", item_name)
 
 	ingredients_changed.emit(ingredients)
 	money_changed.emit(money)
@@ -252,7 +236,7 @@ func init_new_save():
 	ingredients = _create_default_ingredients()
 	money = 0
 	collectable_money = 3
-	_init_equipment()
+	equipment = []
 
 func _update_inventory():
 	var current_inventory_update_unix_time = Time.get_unix_time_from_system()

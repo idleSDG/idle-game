@@ -367,17 +367,17 @@ func ApplyExp():
 
 func SetUpWizard():
 	wizardSprites.get_child(0).modulate = PlayerAppearance.appearance.get_skin_color()
-	
-	var tex = load("res://assets/equipment/hat1.png") if EquipmentManager.get_equipped(EquipmentItem.Slot.HAT) else null
-	wizardSprites.get_child(2).texture = tex
+
+	var hat = EquipmentManager.get_equipped(EquipmentItem.Slot.HAT)
+	wizardSprites.get_child(2).texture = hat.sprite if hat else null
 	wizardSprites.get_child(2).modulate = Color.WHITE
-	
-	tex = load("res://assets/equipment/robe1.png") if EquipmentManager.get_equipped(EquipmentItem.Slot.ROBE) else null
-	wizardSprites.get_child(3).texture = tex
+
+	var robe = EquipmentManager.get_equipped(EquipmentItem.Slot.ROBE)
+	wizardSprites.get_child(3).texture = robe.sprite if robe else null
 	wizardSprites.get_child(3).modulate = Color.WHITE
-	
-	tex = load("res://assets/equipment/staff1.png") if EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON) else null
-	wizardSprites.get_child(4).texture = tex
+
+	var weapon = EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON)
+	wizardSprites.get_child(4).texture = weapon.sprite if weapon else null
 	wizardSprites.get_child(4).modulate = Color.WHITE
 	
 	pass
