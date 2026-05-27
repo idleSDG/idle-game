@@ -1,0 +1,355 @@
+[gd_scene format=3 uid="uid://sd8d1mp2hdsf"]
+
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="1_0t77b"]
+[ext_resource type="Script" uid="uid://dxrcxqu8hx86u" path="res://src/ui/ingredient_info_popup/ingredient_info_popup.gd" id="1_ox87t"]
+[ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="2_ox87t"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="3_81mlh"]
+[ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_b7wjx"]
+[ext_resource type="Texture2D" uid="uid://b5b4h853pvvcj" path="res://assets/settings/Popup decoration.png" id="4_dc2hy"]
+[ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="6_51lbm"]
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="6_ox87t"]
+[ext_resource type="FontFile" uid="uid://dvkmw44ofrw88" path="res://assets/fonts/Pixel Code/PixelCode-DemiBold.otf" id="7_81mlh"]
+[ext_resource type="Texture2D" uid="uid://deye553ns3sw3" path="res://assets/hud/buttons/icon_exit_dark.tres" id="10_51lbm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7wjx"]
+shader = ExtResource("1_0t77b")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ldl2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_51lbm"]
+shader = ExtResource("2_ox87t")
+shader_parameter/wood_texture = ExtResource("3_81mlh")
+shader_parameter/scale = 1.66
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_48ay2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sugp2"]
+bg_color = Color(1, 1, 1, 0.42745098)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gcy40"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mvwhb"]
+
+[node name="IngredientInfoPopup" type="Control" unique_id=1263036612]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ox87t")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=248269217]
+material = SubResource("ShaderMaterial_b7wjx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1745134180]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -496.0
+offset_top = -701.5
+offset_right = 496.0
+offset_bottom = 701.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6ldl2")
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer" unique_id=2106604339]
+material = SubResource("ShaderMaterial_51lbm")
+layout_mode = 2
+
+[node name="Control" type="TextureRect" parent="PanelContainer/ColorRect" unique_id=1482778345]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.1097412
+offset_right = 6.390869
+offset_bottom = 3.8659668
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.025, 1.025)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("4_dc2hy")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1440977189]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="IngredientVBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=119189744]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 2
+theme_override_constants/separation = 4
+
+[node name="KineticShardsPanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer" unique_id=1432302837]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_48ay2")
+
+[node name="KineticShardsHBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer" unique_id=412796125]
+layout_mode = 2
+alignment = 1
+
+[node name="KineticShardsVBoxContainerLeft" type="VBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer" unique_id=1574973065]
+custom_minimum_size = Vector2(450, 450)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="KineticShardsLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=2001384115]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_ox87t")
+theme_override_font_sizes/font_size = 56
+text = "Kinetic Shards:"
+
+[node name="KineticShardsCounterLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=1246708745]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_81mlh")
+theme_override_font_sizes/font_size = 48
+text = "5/10"
+
+[node name="KineticShardsGainRateLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=536406881]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_81mlh")
+theme_override_font_sizes/font_size = 48
+text = "1 / min"
+
+[node name="KineticShardsMomentumTodayLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=1686233434]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Today's momentum: 
+x steps (100%)"
+
+[node name="KineticShardsMomentumTomorrowLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerLeft" unique_id=1791221627]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Tomorrow's momentum: 
+x steps (100%)"
+
+[node name="KineticShardsVBoxContainerRight" type="VBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer" unique_id=1602767244]
+custom_minimum_size = Vector2(300, 450)
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="KineticShardsMomentumGraphPanel" type="Panel" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight" unique_id=464645039]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="KineticShardsMomentumGraphLine" type="Line2D" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight/KineticShardsMomentumGraphPanel" unique_id=590529343]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+points = PackedVector2Array(393, 163.5)
+width = 4.0
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+script = ExtResource("3_b7wjx")
+padding = 10.0
+
+[node name="KineticShardsGraphPercentageLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/KineticShardsPanelContainer/KineticShardsHBoxContainer/KineticShardsVBoxContainerRight" unique_id=1984573637]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_ox87t")
+theme_override_font_sizes/font_size = 48
+text = "100%"
+horizontal_alignment = 1
+
+[node name="FocusFluxPanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer" unique_id=862860663]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gcy40")
+
+[node name="FocusFluxHBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer" unique_id=2058855285]
+layout_mode = 2
+alignment = 1
+
+[node name="FocusFluxVBoxContainerLeft" type="VBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer" unique_id=1570847607]
+custom_minimum_size = Vector2(450, 400)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="FocusFluxLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerLeft" unique_id=927682911]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_ox87t")
+theme_override_font_sizes/font_size = 56
+text = "Focus Flux:"
+
+[node name="FocusFluxCounterLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerLeft" unique_id=1430573485]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_81mlh")
+theme_override_font_sizes/font_size = 48
+text = "5/10"
+
+[node name="FocusFluxGainRateLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerLeft" unique_id=1308289010]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_81mlh")
+theme_override_font_sizes/font_size = 48
+text = "1 / min"
+
+[node name="FocusFluxMomentum" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerLeft" unique_id=1920533170]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Current mommentum: 
+x minutes (100%)"
+
+[node name="FocusFluxVBoxContainerRight" type="VBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer" unique_id=1014837970]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+alignment = 1
+
+[node name="FocusFluxMomentumGraphPanel" type="Panel" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight" unique_id=1856508891]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="FocusFluxMomentumGraphLine" type="Line2D" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight/FocusFluxMomentumGraphPanel" unique_id=1751432648]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+points = PackedVector2Array(914, 101.5)
+width = 4.0
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+script = ExtResource("3_b7wjx")
+padding = 10.0
+
+[node name="FocusFluxGraphPercentageLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/FocusFluxPanelContainer/FocusFluxHBoxContainer/FocusFluxVBoxContainerRight" unique_id=1795219126]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_ox87t")
+theme_override_font_sizes/font_size = 48
+text = "100%"
+horizontal_alignment = 1
+
+[node name="DreamShardsPanelContainer" type="PanelContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer" unique_id=104989122]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mvwhb")
+
+[node name="DreamShardsHBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer" unique_id=1477886564]
+layout_mode = 2
+alignment = 1
+
+[node name="DreamShardsVBoxContainerRight" type="VBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer" unique_id=394485996]
+custom_minimum_size = Vector2(450, 400)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="DreamShardsFluxLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerRight" unique_id=1225064650]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("6_ox87t")
+theme_override_font_sizes/font_size = 56
+text = "Dream Shards:"
+
+[node name="DreamShardsCounterLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerRight" unique_id=497510008]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_81mlh")
+theme_override_font_sizes/font_size = 48
+text = "5/10"
+
+[node name="DreamShardsGainRateLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerRight" unique_id=1858726895]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_81mlh")
+theme_override_font_sizes/font_size = 48
+text = "1 / min"
+
+[node name="DreamShardsMomentum" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerRight" unique_id=378105587]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Current momentum: 
+x hours (100%)"
+
+[node name="DreamShardsVBoxContainerLeft" type="VBoxContainer" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer" unique_id=1755872372]
+custom_minimum_size = Vector2(300, 400)
+layout_mode = 2
+alignment = 1
+
+[node name="DreamShardsMomentumGraphPanel" type="Panel" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft" unique_id=1947676941]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxFlat_sugp2")
+
+[node name="DreamShardsMomentumGraphLine" type="Line2D" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft/DreamShardsMomentumGraphPanel" unique_id=1296750899]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+width = 4.0
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+script = ExtResource("3_b7wjx")
+padding = 10.0
+
+[node name="DreamShardsGraphPercentageLabel" type="Label" parent="PanelContainer/MarginContainer/IngredientVBoxContainer/DreamShardsPanelContainer/DreamShardsHBoxContainer/DreamShardsVBoxContainerLeft" unique_id=935613846]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_ox87t")
+theme_override_font_sizes/font_size = 48
+text = "100%"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer" unique_id=2067179337]
+custom_minimum_size = Vector2(0, 38.915)
+layout_mode = 2
+
+[node name="IconButton" parent="PanelContainer/MarginContainer/Control" unique_id=722163806 instance=ExtResource("6_51lbm")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -151.0
+offset_top = -24.5
+offset_right = 9.0
+offset_bottom = 135.5
+grow_horizontal = 0
+icon = ExtResource("10_51lbm")
+
+[connection signal="gui_input" from="ColorRect" to="." method="_on_background_clicked"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/Control/IconButton" to="." method="_on_close_button_pressed"]
