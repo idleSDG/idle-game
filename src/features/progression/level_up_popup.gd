@@ -20,7 +20,6 @@ var skillUnlocks = []
  
 func _ready() -> void:
 	visible = false
-	ok_button.pressed.connect(_on_ok_pressed)
 	PlayerProgress.leveled_up.connect(_on_leveled_up)
 	
 func _on_leveled_up(old_level: int, new_level: int) -> void:
@@ -65,7 +64,8 @@ func show_level_up(old_level: int, new_level: int) -> void:
 			
 			proper.queue_free()
  
-func _on_ok_pressed() -> void:
+func _on_ok_button_pressed() -> void:
+	ok_button_pressed.emit()
 	visible = false
 	_play_confirm_sfx()
 	for s in skillUnlocks:
@@ -79,7 +79,3 @@ func _play_confirm_sfx():
 func _play_level_up_sfx():
 	sfx_player.stream = level_up_sfx
 	sfx_player.play()
-
-func _on_ok_button_pressed() -> void:
-	ok_button_pressed.emit()
-	PlayerProgress.level_up_popup_closed.emit()

@@ -251,8 +251,6 @@ func finish_fight(result: bool):
 		
 		post_battle_popup.description_label.text = "+ %d XP!" % xp_reward
 		post_battle_popup.show_popup(true)
-		await post_battle_popup.exit_button_pressed
-		
 		PlayerProgress.add_xp(120)
 		characterList[0].ApplyExp()
 	else:
@@ -261,8 +259,6 @@ func finish_fight(result: bool):
 		
 		post_battle_popup.description_label.text = ""
 		post_battle_popup.show_popup(false)
-		await post_battle_popup.exit_button_pressed
-		
 
 	SaveManager.save_game()
 

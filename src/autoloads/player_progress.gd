@@ -3,7 +3,6 @@ extends Node
 # Signals
 signal xp_changed(current_xp: int, xp_required: int)
 signal leveled_up(old_level: int, new_level: int)
-signal level_up_popup_closed()
 
 # Configuration
 const BASE_XP: int = 100

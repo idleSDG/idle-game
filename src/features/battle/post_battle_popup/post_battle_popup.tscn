@@ -21,15 +21,15 @@ shader = ExtResource("1_t3hjw")
 shader_parameter/wood_texture = ExtResource("2_p1ysw")
 shader_parameter/scale = 1.66
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mwuy7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bye7g"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xoup4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wj5lf"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gpl0"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_400rp"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r0ftk"]
 
 [node name="PostBattlePopup" type="Control" unique_id=1411234404]
 z_index = 500
@@ -119,11 +119,11 @@ horizontal_alignment = 1
 
 [node name="ExitButton" parent="PopupPanelContainer/TextMarginContainer/TextVBox" unique_id=112168689 instance=ExtResource("7_wj5lf")]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_xoup4")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_wj5lf")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_4gpl0")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_400rp")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_r0ftk")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mwuy7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bye7g")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xoup4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wj5lf")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_4gpl0")
 button_text = "EXIT"
 label_font = ExtResource("4_mwuy7")
 label_font_size = 48
