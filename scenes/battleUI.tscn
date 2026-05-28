@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://ixme676dvwbw" path="res://scenes/potion_button.tscn" id="3_wm05t"]
 [ext_resource type="Texture2D" uid="uid://d16csp42sfssi" path="res://assets/potions_screen/PotionsScreen_Slot_Background.png" id="5_cyajf"]
 [ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="6_5oidc"]
+[ext_resource type="Texture2D" uid="uid://bv028dyjrtagh" path="res://assets/icons/potions/potion_strength_icon.tres" id="8_m0wbb"]
+[ext_resource type="Texture2D" uid="uid://cd2nh82o6ochk" path="res://assets/icons/potions/potion_health_icon.tres" id="8_qe70f"]
+[ext_resource type="Texture2D" uid="uid://dn4apnb0ipqa2" path="res://assets/icons/potions/potion_explosion_icon.tres" id="9_r7l1v"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dm231"]
 bg_color = Color(0, 0, 0, 1)
@@ -76,6 +79,7 @@ grow_vertical = 2
 texture = ExtResource("3_cyajf")
 
 [node name="UnitPreview" type="Control" parent="." unique_id=2068457909]
+visible = false
 layout_mode = 1
 anchor_right = 1.0
 anchor_bottom = 0.76000005
@@ -260,7 +264,6 @@ expand_mode = 1
 stretch_mode = 1
 
 [node name="PotionBar" type="Control" parent="." unique_id=1831040683]
-visible = false
 anchors_preset = 0
 offset_right = 1080.0
 offset_bottom = 393.0
@@ -272,20 +275,23 @@ anchor_right = 1.0
 anchor_bottom = 0.88000005
 offset_top = 10.0
 offset_right = 3.0
-offset_bottom = 50.159973
+offset_bottom = 19.159973
 alignment = 1
 
 [node name="Button" parent="PotionBar/HBoxContainer" unique_id=1101878322 instance=ExtResource("3_wm05t")]
 layout_mode = 2
 size_flags_vertical = 4
+icon = ExtResource("8_m0wbb")
 
 [node name="Button2" parent="PotionBar/HBoxContainer" unique_id=1649095051 instance=ExtResource("3_wm05t")]
 layout_mode = 2
 size_flags_vertical = 4
+icon = ExtResource("9_r7l1v")
 
 [node name="Button3" parent="PotionBar/HBoxContainer" unique_id=1034070388 instance=ExtResource("3_wm05t")]
 layout_mode = 2
 size_flags_vertical = 4
+icon = ExtResource("8_qe70f")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1039973797]
 
