@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://b8lay0nj1nldp" path="res://assets/character_screen/Avatar_background.png" id="4_jbg7u"]
 [ext_resource type="AudioStream" uid="uid://cwudm2jtaxxm4" path="res://assets/sfx/ui/001_Hover_01_reverse.ogg" id="5_jbg7u"]
 [ext_resource type="PackedScene" uid="uid://dx8hs5u3c2ruw" path="res://scenes/skill_grid.tscn" id="5_kt2ab"]
-[ext_resource type="Texture2D" uid="uid://dhbuj8njcjydc" path="res://assets/hud/buttons/UI_Buttons.png" id="6_ahy0h"]
 [ext_resource type="PackedScene" uid="uid://ioxsx0fl2xta" path="res://scenes/skill_grid_preview.tscn" id="6_jbg7u"]
 [ext_resource type="AudioStream" uid="uid://cxndout5wl1gq" path="res://assets/sfx/ui/070_Equip_10.ogg" id="6_qpts6"]
 [ext_resource type="PackedScene" uid="uid://dbwsw84mds467" path="res://scenes/item_grid.tscn" id="7_ahy0h"]
@@ -17,30 +16,54 @@
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="8_ahy0h"]
 [ext_resource type="AudioStream" uid="uid://mbu1s8krdivp" path="res://assets/sfx/ui/001_Hover_01.ogg" id="8_g64kq"]
 [ext_resource type="Texture2D" uid="uid://lkpxjtohm367" path="res://assets/potions_screen/Potions_Background.png" id="9_g64kq"]
+[ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="12_gksnk"]
 [ext_resource type="Texture2D" uid="uid://d20uxmsskevy4" path="res://assets/character_screen/x.png" id="13_f5f5t"]
 [ext_resource type="Texture2D" uid="uid://c7gseeu8oaehi" path="res://assets/character_screen/lock.png" id="14_1be3q"]
 [ext_resource type="Texture2D" uid="uid://dg644utogun2k" path="res://assets/equipment/skill_panel.png" id="15_vrfog"]
 [ext_resource type="Texture2D" uid="uid://drsk0k83a26n8" path="res://assets/equipment/equip_panel.png" id="16_vrfog"]
-[ext_resource type="Texture2D" uid="uid://byhs7o13gw54d" path="res://assets/hud/buttons/button_white_normal.tres" id="17_f5f5t"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ti4qo"]
-content_margin_left = 20.0
-content_margin_top = 5.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-texture = ExtResource("6_ahy0h")
-region_rect = Rect2(0, 0, 47.97143, 16.013538)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aiw4e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1be3q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gksnk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_80iam"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_413qw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aiw4e"]
 bg_color = Color(0.6, 0.6, 0.6, 0.6117647)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_syx3m"]
-content_margin_left = 20.0
-content_margin_top = 5.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
-texture = ExtResource("6_ahy0h")
-region_rect = Rect2(0, 0, 48.01725, 16.006632)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ixb1h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5fm72"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pacs7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v3k42"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bav0v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jcdky"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ripik"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqk2p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8yfqm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_flew4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xfxbu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnjnk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s5bdp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rr12i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qnpdv"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vrfog"]
 texture = ExtResource("16_vrfog")
@@ -66,12 +89,15 @@ content_margin_right = 70.0
 content_margin_bottom = 50.0
 texture = ExtResource("16_vrfog")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5f6dy"]
-content_margin_left = 50.0
-content_margin_top = 20.0
-content_margin_right = 50.0
-content_margin_bottom = 50.0
-texture = ExtResource("17_f5f5t")
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ghi8f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q0i4j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_38oat"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t1ioh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7vtb"]
 
 [node name="CharacterMenu" type="Node2D" unique_id=1633184879]
 script = ExtResource("1_viems")
@@ -156,7 +182,7 @@ layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 40
+theme_override_constants/margin_bottom = 50
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin" unique_id=255376412]
 layout_mode = 2
@@ -172,19 +198,18 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="SkinBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox" unique_id=541459334]
-texture_filter = 1
+[node name="SkinBtn" parent="CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox" unique_id=112168689 instance=ExtResource("12_gksnk")]
+custom_minimum_size = Vector2(280, 80)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxTexture_ti4qo")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_ti4qo")
-theme_override_styles/hover = SubResource("StyleBoxTexture_ti4qo")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_ti4qo")
-theme_override_styles/focus = SubResource("StyleBoxTexture_ti4qo")
-text = "Skin color"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_aiw4e")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1be3q")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_gksnk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_80iam")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_413qw")
+button_text = "Skin color"
+label_font_size = 30
+patch_margin = 52
 
 [node name="Skills" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxTop" unique_id=214867289]
 layout_mode = 2
@@ -328,44 +353,41 @@ theme_override_font_sizes/font_size = 60
 text = "Equipment"
 horizontal_alignment = 1
 
-[node name="WeaponSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=751680909]
-texture_filter = 1
-custom_minimum_size = Vector2(470, 100)
+[node name="WeaponSlotBtn" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=638503398 instance=ExtResource("12_gksnk")]
+custom_minimum_size = Vector2(460, 100)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/hover = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
-text = "Staff: [tap to equip]"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ixb1h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5fm72")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pacs7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_v3k42")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bav0v")
+button_text = "Staff:[tap to equip]"
+label_font_size = 30
+patch_margin = 55
 
-[node name="RobeSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=286484683]
-texture_filter = 1
-custom_minimum_size = Vector2(470, 100)
+[node name="RobeSlotBtn" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=2114524311 instance=ExtResource("12_gksnk")]
+custom_minimum_size = Vector2(460, 100)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/hover = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
-text = "Robe: [tap to equip]"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_jcdky")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ripik")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_gqk2p")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8yfqm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_flew4")
+button_text = "Robe:[tap to equip]"
+label_font_size = 30
+patch_margin = 55
 
-[node name="HatSlotBtn" type="Button" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=137611829]
-texture_filter = 1
-custom_minimum_size = Vector2(470, 100)
+[node name="HatSlotBtn" parent="CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection" unique_id=469491331 instance=ExtResource("12_gksnk")]
+custom_minimum_size = Vector2(460, 100)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/hover = SubResource("StyleBoxTexture_syx3m")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_syx3m")
-text = "Hat: [tap to equip]"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xfxbu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lnjnk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_s5bdp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_rr12i")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qnpdv")
+button_text = "Hat:[tap to equip]"
+label_font_size = 30
+patch_margin = 55
 
 [node name="Stats" type="MarginContainer" parent="CanvasLayer/Background/VBox/HBoxBottom" unique_id=241236230]
 layout_mode = 2
@@ -599,7 +621,6 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_aiw4e")
 layout_mode = 2
 
 [node name="ItemPicker" type="Control" parent="CanvasLayer2" unique_id=1096475004]
-visible = false
 z_index = 100
 layout_mode = 3
 anchors_preset = 15
@@ -666,7 +687,7 @@ size_flags_horizontal = 4
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=276525877]
 texture_filter = 1
-custom_minimum_size = Vector2(160, 160)
+custom_minimum_size = Vector2(300, 300)
 layout_mode = 2
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent" unique_id=1224369523]
@@ -683,21 +704,20 @@ bbcode_enabled = true
 fit_content = true
 autowrap_mode = 0
 
-[node name="EquipBtn" type="Button" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=612806409]
-texture_filter = 1
+[node name="EquipBtn" parent="CanvasLayer2/ItemPicker/PanelContainer/VBox" unique_id=635043436 instance=ExtResource("12_gksnk")]
+custom_minimum_size = Vector2(320, 140)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.11764706, 0.627451, 0, 1)
-theme_override_colors/font_pressed_color = Color(0.11764706, 0.627451, 0, 1)
-theme_override_colors/font_hover_color = Color(0.11764706, 0.627451, 0, 1)
-theme_override_fonts/font = ExtResource("8_ahy0h")
-theme_override_font_sizes/font_size = 64
-theme_override_styles/normal = SubResource("StyleBoxTexture_5f6dy")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_5f6dy")
-theme_override_styles/hover = SubResource("StyleBoxTexture_5f6dy")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_5f6dy")
-theme_override_styles/focus = SubResource("StyleBoxTexture_5f6dy")
-text = "Equip"
+size_flags_vertical = 10
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ghi8f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_q0i4j")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_38oat")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_t1ioh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_r7vtb")
+button_text = "Equip"
+text_color = Color(0.11764706, 0.627451, 0, 1)
+label_font = ExtResource("8_ahy0h")
+label_font_size = 64
 
 [connection signal="pressed" from="CanvasLayer/Background/VBox/HBoxTop/Skills/SkillsSection/Margin/LockMargin/SkillLockPanel/SkillLockButton" to="." method="_on_skill_lock_button_pressed"]
 [connection signal="skill_pressed" from="CanvasLayer2/SkillSelectionBackground/SkillSelection/ScrollContainer/VBox/MarginContainer/SkillGrid" to="CanvasLayer2/SkillSelectionBackground/SkillSelection/PanelContainer/SkillPreview" method="_on_skill_grid_skill_pressed"]
