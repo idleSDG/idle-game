@@ -15,6 +15,7 @@ var ingredient_icon_map: Dictionary[Ingredient.Type, Resource] = {
 @onready var _potion_description: RichTextLabel = %PotionDescriptionRichTextLabel
 @onready var _potion_craft_button: IconButton = %PotionCraftButton
 @onready var _potion_crafting_slots: Array[PotionScreenItemSlot] = [%CraftingSlot1, %CraftingSlot2]
+@onready var _potion_crafting_slot_labels: Array[Label] = [%CraftingSlot1Label, %CraftingSlot2Label]
 @onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 @export var craft_sfx: AudioStream
@@ -71,8 +72,10 @@ func _update_crafting_section(index: int) -> void:
 		_potion_craft_button.button_is_disabled = true
 		_potion_crafting_slots[0].icon_texture = null
 		_potion_crafting_slots[0].counter_value = ""
+		_potion_crafting_slot_labels[0].text = "?"
 		_potion_crafting_slots[1].icon_texture = null
 		_potion_crafting_slots[1].counter_value = ""
+		_potion_crafting_slot_labels[1].text = "?"
 		return
 	
 	var potion = PotionManager.potions[index]
@@ -84,8 +87,10 @@ func _update_crafting_section(index: int) -> void:
 	_potion_description.text = potion.recipe_description
 	_potion_crafting_slots[0].icon_texture = ingredient_icon_map.get(potion.recipe[0].type)
 	_potion_crafting_slots[0].counter_value = "%d / %d" % [PlayerInventory.ingredients[potion.recipe[0].type].count, potion.recipe[0].amount]
+	_potion_crafting_slot_labels[0].text = Ingredient.Type.keys()[potion.recipe[0].type].replace("_", " ")
 	_potion_crafting_slots[1].icon_texture = ingredient_icon_map.get(potion.recipe[1].type)
 	_potion_crafting_slots[1].counter_value = "%d / %d" % [PlayerInventory.ingredients[potion.recipe[1].type].count, potion.recipe[1].amount]
+	_potion_crafting_slot_labels[1].text = Ingredient.Type.keys()[potion.recipe[1].type].replace("_", " ")
 	
 	var can_craft_potion = _can_craft_potion(index)
 	_potion_craft_button.button_is_disabled = !can_craft_potion
