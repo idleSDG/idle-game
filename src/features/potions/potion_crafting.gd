@@ -4,9 +4,9 @@ const INVENTORY_GRID_COLUMNS: int = 6
 const INVENTORY_GRID_ROWS: int = 2
 
 var ingredient_icon_map: Dictionary[Ingredient.Type, Resource] = {
-	Ingredient.Type.KINETIC_SHARD: preload("res://assets/icons/kinetic.png"),
-	Ingredient.Type.FOCUS_FLUX: preload("res://assets/icons/triangleTex.png"),
-	Ingredient.Type.DREAM_SHARDS: preload("res://assets/icons/staff.png"),
+	Ingredient.Type.KINETIC_SHARD: preload("res://assets/icons/ingredients/ingredient_kinetic_shard.tres"),
+	Ingredient.Type.FOCUS_FLUX: preload("res://assets/icons/ingredients/ingredient_focus_flux.tres"),
+	Ingredient.Type.DREAM_SHARDS: preload("res://assets/icons/ingredients/ingredient_dream_shard.tres"),
 } 
 
 @onready var potion_inventory_grid = $VBoxContainer
