@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d05apa8vl446c"
-path="res://.godot/imported/hovered_button.png-a22b95f151ac1d6c017c77f6dbecc22b.ctex"
+uid="uid://cdvvjcni1kdtu"
+path="res://.godot/imported/hover_button.png-3743be688f4172734fb9d6004ecbff07.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/battlemap/hovered_button.png"
-dest_files=["res://.godot/imported/hovered_button.png-a22b95f151ac1d6c017c77f6dbecc22b.ctex"]
+source_file="res://assets/battlemap/hover_button.png"
+dest_files=["res://.godot/imported/hover_button.png-3743be688f4172734fb9d6004ecbff07.ctex"]
 
 [params]
 
