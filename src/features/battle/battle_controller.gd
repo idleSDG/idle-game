@@ -22,6 +22,8 @@ var maps: Array[campaign_map]
 var current_map_string: String
 var current_map: campaign_map
 
+var current_level : battle_level
+
 var max_button_size: float = 0.55
 var min_button_size: float = 0.45
 var increasing_scale: bool = false
@@ -178,7 +180,7 @@ func draw_map(map: campaign_map):
 		level_button.texture_click_mask = bitmap
 		level_button.set_position(Vector2(lvl.x - 50, lvl.y - 50))
 		level_button.scale = Vector2(0.5, 0.5)
-		level_button.pressed.connect(_on_start_battle_request.bind(lvl))
+		level_button.pressed.connect(_on_battle_button_pressed.bind(lvl))
 
 		if highest_level == null:
 			if lvl.depth != 0:
@@ -386,3 +388,57 @@ func randomization_loop():
 	var minutes_left = 59 - time["minute"]
 	var seconds_left = 59 - time["second"]
 	randomization_label.text = "Time until randomization:\n%02d : %02d : %02d" % [hours_left, minutes_left, seconds_left]
+
+
+func _on_battle_button_pressed(level : battle_level):
+	%LevelLabel.text = "Level %d enemies" % level.enemy_level
+	
+	var wolf_count = level.enemies.count(100)
+	var skeleton_count = level.enemies.count(101)
+	var bird_count = level.enemies.count(102)
+	var one_visible = false
+	if (wolf_count == 0 and skeleton_count == 0) or (wolf_count == 0 and bird_count == 0) or (skeleton_count == 0 and bird_count == 0):
+		one_visible = true
+		
+	if(wolf_count > 0):
+		%WolfHbox.visible = true
+		%WolfHbox/Label.text = "x%d Wolf" % wolf_count
+		if one_visible:
+			%WolfHbox.custom_minimum_size = Vector2(0,280)
+		else:
+			%WolfHbox.custom_minimum_size = Vector2(0,140)
+	else:
+		%WolfHbox.visible = false
+		
+	if(skeleton_count > 0):
+		%SkeletonHbox.visible = true
+		%SkeletonHbox/Label.text = "x%d Skeleton" % skeleton_count
+		if one_visible:
+			%SkeletonHbox.custom_minimum_size = Vector2(0,280)
+		else:
+			%SkeletonHbox.custom_minimum_size = Vector2(0,140)
+	else:
+		%SkeletonHbox.visible = false
+		
+	if(bird_count > 0):
+		%BigBirdHBox.visible = true
+		%BigBirdHBox/Label.text = "x%d Big Bird" % bird_count
+		if one_visible:
+			%BigBirdHBox.custom_minimum_size = Vector2(0,280)
+		else:
+			%BigBirdHBox.custom_minimum_size = Vector2(0,140)
+	else:
+		%BigBirdHBox.visible = false
+		
+	%BattlePopup.visible = true
+	current_level = level
+
+
+func _on_start_battle_button_pressed() -> void:
+	%BattlePopup.visible = false
+	_on_start_battle_request(current_level)
+
+
+func _on_exit_battle_popup_button_pressed() -> void:
+	current_level = null
+	%BattlePopup.visible = false

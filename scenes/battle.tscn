@@ -4,6 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://vandtp8575h4" path="res://assets/battlemap/cloud.png" id="2_a12nh"]
 [ext_resource type="Texture2D" uid="uid://b458plh5o7o1n" path="res://assets/potions_screen/PotionsScreen_Main_Background.png" id="2_th188"]
 [ext_resource type="Texture2D" uid="uid://bdx52ujh525cf" path="res://assets/hud/navbar/NavBar_Decoration_Top.png" id="3_p1qf1"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="5_4k1nj"]
+[ext_resource type="PackedScene" uid="uid://b68whslk43wd6" path="res://src/ui/button/text_icon_button.tscn" id="6_f4pi3"]
+[ext_resource type="Texture2D" uid="uid://lubucstw0gbe" path="res://assets/enemies/wolf.png" id="6_v7i3o"]
+[ext_resource type="Texture2D" uid="uid://crwlc0083nu2h" path="res://assets/enemies/skeleton.png" id="7_66ngm"]
+[ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="7_yahae"]
+[ext_resource type="Texture2D" uid="uid://lax6rxhc255d" path="res://assets/enemies/bird.png" id="8_03edq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p1qf1"]
 texture = ExtResource("2_th188")
@@ -27,6 +33,26 @@ texture = ExtResource("2_th188")
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 modulate_color = Color(0.6255971, 0.6255971, 0.6255971, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7i3o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_66ngm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_03edq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_22uqi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ni85"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vceff"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ekamt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_djc8l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h4dll"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p0caf"]
 
 [node name="Battle" type="Node2D" unique_id=1983405384]
 script = ExtResource("1_dn72j")
@@ -153,4 +179,169 @@ offset_bottom = -273.0
 grow_horizontal = 2
 texture = ExtResource("3_p1qf1")
 
+[node name="BattlePopup" type="Control" parent="CanvasLayer" unique_id=681035904]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -18.0
+offset_right = 19.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/BattlePopup" unique_id=1845268637]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -479.0
+offset_top = -183.00003
+offset_right = -431.0
+offset_bottom = -150.05003
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(20, 20)
+texture = ExtResource("5_4k1nj")
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/BattlePopup" unique_id=1853687155]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -479.0
+offset_top = -195.0
+offset_right = 481.0
+offset_bottom = 487.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/BattlePopup/MarginContainer" unique_id=614990112]
+layout_mode = 2
+
+[node name="TopLabel" type="Label" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer" unique_id=922736450]
+layout_mode = 2
+theme_override_font_sizes/font_size = 72
+text = "Entering Battle"
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer" unique_id=410821860]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WolfHbox" type="HBoxContainer" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer" unique_id=401173918]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/WolfHbox" unique_id=1949951269]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/WolfHbox" unique_id=437534340]
+layout_mode = 2
+texture = ExtResource("6_v7i3o")
+stretch_mode = 3
+
+[node name="SkeletonHbox" type="HBoxContainer" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer" unique_id=1012353625]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/SkeletonHbox" unique_id=1215136350]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/SkeletonHbox" unique_id=1653951149]
+layout_mode = 2
+texture = ExtResource("7_66ngm")
+stretch_mode = 3
+
+[node name="BigBirdHBox" type="HBoxContainer" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer" unique_id=1444947539]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/BigBirdHBox" unique_id=886462448]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/BigBirdHBox" unique_id=1287269540]
+layout_mode = 2
+texture = ExtResource("8_03edq")
+stretch_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer" unique_id=1309552798]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="StartBattleButton" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=112168689 instance=ExtResource("6_f4pi3")]
+custom_minimum_size = Vector2(400, 160)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v7i3o")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_66ngm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_03edq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_22uqi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_6ni85")
+button_text = "Enter Battle"
+label_font_size = 40
+
+[node name="ExitBattlePopupButton" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1611702509 instance=ExtResource("6_f4pi3")]
+modulate = Color(0.64, 0, 0, 1)
+custom_minimum_size = Vector2(400, 160)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vceff")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ekamt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_djc8l")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_h4dll")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p0caf")
+button_text = "Exit"
+label_font_size = 40
+
+[node name="TextureRect" type="NinePatchRect" parent="CanvasLayer/BattlePopup" unique_id=276356326]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -493.0
+offset_top = -204.0
+offset_right = 493.0
+offset_bottom = 493.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_yahae")
+patch_margin_left = 100
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
+
 [connection signal="pressed" from="CanvasLayer/BattleTopButtonContainer/RandomizationContainer/RandomizeButton" to="." method="_on_randomize_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/HBoxContainer/StartBattleButton" to="." method="_on_start_battle_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/HBoxContainer/ExitBattlePopupButton" to="." method="_on_exit_battle_popup_button_pressed"]
