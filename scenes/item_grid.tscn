@@ -20,7 +20,7 @@ columns = 4
 script = ExtResource("1_0248v")
 
 [node name="Button" parent="." unique_id=722163806 instance=ExtResource("2_id65l")]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
 icon = SubResource("AtlasTexture_b4ho7")
 

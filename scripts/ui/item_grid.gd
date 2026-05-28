@@ -12,25 +12,12 @@ var gridItems = []
 var _current_slot : EquipmentItem.Slot
 
 func _ready():
-	#doIngredients()
 	pass
 
 func empty_grid():
 	for item in gridItems:
 		item.queue_free()
 	gridItems = []
-
-# func doIngredients():
-# 	empty_grid()
-# 	var list = PlayerInventory.ingredients
-# 	for item in list:
-# 		var newButton = buttonBase.duplicate()
-# 		newButton.visible = true
-# 		grid.add_child(newButton)
-# 		gridItems.append(newButton)
-# 		newButton.pressed.connect(inv_ingredient_Button_Pressed.bind(list[item]))
-# 		newButton.get_child(0).text = "x" + str(list[item].count)
-# 		newButton.icon = load("res://assets/icons/kinetic.png")
 
 func doEquipment(slot : EquipmentItem.Slot, 
 	show_unequip : bool = false, show_highlight : bool = false):
@@ -39,6 +26,11 @@ func doEquipment(slot : EquipmentItem.Slot,
 
 	if show_unequip:
 		var unequipButton = buttonBase
+
+		var icon_node = unequipButton.get_node("Icon")
+		icon_node.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon_node.offset_bottom = -30
+
 		unequipButton.visible = true
 		unequipButton.add_theme_font_size_override("font_size", 128)
 		unequipButton.pressed.connect(func(): unequip_pressed.emit(slot))
@@ -54,7 +46,7 @@ func doEquipment(slot : EquipmentItem.Slot,
 			icon_node.offset_left = 20
 			icon_node.offset_top = 20
 			icon_node.offset_right = -20
-			icon_node.offset_bottom = -20
+			icon_node.offset_bottom = -60
 
 			newButton.visible = true
 			newButton.icon = null
@@ -70,7 +62,6 @@ func doEquipment(slot : EquipmentItem.Slot,
 			else:
 					newButton.icon = load("res://assets/icons/hat.png")
 
-			# Green border on currently equipped item
 			if equipped != null and item == equipped and show_highlight:
 					var border = TextureRect.new()
 					border.texture = load("res://assets/character_screen/green_border.png")
@@ -88,19 +79,12 @@ func doEquipment(slot : EquipmentItem.Slot,
 				icon_node.offset_left = 20
 				icon_node.offset_top = 20
 				icon_node.offset_right = -20
-				icon_node.offset_bottom = -20
+				icon_node.offset_bottom = -60
 			)
-
-# func inv_ingredient_Button_Pressed(item : Ingredient):
-# 	ingredient_pressed.emit(item)
-# 	doIngredients()
 
 func inv_equipment_Button_Pressed(item : EquipmentItem):
 	equipment_pressed.emit(item)
 	doEquipment(item.slot)
-
-# func _on_ingredients_pressed() -> void:
-# 	doIngredients()
 
 func _on_hats_pressed() -> void:
 	doEquipment(EquipmentItem.Slot.HAT)
