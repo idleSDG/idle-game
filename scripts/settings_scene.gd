@@ -13,10 +13,10 @@ func _ready() -> void:
 		PlayerInventory.screentime.screen_time_permissions.connect(_ready)
 	if PlayerInventory.steps.has_history_permissions && PlayerInventory.sleep.has_history_permissions:
 		$CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/StepAndSleepButton.button_text = "Step and sleep permissions granted"
-		$CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/StepAndSleepButton.is_disabled = true
+		$CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/StepAndSleepButton.button_is_disabled = true
 	if PlayerInventory.screentime.has_history_permissions:
 		$CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/ScreenTimeButton.button_text = "Screen time permissions granted"
-		$CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/ScreenTimeButton.is_disabled = true
+		$CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/ScreenTimeButton.button_is_disabled = true
 	_set_sound_button_icons()
 	$CanvasLayer/ScrollContainer.get_v_scroll_bar().custom_minimum_size.x = 20
 
@@ -47,8 +47,8 @@ func _on_clear_save_pressed() -> void:
 	SaveManager.clear_save()
 
 
-func _on_request_step_permissions_pressed() -> void:
-	if not PlayerInventory.steps.has_history_permissions:
+func _on_request_step_and_sleep_permissions_pressed() -> void:
+	if not PlayerInventory.steps.has_history_permissions or not PlayerInventory.sleep.has_history_permissions:
 		PlayerInventory.step_sleep_manager.request_history_permissions()
 
 
