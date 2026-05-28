@@ -1,15 +1,12 @@
 [gd_scene format=3 uid="uid://dbwsw84mds467"]
 
 [ext_resource type="Script" uid="uid://d4bcb28lawejv" path="res://scripts/ui/item_grid.gd" id="1_0248v"]
-[ext_resource type="Texture2D" uid="uid://byhs7o13gw54d" path="res://assets/hud/buttons/button_white_normal.tres" id="2_28v2b"]
-[ext_resource type="Texture2D" uid="uid://d2yu003kmyj7f" path="res://icon.svg" id="2_ofkgl"]
+[ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="2_id65l"]
+[ext_resource type="Texture2D" uid="uid://dhbuj8njcjydc" path="res://assets/hud/buttons/UI_Buttons.png" id="3_28v2b"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b4ho7"]
-content_margin_left = 30.0
-content_margin_top = 30.0
-content_margin_right = 30.0
-content_margin_bottom = 30.0
-texture = ExtResource("2_28v2b")
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4ho7"]
+atlas = ExtResource("3_28v2b")
+region = Rect2(178, 65, 12, 11)
 
 [node name="ItemGrid" type="GridContainer" unique_id=1758141714]
 offset_left = 12.0
@@ -22,22 +19,10 @@ theme_override_constants/v_separation = 14
 columns = 4
 script = ExtResource("1_0248v")
 
-[node name="Button" type="Button" parent="." unique_id=1402094489]
-visible = false
-texture_filter = 1
-custom_minimum_size = Vector2(200, 200)
+[node name="Button" parent="." unique_id=722163806 instance=ExtResource("2_id65l")]
+custom_minimum_size = Vector2(220, 220)
 layout_mode = 2
-size_flags_horizontal = 6
-theme_override_font_sizes/font_size = 39
-theme_override_styles/normal = SubResource("StyleBoxTexture_b4ho7")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_b4ho7")
-theme_override_styles/hover = SubResource("StyleBoxTexture_b4ho7")
-theme_override_styles/disabled = SubResource("StyleBoxTexture_b4ho7")
-theme_override_styles/focus = SubResource("StyleBoxTexture_b4ho7")
-icon = ExtResource("2_ofkgl")
-alignment = 2
-icon_alignment = 1
-expand_icon = true
+icon = SubResource("AtlasTexture_b4ho7")
 
 [node name="Label" type="Label" parent="Button" unique_id=1700646693]
 layout_mode = 0
