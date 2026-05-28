@@ -24,12 +24,12 @@ func _play_equipment_open_menu_sfx() -> void:
 @onready var stats_values_label : RichTextLabel = $CanvasLayer/Background/VBox/HBoxBottom/Stats/StatsSection/Margin/Margin/Margin/HBoxContainer/StatsValues
 
 # Equipment buttons
-@onready var weapon_btn : Button = $CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection/WeaponSlotBtn
-@onready var robe_btn : Button = $CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection/RobeSlotBtn
-@onready var hat_btn : Button = $CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection/HatSlotBtn
+@onready var weapon_btn : TextIconButton = $CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection/WeaponSlotBtn
+@onready var robe_btn : TextIconButton = $CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection/RobeSlotBtn
+@onready var hat_btn : TextIconButton = $CanvasLayer/Background/VBox/HBoxBottom/Equip/EquipSection/HatSlotBtn
 
 # Skin color
-@onready var skin_btn : Button = $CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox/SkinBtn
+@onready var skin_btn : TextIconButton = $CanvasLayer/Background/VBox/HBoxTop/Char/VBox/Avatar/Margin/VBox/SkinBtn
 @onready var skin_color_picker : Control = $CanvasLayer/Background/SkinColorPicker
 @onready var skin_close_btn : TextureButton = $CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer/HBoxContainer/TextureButton
 @onready var color_picker : ColorPicker = $CanvasLayer/Background/SkinColorPicker/SkinColorPanel/MarginContainer/VBoxContainer/ColorPicker
@@ -39,7 +39,7 @@ func _play_equipment_open_menu_sfx() -> void:
 @onready var item_picker : Control = $CanvasLayer2/ItemPicker
 @onready var item_grid : ItemGrid = $CanvasLayer2/ItemPicker/PanelContainer/VBox/ItemGrid
 @onready var picker_title : Label = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBox/PickerTitle
-@onready var picker_equip_btn : Button = $CanvasLayer2/ItemPicker/PanelContainer/VBox/EquipBtn
+@onready var picker_equip_btn : TextIconButton = $CanvasLayer2/ItemPicker/PanelContainer/VBox/EquipBtn
 @onready var preview_icon : TextureRect = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/TextureRect
 @onready var preview_name : Label = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentName
 @onready var picker_info_lbl : RichTextLabel = $CanvasLayer2/ItemPicker/PanelContainer/VBox/HBoxCurrent/VBox/CurrentInfo
@@ -63,7 +63,7 @@ func _ready() -> void:
 
 	item_picker.visible  = false
 	skin_color_picker.visible = false
-	picker_equip_btn.disabled = true
+	picker_equip_btn.button_is_disabled = true
 
 	weapon_btn.pressed.connect(_on_weapon_pressed)
 	robe_btn.pressed.connect(_on_robe_pressed)
@@ -152,9 +152,9 @@ func _refresh_equipment_buttons() -> void:
 	var w = EquipmentManager.get_equipped(EquipmentItem.Slot.WEAPON)
 	var r = EquipmentManager.get_equipped(EquipmentItem.Slot.ROBE)
 	var h = EquipmentManager.get_equipped(EquipmentItem.Slot.HAT)
-	weapon_btn.text = "Staff: " + (w.item_name if w else "[tap to equip]")
-	robe_btn.text = "Robe: " + (r.item_name if r else "[tap to equip]")
-	hat_btn.text = "Hat: " + (h.item_name if h else "[tap to equip]")
+	weapon_btn.button_text = "Staff:" + (w.item_name if w else "[tap to equip]")
+	robe_btn.button_text = "Robe:" + (r.item_name if r else "[tap to equip]")
+	hat_btn.button_text = "Hat:" + (h.item_name if h else "[tap to equip]")
 
 # Item picker popup
 func _open_picker(slot: EquipmentItem.Slot, title: String) -> void:
@@ -164,7 +164,7 @@ func _open_picker(slot: EquipmentItem.Slot, title: String) -> void:
 	picker_info_lbl.text = ""
 	preview_icon.texture = load("res://assets/icons/icon_question_mark.png")
 	preview_name.text = "No item selected"
-	picker_equip_btn.disabled = true
+	picker_equip_btn.button_is_disabled = true
 	item_grid.doEquipment(slot, true, true)
 	item_picker.visible = true
 	_play_equipment_open_menu_sfx()
@@ -190,10 +190,10 @@ func _on_item_selected(item: EquipmentItem) -> void:
 	preview_name.text = item.item_name
 	_show_item_info(item)
 	if equipped != null and item == equipped:
-		picker_equip_btn.disabled = true
+		picker_equip_btn.button_is_disabled = true
 		return
 	_selected_item = item
-	picker_equip_btn.disabled = false
+	picker_equip_btn.button_is_disabled = false
 
 
 func _show_item_info(item: EquipmentItem) -> void:

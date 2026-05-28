@@ -127,9 +127,9 @@ static func generate_map(
 		counts.append(i + 1)
 	var last_position_count: int = (randi() % max_possitions) + 1
 	for i in range(depth):
-		var enemy_count = min(p_enemy_level + 2, 10)
 		if (i == int(depth * 0.33) or i == int(depth * 0.66)):
 			p_enemy_level += 1
+		var enemy_count = min(p_enemy_level + 2, 10)
 		var existing_depth_levels = existing_levels.filter(func(x): return x.depth == i)
 		if !existing_depth_levels.is_empty():
 			for lvl in existing_depth_levels:
