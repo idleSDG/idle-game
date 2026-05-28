@@ -152,14 +152,14 @@ func _day_offset_for_unix(unix_time: float) -> int:
 
 
 func set_fallback_data():
-	if not _has_sleep_data:
-		daily_sleep_by_date.clear()
-		daily_sleep_by_date[_date_key_for_offset(0)] = 6.5 * 60
-		daily_sleep_by_date[_date_key_for_offset(1)] = 6 * 60
-		daily_sleep_by_date[_date_key_for_offset(2)] = 7 * 60
-		daily_sleep_by_date[_date_key_for_offset(3)] = 10 * 60
-		daily_sleep_by_date[_date_key_for_offset(4)] = 8 * 60
-		daily_sleep_by_date[_date_key_for_offset(5)] = 8 * 60
-		daily_sleep_by_date[_date_key_for_offset(6)] = 4 * 60
-		daily_sleep_by_date[_date_key_for_offset(7)] = 6 * 60
-		mark_sleep_ready()
+	_has_sleep_data = false
+	daily_sleep_by_date.clear()
+	daily_sleep_by_date[_date_key_for_offset(0)] = 6.5 * 60
+	daily_sleep_by_date[_date_key_for_offset(1)] = 6 * 60
+	daily_sleep_by_date[_date_key_for_offset(2)] = 7 * 60
+	daily_sleep_by_date[_date_key_for_offset(3)] = 10 * 60
+	daily_sleep_by_date[_date_key_for_offset(4)] = 8 * 60
+	daily_sleep_by_date[_date_key_for_offset(5)] = 8 * 60
+	daily_sleep_by_date[_date_key_for_offset(6)] = 4 * 60
+	daily_sleep_by_date[_date_key_for_offset(7)] = 6 * 60
+	mark_sleep_ready()
