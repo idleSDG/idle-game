@@ -268,7 +268,7 @@ theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
 
-[node name="FocusFluxTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1086528486]
+[node name="DreamShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1086528486]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -281,7 +281,7 @@ texture_under = ExtResource("9_chjal")
 texture_over = ExtResource("10_cjqg0")
 texture_progress = ExtResource("9_vchkt")
 
-[node name="ColorRect" type="ColorRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1325664442]
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1325664442]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_chjal")
 layout_mode = 1
@@ -297,7 +297,7 @@ offset_bottom = 64.923096
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="TextureRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1753205370]
+[node name="Sprite2D" type="TextureRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1753205370]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -315,7 +315,7 @@ scale = Vector2(4, 4)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("6_c6pm6")
 
-[node name="MainDreamShardsCounterLabel" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1136599745]
+[node name="MainDreamShardsCounterLabel" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1136599745]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
@@ -335,7 +335,7 @@ theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
 
-[node name="DreamShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1791962131]
+[node name="FocusFluxTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1791962131]
 unique_name_in_owner = true
 texture_filter = 1
 layout_mode = 2
@@ -348,7 +348,7 @@ texture_under = ExtResource("9_chjal")
 texture_over = ExtResource("10_cjqg0")
 texture_progress = ExtResource("9_cjqg0")
 
-[node name="ColorRect" type="ColorRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=199410995]
+[node name="ColorRect" type="ColorRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=199410995]
 show_behind_parent = true
 material = SubResource("ShaderMaterial_chjal")
 layout_mode = 1
@@ -364,7 +364,7 @@ offset_bottom = 64.923096
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D" type="TextureRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1184623471]
+[node name="Sprite2D" type="TextureRect" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1184623471]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
@@ -382,7 +382,7 @@ scale = Vector2(4, 4)
 pivot_offset_ratio = Vector2(0.5, 0.5)
 texture = ExtResource("7_5he1u")
 
-[node name="MainFocusFluxCounterLabel" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=1737735179]
+[node name="MainFocusFluxCounterLabel" type="Label" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1737735179]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7

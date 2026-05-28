@@ -78,24 +78,24 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 			MomentumTracker.new(MomentumConfig.new(6000.0, 12000.0), StepsMomentumDataSource.new(steps)),
 			0.0,
 			0,
-			10000,
-			1.0
+			10,
+			0.1
 		),
 		Ingredient.Type.FOCUS_FLUX: Ingredient.new(
 			Ingredient.Type.FOCUS_FLUX,
 			MomentumTracker.new(MomentumConfig.new(-20, -5), ScreenTimeMomentumDataSource.new(screentime)),
 			0.0,
 			0,
-			10000,
-			1.0
+			10,
+			0.1
 		),
 		Ingredient.Type.DREAM_SHARDS: Ingredient.new(
 			Ingredient.Type.DREAM_SHARDS,
 			MomentumTracker.new(MomentumConfig.new(6.5 * 60, 8.5 * 60), SleepMomentumDataSource.new(sleep)),
 			0.0,
 			0,
-			10000,
-			1.0
+			10,
+			0.1
 		)
 	}
 
