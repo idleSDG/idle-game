@@ -139,6 +139,7 @@ func _ready() -> void:
 	pass
 
 func play_sfx(sfx_name: SFX_TYPE) -> void:
+	sfx_player.stop()
 	sfx_player.stream = attack_sfx.get(sfx_name).pick_random()
 	sfx_player.play()
 	
