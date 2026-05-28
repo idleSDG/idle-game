@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ckpxfjvfwotvs" path="res://assets/icons/Big Vial - RED - 0000.png" id="1_br6ly"]
 [ext_resource type="Script" uid="uid://dh74n32hqprc3" path="res://src/ui/battleUI/potion_button.gd" id="2_br6ly"]
 [ext_resource type="Texture2D" uid="uid://b8vmbnqo2idkb" path="res://assets/skills/Grayscale_border.png" id="3_dhn0q"]
+[ext_resource type="FontFile" uid="uid://dvkmw44ofrw88" path="res://assets/fonts/Pixel Code/PixelCode-DemiBold.otf" id="4_vbldb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_br6ly"]
 bg_color = Color(0, 0, 0, 0.40784314)
@@ -87,17 +88,18 @@ anchors_preset = -1
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.248
-offset_left = 5.0
-offset_top = 17.0
-offset_right = 2.0
-offset_bottom = 17.0
+offset_left = -71.0
+offset_top = 13.149994
+offset_right = 78.0
+offset_bottom = 96.54999
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 17
-theme_override_font_sizes/font_size = 30
+theme_override_fonts/font = ExtResource("4_vbldb")
+theme_override_font_sizes/font_size = 42
 text = "Healing Potion"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=1713228084]
 visible = false

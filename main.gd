@@ -29,7 +29,7 @@ func _ready():
 func _on_tab_switched(tab_name):
 	# Only show HUD on home or battle
 	hud_layer.visible = tab_name in ["home", "character", "shop", "potions"]
-	ingredient_hud.visible = tab_name in ["home", "shop"]
+	ingredient_hud.visible = tab_name in ["home"]
 
 func _on_home_button_pressed():
 	SceneManager.switch_tab("home")

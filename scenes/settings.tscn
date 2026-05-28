@@ -397,7 +397,7 @@ icon_size = Vector2(180, 180)
 normal_texture = ExtResource("14_oe2nd")
 pressed_texture = ExtResource("15_7kvyq")
 
-[connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/StepAndSleepButton" to="." method="_on_request_step_permissions_pressed"]
+[connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/StepAndSleepButton" to="." method="_on_request_step_and_sleep_permissions_pressed"]
 [connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/ScreenTimeButton" to="." method="_on_request_screen_time_permissions_pressed"]
 [connection signal="pressed" from="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer/VolumeButton" to="." method="_on_volume_button_1_pressed"]
 [connection signal="value_changed" from="CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer/VolumeSlider" to="." method="_on_volume_slider_1_value_changed"]

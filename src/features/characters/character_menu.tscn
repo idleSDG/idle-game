@@ -125,12 +125,15 @@ grow_horizontal = 2
 
 [node name="VBox" type="VBoxContainer" parent="CanvasLayer/Background" unique_id=1802864097]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.123
-anchor_right = 1.0
-anchor_bottom = 0.855
-offset_top = -0.16000366
-offset_bottom = 0.39990234
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -514.0
+offset_top = -687.0
+offset_right = 514.0
+offset_bottom = 687.0
 grow_horizontal = 2
 grow_vertical = 2
 

@@ -39,7 +39,7 @@ func _on_screen_usage(hourly_array: Array):
 
 
 func _on_error(err):
-	print("Steps error:", err)
+	print("Screen time error:", err)
 	_set_fallback_data()
 	_mark_screen_time_ready()
 
@@ -64,15 +64,16 @@ func _notification(what: int) -> void:
 
 func _on_permissions(permissions: bool):
 	if permissions:
-		has_history_permissions = true
-		emit_signal("screen_time_permissions")
-		_fetch_screen_time()
-		var timer = Timer.new()
-		timer.wait_time = 60
-		timer.autostart = true
-		timer.one_shot = false
-		timer.timeout.connect(_fetch_screen_time)
-		add_child(timer)
+		if not has_history_permissions:
+			has_history_permissions = true
+			emit_signal("screen_time_permissions")
+			_fetch_screen_time()
+			var timer = Timer.new()
+			timer.wait_time = 60
+			timer.autostart = true
+			timer.one_shot = false
+			timer.timeout.connect(_fetch_screen_time)
+			add_child(timer)
 	else:
 		# For now set the screen time to the fallback if permissions are denied
 		_set_fallback_data()
