@@ -63,7 +63,7 @@ func doEquipment(slot : EquipmentItem.Slot,
 					newButton.icon = load("res://assets/icons/hat.png")
 
 			if equipped != null and item == equipped and show_highlight:
-				newButton.modulate = Color(0.6, 1.0, 0.6, 1.0)
+				newButton.show_highlight = true
 				
 			newButton.pressed.connect(func():
 				equipment_pressed.emit(item)

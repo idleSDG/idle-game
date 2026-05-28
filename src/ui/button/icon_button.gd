@@ -14,8 +14,15 @@ class_name IconButton
 		if is_node_ready():
 			_update_icon()
 
+@export var show_highlight: bool = false:
+	set(value):
+		show_highlight = value
+		if is_node_ready():
+			_update_highlight()
+
 func _ready():
 	_update_icon()
+	_update_highlight()
 
 func _update_icon():
 	var icon_node = get_node_or_null("Icon")
@@ -44,3 +51,8 @@ func _on_button_up():
 	var icon_node = get_node_or_null("Icon")
 	if icon_node:
 		icon_node.position.y = 0
+
+func _update_highlight():
+	var border = get_node_or_null("HighlightBorder")
+	if border:
+		border.visible = show_highlight

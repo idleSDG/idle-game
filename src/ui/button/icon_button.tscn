@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c7d5n4mlq62cn" path="res://src/ui/button/icon_button.gd" id="3_ykoqy"]
 [ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="4_a86na"]
 [ext_resource type="Script" uid="uid://dkw7c6rdopwea" path="res://src/ui/button/icon_button_shadow.gd" id="5_6k0f2"]
+[ext_resource type="Texture2D" uid="uid://n33ecoyr7sor" path="res://assets/character_screen/green_border.png" id="6_ykoqy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ykoqy"]
 
@@ -23,6 +24,20 @@ texture_normal = ExtResource("1_a86na")
 texture_pressed = ExtResource("2_6k0f2")
 stretch_mode = 5
 script = ExtResource("3_ykoqy")
+show_highlight = null
+
+[node name="HighlightBorder" type="TextureRect" parent="." unique_id=358351813]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("6_ykoqy")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Icon" type="TextureRect" parent="." unique_id=1298052985]
 layout_mode = 1
