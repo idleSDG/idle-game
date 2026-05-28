@@ -454,6 +454,7 @@ text = "XP"
 
 [node name="PlayerXPTestButton" type="Button" parent="HUDLayer/XP" unique_id=1047275507]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 25

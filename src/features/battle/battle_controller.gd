@@ -402,7 +402,7 @@ func _on_battle_button_pressed(level : battle_level):
 		
 	if(wolf_count > 0):
 		%WolfHbox.visible = true
-		%WolfHbox/Label.text = "x%d Wolf" % wolf_count
+		%WolfHbox/Label.text = "%dx Wolf" % wolf_count
 		if one_visible:
 			%WolfHbox.custom_minimum_size = Vector2(0,280)
 		else:
@@ -412,7 +412,7 @@ func _on_battle_button_pressed(level : battle_level):
 		
 	if(skeleton_count > 0):
 		%SkeletonHbox.visible = true
-		%SkeletonHbox/Label.text = "x%d Skeleton" % skeleton_count
+		%SkeletonHbox/Label.text = "%dx Skeleton" % skeleton_count
 		if one_visible:
 			%SkeletonHbox.custom_minimum_size = Vector2(0,280)
 		else:
@@ -422,7 +422,7 @@ func _on_battle_button_pressed(level : battle_level):
 		
 	if(bird_count > 0):
 		%BigBirdHBox.visible = true
-		%BigBirdHBox/Label.text = "x%d Big Bird" % bird_count
+		%BigBirdHBox/Label.text = "%dx Big Bird" % bird_count
 		if one_visible:
 			%BigBirdHBox.custom_minimum_size = Vector2(0,280)
 		else:

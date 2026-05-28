@@ -118,4 +118,3 @@ scroll_active = false
 [connection signal="pressed" from="CanvasLayer/Background/NavBar/Weapons" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_weapons_pressed"]
 [connection signal="pressed" from="CanvasLayer/Background/NavBar/Potions" to="CanvasLayer/Background/ScrollContainer/ItemGrid" method="_on_potions_pressed"]
 [connection signal="equipment_pressed" from="CanvasLayer/Background/ScrollContainer/ItemGrid" to="." method="_on_item_grid_equipment_pressed"]
-[connection signal="ingredient_pressed" from="CanvasLayer/Background/ScrollContainer/ItemGrid" to="." method="_on_item_grid_ingredient_pressed"]

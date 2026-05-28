@@ -16,7 +16,7 @@ signal money_changed(money: int)
 var collectable_money: int
 var collectable_money_capacity: int = 25
 var collectable_money_progress: float = 0
-var collectable_money_gain_rate_seconds: float = 1.0167
+var collectable_money_gain_rate_seconds: float = 0.167
 signal collectable_money_changed(collectable_money: int)
 
 # Ingredients
@@ -79,7 +79,7 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 			0.0,
 			0,
 			10,
-			0.1
+			0.07
 		),
 		Ingredient.Type.FOCUS_FLUX: Ingredient.new(
 			Ingredient.Type.FOCUS_FLUX,
@@ -87,7 +87,7 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 			0.0,
 			0,
 			10,
-			0.1
+			0.05
 		),
 		Ingredient.Type.DREAM_SHARDS: Ingredient.new(
 			Ingredient.Type.DREAM_SHARDS,
@@ -95,7 +95,7 @@ func _create_default_ingredients() -> Dictionary[Ingredient.Type, Ingredient]:
 			0.0,
 			0,
 			10,
-			0.1
+			0.08
 		)
 	}
 
