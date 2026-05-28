@@ -63,12 +63,7 @@ func doEquipment(slot : EquipmentItem.Slot,
 					newButton.icon = load("res://assets/icons/hat.png")
 
 			if equipped != null and item == equipped and show_highlight:
-					var border = TextureRect.new()
-					border.texture = load("res://assets/character_screen/green_border.png")
-					border.set_anchors_preset(Control.PRESET_FULL_RECT)
-					border.stretch_mode = TextureRect.STRETCH_SCALE
-					border.mouse_filter = Control.MOUSE_FILTER_IGNORE
-					newButton.add_child(border)
+				newButton.modulate = Color(0.6, 1.0, 0.6, 1.0)
 				
 			newButton.pressed.connect(func():
 				equipment_pressed.emit(item)
