@@ -18,7 +18,7 @@ func _ready() -> void:
 		$CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/ScreenTimeButton.button_text = "Screen time permissions granted"
 		$CanvasLayer/ScrollContainer/SizingControl/Permissions/PermissionVBoxContainer/ScreenTimeButton.button_is_disabled = true
 	_set_sound_button_icons()
-	$CanvasLayer/ScrollContainer.get_v_scroll_bar().custom_minimum_size.x = 20
+	$CanvasLayer/ScrollContainer.get_v_scroll_bar().custom_minimum_size.x = 24
 
 func _set_sound_button_icons():
 	var audio_bus = $CanvasLayer/ScrollContainer/SizingControl/Sound/VolumeVBoxContainer/VolumeVBoxContainer/SliderHBoxContainer/VolumeSlider.bus_index

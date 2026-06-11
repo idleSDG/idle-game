@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://lax6rxhc255d" path="res://assets/enemies/bird.png" id="8_03edq"]
 [ext_resource type="Texture2D" uid="uid://dujcs88wm1h4n" path="res://assets/hud/buttons/wide_red_button.png" id="10_03edq"]
 [ext_resource type="Texture2D" uid="uid://deum40cvyrm2o" path="res://assets/hud/buttons/wide_red_button_pressed.png" id="11_22uqi"]
+[ext_resource type="Texture2D" uid="uid://cxw5my7ip4vyn" path="res://assets/hud/buttons/wide_button.png" id="14_ekamt"]
+[ext_resource type="Texture2D" uid="uid://cnbko2rn6lfx" path="res://assets/hud/buttons/wide_button_pressed.png" id="15_djc8l"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p1qf1"]
 texture = ExtResource("2_th188")
@@ -38,14 +40,6 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 modulate_color = Color(0.6255971, 0.6255971, 0.6255971, 1)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6ni85"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vceff"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ekamt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_djc8l"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h4dll"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p0caf"]
@@ -57,6 +51,14 @@ modulate_color = Color(0.6255971, 0.6255971, 0.6255971, 1)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dd63g"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fpf3k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bi5l8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jt4d8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kl6ie"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1m01a"]
 
 [node name="Battle" type="Node2D" unique_id=1983405384]
 script = ExtResource("1_dn72j")
@@ -345,29 +347,31 @@ alignment = 1
 [node name="StartBattleButton" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=112168689 instance=ExtResource("6_f4pi3")]
 custom_minimum_size = Vector2(400, 160)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_6ni85")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_vceff")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_ekamt")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_djc8l")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_h4dll")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h4dll")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_p0caf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_61i1y")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_saiin")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dd63g")
 button_text = "FIGHT!"
-label_font = ExtResource("6_22uqi")
-label_font_size = 40
-
-[node name="ExitBattlePopupButton" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1611702509 instance=ExtResource("6_f4pi3")]
-custom_minimum_size = Vector2(400, 160)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_p0caf")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_61i1y")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_saiin")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_dd63g")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_fpf3k")
-button_text = "Go Back..."
 text_color = Color(1, 1, 1, 1)
 label_font = ExtResource("6_22uqi")
 label_font_size = 40
 normal_texture = ExtResource("10_03edq")
 pressed_texture = ExtResource("11_22uqi")
+
+[node name="ExitBattlePopupButton" parent="CanvasLayer/BattlePopup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1611702509 instance=ExtResource("6_f4pi3")]
+custom_minimum_size = Vector2(400, 160)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fpf3k")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bi5l8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jt4d8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kl6ie")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1m01a")
+button_text = "Go Back..."
+label_font = ExtResource("6_22uqi")
+label_font_size = 40
+normal_texture = ExtResource("14_ekamt")
+pressed_texture = ExtResource("15_djc8l")
 
 [node name="TextureRect" type="NinePatchRect" parent="CanvasLayer/BattlePopup" unique_id=276356326]
 layout_mode = 1

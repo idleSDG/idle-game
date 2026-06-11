@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dxrcxqu8hx86u" path="res://src/ui/ingredient_info_popup/ingredient_info_popup.gd" id="1_ox87t"]
 [ext_resource type="Shader" uid="uid://c8da65llxs6wj" path="res://src/ui/navbar/navbar_background.gdshader" id="2_ox87t"]
 [ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="3_81mlh"]
-[ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://scenes/graph.gd" id="3_b7wjx"]
+[ext_resource type="Script" uid="uid://dsra26e57mr5m" path="res://src/ui/graph/graph_line.gd" id="3_b7wjx"]
 [ext_resource type="Texture2D" uid="uid://b5b4h853pvvcj" path="res://assets/settings/Popup decoration.png" id="4_dc2hy"]
 [ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="6_51lbm"]
 [ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="6_ox87t"]
@@ -350,6 +350,7 @@ offset_right = 9.0
 offset_bottom = 135.5
 grow_horizontal = 0
 icon = ExtResource("10_51lbm")
+show_highlight = false
 
 [connection signal="gui_input" from="ColorRect" to="." method="_on_background_clicked"]
 [connection signal="pressed" from="PanelContainer/MarginContainer/Control/IconButton" to="." method="_on_close_button_pressed"]

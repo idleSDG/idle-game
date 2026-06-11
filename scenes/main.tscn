@@ -27,9 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://dgykxbunxxfly" path="res://assets/hud/buttons/icon_battle_dark.tres" id="10_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://d1hxh3idk7m6r" path="res://assets/hud/buttons/icon_character_dark.tres" id="11_jkv2x"]
 [ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="11_kmb1v"]
-[ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="12_eb6dy"]
 [ext_resource type="Texture2D" uid="uid://dn8sxonh51q6w" path="res://assets/hud/buttons/icon_potion_dark.tres" id="12_jbj1t"]
-[ext_resource type="Script" uid="uid://b4ych1hv6wmbm" path="res://src/ui/missing_sleep_data_pop_up.gd" id="12_trceg"]
 [ext_resource type="Texture2D" uid="uid://cpmarjf0oqxj2" path="res://assets/hud/buttons/icon_shop_dark.tres" id="13_muem4"]
 [ext_resource type="Texture2D" uid="uid://bttb3vbjujioa" path="res://assets/hud/buttons/icon_home_dark.tres" id="16_y6deb"]
 [ext_resource type="Texture2D" uid="uid://brukslchvljem" path="res://assets/hud/buttons/icon_battle_red.tres" id="18_fuf3a"]
@@ -41,12 +39,32 @@
 [ext_resource type="AudioStream" uid="uid://r8a6fmslr4aw" path="res://assets/music/pixel_rpg_pack/Victory Loop - Pixel RPG Pack.ogg" id="29_5q0nq"]
 [ext_resource type="AudioStream" uid="uid://bva1qrb4fwdqn" path="res://assets/music/pixel_rpg_pack/Defeat Intro (use loop after) - Pixel RPG Pack.ogg" id="30_dgi5k"]
 [ext_resource type="AudioStream" uid="uid://b2ij7vw74l8se" path="res://assets/music/pixel_rpg_pack/Defeat Loop - Pixel RPG Pack.ogg" id="31_j8jky"]
+[ext_resource type="PackedScene" uid="uid://buy8shr65bnqm" path="res://src/ui/missing_sleep_data_popup/missing_sleep_data_popup.tscn" id="32_5poiv"]
 [ext_resource type="PackedScene" uid="uid://sd8d1mp2hdsf" path="res://src/ui/ingredient_info_popup/ingredient_info_popup.tscn" id="34_2cjbq"]
+[ext_resource type="PackedScene" uid="uid://dxx7pdlwwq2y6" path="res://src/ui/ingredient_popup/ingredient_popup.tscn" id="34_chjal"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_chjal"]
 shader = ExtResource("4_5q0nq")
 shader_parameter/overlay_color = Color(1, 1, 1, 1)
 shader_parameter/final_alpha = 0.35
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2cjbq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_chjal"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjqg0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vchkt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_txyw0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vc5cj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvyfr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty1g6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j2jfr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmb1v"]
 draw_center = false
@@ -81,12 +99,6 @@ shader_parameter/scale = 1.66
 
 [sub_resource type="LabelSettings" id="LabelSettings_ya4ey"]
 font_size = 24
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
-shader = ExtResource("12_eb6dy")
-shader_parameter/blur_amount = 2.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eb6dy"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_yq6so"]
 clip_count = 7
@@ -172,8 +184,9 @@ grow_vertical = 2
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=921580546]
 script = ExtResource("2_sugp2")
 
-[node name="SmallIngredientButton" type="Button" parent="HUDLayer" unique_id=430342629]
+[node name="SmallIngredientButton" type="Control" parent="HUDLayer" unique_id=1830042267]
 unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -185,7 +198,6 @@ offset_right = 311.0
 offset_bottom = -329.0
 grow_horizontal = 2
 grow_vertical = 0
-flat = true
 
 [node name="IngredientSmallHboxContainer" type="HBoxContainer" parent="HUDLayer/SmallIngredientButton" unique_id=681355684]
 layout_mode = 1
@@ -268,6 +280,19 @@ theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
 
+[node name="KineticShardsButton" type="Button" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=184381609]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2cjbq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_chjal")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cjqg0")
+
 [node name="DreamShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1086528486]
 unique_name_in_owner = true
 texture_filter = 1
@@ -335,6 +360,19 @@ theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
 
+[node name="DreamShardsButton" type="Button" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=232792629]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vchkt")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_txyw0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vc5cj")
+
 [node name="FocusFluxTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1791962131]
 unique_name_in_owner = true
 texture_filter = 1
@@ -401,6 +439,19 @@ theme_override_fonts/font = ExtResource("9_txyw0")
 theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
+
+[node name="FocusFluxButton" type="Button" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1652222227]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nvyfr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ty1g6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j2jfr")
 
 [node name="XP" type="VBoxContainer" parent="HUDLayer" unique_id=548802942]
 custom_minimum_size = Vector2(250, 0)
@@ -574,6 +625,7 @@ offset_bottom = 159.0
 grow_horizontal = 0
 scale = Vector2(0.75, 0.75)
 icon = ExtResource("4_j8jky")
+show_highlight = false
 
 [node name="Spacer3" type="Control" parent="HUDLayer/Settings + Money" unique_id=1891544803]
 layout_mode = 2
@@ -648,6 +700,7 @@ min_font_size = 16
 [node name="HomeButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1310330143 instance=ExtResource("5_o6xl0")]
 layout_mode = 2
 icon = ExtResource("16_y6deb")
+show_highlight = false
 
 [node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1716637295 instance=ExtResource("5_choun")]
 layout_mode = 2
@@ -670,6 +723,7 @@ min_font_size = 16
 [node name="BattleButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1837827217 instance=ExtResource("5_o6xl0")]
 layout_mode = 2
 icon = ExtResource("10_eb6dy")
+show_highlight = false
 
 [node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1962940906 instance=ExtResource("5_choun")]
 visible = false
@@ -693,6 +747,7 @@ max_font_size = 24
 [node name="CharacterButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=1386286071 instance=ExtResource("5_o6xl0")]
 layout_mode = 2
 icon = ExtResource("11_jkv2x")
+show_highlight = false
 
 [node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3" unique_id=996423725 instance=ExtResource("5_choun")]
 visible = false
@@ -717,6 +772,7 @@ min_font_size = 16
 [node name="PotionsButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=2084646125 instance=ExtResource("5_o6xl0")]
 layout_mode = 2
 icon = ExtResource("12_jbj1t")
+show_highlight = false
 
 [node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4" unique_id=315906267 instance=ExtResource("5_choun")]
 visible = false
@@ -741,6 +797,7 @@ min_font_size = 16
 [node name="ShopButton" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer5" unique_id=1449168052 instance=ExtResource("5_o6xl0")]
 layout_mode = 2
 icon = ExtResource("13_muem4")
+show_highlight = false
 
 [node name="AutoSizeLabel" parent="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer5" unique_id=1792321631 instance=ExtResource("5_choun")]
 visible = false
@@ -761,82 +818,14 @@ visible = false
 
 [node name="InvalidSavePopUp" parent="PopupLayer" unique_id=256500332 instance=ExtResource("5_tbgi4")]
 
-[node name="MissingSleepDataPopUp" type="Control" parent="PopupLayer" unique_id=2021368707]
-unique_name_in_owner = true
+[node name="MissingSleepDataPopup" parent="PopupLayer" unique_id=1217441640 instance=ExtResource("32_5poiv")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("12_trceg")
-
-[node name="SleepDataBackgroundBlur" type="ColorRect" parent="PopupLayer/MissingSleepDataPopUp" unique_id=1398356484]
-material = SubResource("ShaderMaterial_trceg")
-custom_minimum_size = Vector2(1080, 1920)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SleepDataPanelContainer" type="PanelContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur" unique_id=917765986]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -506.0
-offset_top = -314.5
-offset_right = 506.0
-offset_bottom = 314.5
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_eb6dy")
-
-[node name="SleepDataVBoxContainer" type="VBoxContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer" unique_id=977809021]
-layout_mode = 2
-
-[node name="SleepDataLabelMarginContainer" type="MarginContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer" unique_id=1942552957]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-
-[node name="SleepDataLabel" type="Label" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataLabelMarginContainer" unique_id=734127456]
-custom_minimum_size = Vector2(960, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 76
-text = "No sleep data has been found on the device, would you like to use the default values?"
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="SleepDataButtonMarginContainer" type="MarginContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer" unique_id=283125614]
-layout_mode = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="SleepDataButtonsHBoxContainer" type="HBoxContainer" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer" unique_id=601658771]
-layout_mode = 2
-
-[node name="SleepDataFallbackButton" type="Button" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer" unique_id=309633020]
-custom_minimum_size = Vector2(480, 120)
-layout_mode = 2
-theme_override_font_sizes/font_size = 48
-text = "Use default data"
-
-[node name="SleepDataDeviceDataButton" type="Button" parent="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer" unique_id=1225988326]
-custom_minimum_size = Vector2(480, 120)
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Use device's data"
 
 [node name="IngredientInfoPopup" parent="PopupLayer" unique_id=1263036612 instance=ExtResource("34_2cjbq")]
+visible = false
+
+[node name="IngredientPopup" parent="PopupLayer" unique_id=1976256409 instance=ExtResource("34_chjal")]
+unique_name_in_owner = true
 visible = false
 
 [node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=978724567]
@@ -847,7 +836,9 @@ volume_db = -10.0
 bus = &"Music"
 script = ExtResource("25_og1vs")
 
-[connection signal="pressed" from="HUDLayer/SmallIngredientButton" to="PopupLayer/IngredientInfoPopup" method="open_popup"]
+[connection signal="pressed" from="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar/KineticShardsButton" to="PopupLayer/IngredientPopup" method="open_for_ingredient" binds= [1]]
+[connection signal="pressed" from="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar/DreamShardsButton" to="PopupLayer/IngredientPopup" method="open_for_ingredient" binds= [3]]
+[connection signal="pressed" from="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar/FocusFluxButton" to="PopupLayer/IngredientPopup" method="open_for_ingredient" binds= [2]]
 [connection signal="pressed" from="HUDLayer/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/Settings + Money/Control/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
@@ -855,5 +846,3 @@ script = ExtResource("25_og1vs")
 [connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer3/CharacterButton" to="." method="_on_character_button_pressed"]
 [connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer4/PotionsButton" to="." method="_on_potions_button_pressed"]
 [connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer5/ShopButton" to="." method="_on_shop_button_pressed"]
-[connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataFallbackButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_fallback_button_pressed"]
-[connection signal="pressed" from="PopupLayer/MissingSleepDataPopUp/SleepDataBackgroundBlur/SleepDataPanelContainer/SleepDataVBoxContainer/SleepDataButtonMarginContainer/SleepDataButtonsHBoxContainer/SleepDataDeviceDataButton" to="PopupLayer/MissingSleepDataPopUp" method="_on_sleep_data_device_data_button_pressed"]

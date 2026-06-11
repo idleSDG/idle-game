@@ -1,0 +1,332 @@
+[gd_scene format=3 uid="uid://dxx7pdlwwq2y6"]
+
+[ext_resource type="Script" uid="uid://4iwrecfbq5e2" path="res://src/ui/ingredient_popup/ingredient_popup.gd" id="1_fsjym"]
+[ext_resource type="Shader" uid="uid://dunbj4dxmosd2" path="res://src/ui/HUD/color_overlay.gdshader" id="2_pxfhu"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="4_wcccp"]
+[ext_resource type="Texture2D" uid="uid://b5b4h853pvvcj" path="res://assets/settings/Popup decoration.png" id="5_jvlnw"]
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="6_jhvkl"]
+[ext_resource type="PackedScene" uid="uid://dxbb8fd1bux66" path="res://src/ui/graph/graph_2d.tscn" id="6_t34ev"]
+[ext_resource type="Texture2D" uid="uid://bhdmmt2opur7a" path="res://assets/hud/circle_bars/32x32 circle bar under.png" id="7_awknb"]
+[ext_resource type="FontFile" uid="uid://dvkmw44ofrw88" path="res://assets/fonts/Pixel Code/PixelCode-DemiBold.otf" id="7_ddey8"]
+[ext_resource type="FontFile" uid="uid://dn531g1ux5cgt" path="res://assets/fonts/Pixel Code/PixelCode-Bold-Italic.otf" id="8_2fxee"]
+[ext_resource type="Texture2D" uid="uid://bd4aeawy2xq44" path="res://assets/hud/circle_bars/32x32 circle bar over.png" id="8_7x2mp"]
+[ext_resource type="Texture2D" uid="uid://c7qat0xfachrg" path="res://assets/hud/circle_bars/32x32 circle bar progress dark brown.png" id="9_2fxee"]
+[ext_resource type="PackedScene" uid="uid://c7poemt28rslu" path="res://src/ui/button/icon_button.tscn" id="9_dekqe"]
+[ext_resource type="Texture2D" uid="uid://d02f0ipjgx01a" path="res://assets/icons/ingredients/ingredient_kinetic_shard.tres" id="10_1xt5m"]
+[ext_resource type="Texture2D" uid="uid://deye553ns3sw3" path="res://assets/hud/buttons/icon_exit_dark.tres" id="10_l2oc4"]
+[ext_resource type="Theme" uid="uid://o6ja5ygtgnte" path="res://src/ui/themes/default_theme.tres" id="11_2hnr3"]
+[ext_resource type="FontFile" uid="uid://csfinobv8w3kr" path="res://assets/fonts/Pixel Code/PixelCode.otf" id="14_4cvbl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7wjx"]
+shader = ExtResource("2_pxfhu")
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+shader_parameter/final_alpha = 0.35
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p3bkk"]
+texture = ExtResource("4_wcccp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iiw07"]
+shader = ExtResource("2_pxfhu")
+shader_parameter/overlay_color = Color(1, 1, 1, 1)
+shader_parameter/final_alpha = 0.35
+
+[sub_resource type="LabelSettings" id="LabelSettings_l22hj"]
+font = ExtResource("14_4cvbl")
+font_size = 32
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.23921569)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_o6lm2"]
+font = ExtResource("14_4cvbl")
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.23921569)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_f1uni"]
+font = ExtResource("14_4cvbl")
+font_size = 24
+shadow_size = 4
+shadow_color = Color(0.18039216, 0.18039216, 0.18039216, 0.83137256)
+shadow_offset = Vector2(2, 2)
+
+[node name="IngredientPopup" type="Control" unique_id=1263036612]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fsjym")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=248269217]
+material = SubResource("ShaderMaterial_b7wjx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1745134180]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -496.0
+offset_top = -336.0
+offset_right = 496.0
+offset_bottom = 336.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_p3bkk")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1945056490]
+layout_mode = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 32
+
+[node name="IconButtonControl" type="Control" parent="PanelContainer/MarginContainer" unique_id=2067179337]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+
+[node name="IconButton" parent="PanelContainer/MarginContainer/IconButtonControl" unique_id=722163806 instance=ExtResource("9_dekqe")]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -97.974976
+offset_right = 62.025024
+offset_bottom = 160.0
+grow_horizontal = 0
+scale = Vector2(0.5, 0.5)
+icon = ExtResource("10_l2oc4")
+show_highlight = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=289578031]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 32
+
+[node name="IngredientHeaderLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1267994401]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_jhvkl")
+theme_override_font_sizes/font_size = 64
+text = "Kinetic Shards"
+horizontal_alignment = 1
+
+[node name="IngredientDescriptionLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1483045648]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("14_4cvbl")
+theme_override_fonts/bold_font = ExtResource("6_jhvkl")
+theme_override_fonts/bold_italics_font = ExtResource("8_2fxee")
+theme_override_font_sizes/normal_font_size = 32
+theme_override_font_sizes/bold_font_size = 32
+theme_override_font_sizes/bold_italics_font_size = 32
+theme_override_font_sizes/italics_font_size = 32
+theme_override_font_sizes/mono_font_size = 32
+bbcode_enabled = true
+text = "Gain [b][i]Kinetic Shards[/i][/b] by reaching your daily step target! (Current target: [b]6000 steps[/b])"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1322298225]
+layout_mode = 2
+alignment = 1
+
+[node name="Spacer" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1541765427]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="IngredientControl" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1828956142]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl" unique_id=650778016]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+alignment = 1
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer" unique_id=1933998288]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 2
+
+[node name="IngredientProgressBar" type="TextureProgressBar" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer/Control" unique_id=2046623368]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+step = 0.01
+value = 33.0
+fill_mode = 4
+nine_patch_stretch = true
+texture_under = ExtResource("7_awknb")
+texture_over = ExtResource("8_7x2mp")
+texture_progress = ExtResource("9_2fxee")
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer/Control/IngredientProgressBar" unique_id=1047577627]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_iiw07")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.19236
+offset_top = -64.923096
+offset_right = 57.192383
+offset_bottom = 64.923096
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="IngredientIcon" type="TextureRect" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer/Control/IngredientProgressBar" unique_id=812690094]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.961487
+offset_top = -17.38446
+offset_right = 8.961594
+offset_bottom = 8.154053
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("10_1xt5m")
+
+[node name="IngredientCount" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer/Control/IngredientProgressBar" unique_id=1812852160]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = 7.669998
+offset_right = 96.0
+offset_bottom = 51.67
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("11_2hnr3")
+theme_override_fonts/font = ExtResource("7_ddey8")
+theme_override_font_sizes/font_size = 24
+text = "1000/1000"
+horizontal_alignment = 1
+
+[node name="Control2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer" unique_id=280203133]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer/Control2" unique_id=250915912]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 60.0
+offset_bottom = 132.0
+grow_horizontal = 2
+
+[node name="MomentumRichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer/Control2/VBoxContainer" unique_id=463320455]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("7_ddey8")
+theme_override_font_sizes/normal_font_size = 18
+theme_override_font_sizes/bold_font_size = 18
+theme_override_font_sizes/bold_italics_font_size = 18
+theme_override_font_sizes/italics_font_size = 18
+theme_override_font_sizes/mono_font_size = 18
+text = "Today's Momentum:"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="MomentumLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IngredientControl/VBoxContainer/Control2/VBoxContainer" unique_id=1036105620]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("7_ddey8")
+theme_override_font_sizes/font_size = 32
+text = "100%"
+horizontal_alignment = 1
+
+[node name="Spacer2" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1814869862]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Graph2DControl" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=23574688]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="IngredientGraph2D" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Graph2DControl" unique_id=1783902539 instance=ExtResource("6_t34ev")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+graph_line_width = 3.0
+gridline_width = 2.0
+x_axis_title = "Time"
+y_axis_title = "% of Daily Steps"
+x_axis_label_settings = SubResource("LabelSettings_l22hj")
+y_axis_label_settings = SubResource("LabelSettings_o6lm2")
+axis_marker_label_settings = SubResource("LabelSettings_f1uni")
+
+[node name="Spacer3" type="Control" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=558985831]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BorderDecorationControl" type="Control" parent="PanelContainer" unique_id=58921485]
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 2
+
+[node name="BorderDecoration" type="TextureRect" parent="PanelContainer/BorderDecorationControl" unique_id=2011174563]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+scale = Vector2(1.035, 1.035)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+texture = ExtResource("5_jvlnw")
+
+[connection signal="gui_input" from="ColorRect" to="." method="_on_background_clicked"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/IconButtonControl/IconButton" to="." method="_on_close_button_pressed"]
