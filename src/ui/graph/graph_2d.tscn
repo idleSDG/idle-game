@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://dxbb8fd1bux66"]
+
+[ext_resource type="Script" uid="uid://b1t4dh8rd0758" path="res://src/ui/graph/graph.gd" id="1_gkga8"]
+[ext_resource type="Script" uid="uid://ber80r720416r" path="res://src/ui/graph/graph_decorations.gd" id="2_decorations"]
+[ext_resource type="Texture2D" uid="uid://d16csp42sfssi" path="res://assets/potions_screen/PotionsScreen_Slot_Background.png" id="2_y4aie"]
+[ext_resource type="FontFile" uid="uid://csfinobv8w3kr" path="res://assets/fonts/Pixel Code/PixelCode.otf" id="3_y4aie"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y4aie"]
+texture = ExtResource("2_y4aie")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_usxky"]
+bg_color = Color(0.95612985, 0.46431637, 0.41397607, 0.14117648)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y4aie"]
+font = ExtResource("3_y4aie")
+font_size = 12
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.23921569)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_usxky"]
+font = ExtResource("3_y4aie")
+font_size = 12
+shadow_size = 4
+shadow_color = Color(0.18039216, 0.18039216, 0.18039216, 0.83137256)
+shadow_offset = Vector2(2, 2)
+
+[node name="Graph2D" type="Control" unique_id=1783902539]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 400.0
+script = ExtResource("1_gkga8")
+padding = 18.0
+panel_stylebox = SubResource("StyleBoxTexture_y4aie")
+graph_background_stylebox = SubResource("StyleBoxFlat_usxky")
+graph_line_color = Color(1, 1, 1, 1)
+graph_line_width = 2.0
+graph_line_smoothing = true
+gridlines_enabled = true
+x_gridline_spacing = 7200.0
+y_gridline_spacing = 20.0
+gridline_color = Color(0, 0, 0, 0.45882353)
+x_axis_title_visible = true
+y_axis_title_visible = true
+x_axis_label_settings = SubResource("LabelSettings_y4aie")
+y_axis_label_settings = SubResource("LabelSettings_y4aie")
+y_axis_marker_values = PackedInt32Array(0, 100)
+x_axis_markers_visible = true
+x_axis_marker_interval_hours = 2
+axis_marker_label_settings = SubResource("LabelSettings_usxky")
+y_axis_marker_padding_right = 8.0
+x_axis_marker_padding_top = 8.0
+baseline_values = PackedFloat32Array(100)
+baseline_color = Color(1, 1, 1, 0.8)
+
+[node name="Panel" type="Panel" parent="." unique_id=1727592423]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_y4aie")
+
+[node name="Decorations" type="Control" parent="Panel" unique_id=1375915657]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_decorations")
+
+[node name="Line" type="Line2D" parent="Panel" unique_id=748819421]
+unique_name_in_owner = true
+points = PackedVector2Array(48, 285.66666, 143.4, 188.33333, 238.8, 261.33334, 334.2, 91, 429.6, 18, 525, 127.5)
+width = 2.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="XAxisLabel" type="Label" parent="." unique_id=578195343]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 39.0
+offset_top = 365.0
+offset_right = 582.0
+offset_bottom = 382.0
+text = "X Axis"
+label_settings = SubResource("LabelSettings_y4aie")
+horizontal_alignment = 1
+
+[node name="YAxisLabel" type="Label" parent="." unique_id=709078533]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 361.0
+offset_right = 343.0
+offset_bottom = 378.0
+rotation = -1.5708
+text = "Y Axis"
+label_settings = SubResource("LabelSettings_y4aie")
+horizontal_alignment = 1

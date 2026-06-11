@@ -41,11 +41,30 @@
 [ext_resource type="AudioStream" uid="uid://b2ij7vw74l8se" path="res://assets/music/pixel_rpg_pack/Defeat Loop - Pixel RPG Pack.ogg" id="31_j8jky"]
 [ext_resource type="PackedScene" uid="uid://buy8shr65bnqm" path="res://src/ui/missing_sleep_data_popup/missing_sleep_data_popup.tscn" id="32_5poiv"]
 [ext_resource type="PackedScene" uid="uid://sd8d1mp2hdsf" path="res://src/ui/ingredient_info_popup/ingredient_info_popup.tscn" id="34_2cjbq"]
+[ext_resource type="PackedScene" uid="uid://dxx7pdlwwq2y6" path="res://src/ui/ingredient_popup/ingredient_popup.tscn" id="34_chjal"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_chjal"]
 shader = ExtResource("4_5q0nq")
 shader_parameter/overlay_color = Color(1, 1, 1, 1)
 shader_parameter/final_alpha = 0.35
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2cjbq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_chjal"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjqg0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vchkt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_txyw0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vc5cj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvyfr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty1g6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j2jfr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmb1v"]
 draw_center = false
@@ -165,8 +184,9 @@ grow_vertical = 2
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=921580546]
 script = ExtResource("2_sugp2")
 
-[node name="SmallIngredientButton" type="Button" parent="HUDLayer" unique_id=430342629]
+[node name="SmallIngredientButton" type="Control" parent="HUDLayer" unique_id=1830042267]
 unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -178,7 +198,6 @@ offset_right = 311.0
 offset_bottom = -329.0
 grow_horizontal = 2
 grow_vertical = 0
-flat = true
 
 [node name="IngredientSmallHboxContainer" type="HBoxContainer" parent="HUDLayer/SmallIngredientButton" unique_id=681355684]
 layout_mode = 1
@@ -261,6 +280,19 @@ theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
 
+[node name="KineticShardsButton" type="Button" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar" unique_id=184381609]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2cjbq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_chjal")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_cjqg0")
+
 [node name="DreamShardsTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1086528486]
 unique_name_in_owner = true
 texture_filter = 1
@@ -328,6 +360,19 @@ theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
 
+[node name="DreamShardsButton" type="Button" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar" unique_id=232792629]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vchkt")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_txyw0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vc5cj")
+
 [node name="FocusFluxTextureProgressBar" type="TextureProgressBar" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer" unique_id=1791962131]
 unique_name_in_owner = true
 texture_filter = 1
@@ -394,6 +439,19 @@ theme_override_fonts/font = ExtResource("9_txyw0")
 theme_override_font_sizes/font_size = 24
 text = "1000/1000"
 horizontal_alignment = 1
+
+[node name="FocusFluxButton" type="Button" parent="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar" unique_id=1652222227]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nvyfr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ty1g6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j2jfr")
 
 [node name="XP" type="VBoxContainer" parent="HUDLayer" unique_id=548802942]
 custom_minimum_size = Vector2(250, 0)
@@ -766,6 +824,10 @@ visible = false
 [node name="IngredientInfoPopup" parent="PopupLayer" unique_id=1263036612 instance=ExtResource("34_2cjbq")]
 visible = false
 
+[node name="IngredientPopup" parent="PopupLayer" unique_id=1976256409 instance=ExtResource("34_chjal")]
+unique_name_in_owner = true
+visible = false
+
 [node name="SettingsLayer" type="CanvasLayer" parent="." unique_id=978724567]
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1001522815]
@@ -774,7 +836,9 @@ volume_db = -10.0
 bus = &"Music"
 script = ExtResource("25_og1vs")
 
-[connection signal="pressed" from="HUDLayer/SmallIngredientButton" to="PopupLayer/IngredientInfoPopup" method="open_popup"]
+[connection signal="pressed" from="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/KineticShardsTextureProgressBar/KineticShardsButton" to="PopupLayer/IngredientPopup" method="open_for_ingredient" binds= [1]]
+[connection signal="pressed" from="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/DreamShardsTextureProgressBar/DreamShardsButton" to="PopupLayer/IngredientPopup" method="open_for_ingredient" binds= [3]]
+[connection signal="pressed" from="HUDLayer/SmallIngredientButton/IngredientSmallHboxContainer/FocusFluxTextureProgressBar/FocusFluxButton" to="PopupLayer/IngredientPopup" method="open_for_ingredient" binds= [2]]
 [connection signal="pressed" from="HUDLayer/XP/PlayerXPTestButton" to="HUDLayer" method="_on_test_button_pressed"]
 [connection signal="pressed" from="HUDLayer/Settings + Money/Control/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="button_down" from="NavBarLayer/NavBar/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
