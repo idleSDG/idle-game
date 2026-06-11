@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://buy8shr65bnqm"]
+
+[ext_resource type="Script" uid="uid://b4ych1hv6wmbm" path="res://src/ui/missing_sleep_data_popup/missing_sleep_data_pop_up.gd" id="1_jefpa"]
+[ext_resource type="Shader" uid="uid://ceusbliiklaln" path="res://src/ui/invalid_save_popup/background_blur.gdshader" id="2_6ikgx"]
+[ext_resource type="Texture2D" uid="uid://s35a27srkp1" path="res://assets/textures/wood/Wood_dark.png" id="3_b72he"]
+[ext_resource type="FontFile" uid="uid://cys43xkudw2hq" path="res://assets/fonts/Pixel Code/PixelCode-Bold.otf" id="4_jxiap"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
+shader = ExtResource("2_6ikgx")
+shader_parameter/blur_amount = 2.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2cjbq"]
+texture = ExtResource("3_b72he")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cjbq"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_chjal"]
+bg_color = Color(0.7302159, 0.730216, 0.73021597, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="MissingSleepDataPopup" type="Control" unique_id=1217441640]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jefpa")
+
+[node name="SleepDataBackgroundBlur" type="ColorRect" parent="." unique_id=700330729]
+material = SubResource("ShaderMaterial_trceg")
+custom_minimum_size = Vector2(1080, 1920)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SleepDataPanelContainer" type="PanelContainer" parent="SleepDataBackgroundBlur" unique_id=1409681257]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -514.0
+offset_top = -305.0
+offset_right = 510.0
+offset_bottom = 233.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2cjbq")
+
+[node name="MarginContainer" type="MarginContainer" parent="SleepDataBackgroundBlur/SleepDataPanelContainer" unique_id=684263148]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="SleepDataVBoxContainer" type="VBoxContainer" parent="SleepDataBackgroundBlur/SleepDataPanelContainer/MarginContainer" unique_id=1631312705]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="SleepDataHeaderLabel" type="Label" parent="SleepDataBackgroundBlur/SleepDataPanelContainer/MarginContainer/SleepDataVBoxContainer" unique_id=979853737]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jxiap")
+theme_override_font_sizes/font_size = 64
+text = "No sleep data 
+found on device!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SleepDataDescriptionLabel" type="Label" parent="SleepDataBackgroundBlur/SleepDataPanelContainer/MarginContainer/SleepDataVBoxContainer" unique_id=781878934]
+custom_minimum_size = Vector2(960, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "No sleep data has been found on your device, would you like to use the default values?"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SleepDataButtonsHBoxContainer" type="HBoxContainer" parent="SleepDataBackgroundBlur/SleepDataPanelContainer/MarginContainer/SleepDataVBoxContainer" unique_id=36421403]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="SleepDataFallbackButton" type="Button" parent="SleepDataBackgroundBlur/SleepDataPanelContainer/MarginContainer/SleepDataVBoxContainer/SleepDataButtonsHBoxContainer" unique_id=1183843120]
+custom_minimum_size = Vector2(480, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_jxiap")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_2cjbq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_chjal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2cjbq")
+theme_override_styles/focus = SubResource("StyleBoxFlat_2cjbq")
+text = "Use default data"
+
+[node name="SleepDataDeviceDataButton" type="Button" parent="SleepDataBackgroundBlur/SleepDataPanelContainer/MarginContainer/SleepDataVBoxContainer/SleepDataButtonsHBoxContainer" unique_id=1576416215]
+custom_minimum_size = Vector2(480, 120)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_jxiap")
+theme_override_font_sizes/font_size = 38
+theme_override_styles/normal = SubResource("StyleBoxFlat_2cjbq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_chjal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_2cjbq")
+text = "Use device's data"
+
+[connection signal="pressed" from="SleepDataBackgroundBlur/SleepDataPanelContainer/MarginContainer/SleepDataVBoxContainer/SleepDataButtonsHBoxContainer/SleepDataFallbackButton" to="." method="_on_sleep_data_fallback_button_pressed"]
+[connection signal="pressed" from="SleepDataBackgroundBlur/SleepDataPanelContainer/MarginContainer/SleepDataVBoxContainer/SleepDataButtonsHBoxContainer/SleepDataDeviceDataButton" to="." method="_on_sleep_data_device_data_button_pressed"]
