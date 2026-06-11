@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cnbko2rn6lfx" path="res://assets/hud/buttons/wide_button_pressed.png" id="3_qcwep"]
 [ext_resource type="Texture2D" uid="uid://bse1emdawkvjp" path="res://assets/icons/staff.png" id="4_lajo1"]
 [ext_resource type="Texture2D" uid="uid://bxnw8gaspsw07" path="res://assets/icons/robe.png" id="5_ckpi3"]
+[ext_resource type="FontFile" uid="uid://dvkmw44ofrw88" path="res://assets/fonts/Pixel Code/PixelCode-DemiBold.otf" id="5_xpg8m"]
 [ext_resource type="Texture2D" uid="uid://dydabj0wh8gpu" path="res://assets/icons/hat.png" id="6_1g5d4"]
 [ext_resource type="Texture2D" uid="uid://c5xe2dibg1jx1" path="res://assets/hud/general decoration.png" id="9_ckpi3"]
 
@@ -57,9 +58,9 @@ anchor_top = 0.42700002
 anchor_right = 0.5
 anchor_bottom = 0.42700002
 offset_left = -486.0
-offset_top = -555.83997
+offset_top = -471.84003
 offset_right = -437.5
-offset_bottom = -499.23993
+offset_bottom = -415.2398
 scale = Vector2(20, 20)
 texture = ExtResource("2_qbvc6")
 stretch_mode = 1
@@ -71,9 +72,9 @@ anchor_top = 0.432
 anchor_right = 0.5
 anchor_bottom = 0.432
 offset_left = -500.0
-offset_top = -569.44
+offset_top = -481.44
 offset_right = 500.0
-offset_bottom = 588.56
+offset_bottom = 676.56
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 25
@@ -88,6 +89,7 @@ theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
 theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
 theme_override_colors/font_unselected_color = Color(0.3515629, 0.3515629, 0.35156286, 1)
 theme_override_constants/side_margin = 15
+theme_override_fonts/font = ExtResource("5_xpg8m")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/panel = SubResource("StyleBoxFlat_ckpi3")
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_1g5d4")
@@ -112,6 +114,7 @@ size_flags_vertical = 3
 
 [node name="WeaponsItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Weapons/WeaponsScrollContainer" unique_id=24865365]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -129,6 +132,7 @@ size_flags_vertical = 3
 
 [node name="RobesItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Robes/RobesScrollContainer" unique_id=1802707247]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -146,6 +150,7 @@ size_flags_vertical = 3
 
 [node name="HatsItemList" type="VBoxContainer" parent="CanvasLayer/MarginContainer/TabContainer/Hats/HatsScrollContainer" unique_id=1355433802]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(900, 0)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
@@ -158,9 +163,9 @@ anchor_top = 0.43100002
 anchor_right = 0.5
 anchor_bottom = 0.43100002
 offset_left = -500.0
-offset_top = -579.52
+offset_top = -502.52002
 offset_right = 500.0
-offset_bottom = 585.48
+offset_bottom = 685.48
 texture = ExtResource("9_ckpi3")
 region_rect = Rect2(2, 0, 984, 350)
 patch_margin_left = 88
